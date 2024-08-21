@@ -1,48 +1,70 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+// Shared Tailwind CSS classes
+const cardClasses = 'relative rounded-lg overflow-hidden shadow-lg group max-w-md mx-auto bg-white';
+const imageClasses = 'w-full h-60 sm:h-64 md:h-72 object-cover transition-transform duration-300 ease-in-out group-hover:scale-110';
+const overlayClasses = 'absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50';
+const textClasses = 'absolute bottom-0 p-4 sm:p-6 text-white transition-all duration-300 ease-in-out transform group-hover:translate-y-2';
+const titleClasses = 'text-lg sm:text-xl md:text-2xl font-semibold mt-2 transition-transform duration-300 ease-in-out group-hover:scale-110';
+const paragraphClasses = 'mt-2 text-gray-700';
+
+// Player Card Component
+const PlayerCard = ({ name, imgSrc, altText, position }) => (
+  <div className={cardClasses}>
+    <img src={imgSrc} alt={altText} className={imageClasses} />
+    <div className={overlayClasses}></div>
+    <div className={textClasses}>
+      <h2 className={titleClasses}>{name}</h2>
+      <h3 className="text-sm text-gray-300">{position}</h3>
+    </div>
+  </div>
+);
+
+PlayerCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  altText: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+};
+
+// Coach Card Component
+const CoachCard = () => (
+  <div className={cardClasses}>
+    <img className={imageClasses} src="https://placehold.co/200x200" alt="Coach Image" />
+    <div className={textClasses}>
+      <h2 className={titleClasses}>DARVIN HAM</h2>
+      <h3 className="text-sm text-gray-600">HEAD COACH</h3>
+      <p className={paragraphClasses}>
+        Darvin Ham, known for his defensive strategies and leadership, brings a wealth of experience and passion to the Lakers.
+      </p>
+      <div className="mt-4 text-sm text-gray-600">
+        <p><strong>Date of birth:</strong> 23 July 1973</p>
+        <p><strong>Place of birth:</strong> Saginaw, Michigan</p>
+        <p><strong>Nationality:</strong> USA</p>
+      </div>
+    </div>
+  </div>
+);
 
 const BasketballPage = () => (
-    <div className="p-6 bg-gray-100 min-h-screen">
-        <h1 className="text-4xl font-bold mb-4">Basketball Team</h1>
-        
-        {/* Team Profile */}
-        <section className="mb-8">
-            <h2 className="text-3xl font-semibold mb-2">Team Profile</h2>
-            <p>Our Basketball Team excels in skill and strategy. We are committed to developing players and achieving high performance.</p>
-            <img src="/basketball-team-photo.jpg" alt="Basketball Team" className="w-full h-64 object-cover rounded-lg mb-4" />
-        </section>
-
-        {/* Team Stats */}
-        <section className="mb-8">
-            <h2 className="text-3xl font-semibold mb-2">Team Stats</h2>
-            <ul className="list-disc ml-6">
-                <li><strong>Wins:</strong> 22</li>
-                <li><strong>Losses:</strong> 6</li>
-                <li><strong>Draws:</strong> 2</li>
-                <li><strong>Top Scorer:</strong> Lisa Adams (30 points per game)</li>
-                <li><strong>Best Playmaker:</strong> David Wilson</li>
-            </ul>
-        </section>
-
-        {/* Team Members */}
-        <section>
-            <h2 className="text-3xl font-semibold mb-2">Team Members</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="bg-white p-4 rounded-lg shadow-lg">
-                    <img src="/player5.jpg" alt="Player 1" className="w-32 h-32 object-cover rounded-full mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">Lisa Adams</h3>
-                    <p>Position: Guard</p>
-                    <p>Number: 23</p>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-lg">
-                    <img src="/player6.jpg" alt="Player 2" className="w-32 h-32 object-cover rounded-full mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">David Wilson</h3>
-                    <p>Position: Forward</p>
-                    <p>Number: 7</p>
-                </div>
-                {/* Add more player profiles */}
-            </div>
-        </section>
+  <div className="bg-gray-50 p-8">
+    <h1 className="text-4xl font-extrabold text-black mb-8 text-center">Los Angeles Lakers Players and Coach</h1>
+    
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
+      <PlayerCard name="LeBron James" imgSrc="https://example.com/lebron.jpg" altText="LeBron James" position="Forward" />
+      <PlayerCard name="Anthony Davis" imgSrc="https://example.com/davis.jpg" altText="Anthony Davis" position="Forward-Center" />
+      <PlayerCard name="D'Angelo Russell" imgSrc="https://example.com/russell.jpg" altText="D'Angelo Russell" position="Guard" />
+      <PlayerCard name="Austin Reaves" imgSrc="https://example.com/reaves.jpg" altText="Austin Reaves" position="Guard" />
+      <PlayerCard name="Jarred Vanderbilt" imgSrc="https://example.com/vanderbilt.jpg" altText="Jarred Vanderbilt" position="Forward" />
+      <PlayerCard name="Rui Hachimura" imgSrc="https://example.com/hachimura.jpg" altText="Rui Hachimura" position="Forward" />
+      <PlayerCard name="Christian Wood" imgSrc="https://example.com/wood.jpg" altText="Christian Wood" position="Forward-Center" />
+      <PlayerCard name="Mo Bamba" imgSrc="https://example.com/bamba.jpg" altText="Mo Bamba" position="Center" />
     </div>
+    
+    <CoachCard />
+
+  </div>
 );
 
 export default BasketballPage;

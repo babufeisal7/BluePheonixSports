@@ -9,7 +9,7 @@ const sponsorData = [
     { name: 'NxtRadio', logo: '/images/nxtradio.svg' },
 ];
 
-const sponsorContainerClasses = 'mx-auto mt-10 grid max-w-lg grid-cols-2 gap-x-6 gap-y-6 sm:max-w-xl sm:grid-cols-3 sm:gap-x-8 lg:max-w-7xl lg:grid-cols-5 lg:gap-x-10';
+const sponsorContainerClasses = 'mx-auto mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:max-w-xl sm:grid-cols-3 sm:gap-x-8 lg:max-w-7xl lg:grid-cols-5 lg:gap-x-10';
 const sponsorLogoClasses = 'max-h-12 w-full object-contain';
 
 const Sponsor = ({ logo, altText }) => (
@@ -23,7 +23,7 @@ const Sponsor = ({ logo, altText }) => (
 );
 
 const SponsorList = () => (
-    <div className="bg-white py-16 sm:py-20 lg:py-24">
+    <div className="bg-gray-300 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
                 Trusted by our valued sponsors

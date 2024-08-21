@@ -13,10 +13,11 @@ import Blog from './components/blog';
 import Sponsers from './components/sponsers';
 import Joinus from './components/joinus';
 import Footer from './components/footer';
-import RugbyPage from './pages/RugbyPage'; // Corrected import path
-import FootballPage from './pages/FootballPage'; // Corrected import path
-import BasketballPage from './pages/BasketballPage'; // Corrected import path
-import SwimmingPage from './pages/SwimmingPage'; // Corrected import path
+import RugbyPage from './pages/RugbyPage'; 
+import FootballPage from './pages/FootballPage'; 
+import BasketballPage from './pages/BasketballPage'; 
+import SwimmingPage from './pages/SwimmingPage';
+import Gallerypage from './pages/Gallerypage'; 
 
 const Home = () => (
   <>
@@ -28,9 +29,8 @@ const Home = () => (
     <Ourteams />
     <Gallery />
     <Achievements />
-    <Blog />
-    <Sponsers />
-    <Joinus />
+    
+  
   </>
 );
 
@@ -49,7 +49,11 @@ const App = () => {
         <Route path="/teams/football" element={<FootballPage />} />
         <Route path="/teams/basketball" element={<BasketballPage />} />
         <Route path="/teams/swimming" element={<SwimmingPage />} />
+         <Route path="/pages/Gallerypage" element={< Gallerypage/>} />
       </Routes>
+      <Blog />
+    <Sponsers />
+      <Joinus />
       <Footer />
     </Router>
   );

@@ -45,6 +45,7 @@ const TeamSummaryCard = ({ sport, image, description, buttonText }) => (
             <a
                 href={`/${sport.toLowerCase()}`}
                 className="bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 text-sm rounded-lg"
+                aria-label={`Learn more about our ${sport} team`}
             >
                 {buttonText}
             </a>

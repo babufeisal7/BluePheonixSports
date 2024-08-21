@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const containerClasses = 'py-8 px-4 sm:py-12 sm:px-6 lg:py-16 lg:px-8'; // Padding adjustments
 const cardContainerClasses = 'flex flex-col md:flex-row items-center'; // Flex container for responsiveness
@@ -37,9 +38,9 @@ const AboutUs = () => {
                             </section>
 
                             <section>
-                                <button onClick={toggleDropdown} className={buttonClasses}>
-                                    {isDropdownVisible ? 'Show Less <<' : 'Read More >>'}
-                                </button>
+                                <Link to="/about" className={buttonClasses}>
+                                    Read More >>
+                                </Link>
                             </section>
                         </div>
 

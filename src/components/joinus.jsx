@@ -1,55 +1,61 @@
 import React from 'react';
 
-const buttonClass = 'bg-accent text-accent-foreground py-2 px-4 rounded-lg transition-transform transform hover:scale-105 opacity-90';
-const inputClass = 'border border-border rounded-l-lg p-3 w-full md:w-64 focus:outline-none focus:ring focus:ring-primary';
-const joinButtonClass = 'bg-primary text-primary-foreground rounded-r-lg py-2 px-4 transition-transform transform hover:scale-105';
+// Shared styles
+const sharedButtonClasses = 'px-4 py-2 rounded-lg'; // No color applied here
+const sharedTextClasses = 'text-muted-foreground';
+const sharedBorderClasses = 'border border-border';
+const joinButtonClass = 'bg-primary text-primary-foreground'; // Default button color
 
 const JoinUs = () => {
     return (
         <div className="bg-blue-700 text-white p-6 sm:p-8 md:p-12 lg:p-16 shadow-lg">
-            <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-8">
-                {/* Text Column */}
-                <div className="w-full lg:w-1/2 text-center lg:text-left">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Join Us</h1>
-                    <p className="text-base sm:text-lg lg:text-xl mb-6">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
+                {/* First Column - Text Section */}
+                <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-center lg:text-left">
+                        Join Us
+                    </h1>
+                    <p className="text-base sm:text-lg md:text-xl mb-6 text-center lg:text-left">
                         Become a part of the Blue Phoenix community! Choose your preferred sports and get involved today.
                     </p>
-                    <div className="flex flex-col items-center lg:items-start space-y-2">
-                        <button className={buttonClass}>Rugby</button>
-                        <button className={buttonClass}>Football</button>
-                        <button className={buttonClass}>Basketball</button>
-                        <button className={buttonClass}>Swimming</button>
+                    <div className="flex flex-col items-center lg:items-centre space-y-2">
+                        <button className={`${sharedButtonClasses} ${joinButtonClass}`}>Rugby</button>
+                        <button className={`${sharedButtonClasses} ${joinButtonClass}`}>Football</button>
+                        <button className={`${sharedButtonClasses} ${joinButtonClass}`}>Basketball</button>
+                        <button className={`${sharedButtonClasses} ${joinButtonClass}`}>Swimming</button>
                     </div>
                 </div>
 
-                {/* Video Column */}
-                <div className="w-full lg:w-1/2 flex justify-center lg:justify-start mt-6 lg:mt-0">
-                    <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-                        <video
-                            className="rounded-lg shadow-lg w-full h-auto object-cover"
-                            controls
-                            src="/videos/intro-video.mp4"
-                            title="Introduction to Blue Phoenix"
-                        >
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
+                {/* Second Column - Video Section */}
+                <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
+                    <iframe
+                        className={`w-full h-56 sm:h-64 md:h-80 lg:h-96 rounded-lg ${sharedBorderClasses}`}
+                        src="https://www.youtube.com/embed/your_video_id"
+                        title="Introduction to Blue Phoenix"
+                        allowFullScreen
+                    ></iframe>
                 </div>
             </div>
 
-            {/* Subscription Section */}
-            <div className="mt-6 lg:mt-8 flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0 lg:space-x-4">
-                {/* Subscription Text */}
-                <div className="text-center lg:text-left w-full lg:w-1/2">
-                    <p className="text-base sm:text-lg mb-2">Sign up for more information and updates.</p>
-                    <p className="text-base sm:text-lg">We'll keep you informed about upcoming events and activities.</p>
+            {/* Sign-Up Form Row - Positioned Below the Columns */}
+            <div className="mt-8 w-full">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full space-y-4 lg:space-y-0 lg:space-x-4">
+                    <label htmlFor="email" className={`${sharedTextClasses} mb-2 lg:mb-0 lg:w-1/2 text-center lg:text-left`}>
+                        Sign up for more information and updates.
+                    </label>
+                    <div className="flex flex-col lg:flex-row lg:items-center lg:w-1/2 space-y-4 lg:space-y-0 lg:space-x-4">
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="e.g., name@example.com"
+                            className={`p-3 ${sharedBorderClasses} rounded-lg w-full lg:w-96 focus:outline-none focus:ring focus:ring-primary`} // Increased width
+                        />
+                        <button className={`${joinButtonClass} ${sharedButtonClasses} w-full lg:w-auto`}>Join Us</button>
+                    </div>
                 </div>
-
-                {/* Subscription Form */}
-                <div className="flex w-full lg:w-1/2 items-center space-x-4 mt-4 lg:mt-0">
-                    <input type="email" placeholder="e.g., name@example.com" className={inputClass} />
-                    <button className={joinButtonClass}>Join Us</button>
-                </div>
+                <p className={`${sharedTextClasses} mt-2 text-center lg:text-left`}>
+                    We'll keep you informed about upcoming events and activities.
+                </p>
             </div>
         </div>
     );

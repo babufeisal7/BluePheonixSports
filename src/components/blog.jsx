@@ -44,7 +44,7 @@ const BlogSection = () => {
             setCurrentIndex((prevIndex) =>
                 prevIndex === 2 ? 0 : prevIndex + 1
             );
-        }, 4000); // Change slide every 5 seconds
+        }, 3000); // Change slide every 3 seconds
 
         return () => clearInterval(intervalId); // Clean up the interval on component unmount
     }, [isPaused]);
@@ -60,7 +60,7 @@ const BlogSection = () => {
         slidesToShow: 3, // Show 3 slides at once
         slidesToScroll: 1,
         autoplay: !isPaused,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 3000, // Change speed to match interval
         arrows: false, // Hide default arrows
         afterChange: (current) => setCurrentIndex(current), // Update currentIndex on slide change
         responsive: [
@@ -129,7 +129,6 @@ const BlogSection = () => {
                         image={imagePlaceholder}
                         authorImage="https://placehold.co/100x100"
                     />
-                    {/* Additional Blog Cards */}
                     <BlogCard
                         date="Aug 07, 2024"
                         category="Training"
@@ -173,15 +172,6 @@ const BlogSection = () => {
                         ></button>
                     ))}
                 </div>
-
-                {/* Pause/Play Button */}
-                <button
-                    className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-gray-800 text-white py-2 px-4 rounded"
-                    onClick={() => setIsPaused(!isPaused)}
-                    aria-label={isPaused ? 'Resume Carousel' : 'Pause Carousel'}
-                >
-                    {isPaused ? 'Play' : 'Pause'}
-                </button>
             </div>
         </section>
     );
