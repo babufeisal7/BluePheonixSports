@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes for prop validation
 
 const teams = [
     {
@@ -28,7 +29,6 @@ const teams = [
 ];
 
 const cardClasses = "bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105";
-const textClasses = "text-gray-700 text-sm";
 const titleClasses = "text-xl font-bold text-gray-900";
 const descriptionClasses = "text-gray-700 mb-4";
 
@@ -53,10 +53,18 @@ const TeamSummaryCard = ({ sport, image, description, buttonText }) => (
     </div>
 );
 
+// Add PropTypes validation for the TeamSummaryCard component
+TeamSummaryCard.propTypes = {
+    sport: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    buttonText: PropTypes.string.isRequired
+};
+
 const OurTeamsSummary = () => (
-    <div id="teams" className="relative py-12 bg-blue-700 min-h-screen">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 text-white">Our Teams</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-8 lg:px-12">
+    <div id="teams" className="relative py-16 bg-blue-700 min-h-screen">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 text-white">Our Teams</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-8 lg:px-12 mb-12">
             {teams.map((team, index) => (
                 <TeamSummaryCard
                     key={index}

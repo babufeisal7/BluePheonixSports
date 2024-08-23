@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Slider from 'react-slick'; // Import react-slick
 import 'slick-carousel/slick/slick.css'; // Import slick-carousel styles
 import 'slick-carousel/slick/slick-theme.css'; // Import slick-carousel theme styles
 
-const cardClasses = "bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 mx-3"; // Added mx-3 for horizontal spacing
+const cardClasses = "bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 mx-3";
 const textClasses = "text-gray-600";
-const imagePlaceholder = "https://placehold.co/300x200"; // You can replace with actual image URLs
+const imagePlaceholder = "https://placehold.co/300x200"; // Placeholder image
 const profileImageClasses = "w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover mr-4";
-const cardContentClasses = "p-4 text-left"; // Ensure content is aligned to the left
+const cardContentClasses = "p-4 text-left";
 
 const BlogCard = ({ date, category, title, content, author, role, image, authorImage }) => {
     return (
@@ -33,13 +34,21 @@ const BlogCard = ({ date, category, title, content, author, role, image, authorI
     );
 };
 
+BlogCard.propTypes = {
+    date: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    authorImage: PropTypes.string.isRequired,
+};
+
 const BlogSection = () => {
-    const [isPaused, setIsPaused] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        if (isPaused) return;
-
         const intervalId = setInterval(() => {
             setCurrentIndex((prevIndex) =>
                 prevIndex === 2 ? 0 : prevIndex + 1
@@ -47,7 +56,7 @@ const BlogSection = () => {
         }, 3000); // Change slide every 3 seconds
 
         return () => clearInterval(intervalId); // Clean up the interval on component unmount
-    }, [isPaused]);
+    }, []);
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
@@ -59,7 +68,7 @@ const BlogSection = () => {
         speed: 500,
         slidesToShow: 3, // Show 3 slides at once
         slidesToScroll: 1,
-        autoplay: !isPaused,
+        autoplay: true,
         autoplaySpeed: 3000, // Change speed to match interval
         arrows: false, // Hide default arrows
         afterChange: (current) => setCurrentIndex(current), // Update currentIndex on slide change

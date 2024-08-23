@@ -1,12 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Updated sponsor data with paths from the public directory
 const sponsorData = [
     { name: 'Stanbic Bank', logo: '/images/stanbic-bank.svg' },
     { name: 'NxtRadio', logo: '/images/nxtradio.svg' },
     { name: "King's Park", logo: '/images/kings-park.svg' },
-    { name: 'Stanbic Bank', logo: '/images/stanbic-bank.svg' },
-    { name: 'NxtRadio', logo: '/images/nxtradio.svg' },
+    // Removed duplicate entries
 ];
 
 const sponsorContainerClasses = 'mx-auto mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:max-w-xl sm:grid-cols-3 sm:gap-x-8 lg:max-w-7xl lg:grid-cols-5 lg:gap-x-10';
@@ -21,6 +21,11 @@ const Sponsor = ({ logo, altText }) => (
         height={48}
     />
 );
+
+Sponsor.propTypes = {
+    logo: PropTypes.string.isRequired,
+    altText: PropTypes.string.isRequired
+};
 
 const SponsorList = () => (
     <div className="bg-gray-300 py-16 sm:py-20 lg:py-24">

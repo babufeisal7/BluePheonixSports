@@ -42,14 +42,15 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<Aboutus />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/gallery" element={<Gallerypage />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/join" element={<Joinus />} />
         <Route path="/teams/rugby" element={<RugbyPage />} />
         <Route path="/teams/football" element={<FootballPage />} />
         <Route path="/teams/basketball" element={<BasketballPage />} />
         <Route path="/teams/swimming" element={<SwimmingPage />} />
-         <Route path="/pages/Gallerypage" element={< Gallerypage/>} />
+        <Route path="/gallerypage" element={<Gallerypage />} />
+
       </Routes>
       <Blog />
     <Sponsers />

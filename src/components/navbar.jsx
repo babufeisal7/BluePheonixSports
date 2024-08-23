@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import logo from "../assets/images/logo.jpg";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isProgramsDropdownOpen, setIsProgramsDropdownOpen] = useState(false);
     const [isTeamsDropdownOpen, setIsTeamsDropdownOpen] = useState(false);
-    const location = useLocation(); // Hook to get the current location
+    const location = useLocation();
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -28,16 +27,14 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-        // Scroll to the top when the location changes
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [location]);
 
-    // Close dropdowns if clicked outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
-                event.target.closest(".dropdown") === null &&
-                event.target.closest(".dropdown-button") === null
+                !event.target.closest(".dropdown") &&
+                !event.target.closest(".dropdown-button")
             ) {
                 closeDropdowns();
             }
@@ -51,7 +48,7 @@ const Navbar = () => {
 
     const handleOptionClick = () => {
         closeDropdowns();
-        setIsOpen(false); // Close the mobile menu if an option is clicked
+        setIsOpen(false);
     };
 
     return (
@@ -97,12 +94,11 @@ const Navbar = () => {
                                 onOptionClick={handleOptionClick}
                             />
 
-                             <NavLink to="/gallery" label="Gallery" />
-                             
+                            <NavLink to="/gallery" label="Gallery" />
                             <NavLink to="/blog" label="Blog" />
                             <Link
                                 to="/join"
-                                className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+                                className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-full shadow-lg border border-orange-700 transition duration-300 ease-in-out transform hover:scale-105"
                             >
                                 Join Us
                             </Link>
@@ -184,11 +180,13 @@ const Dropdown = ({ isOpen, toggleDropdown, label, items, onOptionClick }) => (
         <button
             onClick={toggleDropdown}
             className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 flex items-center dropdown-button"
+            aria-expanded={isOpen}
+            aria-label={`Toggle ${label} dropdown`}
         >
             {label} <FaChevronDown className="ml-1" />
         </button>
         {isOpen && (
-            <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-20">
+            <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-20 transition-transform duration-300">
                 {items.map((item) => (
                     <Link
                         key={item.to}

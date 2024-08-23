@@ -12,13 +12,23 @@ export default {
         'neo-sans': ['Neo Sans', 'sans-serif'],
       },
       keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
         slideDown: {
           '0%': { opacity: '0', transform: 'translateY(-10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        slide: {
+          '0%': { opacity: '0', transform: 'scale(1.05)' },
+          '100%': { opacity: '1', transform: 'scale(1)' }
+        }
       },
       animation: {
+        'fade-in': 'fadeIn 2s ease-in forwards',
         'slide-down': 'slideDown 0.3s ease-out forwards',
+        'slide': 'slide 1s ease-in-out'
       },
     },
   },

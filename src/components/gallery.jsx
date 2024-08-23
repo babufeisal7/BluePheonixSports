@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Define gallery items with updated descriptions
 const galleryItems = [
@@ -60,13 +61,12 @@ const Gallery = () => (
             ))}
         </div>
         <div className="flex justify-center mt-8">
-            <a
-                href="/pages/Gallery.jsx"
+            <Link
+                to="/gallery"
                 className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300"
-                rel="noopener noreferrer"
             >
                 View More
-            </a>
+            </Link>
         </div>
     </div>
 );

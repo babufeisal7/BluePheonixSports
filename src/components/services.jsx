@@ -1,8 +1,8 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import { AcademicCapIcon, UsersIcon, CalendarIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 
 // Custom class for increased icon size
-const iconSize = 'h-[2.50rem] w-[2.50rem]'; // Increased size
+const iconSize = 'h-[2.80rem] w-[2.80rem]'; // Increased size
 
 const services = [
     {
@@ -28,16 +28,22 @@ const services = [
 ];
 
 const ServiceCard = ({ title, description, icon }) => (
-    <div className="relative bg-white p-6 rounded-lg shadow-lg text-black">
+    <div className="relative bg-white p-6 rounded-lg shadow-lg text-black text-base sm:text-lg text-muted-foreground mb-4 fade-in">
         <div className="absolute top-12 left-4">
             {icon}
         </div>
         <div className="ml-16 pt-6">
-            <h3 className="text-xl font-semibold mb-2">{title}</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4 sm:mb-6">{title}</h3>
             <p>{description}</p>
         </div>
     </div>
 );
+
+ServiceCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    icon: PropTypes.element.isRequired
+};
 
 const Services = () => (
     <div id="services" className="relative py-12">
