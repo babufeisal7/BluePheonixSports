@@ -44,22 +44,22 @@ const Achievements = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto max-w-6xl">
                 <AchievementCard
                     value={24}
-                    text="Uganda Rugby League"
+                    text="Rugby Tournaments"
                     image="/Trophies.png"
                 />
                 <AchievementCard
                     value={12}
-                    text="CURA 7s"
+                    text="Football Championships"
                     image="/Awards-Trophy.png"
                 />
                 <AchievementCard
                     value={8}
-                    text="Super League"
+                    text="Basketball Leagues"
                     image="/Trophy-Cup.png"
                 />
                 <AchievementCard
                     value={16}
-                    text="Kisibi 10s"
+                    text="Swimming Meets"
                     image="/Trophy2.png"
                 />
             </div>

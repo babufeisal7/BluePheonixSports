@@ -1,5 +1,5 @@
-
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 // Shared Tailwind CSS classes
 const cardClasses = 'relative rounded-lg overflow-hidden shadow-lg group max-w-md mx-auto bg-white mb-6 cursor-pointer';
@@ -7,8 +7,8 @@ const imageClasses = 'w-full h-60 sm:h-64 md:h-72 object-cover transition-transf
 const overlayClasses = 'absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50';
 const textClasses = 'absolute bottom-0 p-4 sm:p-6 text-white transition-all duration-300 ease-in-out transform group-hover:translate-y-2';
 const titleClasses = 'text-lg sm:text-xl md:text-2xl font-semibold mt-2 transition-transform duration-300 ease-in-out group-hover:scale-110';
-const statsClasses = 'text-sm text-gray-600 mt-2'; // Style for stats
-const bioClasses = 'mt-2 text-gray-800';
+const statsClasses = 'text-sm text-gray-300 mt-2'; // Style for stats
+const bioClasses = 'mt-2 text-gray-200';
 
 const PlayerCard = ({ id, name, imgSrc, altText, position, stats, bio, onClick, isActive }) => (
   <div className={`${cardClasses} ${isActive ? 'bg-gray-200' : ''}`} onClick={() => onClick(id)}>
@@ -40,11 +40,11 @@ const CoachCard = () => (
     <img className={imageClasses} src="https://placehold.co/200x200" alt="Coach Image" />
     <div className={textClasses}>
       <h2 className={titleClasses}>ITSUKI TAKAHASHI</h2>
-      <h3 className="text-sm text-gray-600">COACH</h3>
+      <h3 className="text-sm text-gray-300">COACH</h3>
       <p className={bioClasses}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
       </p>
-      <div className="mt-4 text-sm text-gray-600">
+      <div className="mt-4 text-sm text-gray-300">
         <p><strong>Date of birth:</strong> 11 August 1967</p>
         <p><strong>Place of birth:</strong> Livorno</p>
         <p><strong>Nationality:</strong> Norway</p>

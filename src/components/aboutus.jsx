@@ -29,7 +29,7 @@ const AboutUs = () => {
               <h2 className={titleClasses}>About Us</h2>
 
               <section className="mb-8">
-                <h3 className={sectionTitleClasses}>Our Mission & Vision</h3>
+                
                 <p className={textClasses}>
                   At Blue Phoenix Sports Limited, our mission is to foster athletic excellence and community engagement through a diverse range of sports programs. Founded in 2022, we are dedicated to nurturing talent, promoting teamwork, and supporting local sports initiatives.
                 </p>

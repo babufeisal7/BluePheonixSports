@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
+import PropTypes from 'prop-types';  // Import PropTypes for validation
 import logo from "../assets/images/logo.jpg";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 
@@ -163,7 +164,7 @@ const Navbar = () => {
     );
 };
 
-// Generic NavLink component
+// Generic NavLink component with PropTypes
 const NavLink = ({ to, label, onClick }) => (
     <Link
         to={to}
@@ -174,7 +175,13 @@ const NavLink = ({ to, label, onClick }) => (
     </Link>
 );
 
-// Generic Dropdown component
+NavLink.propTypes = {
+    to: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+};
+
+// Generic Dropdown component with PropTypes
 const Dropdown = ({ isOpen, toggleDropdown, label, items, onOptionClick }) => (
     <div className="relative dropdown">
         <button
@@ -201,5 +208,18 @@ const Dropdown = ({ isOpen, toggleDropdown, label, items, onOptionClick }) => (
         )}
     </div>
 );
+
+Dropdown.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    toggleDropdown: PropTypes.func.isRequired,
+    label: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            to: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+    onOptionClick: PropTypes.func.isRequired,
+};
 
 export default Navbar;
