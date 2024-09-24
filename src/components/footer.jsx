@@ -3,14 +3,14 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaPhone, FaEnvelope, Fa
 
 const Footer = () => {
     return (
-        <footer className="bg-[#f09a21] text-white py-8">
+        <footer className="bg-[#1d4ed8] text-white py-8">
             <div className="container mx-auto px-4 md:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {/* Column 1: Logo and Social Media Links */}
                 <div className="flex flex-col items-start space-y-6 md:space-y-8 lg:w-2/5">
                     <div className="flex items-center space-x-4">
                         <img
-                            src="/path/to/your/logo.png" // Replace with the path to your logo image
-                            alt="Blue Phoenix Logo"
+                            src="../logo.jpg" // Replace with the path to your logo image
+                           
                             className="h-16 w-auto"
                         />
                         <h1 className="text-2xl font-bold text-white">Blue Phoenix</h1>

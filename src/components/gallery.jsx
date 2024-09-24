@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 // Define gallery items with updated descriptions
 const galleryItems = [
-    { src: '/photo8.jpg', alt: 'Gallery Image 1', size: 'large', description: 'Rugby Tournament Highlights', link: '/categories/rugby-tournament' },
-    { src: '/photo9.jpg', alt: 'Gallery Image 2', size: 'medium', description: 'Football Championship Moments', link: '/categories/football-championship' },
-    { src: '/photo10.jpg', alt: 'Gallery Image 3', size: 'small', description: 'Basketball Finals Excitement', link: '/categories/basketball-finals' },
-    { src: '/photo11.jpg', alt: 'Gallery Image 4', size: 'large', description: 'Swimming Competition Action', link: '/categories/swimming-competition' },
+    { src: '/photo5.jpg', alt: 'Gallery Image 1', size: 'large', description: 'Rugby Tournament Highlights', link: '/categories/rugby-tournament' },
+    { src: '/football2.jpg', alt: 'Gallery Image 2', size: 'medium', description: 'Football Championship Moments', link: '/categories/football-championship' },
+    { src: '/basketball6.jpg', alt: 'Gallery Image 3', size: 'small', description: 'Basketball Finals Excitement', link: '/categories/basketball-finals' },
+    { src: '/swimming4.jpg', alt: 'Gallery Image 4', size: 'large', description: 'Swimming Competition Action', link: '/categories/swimming-competition' },
     { src: '/video1.mp4', alt: 'Gallery Video 1', size: 'medium', description: 'Rugby Tournament Highlights Video', link: '/categories/rugby-tournament', type: 'video' },
     { src: '/video2.mp4', alt: 'Gallery Video 2', size: 'small', description: 'Football Championship Highlights Video', link: '/categories/football-championship', type: 'video' },
 ];

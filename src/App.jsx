@@ -18,6 +18,11 @@ import FootballPage from './pages/FootballPage';
 import BasketballPage from './pages/BasketballPage'; 
 import SwimmingPage from './pages/SwimmingPage';
 import Gallerypage from './pages/Gallerypage'; 
+import Eventspage from './pages/Eventspage';
+import AboutusPage from './pages/AboutusPage';
+import BlogPage from './pages/BlogPage';
+import Experts from './components/experts'; 
+import Faq from './components/faq'; 
 
 const Home = () => (
   <>
@@ -29,8 +34,8 @@ const Home = () => (
     <Ourteams />
     <Gallery />
     <Achievements />
-    
-  
+     <Experts />
+   
   </>
 );
 
@@ -50,11 +55,16 @@ const App = () => {
         <Route path="/teams/basketball" element={<BasketballPage />} />
         <Route path="/teams/swimming" element={<SwimmingPage />} />
         <Route path="/gallerypage" element={<Gallerypage />} />
-
+        <Route path="/eventspage" element={<Eventspage />} />
+        <Route path="/aboutuspage" element={<AboutusPage />} />
+        <Route path="/blogpage" element={<BlogPage />} />
+        <Route path="/experts" element={<Experts />} /> 
+        
       </Routes>
       <Blog />
-    <Sponsers />
+      <Sponsers />
       <Joinus />
+        <Faq />
       <Footer />
     </Router>
   );

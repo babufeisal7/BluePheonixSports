@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const images = [
     '/photo12.jpg',
-    '/image1.jpg',
-    '/image2.jpg',
-    '/photo9.jpg',
+    '/football1.jpg',
+    '/swimming1.jpg',
+    '/basketball4.jpg',
 ];
 
 const Hero = () => {

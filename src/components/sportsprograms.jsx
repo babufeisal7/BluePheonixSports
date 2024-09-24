@@ -53,7 +53,7 @@ const SportsPrograms = () => {
                 {/* Football Program */}
                 <div id="football" className={programCardClasses}>
                     <div className="flex flex-col sm:flex-row items-center">
-                        <img src="/photo8.jpg" alt="Football" className={imageClasses} />
+                        <img src="/football1.jpg" alt="Football" className={imageClasses} />
                         <div className="flex-1">
                             <h2 className={programTitleClasses}>Football Program</h2>
                             <button
@@ -80,7 +80,7 @@ const SportsPrograms = () => {
                 {/* Basketball Program */}
                 <div id="basketball" className={programCardClasses}>
                     <div className="flex flex-col sm:flex-row items-center">
-                        <img src="/photo9.jpg" alt="Basketball" className={imageClasses} />
+                        <img src="/basketball6.jpg" alt="Basketball" className={imageClasses} />
                         <div className="flex-1">
                             <h2 className={programTitleClasses}>Basketball Program</h2>
                             <button
@@ -107,7 +107,7 @@ const SportsPrograms = () => {
                 {/* Swimming Program */}
                 <div id="swimming" className={programCardClasses}>
                     <div className="flex flex-col sm:flex-row items-center">
-                        <img src="/photo12.jpg" alt="Swimming" className={imageClasses} />
+                        <img src="/swimming1.jpg" alt="Swimming" className={imageClasses} />
                         <div className="flex-1">
                             <h2 className={programTitleClasses}>Swimming Program</h2>
                             <button

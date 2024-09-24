@@ -65,16 +65,16 @@ const Navbar = () => {
                         {/* Desktop Menu */}
                         <div className="hidden md:flex space-x-2 md:ml-auto">
                             <NavLink to="/" label="Home" />
-                            <NavLink to="/about" label="About Us" />
+                            <NavLink to="/AboutusPage" label="About Us" />
                             <NavLink to="/#services" label="Services" />
-                            <NavLink to="/events" label="Events" />
+                            <NavLink to="/Eventspage" label="Events" />
 
                             <Dropdown
                                 isOpen={isProgramsDropdownOpen}
                                 toggleDropdown={toggleProgramsDropdown}
                                 label="Sports Programs"
                                 items={[
-                                    { to: "/sports-programs#rugby", label: "Rugby" },
+                                   { to: "/", label: "Rugby" },
                                     { to: "/sports-programs#football", label: "Football" },
                                     { to: "/sports-programs#basketball", label: "Basketball" },
                                     { to: "/sports-programs#swimming", label: "Swimming" },
@@ -96,7 +96,7 @@ const Navbar = () => {
                             />
 
                             <NavLink to="/gallery" label="Gallery" />
-                            <NavLink to="/blog" label="Blog" />
+                            <NavLink to="/BlogPage" label="Blog" />
                             <Link
                                 to="/join"
                                 className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-full shadow-lg border border-orange-700 transition duration-300 ease-in-out transform hover:scale-105"

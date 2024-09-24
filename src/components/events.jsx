@@ -14,12 +14,14 @@ const titleClasses = 'text-lg sm:text-xl md:text-2xl font-semibold mt-2 transiti
 
 const events = [
     { title: 'CURA 7s', date: 'September 14, 2024', image: '/photo71.jpg' },
-    { title: 'Central League', date: 'October 5, 2024', image: '/photo10.jpg' },
+    { title: 'Football Super Cup', date: 'March 5, 2025', image: '/football3.jpg' },
     { title: 'Kisubi 10s', date: 'November 20, 2024', image: '/photo9.jpg' },
+    { title: 'Basketball PlayOffs', date: 'may 25, 2025', image: '/basketball4.jpg' },
     { title: 'Uganda Cup', date: 'December 15, 2024', image: '/photo6.jpg' },
-    { title: 'Swimming Championship', date: 'January 10, 2025', image: '/photo71.jpg' },
-    { title: 'Basketball Finals', date: 'February 15, 2025', image: '/photo10.jpg' },
-    { title: 'Football Super Cup', date: 'March 5, 2025', image: '/photo9.jpg' },
+    { title: 'Swimming Championship', date: 'January 10, 2025', image: '/swimming3.jpg' },
+    { title: 'Football Super Cup', date: 'March 5, 2025', image: '/football4.jpg' },
+    { title: 'Central League', date: 'October 5, 2024', image: '/photo10.jpg' },
+    { title: 'Basketball Finals', date: 'February 15, 2025', image: '/basketball2.jpg' },
     { title: 'Athletics Meet', date: 'April 20, 2025', image: '/photo6.jpg' },
 ];
 

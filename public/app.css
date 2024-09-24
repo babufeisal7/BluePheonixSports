@@ -8,6 +8,8 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    padding-top: 60px;
+    /* Ensure content starts below the navbar */
 }
 
 .container {
@@ -34,6 +36,8 @@ h6 {
     padding: 0;
     font-weight: normal;
     line-height: 1.2;
+    margin-top: 60px;
+    /* Ensure headers don't overlap with navbar */
 }
 
 p {
@@ -119,8 +123,14 @@ button:hover {
 /* Navbar Styles */
 nav {
     background-color: #003366;
-    /* Blue background */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    /* Fixed position to keep navbar at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    /* Ensure the navbar stays above other elements */
 }
 
 nav .container {
@@ -129,7 +139,6 @@ nav .container {
 
 .navbar-logo {
     height: 3rem;
-    /* Adjust as needed */
 }
 
 .navbar-link {
@@ -141,7 +150,6 @@ nav .container {
 
 .navbar-link:hover {
     background-color: #0056b3;
-    /* Darker blue */
     border-radius: 0.25rem;
 }
 
@@ -162,7 +170,6 @@ nav .container {
 
 .dropdown-button:hover {
     background-color: #0056b3;
-    /* Darker blue */
 }
 
 .dropdown-menu {
@@ -191,14 +198,7 @@ nav .container {
     display: block;
 }
 
-/* Mobile Menu Styles */
-.md\\:hidden {
-    display: block;
-}
-
 @media (max-width: 1024px) {
-
-    /* Tablet Landscape */
     .navbar-menu {
         display: none;
     }
@@ -206,7 +206,6 @@ nav .container {
     .navbar-menu.open {
         display: block;
         background-color: #003366;
-        /* Blue background */
         padding: 1rem;
     }
 
@@ -216,7 +215,6 @@ nav .container {
         padding: 1rem;
         margin: 0;
         border-bottom: 1px solid #0056b3;
-        /* Divider for mobile links */
     }
 
     .navbar-link:last-of-type {
@@ -233,13 +231,11 @@ nav .container {
         display: block;
         padding: 1rem;
         border-bottom: 1px solid #0056b3;
-        /* Divider for dropdowns */
     }
 
     .dropdown-menu a {
         padding: 1rem;
         border-bottom: 1px solid #f0f0f0;
-        /* Divider for dropdown items */
     }
 
     .dropdown-menu a:last-of-type {
@@ -248,8 +244,6 @@ nav .container {
 }
 
 @media (max-width: 768px) {
-
-    /* Tablet Portrait and Mobile */
     .navbar-menu {
         display: none;
     }
@@ -257,7 +251,6 @@ nav .container {
     .navbar-menu.open {
         display: block;
         background-color: #003366;
-        /* Blue background */
         padding: 1rem;
     }
 
@@ -267,7 +260,6 @@ nav .container {
         padding: 1rem;
         margin: 0;
         border-bottom: 1px solid #0056b3;
-        /* Divider for mobile links */
     }
 
     .navbar-link:last-of-type {
@@ -284,99 +276,33 @@ nav .container {
         display: block;
         padding: 1rem;
         border-bottom: 1px solid #0056b3;
-        /* Divider for dropdowns */
     }
 
     .dropdown-menu a {
         padding: 1rem;
         border-bottom: 1px solid #f0f0f0;
-        /* Divider for dropdown items */
     }
 
     .dropdown-menu a:last-of-type {
         border-bottom: none;
     }
 }
-/* Gallery container styling */
-.gallery-container {
-    background-color: #f7f7f7;
-    /* Light background for contrast */
-    padding: 2rem;
-    /* Adequate padding */
+
+/* buttonStyles.css */
+.button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: 2px solid white;
+    background-color: #1d4ed8;
+    /* Primary color */
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.gallery-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.gallery-header h1 {
-    font-size: 2.5rem;
-    /* Large, bold font for the header */
-    color: #333;
-    /* Dark text color */
-}
-
-.gallery-header h2 {
-    font-size: 2rem;
-    /* Slightly smaller font for category titles */
-    color: #666;
-    /* Lighter text color for subtitles */
-}
-
-/* Grid layout styling */
-.grid-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    /* Responsive grid */
-    gap: 1rem;
-    /* Space between grid items */
-}
-
-/* Image and video styling */
-.grid-gallery img,
-.grid-gallery video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Ensures proper aspect ratio */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    /* Smooth transitions */
-}
-
-.grid-gallery img:hover,
-.grid-gallery video:hover {
-    transform: scale(1.05);
-    /* Slightly zoom on hover */
-}
-
-/* Overlay styling */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Dark overlay */
-    color: #fff;
-    /* White text for contrast */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    /* Fade-in effect */
-}
-
-.overlay p {
-    font-size: 1.25rem;
-    /* Larger font for readability */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    /* Text shadow for better readability */
-}
-
-.grid-gallery div:hover .overlay {
-    opacity: 1;
-    /* Show overlay on hover */
+.button:hover {
+    background-color: #3b82f6;
+    /* Secondary color */
+    color: #1e3a8a;
+    /* Text color on hover */
 }

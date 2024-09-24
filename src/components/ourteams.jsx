@@ -10,19 +10,19 @@ const teams = [
     },
     {
         sport: 'Football',
-        image: '/image3.jpg',
+        image: '/football1.jpg',
         description: 'We will always Rise!',
         buttonText: 'Coming Soon'
     },
     {
         sport: 'Basketball',
-        image: '/image2.jpg',
+        image: '/basketball4.jpg',
         description: 'We will always Rise!',
         buttonText: 'Coming Soon'
     },
     {
         sport: 'Swimming',
-        image: '/image4.jpg',
+        image: '/swimmingteam.jpg',
         description: 'We will always Rise!',
         buttonText: 'Coming Soon'
     },
