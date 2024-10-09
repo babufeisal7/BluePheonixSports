@@ -45,7 +45,7 @@ const FAQComponent = () => {
     <div className="flex flex-col md:flex-row bg-gray-50 p-4 rounded-lg shadow-lg">
       {/* Sidebar with Sports Academy categories */}
       <div className="w-full md:w-1/4 bg-white p-4 rounded-lg shadow-md">
-        <h2 className="text-lg font-semibold text-blue-600">Sports Academy</h2>
+        <h2 className="text-lg font-semibold text-black">Sports Academy</h2>
         <ul className="mt-4 space-y-2">
           {Object.keys(FAQs).map((sport) => (
             <li
@@ -66,7 +66,7 @@ const FAQComponent = () => {
       {/* Main content with FAQ */}
       <div className="w-full md:w-3/4 mt-4 md:mt-0 md:ml-4">
         <div className="bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold text-blue-600">Frequently Asked Questions</h3>
+          <h3 className="text-lg font-semibold text-black">Frequently Asked Questions</h3>
           <div className="mt-4 space-y-4">
             {FAQs[selectedSport].map((faq, index) => (
               <div key={index} className="border-b border-gray-300 pb-2">
