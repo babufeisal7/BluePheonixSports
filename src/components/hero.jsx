@@ -51,6 +51,7 @@ const Hero = () => {
                             Join Us
                         </button>
                     </div>
+                   
                 </div>
 
                 <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">

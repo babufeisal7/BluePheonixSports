@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { AcademicCapIcon, UsersIcon, CalendarIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSchool, faUsers, faCalendarAlt, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 
 // Custom class for increased icon size
 const iconSize = 'h-[2.80rem] w-[2.80rem]'; // Increased size
@@ -8,33 +9,35 @@ const services = [
     {
         title: 'Schools Sports Management',
         description: 'Expert management and coordination of school sports programs, including scheduling, coaching, and event planning.',
-        icon: <AcademicCapIcon className={`${iconSize} text-blue-500`} />
+        icon: <FontAwesomeIcon icon={faSchool} className={`${iconSize} text-black`} /> // Changed to text-black
     },
     {
         title: 'Sports Team Management',
         description: 'Comprehensive management of sports teams, from recruitment and training to game strategies and performance analysis.',
-        icon: <UsersIcon className={`${iconSize} text-blue-500`} />
+        icon: <FontAwesomeIcon icon={faUsers} className={`${iconSize} text-black`} /> // Changed to text-black
     },
     {
         title: 'Sports Events Management',
         description: 'Full-service event management for sports events, including logistics, promotion, and execution to ensure successful events.',
-        icon: <CalendarIcon className={`${iconSize} text-blue-500`} />
+        icon: <FontAwesomeIcon icon={faCalendarAlt} className={`${iconSize} text-black`} /> // Changed to text-black
     },
     {
         title: 'Merchandise Sales',
         description: 'A wide range of merchandise available for fans and players, including apparel, equipment, and accessories.',
-        icon: <ShoppingBagIcon className={`${iconSize} text-blue-500`} />
+        icon: <FontAwesomeIcon icon={faShoppingBag} className={`${iconSize} text-black`} /> // Changed to text-black
     },
 ];
 
 const ServiceCard = ({ title, description, icon }) => (
-    <div className="relative bg-white p-6 rounded-lg shadow-lg text-black text-base sm:text-lg text-muted-foreground mb-4 fade-in">
+    <div className="relative bg-white p-6 rounded-lg shadow-lg text-black text-sm sm:text-base text-muted-foreground mb-4 fade-in">
         <div className="absolute top-12 left-4">
             {icon}
         </div>
         <div className="ml-16 pt-6">
-            <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-4 sm:mb-6">{title}</h3>
-            <p>{description}</p>
+            {/* Change text size for title */}
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2 sm:mb-4">{title}</h3>
+            {/* Change text size for description */}
+            <p className="text-sm sm:text-base">{description}</p>
         </div>
     </div>
 );

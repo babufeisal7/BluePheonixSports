@@ -1,28 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Define reusable styles
-const sectionTitleClasses = "text-3xl font-bold mb-4";
-const sectionTextClasses = "text-lg mb-6";
+const sectionTitleClasses = "text-3xl md:text-4xl font-bold mb-6 text-center text-primary";
+const sectionTextClasses = "text-lg md:text-xl mb-6 ";
 const listClasses = "list-disc pl-6 text-lg space-y-2";
 const highlightTextClasses = "font-semibold text-primary";
-const imgContainerClasses = "w-full h-64 bg-gray-200 rounded-lg overflow-hidden";
+const imgContainerClasses = "w-full h-64 md:h-80 bg-gray-200 rounded-lg overflow-hidden";
 const imgClasses = "w-full h-full object-cover";
-const timelineContainerClasses = "relative pl-10";
-const timelineItemClasses = "mb-8";
-const timelineBulletClasses = "absolute w-4 h-4 bg-blue-500 rounded-full left-0";
-const timelineContentClasses = "ml-8";
+
+const tabButtonClasses = (isActive) =>
+    `py-2 px-4 md:px-6 text-lg font-semibold rounded-t-lg transition-all duration-300 ease-in-out ${isActive ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-blue-500 hover:text-white hover:shadow-lg'}`;
+
+// Define CSS classes for reuse
+const cardClasses = "bg-white p-6 rounded-lg shadow-md transition-transform transform hover:scale-105";
+const textPrimaryClasses = "text-primary";
+const textMutedClasses = "text-gray-500";
+const linkClasses = "text-blue-600 hover:text-blue-800 transition-colors";
+
+// ExpertCard Component
+const ExpertCard = ({ name, role, imgSrc }) => (
+    <div className={cardClasses}>
+        <img className="w-full h-48 object-cover rounded-t-lg" src={imgSrc} alt={name} />
+        <h3 className={`text-2xl font-semibold mt-4 ${textPrimaryClasses}`}>{name}</h3>
+        <p className={`text-lg ${textMutedClasses} mt-2`}>{role}</p>
+        <div className="flex space-x-4 mt-4">
+            <a href="#" className={linkClasses}>Facebook</a>
+            <a href="#" className={linkClasses}>Twitter</a>
+            <a href="#" className={linkClasses}>LinkedIn</a>
+        </div>
+    </div>
+);
+
+// Experts Component
+const Experts = () => {
+    return (
+        <div className="container mx-auto px-4 py-12">
+            <h2 className={`text-4xl font-bold text-center ${textPrimaryClasses} mb-6`}>Meet Our Experts</h2>
+            <p className={`text-center ${textMutedClasses} mb-8`}>Blue Phoenix Rugby Club is backed by an experienced team dedicated to nurturing the next generation of athletes.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <ExpertCard name="Mariah Tal" role="Head Coach" imgSrc="https://placehold.co/300x200" />
+                <ExpertCard name="Jerome Bell" role="Fitness Trainer" imgSrc="https://placehold.co/300x200" />
+                <ExpertCard name="Guy Hawkins" role="Physiotherapist" imgSrc="https://placehold.co/300x200" />
+                <ExpertCard name="Savannah Nguyen" role="Nutritionist" imgSrc="https://placehold.co/300x200" />
+            </div>
+        </div>
+    );
+};
 
 const AboutusPage = () => {
+    const [activeTab, setActiveTab] = useState('vision');
+
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-4xl font-bold text-center mb-8 text-primary">About Us</h1>
+        <div className="container mx-auto p-4 max-w-7xl">
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-10 text-primary">About Us</h1>
 
             {/* Introduction */}
-            <section className="mb-12">
+            <section className="mb-12 border-b pb-8">
                 <h2 className={sectionTitleClasses}>Introduction</h2>
                 <div className="flex flex-col md:flex-row md:items-center md:gap-6">
                     <div className={imgContainerClasses}>
-                        <img src="https://placehold.co/600x400" alt="Introduction" className={imgClasses} />
+                        <img src="https://placehold.co/600x400" alt="Introduction to Blue Phoenix Sports Limited" className={imgClasses} />
                     </div>
                     <div className="mt-6 md:mt-0">
                         <p className={sectionTextClasses}>
@@ -31,105 +68,78 @@ const AboutusPage = () => {
                         <p className={sectionTextClasses}>
                             Our mission is to provide high-quality sports programs and foster a supportive community where athletes can thrive and reach their full potential.
                         </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* Mission and Vision */}
-            <section className="mb-12">
-                <h2 className={sectionTitleClasses}>Our Mission</h2>
-                <p className={sectionTextClasses}>
-                    To deliver top-notch sports training and management services that inspire and develop athletes to excel both on and off the field.
-                </p>
-                <div className={imgContainerClasses + " mb-8"}>
-                    <img src="https://placehold.co/600x400" alt="Mission" className={imgClasses} />
-                </div>
-                <h2 className={`${sectionTitleClasses} mt-8`}>Our Vision</h2>
-                <p className={sectionTextClasses}>
-                    To be a leading sports academy known for fostering talent, promoting teamwork, and creating opportunities for growth and success.
-                </p>
-                <div className={imgContainerClasses}>
-                    <img src="https://placehold.co/600x400" alt="Vision" className={imgClasses} />
-                </div>
-            </section>
-
-            {/* Core Values */}
-            <section className="mb-12">
-                <h2 className={sectionTitleClasses}>Core Values</h2>
-                <ul className={listClasses}>
-                    <li><span className={highlightTextClasses}>Excellence:</span> Striving for the highest standards in everything we do.</li>
-                    <li><span className={highlightTextClasses}>Integrity:</span> Building trust through honesty and ethical practices.</li>
-                    <li><span className={highlightTextClasses}>Community:</span> Creating a supportive environment that encourages growth and collaboration.</li>
-                    <li><span className={highlightTextClasses}>Passion:</span> Fueling our work with enthusiasm and commitment to sports and athletes.</li>
-                </ul>
-                <div className={imgContainerClasses + " mt-8"}>
-                    <img src="https://placehold.co/600x400" alt="Core Values" className={imgClasses} />
-                </div>
-            </section>
-
-            {/* History with Timeline */}
-            <section className="mb-12">
-                <h2 className={sectionTitleClasses}>Our History</h2>
-                <div className={timelineContainerClasses}>
-                    <div className={timelineItemClasses}>
-                        <div className={timelineBulletClasses}></div>
-                        <div className={timelineContentClasses}>
-                            <h3 className="text-xl font-semibold mb-2">Founding Year</h3>
-                            <p className={sectionTextClasses}>
-                                Blue Phoenix Sports Limited was founded with a vision to revolutionize sports management and training.
-                            </p>
-                            <div className={imgContainerClasses + " mt-4"}>
-                                <img src="https://placehold.co/600x400" alt="Founding Year" className={imgClasses} />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                            <div className="flex flex-col items-center">
+                                <span className="text-4xl font-bold">20+</span>
+                                <span className="text-muted-foreground">Professional Coaches</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className={timelineItemClasses}>
-                        <div className={timelineBulletClasses}></div>
-                        <div className={timelineContentClasses}>
-                            <h3 className="text-xl font-semibold mb-2">First Major Milestone</h3>
-                            <p className={sectionTextClasses}>
-                                Reached our first major milestone with the launch of our flagship sports training program.
-                            </p>
-                            <div className={imgContainerClasses + " mt-4"}>
-                                <img src="https://placehold.co/600x400" alt="First Major Milestone" className={imgClasses} />
+                            <div className="flex flex-col items-center">
+                                <span className="text-4xl font-bold">10+</span>
+                                <span className="text-muted-foreground">Certified Youth Coaches</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className={timelineItemClasses}>
-                        <div className={timelineBulletClasses}></div>
-                        <div className={timelineContentClasses}>
-                            <h3 className="text-xl font-semibold mb-2">Expansion and Growth</h3>
-                            <p className={sectionTextClasses}>
-                                Expanded our services to include new sports disciplines and opened additional training centers.
-                            </p>
-                            <div className={imgContainerClasses + " mt-4"}>
-                                <img src="https://placehold.co/600x400" alt="Expansion and Growth" className={imgClasses} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={timelineItemClasses}>
-                        <div className={timelineBulletClasses}></div>
-                        <div className={timelineContentClasses}>
-                            <h3 className="text-xl font-semibold mb-2">Recent Achievements</h3>
-                            <p className={sectionTextClasses}>
-                                Achieved significant milestones in athlete development and community engagement.
-                            </p>
-                            <div className={imgContainerClasses + " mt-4"}>
-                                <img src="https://placehold.co/600x400" alt="Recent Achievements" className={imgClasses} />
+                            <div className="flex flex-col items-center">
+                                <span className="text-4xl font-bold">10K+</span>
+                                <span className="text-muted-foreground">Training Hours Annually</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Call to Action */}
-            <section className="text-center mb-8">
-                <h2 className="text-2xl font-bold mb-4">Join Us</h2>
-                <p className="text-lg mb-4">
-                    Interested in being part of our community? Whether you're looking to join our programs or support our mission, we would love to hear from you!
-                </p>
-                <a href="/contact" className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">Contact Us</a>
-            </section>
+            {/* Tab Navigation */}
+            <div className="flex justify-center space-x-4 mb-8">
+                <button className={tabButtonClasses(activeTab === 'vision')} onClick={() => setActiveTab('vision')}>
+                    Vision
+                </button>
+                <button className={tabButtonClasses(activeTab === 'mission')} onClick={() => setActiveTab('mission')}>
+                    Mission
+                </button>
+                <button className={tabButtonClasses(activeTab === 'objectives')} onClick={() => setActiveTab('objectives')}>
+                    Objectives
+                </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="mb-12">
+                {activeTab === 'vision' && (
+                    <section className="mb-12">
+                        <h2 className={sectionTitleClasses}>Vision</h2>
+                        <p className={sectionTextClasses}>
+                            Our vision at <span className={highlightTextClasses}>Blue Phoenix Rugby Club</span> is to become a leading force in rugby, nurturing players from grassroots to professional levels while promoting integrity, teamwork, and sportsmanship.
+                        </p>
+                    </section>
+                )}
+
+                {activeTab === 'mission' && (
+                    <section className="mb-12">
+                        <h2 className={sectionTitleClasses}>Mission</h2>
+                        <p className={sectionTextClasses}>
+                            Our mission is to empower athletes through structured and innovative rugby programs, providing them with the skills and opportunities needed to succeed both on and off the field. We aim to cultivate a winning mentality while maintaining the values of respect and hard work.
+                        </p>
+                    </section>
+                )}
+
+                {activeTab === 'objectives' && (
+                    <section className="mb-12">
+                        <h2 className={sectionTitleClasses}>Objectives</h2>
+                        <ul className={listClasses}>
+                            <li>
+                                <span className={highlightTextClasses}>Develop Talent:</span> Create pathways for athletes to progress through youth, amateur, and professional levels.
+                            </li>
+                            <li>
+                                <span className={highlightTextClasses}>Promote Inclusivity:</span> Ensure that rugby is accessible to everyone, regardless of background or ability.
+                            </li>
+                            <li>
+                                <span className={highlightTextClasses}>Community Engagement:</span> Strengthen ties with local communities through outreach and partnerships.
+                            </li>
+                            <li>
+                                <span className={highlightTextClasses}>Success On and Off the Field:</span> Help athletes grow both as individuals and as team players, preparing them for life beyond sports.
+                            </li>
+                        </ul>
+                    </section>
+                )}
+            </div>
+
         </div>
     );
 };

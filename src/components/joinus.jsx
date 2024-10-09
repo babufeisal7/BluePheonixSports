@@ -15,57 +15,77 @@ const videoStyles = 'absolute top-0 left-0 object-cover'; // Styles for the vide
 
 const JoinUs = () => {
     return (
-        <div className="bg-blue-700 text-white p-6 sm:p-8 md:p-12 lg:p-16 shadow-lg">
+        <div className="bg-blue-700 text-white p-4 sm:p-6 md:p-8 lg:p-12 shadow-lg"> {/* Reduced padding for mobile */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-4">
                 {/* First Column - Text Section */}
                 <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-center lg:text-center">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-center lg:text-left">
                         Join Us
                     </h1>
-                    <p className="text-base sm:text-lg md:text-xl mb-6 text-center lg:text-center">
+                    <p className="text-base md:text-lg mb-6 text-center lg:text-left">
                         Become a part of the Blue Phoenix community! Choose your preferred sports and get involved today.
                     </p>
-                    <div className="max-w-md mx-auto p-8 bg-card rounded-lg shadow-lg border border-border">
-                        <form>
-                            <div className="mb-5">
-                                <label className="block text-muted-foreground mb-1" htmlFor="name">
-                                    Full Name
-                                </label>
-                                <input className={inputClasses} type="text" id="name" placeholder="John Doe" required />
-                            </div>
-                            <div className="mb-5">
-                                <label className="block text-muted-foreground mb-1" htmlFor="email">
-                                    Email address
-                                </label>
-                                <input className={inputClasses} type="email" id="email" placeholder="you@example.com" required />
-                            </div>
-                            <div className="mb-5">
-                                <label className="block text-muted-foreground mb-1" htmlFor="phone">
-                                    Phone Number
-                                </label>
-                                <input className={inputClasses} type="tel" id="phone" placeholder="+265 7756 7890" required />
-                            </div>
-                            <div className="mb-5">
-                                <label className="block text-muted-foreground mb-1" htmlFor="team-preference">
-                                    Team Preference
-                                </label>
-                                <select
-                                    className={inputClasses}
-                                    id="team-preference"
-                                    style={{ color: 'black' }} // Apply black text color to the select element
-                                    required
-                                >
-                                    <option value="">Select a team</option>
-                                    <option value="rugby">Rugby</option>
-                                    <option value="football">Football</option>
-                                    <option value="basketball">Basketball</option>
-                                    <option value="swimming">Swimming</option>
-                                </select>
-                            </div>
-                            <button className={buttonClasses}>Join Us</button>
-                        </form>
-                        <div className="my-6 text-center text-muted-foreground">Or join us with</div>
-                        <div className="flex justify-center space-x-4">
+                    <div className="max-w-md mx-auto p-6 bg-card rounded-lg shadow-lg border border-border"> {/* Reduced padding */}
+                       <form>
+                           {/** Input fields for the form */}
+                           <div className="mb-4"> {/* Increased margin for spacing */}
+                               <label className="block text-muted-foreground mb-1 text-xs" htmlFor="name">
+                                   Full Name
+                               </label>
+                               <input
+                                   className={`${inputClasses} text-xs`}
+                                   type="text"
+                                   id="name"
+                                   placeholder="John Doe"
+                                   required
+                               />
+                           </div>
+                           <div className="mb-4">
+                               <label className="block text-muted-foreground mb-1 text-xs" htmlFor="email">
+                                   Email address
+                               </label>
+                               <input
+                                   className={`${inputClasses} text-xs`}
+                                   type="email"
+                                   id="email"
+                                   placeholder="you@example.com"
+                                   required
+                               />
+                           </div>
+                           <div className="mb-4">
+                               <label className="block text-muted-foreground mb-1 text-xs" htmlFor="phone">
+                                   Phone Number
+                               </label>
+                               <input
+                                   className={`${inputClasses} text-xs`}
+                                   type="tel"
+                                   id="phone"
+                                   placeholder="+265 7756 7890"
+                                   required
+                               />
+                           </div>
+                           <div className="mb-4">
+                               <label className="block text-muted-foreground mb-1 text-xs" htmlFor="team-preference">
+                                   Team Preference
+                               </label>
+                               <select
+                                   className={`${inputClasses} text-xs`}
+                                   id="team-preference"
+                                   style={{ color: 'black' }}
+                                   required
+                               >
+                                   <option value="">Select a team</option>
+                                   <option value="rugby">Rugby</option>
+                                   <option value="football">Football</option>
+                                   <option value="basketball">Basketball</option>
+                                   <option value="swimming">Swimming</option>
+                               </select>
+                           </div>
+                           <button className={`${buttonClasses} text-xs`}>Join Us</button>
+                       </form>
+
+                        <div className="my-4 text-center text-muted-foreground">Or join us with</div>
+                        <div className="flex flex-col sm:flex-row justify-center space-x-0 space-y-4 sm:space-y-0 sm:space-x-4">
                             <button className={socialButtonClasses}>
                                 <img src="https://openui.fly.dev/openui/google.svg?text=Google" alt="Google" className="w-5 h-5 mr-2" />
                                 Google
@@ -80,11 +100,11 @@ const JoinUs = () => {
 
                 {/* Second Column - Video Section */}
                 <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
-                    <div className={videoContainerStyles} style={{ paddingTop: '56.25%' }}> {/* Aspect Ratio 16:9 */}
+                    <div className={videoContainerStyles} style={{ paddingTop: '56.25%' }}>
                         <video
                             className={videoStyles}
-                            style={{ width: '100%', height: '100%' }} // Set the resolution by adjusting the container size
-                            src="/BLUE PHEONIX.mp4" // Path to your local video
+                            style={{ width: '100%', height: '100%' }}
+                            src="/BLUE PHEONIX.mp4"
                             title="Introduction to Blue Phoenix"
                             controls
                             autoPlay
@@ -98,18 +118,18 @@ const JoinUs = () => {
             {/* Sign-Up Form Row - Positioned Below the Columns */}
             <div className="mt-8 w-full">
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full space-y-4 lg:space-y-0 lg:space-x-4">
-                    <label htmlFor="email" className={`${sharedTextClasses} mb-2 lg:mb-0 lg:w-1/2 text-center lg:text-center`}>
+                    <label htmlFor="newsletter-email" className={`${sharedTextClasses} mb-2 lg:mb-0 lg:w-1/2 text-center lg:text-left`}>
                         Want product news and updates.
-                        <p className={`${sharedTextClasses} mt-2 text-center lg:text-center`}>
+                        <p className={`${sharedTextClasses} mt-2 text-center lg:text-left`}>
                         Sign up for our newsletter.
                         </p>
                     </label>
                     <div className="flex flex-col lg:flex-row lg:items-center lg:w-1/2 space-y-4 lg:space-y-0 lg:space-x-4">
                         <input
                             type="email"
-                            id="email"
+                            id="newsletter-email"
                             placeholder="Enter your email"
-                            className={`p-3 ${sharedBorderClasses} rounded-lg w-full lg:w-80 focus:outline-none focus:ring focus:ring-primary`} // Increased width
+                            className={`p-3 ${sharedBorderClasses} rounded-lg w-full lg:w-80 focus:outline-none focus:ring focus:ring-primary`}
                         />
                         <button className={`${joinButtonClass} ${sharedButtonClasses} w-full lg:w-auto`}>Subscribe</button>
                     </div>

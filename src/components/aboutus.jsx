@@ -7,7 +7,7 @@ const cardContainerClasses = 'flex flex-col md:flex-row items-center';
 const cardClasses = 'flex flex-col md:flex-row items-start md:items-center bg-white p-6';
 const titleClasses = 'text-2xl sm:text-3xl font-bold text-primary mb-4 sm:mb-6';
 const textClasses = 'text-base sm:text-lg text-muted-foreground mb-4 fade-in';
-const buttonClasses = 'bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 sm:py-3 sm:px-6 rounded mt-4';
+const buttonClasses = 'bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300';
 const imageContainerClasses = 'w-full sm:w-1/2 mt-4 sm:mt-0';
 const imageClasses = 'rounded-lg w-full h-auto slide-in';
 
@@ -31,7 +31,7 @@ const AboutUs = () => {
 
               <section>
                 <Link to="/AboutusPage" className={buttonClasses}>
-                  Get Involved
+                  Read More..
                 </Link>
               </section>
             </div>

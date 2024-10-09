@@ -16,7 +16,7 @@ const events = [
     { title: 'CURA 7s', date: 'September 14, 2024', image: '/photo71.jpg' },
     { title: 'Football Super Cup', date: 'March 5, 2025', image: '/football3.jpg' },
     { title: 'Kisubi 10s', date: 'November 20, 2024', image: '/photo9.jpg' },
-    { title: 'Basketball PlayOffs', date: 'may 25, 2025', image: '/basketball4.jpg' },
+    { title: 'Basketball PlayOffs', date: 'May 25, 2025', image: '/basketball4.jpg' },
     { title: 'Uganda Cup', date: 'December 15, 2024', image: '/photo6.jpg' },
     { title: 'Swimming Championship', date: 'January 10, 2025', image: '/swimming3.jpg' },
     { title: 'Football Super Cup', date: 'March 5, 2025', image: '/football4.jpg' },
@@ -76,17 +76,17 @@ const Events = () => {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1
-                }
+                    slidesToScroll: 1,
+                },
             },
             {
                 breakpoint: 640,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
 
     return (

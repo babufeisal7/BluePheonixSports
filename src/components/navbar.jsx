@@ -68,19 +68,19 @@ const Navbar = () => {
                             <NavLink to="/AboutusPage" label="About Us" />
                             <NavLink to="/#services" label="Services" />
                             <NavLink to="/Eventspage" label="Events" />
-
-                            <Dropdown
-                                isOpen={isProgramsDropdownOpen}
-                                toggleDropdown={toggleProgramsDropdown}
-                                label="Sports Programs"
-                                items={[
-                                   { to: "/", label: "Rugby" },
-                                    { to: "/sports-programs#football", label: "Football" },
-                                    { to: "/sports-programs#basketball", label: "Basketball" },
-                                    { to: "/sports-programs#swimming", label: "Swimming" },
+                          <Dropdown
+                              isOpen={isProgramsDropdownOpen}
+                              toggleDropdown={toggleProgramsDropdown}
+                              label="Sports Programs"
+                              items={[
+                                  { to: "/sports-programs#rugby", label: "Rugby" },
+                                  { to: "/sports-programs#football", label: "Football" },
+                                  { to: "/sports-programs#basketball", label: "Basketball" },
+                                  { to: "/sports-programs#swimming", label: "Swimming" },
                                 ]}
                                 onOptionClick={handleOptionClick}
-                            />
+                              />
+
 
                             <Dropdown
                                 isOpen={isTeamsDropdownOpen}

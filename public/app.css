@@ -2,6 +2,7 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
+/* Global Styles */
 body,
 html {
     overflow-x: hidden;
@@ -15,6 +16,7 @@ html {
 .container {
     width: 100%;
     max-width: 1200px;
+    /* Maximum width for larger screens */
     margin: 0 auto;
     padding: 0 16px;
     box-sizing: border-box;
@@ -46,20 +48,55 @@ p {
     font-size: 1rem;
 }
 
+/* Media Queries */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 24px;
+        /* Add padding for medium screens */
+    }
+
+    h1 {
+        font-size: 2rem;
+        /* Adjust font size */
+    }
+}
+
+@media (max-width: 992px) {
+    h1 {
+        font-size: 1.75rem;
+        /* Smaller h1 for tablets */
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        /* Adjusted size */
+    }
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 1.5rem;
+        /* Further reduced font size */
     }
 
     h2 {
         font-size: 1.25rem;
+        /* Smaller h2 for smaller screens */
     }
 
     p {
         font-size: 0.875rem;
+        /* Smaller paragraph text */
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+        /* Smaller button text */
     }
 }
 
+/* Card Styles */
 .card {
     background: #fff;
     border-radius: 8px;
@@ -67,15 +104,18 @@ p {
     padding: 16px;
     margin: 16px;
     box-sizing: border-box;
+    animation: fadeIn 0.5s ease forwards;
 }
 
 @media (max-width: 768px) {
     .card {
         margin: 8px;
         padding: 12px;
+        /* Smaller padding on mobile */
     }
 }
 
+/* Button Styles */
 button {
     background-color: #007bff;
     color: #fff;
@@ -91,13 +131,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
-    button {
-        padding: 8px 16px;
-        font-size: 0.875rem;
-    }
-}
-
+/* Flex and Grid Containers */
 .flex-container {
     display: flex;
     flex-wrap: wrap;
@@ -106,11 +140,13 @@ button:hover {
 
 .flex-item {
     flex: 1 1 auto;
+    /* Flex item will grow to fill space */
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Responsive grid */
     gap: 16px;
 }
 
@@ -153,6 +189,7 @@ nav .container {
     border-radius: 0.25rem;
 }
 
+/* Dropdown Styles */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -198,6 +235,7 @@ nav .container {
     display: block;
 }
 
+/* Responsive Navbar */
 @media (max-width: 1024px) {
     .navbar-menu {
         display: none;
@@ -243,52 +281,7 @@ nav .container {
     }
 }
 
-@media (max-width: 768px) {
-    .navbar-menu {
-        display: none;
-    }
-
-    .navbar-menu.open {
-        display: block;
-        background-color: #003366;
-        padding: 1rem;
-    }
-
-    .navbar-link {
-        display: block;
-        text-align: center;
-        padding: 1rem;
-        margin: 0;
-        border-bottom: 1px solid #0056b3;
-    }
-
-    .navbar-link:last-of-type {
-        border-bottom: none;
-    }
-
-    .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-    }
-
-    .dropdown-button {
-        display: block;
-        padding: 1rem;
-        border-bottom: 1px solid #0056b3;
-    }
-
-    .dropdown-menu a {
-        padding: 1rem;
-        border-bottom: 1px solid #f0f0f0;
-    }
-
-    .dropdown-menu a:last-of-type {
-        border-bottom: none;
-    }
-}
-
-/* buttonStyles.css */
+/* Button Styles */
 .button {
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
@@ -305,4 +298,110 @@ nav .container {
     /* Secondary color */
     color: #1e3a8a;
     /* Text color on hover */
+}
+
+/* Sidebar Link Animation */
+.sidebar-link {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar-link:hover {
+    color: #2563eb;
+    /* Tailwind's blue-600 */
+    transform: translateY(-2px);
+}
+
+/* Fade-in Animation for Key Components */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Skill Bar Styles */
+.single-skill-bar {
+    margin-bottom: 1.5rem;
+    /* Space between bars */
+}
+
+.skill-bar-content {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #3b82f6;
+    /* Adjust color as needed */
+    margin-bottom: 0.5rem;
+    /* Space below title */
+}
+
+.skill-bar {
+    background-color: #e5e7eb;
+    /* Track color */
+    border-radius: 1rem;
+    overflow: hidden;
+    /* Round edges */
+    position: relative;
+    /* For the percentage text */
+}
+
+.skill-track {
+    background-color: #3b82f6;
+    /* Fill color */
+    height: 1rem;
+    /* Height of the progress bar */
+    border-radius: 1rem;
+    transition: width 0.7s ease;
+    /* Smooth transition */
+}
+
+.number-percentage-wrapper {
+    position: absolute;
+    top: 0;
+    /* Center vertically */
+    right: 0;
+    /* Align to the right */
+    transform: translateY(-50%);
+    /* Adjust to center vertically */
+    color: white;
+    /* Text color */
+    font-weight: bold;
+    padding-right: 0.5rem;
+    /* Space on right */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #003366;
+    /* Dark background */
+    color: #ffffff;
+    /* Light text */
+    padding: 2rem 0;
+    /* Space above and below */
+    text-align: center;
+    /* Centered content */
+}
+
+footer a {
+    color: #ffffff;
+    /* Link color */
+    text-decoration: none;
+    /* Remove underline */
+}
+
+footer a:hover {
+    text-decoration: underline;
+    /* Underline on hover */
+}
+
+/* Media Queries for Footer */
+@media (max-width: 768px) {
+    footer {
+        padding: 1rem;
+        /* Smaller padding on mobile */
+    }
 }

@@ -23,6 +23,9 @@ import AboutusPage from './pages/AboutusPage';
 import BlogPage from './pages/BlogPage';
 import Experts from './components/experts'; 
 import Faq from './components/faq'; 
+import SportsProgramPage from './pages/SportsProgramPage';
+import WhyUs from "./components/WhyUs"; 
+import Testimonials from "./components/Testimonials";
 
 const Home = () => (
   <>
@@ -34,8 +37,11 @@ const Home = () => (
     <Ourteams />
     <Gallery />
     <Achievements />
-     <Experts />
-   
+    <Experts />
+     <WhyUs />
+     <Testimonials />
+    
+
   </>
 );
 
@@ -59,8 +65,11 @@ const App = () => {
         <Route path="/aboutuspage" element={<AboutusPage />} />
         <Route path="/blogpage" element={<BlogPage />} />
         <Route path="/experts" element={<Experts />} /> 
+        <Route path="/sports-programs" element={<SportsProgramPage />} />
+        <Route path="/testimonials" element={<Testimonials />} />
         
       </Routes>
+      <Experts />
       <Blog />
       <Sponsers />
       <Joinus />

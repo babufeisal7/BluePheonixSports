@@ -1,42 +1,126 @@
 import React, { useState } from 'react';
-import PlayerModal from "../components/PlayerModal";
+import PropTypes from 'prop-types';
+import { FaTimes } from 'react-icons/fa';
 
-
-// Shared Tailwind CSS classes
 const cardClasses = 'relative rounded-lg overflow-hidden shadow-lg group max-w-md mx-auto bg-white';
 const imageClasses = 'w-full h-60 sm:h-64 md:h-72 object-cover transition-transform duration-300 ease-in-out group-hover:scale-110';
 const overlayClasses = 'absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50';
 const textClasses = 'absolute bottom-0 p-4 sm:p-6 text-white transition-all duration-300 ease-in-out transform group-hover:translate-y-2';
 const titleClasses = 'text-lg sm:text-xl md:text-2xl font-semibold mt-2 transition-transform duration-300 ease-in-out group-hover:scale-110';
-const statsClasses = 'text-sm text-gray-300'; // Styling for stats
-const paragraphClasses = 'mt-2 text-gray-700'; // Styling for bio
 
-const FootballPage = () => {
-  const [activePlayer, setActivePlayer] = useState(null);
+// Player Modal Component
+const PlayerModal = ({ isOpen, player, onClose }) => {
+  if (!isOpen || !player) return null;
 
-  const handleCardClick = (player) => {
-    setActivePlayer(player);
-  };
-
-  const closeModal = () => {
-    setActivePlayer(null);
-  };
-
-  const PlayerCard = ({ player }) => (
-    <div className={cardClasses} onClick={() => handleCardClick(player)}>
-      <img src={player.imgSrc} alt={player.altText} className={imageClasses} />
-      <div className={overlayClasses}></div>
-      <div className={textClasses}>
-        <h2 className={titleClasses}>{player.name}</h2>
-        <h3 className="text-sm text-gray-300">{player.position}</h3>
-        <p className={statsClasses}>{player.stats}</p>
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" role="dialog" aria-modal="true">
+      <div className="relative bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
+        <button
+          className="absolute top-2 right-2 text-black"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          <FaTimes />
+        </button>
+        <div className="flex flex-col md:flex-row items-center">
+          <div className="w-full md:w-1/2 p-4">
+            <img className="w-full h-64 object-cover rounded-lg shadow-md" src={player.imgSrc} alt={player.altText} />
+          </div>
+          <div className="w-full md:w-1/2 p-4">
+            <h2 className="text-3xl font-bold text-primary">{player.name}</h2>
+            <h3 className="text-xl text-secondary-foreground">{player.position}</h3>
+            <p className="mt-4 text-muted-foreground">{player.bio}</p>
+            <div className="mt-4 text-sm text-gray-600">
+              <p><strong>Stats:</strong> {player.stats}</p>
+              {player.experience && <p><strong>Experience:</strong> {player.experience} years</p>}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
+};
+
+PlayerModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  player: PropTypes.shape({
+    imgSrc: PropTypes.string.isRequired,
+    altText: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    bio: PropTypes.string,
+    stats: PropTypes.string,
+    experience: PropTypes.number,
+  }),
+  onClose: PropTypes.func.isRequired,
+};
+
+// Player Card Component
+const PlayerCard = ({ name, imgSrc, altText, position, onClick }) => (
+  <div className={cardClasses} onClick={onClick}>
+    <img src={imgSrc} alt={altText} className={imageClasses} />
+    <div className={overlayClasses}></div>
+    <div className={textClasses}>
+      <h2 className={titleClasses}>{name}</h2>
+      <h3 className="text-sm text-gray-300">{position}</h3>
+    </div>
+  </div>
+);
+
+PlayerCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  altText: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+// Coach Card Component
+const CoachCard = ({ name, imgSrc, position, bio, dob, pob, nationality }) => (
+  <div className="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-8">
+    <div className="flex flex-col md:flex-row items-center">
+      <div className="w-full md:w-1/2 p-4">
+        <img className="w-full h-64 object-cover rounded-lg shadow-md" src={imgSrc} alt={`${name}'s Image`} />
+      </div>
+      <div className="w-full md:w-1/2 p-4">
+        <h2 className="text-3xl font-bold text-primary">{name}</h2>
+        <h3 className="text-xl text-secondary-foreground">{position}</h3>
+        <p className="mt-4 text-muted-foreground">{bio}</p>
+        <div className="mt-4 text-sm text-gray-600">
+          <p><strong>Date of birth:</strong> {dob}</p>
+          <p><strong>Place of birth:</strong> {pob}</p>
+          <p><strong>Nationality:</strong> {nationality}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+CoachCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+  bio: PropTypes.string.isRequired,
+  dob: PropTypes.string.isRequired,
+  pob: PropTypes.string.isRequired,
+  nationality: PropTypes.string.isRequired,
+};
+
+const FootballPage = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+
+  const handleCardClick = (player) => {
+    setSelectedPlayer(player);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedPlayer(null);
+  };
 
   const players = [
-    // (your players data here)
-    
     {
       id: 1,
       name: "Carlos Ramirez",
@@ -158,44 +242,39 @@ const FootballPage = () => {
 
   return (
     <div className="bg-gray-50 p-8">
-      <h1 className="text-4xl font-extrabold text-black mb-8 text-center">Football Players and Coaches</h1>
-      
+      <h1 className="text-4xl font-extrabold text-black mb-8 text-center">
+        Blue Phoenix Rugby Club Players and Coach
+      </h1>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
         {players.map((player) => (
           <PlayerCard
-            key={player.id}
-            player={player}
+            key={player.id} // Use player's id for uniqueness
+            name={player.name}
+            imgSrc={player.imgSrc}
+            altText={player.altText}
+            position={player.position}
+            onClick={() => handleCardClick(player)}
           />
         ))}
       </div>
 
-      {/* Coach Section */}
-      <div className="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-8">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="w-full md:w-1/2 p-4">
-            <img className="w-full h-64 object-cover rounded-lg shadow-md" src="https://placehold.co/300x400" alt="Coach Image" />
-          </div>
-          <div className="w-full md:w-1/2 p-4">
-            <h2 className="text-3xl font-bold text-primary">ALEX MARTINEZ</h2>
-            <h3 className="text-xl text-secondary-foreground">COACH</h3>
-            <p className="mt-4 text-muted-foreground">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
-            </p>
-            <div className="mt-4 text-sm text-gray-600">
-              <p><strong>Date of birth:</strong> 5 March 1980</p>
-              <p><strong>Place of birth:</strong> Madrid</p>
-              <p><strong>Nationality:</strong> Spain</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PlayerModal isOpen={isModalOpen} player={selectedPlayer} onClose={handleCloseModal} />
 
-      {/* Player Modal */}
-      <PlayerModal isOpen={!!activePlayer} player={activePlayer} onClose={closeModal} />
+      <h1 className="text-4xl font-extrabold text-black mb-8 text-center">
+        Meet Our Coach
+      </h1>
+      <CoachCard
+        name="Juan Rodriguez"
+        imgSrc="/coach.jpg"
+        position="Head Coach"
+        bio="Juan has over 20 years of coaching experience and has led various teams to championship victories."
+        dob="March 15, 1980"
+        pob="Madrid, Spain"
+        nationality="Spanish"
+      />
     </div>
   );
 };
 
 export default FootballPage;
-
-

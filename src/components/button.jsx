@@ -1,12 +1,13 @@
 import React from 'react';
 
 const buttonStyle = {
-    backgroundColor: '#f09A21',
+
+    backgroundColor: '#3b82f6',
     color: 'white',
     fontWeight: 'bold',
     padding: '0.5rem 1rem',
     borderRadius: '0.375rem',
-    border: 'none',
+    border: 'white',
     cursor: 'pointer',
     transition: 'background-color 0.3s ease',
     '@media (max-width: 640px)': { // Responsive padding for small screens

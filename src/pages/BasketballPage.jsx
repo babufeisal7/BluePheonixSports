@@ -81,15 +81,15 @@ const CoachCard = () => (
         <img className="w-full h-64 object-cover rounded-lg shadow-md" src="/photo5.jpg" alt="Coach Image" />
       </div>
       <div className="w-full md:w-1/2 p-4">
-        <h2 className="text-3xl font-bold text-primary">MIKE D&apos;ANTONI</h2>
+        <h2 className="text-3xl font-bold text-primary">COACH NAME</h2>
         <h3 className="text-xl text-secondary-foreground">HEAD COACH</h3>
         <p className="mt-4 text-muted-foreground">
-          Mike D&apos;Antoni, renowned for his innovative offensive strategies and fast-paced style of play, is a key figure in the team's success.
+          Brief bio about the coach's background and achievements.
         </p>
         <div className="mt-4 text-sm text-gray-600">
-          <p><strong>Date of birth:</strong> 8 May 1951</p>
-          <p><strong>Place of birth:</strong> Mullens, West Virginia</p>
-          <p><strong>Nationality:</strong> USA</p>
+          <p><strong>Date of birth:</strong> Date here</p>
+          <p><strong>Place of birth:</strong> Place here</p>
+          <p><strong>Nationality:</strong> Nationality here</p>
         </div>
       </div>
     </div>
@@ -111,19 +111,23 @@ const BasketballPage = () => {
   };
 
   const players = [
-    { name: "Carlos Ramirez", imgSrc: "/photo6.jpg", altText: "Carlos Ramirez", position: "Forward", bio: "Carlos is a dynamic forward known for his powerful shots and strategic play.", stats: "30 goals in 50 matches" },
-    { name: "Luis Gonzales", imgSrc: "/photo8.jpg", altText: "Luis Gonzales", position: "Midfielder", bio: "Luis controls the midfield with his excellent passing and vision.", stats: "20 assists in 45 matches" },
-    { name: "Marco Silva", imgSrc: "/photo8.jpg", altText: "Marco Silva", position: "Defender", bio: "Marco is a solid defender with great tackling and aerial ability.", stats: "50 clearances in 40 matches" },
-    { name: "David Martinez", imgSrc: "/photo9.jpg", altText: "David Martinez", position: "Goalkeeper", bio: "David is an outstanding goalkeeper with quick reflexes and excellent shot-stopping skills.", stats: "15 clean sheets in 30 matches" },
-    { name: "Diego Torres", imgSrc: "/photo10.jpg", altText: "Diego Torres", position: "Forward", bio: "Diego is a versatile forward with a knack for finding the back of the net.", stats: "25 goals in 40 matches" },
-    { name: "Antonio Ruiz", imgSrc: "/photo11.jpg", altText: "Antonio Ruiz", position: "Midfielder", bio: "Antonio is a creative midfielder with exceptional dribbling and passing.", stats: "15 assists in 35 matches" },
-    { name: "Rafael Castillo", imgSrc: "/photo6.jpg", altText: "Rafael Castillo", position: "Defender", bio: "Rafael is a tough defender who excels in one-on-one situations.", stats: "40 interceptions in 35 matches" },
-    { name: "Jorge Moreno", imgSrc: "/photo8.jpg", altText: "Jorge Moreno", position: "Goalkeeper", bio: "Jorge is a reliable goalkeeper with a strong command of his area.", stats: "10 clean sheets in 25 matches" },
+    { name: "Jordan Rivers", imgSrc: "/photo11.jpg", altText: "Jordan Rivers", position: "Point Guard", bio: "Jordan is known for his incredible speed and court vision.", stats: "20 points, 8 assists per game" },
+    { name: "Isaiah Carter", imgSrc: "/photo12.jpg", altText: "Isaiah Carter", position: "Shooting Guard", bio: "Isaiah is a sharpshooter with a knack for hitting clutch shots.", stats: "25 points, 5 rebounds per game" },
+    { name: "Marcus Allen", imgSrc: "/photo10.jpg", altText: "Marcus Allen", position: "Small Forward", bio: "Marcus is an athletic player with great defensive skills.", stats: "18 points, 7 rebounds per game" },
+    { name: "DeAndre Simmons", imgSrc: "/photo8.jpg", altText: "DeAndre Simmons", position: "Power Forward", bio: "DeAndre is known for his strong post moves and rebounding ability.", stats: "15 points, 10 rebounds per game" },
+    { name: "Trey Parker", imgSrc: "/photo8.jpg", altText: "Trey Parker", position: "Center", bio: "Trey is a dominant presence in the paint and an excellent shot-blocker.", stats: "12 points, 11 rebounds per game" },
+    { name: "Liam Foster", imgSrc: "/photo6.jpg", altText: "Liam Foster", position: "Point Guard", bio: "Liam is known for his leadership on and off the court.", stats: "22 points, 7 assists per game" },
+    { name: "Noah Taylor", imgSrc: "/photo8.jpg", altText: "Noah Taylor", position: "Shooting Guard", bio: "Noah has a deadly three-point shot and excellent footwork.", stats: "23 points, 4 rebounds per game" },
+    { name: "Ethan King", imgSrc: "/photo8.jpg", altText: "Ethan King", position: "Small Forward", bio: "Ethan is a versatile scorer who can play multiple positions.", stats: "19 points, 6 rebounds per game" },
+    { name: "Oliver Scott", imgSrc: "/photo9.jpg", altText: "Oliver Scott", position: "Power Forward", bio: "Oliver brings size and strength to the team, excelling in post play.", stats: "16 points, 9 rebounds per game" },
+    { name: "Lucas Rivera", imgSrc: "/photo10.jpg", altText: "Lucas Rivera", position: "Center", bio: "Lucas is an elite shot-blocker and rim protector.", stats: "14 points, 10 rebounds per game" },
+    { name: "Mason Brooks", imgSrc: "/photo11.jpg", altText: "Mason Brooks", position: "Small Forward", bio: "Mason is an athletic player known for his quickness and agility.", stats: "21 points, 5 rebounds per game" },
+    { name: "James Bennett", imgSrc: "/photo12.jpg", altText: "James Bennett", position: "Shooting Guard", bio: "James is a crafty scorer with a high basketball IQ.", stats: "17 points, 3 assists per game" },
   ];
-
+  
   return (
     <div className="bg-gray-50 p-8">
-      <h1 className="text-4xl font-extrabold text-black mb-8 text-center">Los Angeles Lakers Players and Coach</h1>
+      <h1 className="text-4xl font-extrabold text-black mb-8 text-center">NBS Pro Players</h1>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
         {players.map((player) => (

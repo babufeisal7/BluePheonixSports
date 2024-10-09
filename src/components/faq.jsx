@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRugbyBall, faFutbol, faBasketballBall, faSwimmer } from '@fortawesome/free-solid-svg-icons';
 
-const buttonClass = 'flex justify-between w-full text-left text-muted-foreground py-2 px-4 rounded-lg hover:bg-gray-100';
+const buttonClass = 'flex justify-between w-full text-left text-black py-2 px-4 rounded-lg hover:bg-gray-100';
 const iconUp = '&#9650;'; // Up arrow
 const iconDown = '&#9660;'; // Down arrow
 
@@ -45,18 +47,17 @@ const FAQComponent = () => {
       <div className="w-full md:w-1/4 bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-lg font-semibold text-blue-600">Sports Academy</h2>
         <ul className="mt-4 space-y-2">
-          {Object.keys(FAQs).map(sport => (
+          {Object.keys(FAQs).map((sport) => (
             <li
               key={sport}
               className={`flex items-center cursor-pointer p-2 ${selectedSport === sport ? 'bg-blue-100' : ''} hover:bg-blue-50 rounded-lg`}
               onClick={() => setSelectedSport(sport)}
             >
-              <img 
-                src={`https://openui.fly.dev/openui/24x24.svg?text=${sport === 'rugby' ? '🏉' : sport === 'football' ? '⚽' : sport === 'basketball' ? '🏀' : '🏊'}`} 
-                alt={`${sport} Icon`} 
-                className="mr-2" 
+              <FontAwesomeIcon 
+                icon={sport === 'rugby' ? faRugbyBall : sport === 'football' ? faFutbol : sport === 'basketball' ? faBasketballBall : faSwimmer} 
+                className="mr-2 text-black" 
               />
-              <span className="text-blue-700 font-medium">{sport.charAt(0).toUpperCase() + sport.slice(1)}</span>
+              <span className="text-black font-medium">{sport.charAt(0).toUpperCase() + sport.slice(1)}</span>
             </li>
           ))}
         </ul>

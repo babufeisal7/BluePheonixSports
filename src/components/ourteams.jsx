@@ -28,9 +28,9 @@ const teams = [
     },
 ];
 
-const cardClasses = "bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105";
-const titleClasses = "text-xl font-bold text-gray-900";
-const descriptionClasses = "text-gray-700 mb-4";
+const cardClasses = "bg- rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105";
+const titleClasses = "text-xl  text-white";
+const descriptionClasses = "text-white mb-4";
 
 const TeamSummaryCard = ({ sport, image, description, buttonText }) => (
     <div className={cardClasses}>
