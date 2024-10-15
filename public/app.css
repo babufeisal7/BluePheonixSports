@@ -405,3 +405,237 @@ footer a:hover {
         /* Smaller padding on mobile */
     }
 }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-in forwards;
+    /* Faster animation */
+}
+
+ /* Add this to your CSS file */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Slide in from below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards; /* Animation duration and easing */
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards; /* Animation duration and easing */
+}
+/* Add this to your CSS file */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px); /* Start off slightly to the left */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* End at its original position */
+  }
+}
+
+.animate-slide-in {
+  animation: slideInFromLeft 0.6s ease forwards; /* Animation duration and easing */
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards; /* Keep the existing fade-in animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Slide in from below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Add this to your CSS file */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px); /* Start off slightly to the left */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* End at its original position */
+  }
+}
+
+.animate-slide-in {
+  animation: slideInFromLeft 0.6s ease forwards; /* Animation duration and easing */
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards; /* Keep the existing fade-in animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Slide in from below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Add this to your CSS file */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+        /* Start from the left */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-in {
+    animation: slideInFromLeft 0.6s ease forwards;
+    /* Animation duration and easing */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        /* Slide in from below */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease forwards;
+    /* Animation duration and easing */
+}
+
+/* Add this to your CSS file */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+        /* Start from the left */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-in {
+    animation: slideInFromLeft 0.6s ease forwards;
+    /* Animation duration and easing */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        /* Slide in from below */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease forwards;
+    /* Animation duration and easing */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 640px) {
+    .animate-slide-in {
+        animation-delay: 0.1s;
+        /* Slight delay for smaller screens */
+    }
+
+    .text-sm {
+        font-size: 0.875rem;
+        /* Smaller font size for mobile */
+    }
+}
+
+@media (min-width: 640px) {
+    .text-sm {
+        font-size: 1rem;
+        /* Default for small devices */
+    }
+}
+
+@media (min-width: 768px) {
+    .text-sm {
+        font-size: 1.125rem;
+        /* Medium font size */
+    }
+}
+
+@media (min-width: 1024px) {
+    .text-sm {
+        font-size: 1.25rem;
+        /* Larger font size for desktops */
+    }
+}
+/* Add these styles in your CSS file */
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-in forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

@@ -15,7 +15,7 @@ const TestimonialCard = ({ quote, author, twitterLink, linkedinLink, facebookLin
         <cite className="font-semibold">{author}</cite>
       </footer>
       <blockquote className={`${textClasses} mb-2 text-center`}>{quote}</blockquote>
-      <div className="flex justify-center space-x-2">
+      <div className="flex justify-center space-x-2 mt-4">
         <a href={twitterLink} target="_blank" rel="noopener noreferrer" className={linkClasses}>
           <FontAwesomeIcon icon={faTwitter} className={iconClasses} />
         </a>

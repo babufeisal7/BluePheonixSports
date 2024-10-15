@@ -29,7 +29,7 @@ const services = [
 ];
 
 const ServiceCard = ({ title, description, icon }) => (
-    <div className="relative bg-white p-6 rounded-lg shadow-lg text-black text-sm sm:text-base text-muted-foreground mb-4 fade-in">
+    <div className="relative bg-white p-6 rounded-lg shadow-lg text-black text-sm sm:text-base text-muted-foreground mb-4 fade-in border border-blue-500">
         <div className="absolute top-12 left-4">
             {icon}
         </div>

@@ -99,7 +99,7 @@ const Navbar = () => {
                             <NavLink to="/BlogPage" label="Blog" />
                             <Link
                                 to="/join"
-                                className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-full shadow-lg border border-orange-700 transition duration-300 ease-in-out transform hover:scale-105"
+                                className="bg-orange-600 hover:bg-orange-700 text-white  py-3 px-5 rounded-full shadow-lg border border-white-700 transition duration-300 ease-in-out transform hover:scale-105"
                             >
                                 Join Us
                             </Link>

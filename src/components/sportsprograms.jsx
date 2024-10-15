@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 // Classes for styling
-const containerClasses = 'bg-blue-800 p-4 sm:p-6 md:p-8 lg:p-10 shadow-lg text-center'; // Padding adjustments for different devices
-const headerClasses = 'text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white'; // Responsive font size
-const programCardClasses = 'bg-blue-700 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg text-white text-left'; // Responsive padding and layout
-const programTitleClasses = 'text-xl sm:text-2xl md:text-3xl font-semibold mb-2'; // Responsive font size
-const buttonClasses = 'flex items-center bg-blue-600 text-white rounded-lg py-2 px-3 sm:py-2.5 sm:px-4 md:py-3 md:px-6 mt-4 opacity-80 hover:opacity-100 transition-opacity duration-300'; // Responsive button sizing
-const imageClasses = 'w-48 h-32 object-cover rounded-lg mb-4 sm:mb-0'; // Universal image size
-const contentClasses = 'mt-4 sm:mt-6 text-left space-y-4'; // Responsive text spacing
-const downloadButtonClasses = 'mt-4 bg-green-600 text-white rounded-lg py-2 px-4 hover:bg-green-700 transition-colors duration-300'; // Download button styling
+const containerClasses = 'bg-blue-800 p-4 sm:p-6 md:p-8 lg:p-10 shadow-lg text-center';
+const headerClasses = 'text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white';
+const programCardClasses = 'bg-blue-700 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg text-white text-left'; 
+const programTitleClasses = 'text-xl sm:text-2xl md:text-3xl font-semibold mb-2';
+const buttonClasses = 'flex items-center bg-blue-600 text-white rounded-lg py-2 px-3 sm:py-2.5 sm:px-4 md:py-3 md:px-6 mt-4 opacity-80 hover:opacity-100 transition-opacity duration-300';
+const imageClasses = 'w-full h-32 object-cover rounded-lg mb-4 sm:w-48 sm:h-32'; // Make image responsive
+const contentClasses = 'mt-4 sm:mt-6 text-left space-y-4';
+const downloadButtonClasses = 'mt-4 bg-green-600 text-white rounded-lg py-2 px-4 hover:bg-green-700 transition-colors duration-300';
 
 const SportsPrograms = () => {
     const [activeProgram, setActiveProgram] = useState(null);
@@ -27,7 +27,7 @@ const SportsPrograms = () => {
                 <div id="rugby" className={programCardClasses}>
                     <div className="flex flex-col sm:flex-row items-center">
                         <img src="/photo71.jpg" alt="Rugby" className={imageClasses} />
-                        <div className="flex-1">
+                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
                             <h2 className={programTitleClasses}>Rugby Program</h2>
                             <button
                                 onClick={() => toggleDropdown('rugby')}
@@ -54,7 +54,7 @@ const SportsPrograms = () => {
                 <div id="football" className={programCardClasses}>
                     <div className="flex flex-col sm:flex-row items-center">
                         <img src="/football1.jpg" alt="Football" className={imageClasses} />
-                        <div className="flex-1">
+                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
                             <h2 className={programTitleClasses}>Football Program</h2>
                             <button
                                 onClick={() => toggleDropdown('football')}
@@ -81,7 +81,7 @@ const SportsPrograms = () => {
                 <div id="basketball" className={programCardClasses}>
                     <div className="flex flex-col sm:flex-row items-center">
                         <img src="/basketball6.jpg" alt="Basketball" className={imageClasses} />
-                        <div className="flex-1">
+                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
                             <h2 className={programTitleClasses}>Basketball Program</h2>
                             <button
                                 onClick={() => toggleDropdown('basketball')}
@@ -108,7 +108,7 @@ const SportsPrograms = () => {
                 <div id="swimming" className={programCardClasses}>
                     <div className="flex flex-col sm:flex-row items-center">
                         <img src="/swimming1.jpg" alt="Swimming" className={imageClasses} />
-                        <div className="flex-1">
+                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
                             <h2 className={programTitleClasses}>Swimming Program</h2>
                             <button
                                 onClick={() => toggleDropdown('swimming')}
@@ -136,4 +136,3 @@ const SportsPrograms = () => {
 };
 
 export default SportsPrograms;
-

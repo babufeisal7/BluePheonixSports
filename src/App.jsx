@@ -37,7 +37,6 @@ const Home = () => (
     <Ourteams />
     <Gallery />
     <Achievements />
-    <Experts />
      <WhyUs />
      <Testimonials />
     

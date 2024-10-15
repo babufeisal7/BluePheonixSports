@@ -4,20 +4,20 @@ import { faFutbol, faBasketballBall, faSwimmer, faTrophy, faUserFriends, faMedal
 import PropTypes from 'prop-types';
 
 const programsData = [
-    { name: "Junior Elite Program", sport: "rugby", image: "photo8.jpg" },
+    { name: "Junior Elite Program", sport: "rugby"},
     { name: "Senior Elite Program", sport: "rugby" },
     { name: "Professional Preparatory Program", sport: "rugby" },
     { name: "Youth Development Program", sport: "rugby" },
-    { name: "Junior Elite Program", sport: "football", image: "football1.jpg" },
+    { name: "Junior Elite Program", sport: "football" },
     { name: "Senior Elite Program", sport: "football" },
     { name: "Goalkeeper Academy", sport: "football" },
     { name: "Professional Preparatory Program", sport: "football" },
     { name: "Youth Development Program", sport: "football" },
-    { name: "Junior Elite Program", sport: "basketball", image: "basketball1.jpg" },
+    { name: "Junior Elite Program", sport: "basketball" },
     { name: "Senior Elite Program", sport: "basketball" },
     { name: "Professional Preparatory Program", sport: "basketball" },
     { name: "Youth Development Program", sport: "basketball" },
-    { name: "Junior Elite Program", sport: "swimming", image: "swimming1.jpg" },
+    { name: "Junior Elite Program", sport: "swimming" },
     { name: "Senior Elite Program", sport: "swimming" },
     { name: "Professional Preparatory Program", sport: "swimming" },
     { name: "Youth Development Program", sport: "swimming" }
@@ -26,7 +26,7 @@ const programsData = [
 // Reusable Card Component
 const Card = ({ icon, title, description }) => {
     return (
-        <div className="bg-card p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col items-center">
+        <div className="border border-blue-500 bg-card p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col items-center">
             <div className="flex justify-center mb-2">
                 <FontAwesomeIcon icon={icon} className="text-4xl text-primary" />
             </div>
@@ -119,8 +119,8 @@ const KeyComponents = ({ selectedSport }) => {
 // Sidebar Component
 const Sidebar = ({ onSportSelect }) => {
     return (
-        <div className="w-80 bg-gray-100 border border-gray-300 p-6 rounded-lg shadow-md flex flex-col items-center">
-            <h2 className="text-2xl font-bold mb-4 text-primary text-center">Sports Programs</h2>
+        <div className="w-80  flex flex-col items-start"> {/* Changed items-center to items-start */}
+            <h2 className="text-2xl font-bold mb-4 text-primary text-left">Sports Programs</h2>
             <ProgramListCard onSportSelect={onSportSelect} />
             <ProgramCard />
             <SocialLinksCard />
@@ -131,7 +131,7 @@ const Sidebar = ({ onSportSelect }) => {
 // Program List Card Component
 const ProgramListCard = ({ onSportSelect }) => {
     return (
-        <div className="bg-card p-4 mb-6 rounded-lg shadow-lg text-center">
+        <div className="bg-card p-4 mb-6 rounded-lg  shadow-lg text-left w-full"> {/* Added w-full for full width */}
             <h3 className="text-xl font-bold mb-4 text-accent">Our Programs</h3>
             <ul className="flex flex-col items-start pl-0 space-y-2">
                 <li>
@@ -151,23 +151,40 @@ const ProgramListCard = ({ onSportSelect }) => {
     );
 };
 
+
 // Program Card Component
 const ProgramCard = () => {
     return (
-        <div className="bg-card p-4 mb-6 rounded-lg shadow-lg text-center">
-            <h3 className="text-2xl font-bold text-primary">ELEVATE YOUR GAME WITH US</h3>
-            <p className="text-muted-foreground mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.</p>
-            <button className="bg-primary text-primary-foreground hover:bg-primary/80 p-2 rounded-lg">Contact Us Now!</button>
+        <div
+            className="relative p-4 mb-6 rounded-lg shadow-lg text-center"
+            style={{
+                backgroundImage: "url('photo8.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
+        >
+            {/* Overlay for better text readability */}
+            <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
+
+            <h3 className="relative text-2xl font-bold text-white drop-shadow-md">ELEVATE YOUR GAME WITH US</h3>
+            <p className="relative text-white mb-4 drop-shadow-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.</p>
+            
+            {/* Improved Button */}
+            <button className="relative bg-transparent text-white font-semibold text-lg  transition-all duration-300 ease-in-out shadow-lg rounded-full px-6 py-2 border border-white hover:border-blue-500">
+                Contact Us Now!
+            </button>
         </div>
     );
 };
 
+
+
 // Social Links Card Component
 const SocialLinksCard = () => {
     return (
-        <div className="bg-card p-4 rounded-lg shadow-lg text-center">
+        <div className="bg-card p-4 rounded-lg shadow-lg ">
             <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
-            <div className="flex justify-center space-x-4">
+            <div className="flex justify-center space-x-3">
                 <a href="#" className="text-muted-foreground">Facebook</a>
                 <a href="#" className="text-muted-foreground">Twitter</a>
                 <a href="#" className="text-muted-foreground">Instagram</a>

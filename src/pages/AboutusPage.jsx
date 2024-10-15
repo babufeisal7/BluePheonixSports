@@ -65,9 +65,7 @@ const AboutusPage = () => {
                         <p className={sectionTextClasses}>
                             Welcome to <span className={highlightTextClasses}>Blue Phoenix Sports Limited</span>! We are dedicated to excellence in sports management and training, committed to empowering athletes of all levels.
                         </p>
-                        <p className={sectionTextClasses}>
-                            Our mission is to provide high-quality sports programs and foster a supportive community where athletes can thrive and reach their full potential.
-                        </p>
+            
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                             <div className="flex flex-col items-center">
                                 <span className="text-4xl font-bold">20+</span>

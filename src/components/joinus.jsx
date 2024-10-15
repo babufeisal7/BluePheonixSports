@@ -26,63 +26,63 @@ const JoinUs = () => {
                         Become a part of the Blue Phoenix community! Choose your preferred sports and get involved today.
                     </p>
                     <div className="max-w-md mx-auto p-6 bg-card rounded-lg shadow-lg border border-border"> {/* Reduced padding */}
-                       <form>
-                           {/** Input fields for the form */}
-                           <div className="mb-4"> {/* Increased margin for spacing */}
-                               <label className="block text-muted-foreground mb-1 text-xs" htmlFor="name">
-                                   Full Name
-                               </label>
-                               <input
-                                   className={`${inputClasses} text-xs`}
-                                   type="text"
-                                   id="name"
-                                   placeholder="John Doe"
-                                   required
-                               />
-                           </div>
-                           <div className="mb-4">
-                               <label className="block text-muted-foreground mb-1 text-xs" htmlFor="email">
-                                   Email address
-                               </label>
-                               <input
-                                   className={`${inputClasses} text-xs`}
-                                   type="email"
-                                   id="email"
-                                   placeholder="you@example.com"
-                                   required
-                               />
-                           </div>
-                           <div className="mb-4">
-                               <label className="block text-muted-foreground mb-1 text-xs" htmlFor="phone">
-                                   Phone Number
-                               </label>
-                               <input
-                                   className={`${inputClasses} text-xs`}
-                                   type="tel"
-                                   id="phone"
-                                   placeholder="+265 7756 7890"
-                                   required
-                               />
-                           </div>
-                           <div className="mb-4">
-                               <label className="block text-muted-foreground mb-1 text-xs" htmlFor="team-preference">
-                                   Team Preference
-                               </label>
-                               <select
-                                   className={`${inputClasses} text-xs`}
-                                   id="team-preference"
-                                   style={{ color: 'black' }}
-                                   required
-                               >
-                                   <option value="">Select a team</option>
-                                   <option value="rugby">Rugby</option>
-                                   <option value="football">Football</option>
-                                   <option value="basketball">Basketball</option>
-                                   <option value="swimming">Swimming</option>
-                               </select>
-                           </div>
-                           <button className={`${buttonClasses} text-xs`}>Join Us</button>
-                       </form>
+                        <form>
+                            {/** Input fields for the form */}
+                            <div className="mb-4"> {/* Increased margin for spacing */}
+                                <label className="block text-muted-foreground mb-1 text-xs" htmlFor="name">
+                                    Full Name
+                                </label>
+                                <input
+                                    className={`${inputClasses} text-xs`}
+                                    type="text"
+                                    id="name"
+                                    placeholder="John Doe"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-muted-foreground mb-1 text-xs" htmlFor="email">
+                                    Email address
+                                </label>
+                                <input
+                                    className={`${inputClasses} text-xs`}
+                                    type="email"
+                                    id="email"
+                                    placeholder="you@example.com"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-muted-foreground mb-1 text-xs" htmlFor="phone">
+                                    Phone Number
+                                </label>
+                                <input
+                                    className={`${inputClasses} text-xs`}
+                                    type="tel"
+                                    id="phone"
+                                    placeholder="+265 7756 7890"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-muted-foreground mb-1 text-xs" htmlFor="team-preference">
+                                    Team Preference
+                                </label>
+                                <select
+                                    className={`${inputClasses} text-xs`}
+                                    id="team-preference"
+                                    style={{ color: 'black' }}
+                                    required
+                                >
+                                    <option value="">Select a team</option>
+                                    <option value="rugby">Rugby</option>
+                                    <option value="football">Football</option>
+                                    <option value="basketball">Basketball</option>
+                                    <option value="swimming">Swimming</option>
+                                </select>
+                            </div>
+                            <button className={`${buttonClasses} text-xs`}>Join Us</button>
+                        </form>
 
                         <div className="my-4 text-center text-muted-foreground">Or join us with</div>
                         <div className="flex flex-col sm:flex-row justify-center space-x-0 space-y-4 sm:space-y-0 sm:space-x-4">

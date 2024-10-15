@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Calendar from 'react-calendar'; // Ensure you have react-calendar installed
-import 'react-calendar/dist/Calendar.css'; // Ensure styles are imported
 import Modal from 'react-modal'; // Import the modal component
 
 // Set the app element for accessibility
@@ -22,17 +20,11 @@ const EventCard = ({ title, date, imageUrl, onClick }) => (
 
 const EventsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
-  };
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    // Optionally filter events based on the selected date
   };
 
   const openModal = (event) => {
@@ -46,7 +38,7 @@ const EventsPage = () => {
   };
 
   const eventCategories = [
-    'All', 'Rugby', 'Football', 'Basketball', 'Swimming', 'Athletics', 'Various'
+    'All', 'Rugby', 'Football', 'Basketball', 'Swimming'
   ];
 
   const events = [
@@ -97,16 +89,6 @@ const EventsPage = () => {
               <option key={index} value={category}>{category}</option>
             ))}
           </select>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-gray-800">Events Calendar</h2>
-          <Calendar
-            onChange={handleDateChange}
-            value={selectedDate}
-            className="border border-gray-300 rounded-lg shadow-sm"
-          />
-          <p className="text-gray-600 mt-4">Click on a date to see events scheduled for that day.</p>
         </section>
       </aside>
 
@@ -172,8 +154,8 @@ const EventsPage = () => {
               <h3 className="text-xl font-semibold mb-2 text-gray-800">Venue Information</h3>
               <p className="text-gray-700 mb-1"><strong>Venue:</strong> {eventDetails.venue}</p>
               <p className="text-gray-700 mb-1"><strong>Location:</strong> {eventDetails.venueLocation}</p>
-              <p className="text-gray-700 mb-1"><strong>Phone:</strong> {eventDetails.venuePhone}</p>
-              <p className="text-gray-700 mb-1"><strong>Phone (Alternate):</strong> {eventDetails.venuePhoneTwo}</p>
+              <p className="text-gray-700 mb-1"><strong>Venue Phone:</strong> {eventDetails.venuePhone}</p>
+              <p className="text-gray-700 mb-1"><strong>Alternative Phone:</strong> {eventDetails.venuePhoneTwo}</p>
             </div>
           </Modal>
         )}

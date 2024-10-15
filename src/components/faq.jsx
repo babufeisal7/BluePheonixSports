@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRugbyBall, faFutbol, faBasketballBall, faSwimmer } from '@fortawesome/free-solid-svg-icons';
+import { faFutbol, faBasketballBall, faSwimmer } from '@fortawesome/free-solid-svg-icons';
 
 const buttonClass = 'flex justify-between w-full text-left text-black py-2 px-4 rounded-lg hover:bg-gray-100';
 const iconUp = '&#9650;'; // Up arrow
@@ -54,7 +54,7 @@ const FAQComponent = () => {
               onClick={() => setSelectedSport(sport)}
             >
               <FontAwesomeIcon 
-                icon={sport === 'rugby' ? faRugbyBall : sport === 'football' ? faFutbol : sport === 'basketball' ? faBasketballBall : faSwimmer} 
+                icon={sport === 'rugby' ? faFutbol : sport === 'football' ? faFutbol : sport === 'basketball' ? faBasketballBall : faSwimmer} 
                 className="mr-2 text-black" 
               />
               <span className="text-black font-medium">{sport.charAt(0).toUpperCase() + sport.slice(1)}</span>
