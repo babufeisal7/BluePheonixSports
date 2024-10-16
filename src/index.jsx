@@ -9,6 +9,7 @@ import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js';
 import 'admin-lte/dist/js/adminlte.min.js';
 
 
+
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement); // Create a root using createRoot
 

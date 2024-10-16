@@ -9,8 +9,7 @@ const Footer = () => {
                 <div className="flex flex-col items-start space-y-6 md:space-y-8 lg:w-2/5">
                     <div className="flex items-center space-x-4">
                         <img
-                            src="../logo.jpg" // Replace with the path to your logo image
-                           
+                            src="../public/logo.jpg" // Replace with the path to your logo image
                             className="h-16 w-auto"
                         />
                         <h1 className="text-2xl font-bold text-white">Blue Phoenix</h1>
@@ -32,7 +31,7 @@ const Footer = () => {
                 </div>
 
                 {/* Column 2: About Us Links */}
-                <div className="flex flex-col space-y-4">
+                <div className="flex flex-col space-y-4 border-l border-white pl-6">
                     <h5 className="text-lg font-bold mb-4">ABOUT US</h5>
                     <ul className="space-y-2">
                         <li><a href="#" className="hover:underline">Homepage</a></li>
@@ -43,7 +42,7 @@ const Footer = () => {
                 </div>
 
                 {/* Column 3: Teams Info Links */}
-                <div className="flex flex-col space-y-4">
+                <div className="flex flex-col space-y-4 border-l border-white pl-6">
                     <h5 className="text-lg font-bold mb-4">TEAMS INFO</h5>
                     <ul className="space-y-2">
                         <li><a href="#" className="hover:underline">Player & Coach</a></li>
@@ -54,12 +53,12 @@ const Footer = () => {
                 </div>
 
                 {/* Column 4: Contact Info */}
-                <div className="flex flex-col space-y-4">
+                <div className="flex flex-col space-y-4 border-l border-white pl-6">
                     <h5 className="text-lg font-bold mb-4">CONTACT US</h5>
                     <ul className="space-y-2">
                         <li>
                             <a href="tel:+6212345678" className="flex items-center hover:underline">
-                                <FaPhone className="mr-2 text-lg md:text-xl lg:text-2xl" /> (+62) 123 - 45678
+                                <FaPhone className="mr-2 text-lg md:text-xl lg:text-2xl" /> (+256) 773 - 45678
                             </a>
                         </li>
                         <li>
@@ -69,7 +68,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <a href="#" className="flex items-center hover:underline">
-                                <FaMapMarkerAlt className="mr-2 text-lg md:text-xl lg:text-2xl" /> 5523 Morgan Ave Los Angeles, California, 90011 US
+                                <FaMapMarkerAlt className="mr-2 text-lg md:text-xl lg:text-2xl" /> 5523 Buziga Kampala, Uganda, 9001 UG
                             </a>
                         </li>
                     </ul>

@@ -639,3 +639,20 @@ footer a:hover {
         opacity: 1;
     }
 }
+/* src/App.css */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    padding: 20px;
+    /* Ensure there's padding for the content */
+}
+
+.footer {
+    position: relative;
+    /* Ensure the footer stays below content */
+    clear: both;
+    /* Avoid overlaps with floating elements */
+}

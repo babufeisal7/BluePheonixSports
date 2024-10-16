@@ -27,6 +27,9 @@ import SportsProgramPage from './pages/SportsProgramPage';
 import WhyUs from "./components/WhyUs"; 
 import Testimonials from "./components/Testimonials";
 
+import AdminPage from './pages/AdminPage';
+import HomePage from './pages/HomePage';
+
 const Home = () => (
   <>
     <Hero />
@@ -39,6 +42,7 @@ const Home = () => (
     <Achievements />
      <WhyUs />
      <Testimonials />
+      
     
 
   </>
@@ -66,6 +70,8 @@ const App = () => {
         <Route path="/experts" element={<Experts />} /> 
         <Route path="/sports-programs" element={<SportsProgramPage />} />
         <Route path="/testimonials" element={<Testimonials />} />
+             <Route path="/" element={<HomePage />} /> {/* Home page route */}
+        <Route path="/admin" element={<AdminPage />} /> {/* Admin page route */}
         
       </Routes>
       <Experts />

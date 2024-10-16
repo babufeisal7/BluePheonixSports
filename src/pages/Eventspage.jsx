@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal'; // Import the modal component
+import { FaBars, FaTimes } from 'react-icons/fa'; // Import icons for hamburger and close buttons
 
 // Set the app element for accessibility
 Modal.setAppElement('#root');
@@ -22,6 +23,7 @@ const EventsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // State for sidebar visibility
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -35,6 +37,10 @@ const EventsPage = () => {
   const closeModal = () => {
     setModalIsOpen(false);
     setSelectedEvent(null);
+  };
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
   };
 
   const eventCategories = [
@@ -76,8 +82,15 @@ const EventsPage = () => {
 
   return (
     <div className="flex flex-row-reverse">
+      {/* Sidebar for Mobile */}
+      <div className="md:hidden">
+        <button onClick={toggleSidebar} className="p-4 text-xl text-gray-800">
+          {sidebarOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <aside className="w-1/4 p-4 bg-gray-100 border-l border-gray-200 min-h-screen">
+      <aside className={`fixed inset-0 bg-gray-100 border-l border-gray-200 p-4 z-50 transition-transform duration-300 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-1/4 md:min-h-screen`}>
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">Filter by Category</h2>
           <select 
@@ -93,7 +106,7 @@ const EventsPage = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="w-3/4 p-8">
+      <main className="w-full md:w-3/4 p-8">
         {/* Page Header */}
         <header className="text-center mb-8">
           <h1 className="text-4xl font-extrabold text-black mb-2">Upcoming Events</h1>
@@ -143,19 +156,11 @@ const EventsPage = () => {
               <p className="text-gray-700 mb-1"><strong>Date:</strong> {eventDetails.date}</p>
               <p className="text-gray-700 mb-1"><strong>Registration Fee:</strong> {eventDetails.registration}</p>
               <p className="text-gray-700 mb-1"><strong>Format:</strong> {eventDetails.format}</p>
-              <p className="text-gray-700 mb-1"><strong>Organizer:</strong> {eventDetails.organizer}</p>
-              <p className="text-gray-700 mb-1"><strong>Organizer Phone:</strong> {eventDetails.organizerPhone}</p>
+              <p className="text-gray-700 mb-1"><strong>Organizer:</strong> {eventDetails.organizer} (Phone: {eventDetails.organizerPhone})</p>
               <p className="text-gray-700 mb-1"><strong>Awards:</strong> {eventDetails.awards}</p>
               <p className="text-gray-700 mb-1"><strong>Catering:</strong> {eventDetails.catering}</p>
-            </div>
-
-            {/* Event Venue Details */}
-            <div className="mt-6 border-t border-gray-200 pt-4">
-              <h3 className="text-xl font-semibold mb-2 text-gray-800">Venue Information</h3>
-              <p className="text-gray-700 mb-1"><strong>Venue:</strong> {eventDetails.venue}</p>
-              <p className="text-gray-700 mb-1"><strong>Location:</strong> {eventDetails.venueLocation}</p>
-              <p className="text-gray-700 mb-1"><strong>Venue Phone:</strong> {eventDetails.venuePhone}</p>
-              <p className="text-gray-700 mb-1"><strong>Alternative Phone:</strong> {eventDetails.venuePhoneTwo}</p>
+              <p className="text-gray-700 mb-1"><strong>Venue:</strong> {eventDetails.venue} (Phone: {eventDetails.venuePhone})</p>
+              <p className="text-gray-700 mb-1"><strong>Location:</strong> {eventDetails.venueLocation} (Phone: {eventDetails.venuePhoneTwo})</p>
             </div>
           </Modal>
         )}

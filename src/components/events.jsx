@@ -30,8 +30,8 @@ const EventCard = ({ title, date, image }) => (
         <img src={image} alt={title} className={imageClasses} />
         <div className={overlayClasses}></div>
         <div className={textClasses}>
-            <span className={dateClasses}>{date}</span>
             <h3 className={titleClasses}>{title}</h3>
+            <span className={dateClasses}>{date}</span>
         </div>
     </div>
 );
@@ -91,7 +91,7 @@ const Events = () => {
 
     return (
         <section className="py-8 sm:py-12 bg-gradient-to-b from-gray-100 to-white relative">
-            <div className="max-w-7xl mx-auto text-center px-4">
+            <div className="max-w-7xl mx-auto  px-4">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Upcoming Events</h2>
                 <p className="text-lg sm:text-xl text-center text-black mb-8">Join us for exciting events and sports action!</p>
                 <Slider {...settings} className="flex flex-wrap">

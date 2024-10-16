@@ -12,28 +12,6 @@ const linkClasses = "text-primary hover:text-primary/80 transition-colors";
         
 
 
-// Custom Next Arrow
-const NextArrow = (props) => (
-    <div 
-        className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-primary text-white rounded-full p-3 cursor-pointer shadow-lg flex items-center justify-center"
-        onClick={props.onClick}
-        style={{ width: '60px', height: '60px' }} // Adjusted width and height
-    >
-        <FaArrowRight />
-    </div>
-);
-
-// Custom Prev Arrow
-const PrevArrow = (props) => (
-    <div 
-        className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-primary text-white rounded-full p-3 cursor-pointer shadow-lg flex items-center justify-center"
-        onClick={props.onClick}
-        style={{ width: '60px', height: '60px' }} // Adjusted width and height
-    >
-        <FaArrowLeft />
-    </div>
-);
-
 // ExpertCard Component
 const ExpertCard = ({ name, role, imgSrc, bio }) => (
     <div className={cardClasses}>
@@ -79,8 +57,7 @@ const Experts = () => {
                 }
             },
         ],
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
+    
     };
 
     return (

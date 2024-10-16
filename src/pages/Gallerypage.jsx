@@ -26,8 +26,8 @@ const categories = {
         { src: '/basketball3.jpg', alt: 'Basketball Finals Excitement 2', type: 'image', description: 'Basketball Finals Excitement', link: '/categories/basketball-finals' },
         { src: '/basketball2.jpg', alt: 'Basketball Finals Excitement 3', type: 'image', description: 'Basketball Finals Excitement', link: '/categories/basketball-finals' },
         { src: '/basketball4.jpg', alt: 'Basketball Finals Excitement 4', type: 'image', description: 'Basketball Finals Excitement', link: '/categories/basketball-finals' },
-        { src: '/video1.mp4', alt: 'Basketball Finals Highlights Video 1', type: 'video', link: '/categories/basketball-finals' },
         { src: '/video2.mp4', alt: 'Basketball Finals Highlights Video 2', type: 'video', link: '/categories/basketball-finals' },
+        { src: '/basketball6.jpg', alt: 'Basketball Finals Excitement 4', type: 'image', description: 'Basketball Finals Excitement', link: '/categories/basketball-finals' },
         { src: '/video2.mp4', alt: 'Swimming Competition Highlights Video 2', type: 'video', link: '/categories/swimming-competition' },
     ],
     Swimming: [

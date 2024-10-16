@@ -119,9 +119,9 @@ const Navbar = () => {
             {isOpen && (
                 <div className="md:hidden bg-blue-700 py-4">
                     <NavLink to="/" label="Home" onClick={handleOptionClick} />
-                    <NavLink to="/about" label="About Us" onClick={handleOptionClick} />
+                    <NavLink to="/AboutusPage" label="About Us" onClick={handleOptionClick} />
                     <NavLink to="/#services" label="Services" onClick={handleOptionClick} />
-                    <NavLink to="/events" label="Events" onClick={handleOptionClick} />
+                    <NavLink to="/Eventspage" label="Events" onClick={handleOptionClick} />
 
                     <Dropdown
                         isOpen={isProgramsDropdownOpen}
@@ -150,7 +150,7 @@ const Navbar = () => {
                     />
 
                     <NavLink to="/gallery" label="Gallery" onClick={handleOptionClick} />
-                    <NavLink to="/blog" label="Blog" onClick={handleOptionClick} />
+                    <NavLink to="/BlogPage" label="Blog" onClick={handleOptionClick} />
                     <Link
                         to="/join"
                         className="block text-center bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mt-4"

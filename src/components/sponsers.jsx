@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 // Updated sponsor data with paths from the public directory
 const sponsorData = [
-    { name: 'Stanbic Bank', logo: '/images/stanbic-bank.svg' },
-    { name: 'NxtRadio', logo: '/images/nxtradio.svg' },
-    { name: "King's Park", logo: '/images/kings-park.svg' },
+    { name: 'Stanbic Bank', logo: '/images/stanbic-bank.png' },
+    { name: 'NxtRadio', logo: '/images/nxtradio.png' },
+    { name: "King's Park", logo: '/images/kings-park.png' },
 ];
 
-const sponsorContainerClasses = 'mx-auto mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:max-w-xl sm:grid-cols-3 sm:gap-x-8 lg:max-w-7xl lg:grid-cols-5 lg:gap-x-10';
+const sponsorContainerClasses = 'mx-auto mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:max-w-xl sm:grid-cols-3 sm:gap-x-8 lg:max-w-7xl lg:grid-cols-5 lg:gap-x-10 flex items-center justify-center';
 const sponsorLogoClasses = 'max-h-12 w-full object-contain';
 
 // Sponsor Component
@@ -38,7 +38,7 @@ const SponsorList = () => (
                 {sponsorData.map((sponsor) => (
                     <Sponsor
                         key={sponsor.name} // Use sponsor name as a unique key
-                        logo={sponsor.logo}
+            png   logo={sponsor.logo}
                         altText={`${sponsor.name} Logo`}
                     />
                 ))}
