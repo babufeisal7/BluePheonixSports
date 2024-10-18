@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Hero from './components/hero';
 import Aboutus from './components/aboutus';
@@ -24,9 +24,7 @@ import BlogPage from './pages/BlogPage';
 import Experts from './components/experts'; 
 import Faq from './components/faq'; 
 import SportsProgramPage from './pages/SportsProgramPage';
-import WhyUs from "./components/WhyUs"; 
 import Testimonials from "./components/Testimonials";
-
 import AdminPage from './pages/AdminPage';
 import HomePage from './pages/HomePage';
 
@@ -40,18 +38,23 @@ const Home = () => (
     <Ourteams />
     <Gallery />
     <Achievements />
-     <WhyUs />
-     <Testimonials />
-      
-    
-
+   
+    <Testimonials />
+    <Faq />
   </>
 );
 
-const App = () => {
+const AppContent = () => {
+  const location = useLocation();
+
+  // Define the paths where you don't want the Navbar to show
+  const noNavbarRoutes = ["/admin"]; 
+
   return (
-    <Router>
-      <Navbar />
+    <>
+      {/* Conditionally render the Navbar if the current path is not in the noNavbarRoutes */}
+      {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<Aboutus />} />
@@ -70,16 +73,22 @@ const App = () => {
         <Route path="/experts" element={<Experts />} /> 
         <Route path="/sports-programs" element={<SportsProgramPage />} />
         <Route path="/testimonials" element={<Testimonials />} />
-             <Route path="/" element={<HomePage />} /> {/* Home page route */}
-        <Route path="/admin" element={<AdminPage />} /> {/* Admin page route */}
-        
+        <Route path="/admin" element={<AdminPage />} /> {/* Admin page */}
       </Routes>
+
       <Experts />
       <Blog />
       <Sponsers />
       <Joinus />
-        <Faq />
       <Footer />
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 };

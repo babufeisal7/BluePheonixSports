@@ -66,31 +66,31 @@ const EventsPage = () => {
     : events.filter(event => event.category === selectedCategory);
 
   const eventDetails = {
-    name: "Golfers' Invitational Championship",
-    date: "August 15-18, 2023",
-    registration: "$86.00",
+    name: "CURA 7S' Invitational Championship",
+    date: "August 15-18, 2025",
+    registration: "UGX 10,000",
     format: "Stroke Play",
-    organizer: "Golfy Club",
-    organizerPhone: "(+1) 0 221 457 441",
-    awards: "Overall Champion Golfer Trophy",
+    organizer: "Blue Phoenix Sports LTD",
+    organizerPhone: "(+256) 0 771 457 441",
+    awards: "Overall Champion CURA 7S Trophy",
     catering: "Dinner on the final day",
-    venue: "Starry Haven Events Center",
-    venueLocation: "Pinecrest Golf Club, 123",
-    venuePhone: "(+1) 0 221 457 441",
-    venuePhoneTwo: "(+1) 0 221 457 441"
+    venue: "Buziga Islamic Institute",
+    venueLocation: "Buziga Kampala, 123",
+    venuePhone: "(+256) 0 771 457 441",
+    venuePhoneTwo: "(+256) 0 771 457 441"
   };
 
   return (
     <div className="flex flex-row-reverse">
       {/* Sidebar for Mobile */}
-      <div className="md:hidden">
+      <div className="md:hidden z-50">
         <button onClick={toggleSidebar} className="p-4 text-xl text-gray-800">
           {sidebarOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
       {/* Sidebar */}
-      <aside className={`fixed inset-0 bg-gray-100 border-l border-gray-200 p-4 z-50 transition-transform duration-300 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-1/4 md:min-h-screen`}>
+      <aside className={`fixed inset-0 bg-gray-100 border-l border-gray-200 p-4 z-40 transition-transform duration-300 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-1/4 md:min-h-screen`}>
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">Filter by Category</h2>
           <select 
@@ -102,14 +102,15 @@ const EventsPage = () => {
               <option key={index} value={category}>{category}</option>
             ))}
           </select>
+          
         </section>
       </aside>
 
       {/* Main Content */}
-      <main className="w-full md:w-3/4 p-8">
+      <main className={`w-full md:w-3/4 p-8 transition-all duration-300 ${sidebarOpen ? 'ml-64' : ''}`}>
         {/* Page Header */}
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-extrabold text-black mb-2">Upcoming Events</h1>
+          <h1 className="text-4xl font-extrabold text-black mb-2 ">Upcoming Events</h1>
           <p className="text-lg text-gray-700">Stay updated with our latest events and activities. Join us for exciting matches, training camps, and more!</p>
         </header>
 
@@ -156,11 +157,22 @@ const EventsPage = () => {
               <p className="text-gray-700 mb-1"><strong>Date:</strong> {eventDetails.date}</p>
               <p className="text-gray-700 mb-1"><strong>Registration Fee:</strong> {eventDetails.registration}</p>
               <p className="text-gray-700 mb-1"><strong>Format:</strong> {eventDetails.format}</p>
-              <p className="text-gray-700 mb-1"><strong>Organizer:</strong> {eventDetails.organizer} (Phone: {eventDetails.organizerPhone})</p>
+              <p className="text-gray-700 mb-1"><strong>Organizer:</strong> {eventDetails.organizer}</p>
+              <p className="text-gray-700 mb-1"><strong>Organizer Phone:</strong> {eventDetails.organizerPhone}</p>
               <p className="text-gray-700 mb-1"><strong>Awards:</strong> {eventDetails.awards}</p>
               <p className="text-gray-700 mb-1"><strong>Catering:</strong> {eventDetails.catering}</p>
-              <p className="text-gray-700 mb-1"><strong>Venue:</strong> {eventDetails.venue} (Phone: {eventDetails.venuePhone})</p>
-              <p className="text-gray-700 mb-1"><strong>Location:</strong> {eventDetails.venueLocation} (Phone: {eventDetails.venuePhoneTwo})</p>
+              <p className="text-gray-700 mb-1"><strong>Venue:</strong> {eventDetails.venue}</p>
+              <p className="text-gray-700 mb-1"><strong>Venue Location:</strong> {eventDetails.venueLocation}</p>
+              <p className="text-gray-700 mb-1"><strong>Venue Phone:</strong> {eventDetails.venuePhone}</p>
+              <p className="text-gray-700 mb-1"><strong>Alternate Venue Phone:</strong> {eventDetails.venuePhoneTwo}</p>
+            </div>
+            <div className="mt-6">
+              <button 
+                onClick={closeModal} 
+                className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+              >
+                Close
+              </button>
             </div>
           </Modal>
         )}
