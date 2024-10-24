@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFutbol, faBasketballBall, faSwimmer, faTrophy, faUserFriends, faMedal } from '@fortawesome/free-solid-svg-icons';
+import { faFootballBall, faFutbol, faBasketballBall, faSwimmer, faTrophy, faUserFriends, faMedal } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
+
 const programsData = [
-    { name: "Junior Elite Program", sport: "rugby"},
-    { name: "Senior Elite Program", sport: "rugby" },
-    { name: "Professional Preparatory Program", sport: "rugby" },
-    { name: "Youth Development Program", sport: "rugby" },
-    { name: "Junior Elite Program", sport: "football" },
-    { name: "Senior Elite Program", sport: "football" },
-    { name: "Goalkeeper Academy", sport: "football" },
-    { name: "Professional Preparatory Program", sport: "football" },
-    { name: "Youth Development Program", sport: "football" },
-    { name: "Junior Elite Program", sport: "basketball" },
-    { name: "Senior Elite Program", sport: "basketball" },
-    { name: "Professional Preparatory Program", sport: "basketball" },
-    { name: "Youth Development Program", sport: "basketball" },
-    { name: "Junior Elite Program", sport: "swimming" },
-    { name: "Senior Elite Program", sport: "swimming" },
-    { name: "Professional Preparatory Program", sport: "swimming" },
-    { name: "Youth Development Program", sport: "swimming" }
+    { name: "Junior Elite Program", sport: "rugby", icon: faFootballBall },
+    { name: "Senior Elite Program", sport: "rugby", icon: faFootballBall },
+    { name: "Professional Preparatory Program", sport: "rugby", icon: faFootballBall },
+    { name: "Youth Development Program", sport: "rugby", icon: faFootballBall },
+    { name: "Junior Elite Program", sport: "football", icon: faFutbol },
+    { name: "Senior Elite Program", sport: "football", icon: faFutbol },
+    { name: "Goalkeeper Academy", sport: "football", icon: faFutbol },
+    { name: "Professional Preparatory Program", sport: "football", icon: faFutbol },
+    { name: "Youth Development Program", sport: "football", icon: faFutbol },
+    { name: "Junior Elite Program", sport: "basketball", icon: faBasketballBall },
+    { name: "Senior Elite Program", sport: "basketball", icon: faBasketballBall },
+    { name: "Professional Preparatory Program", sport: "basketball", icon: faBasketballBall },
+    { name: "Youth Development Program", sport: "basketball", icon: faBasketballBall },
+    { name: "Junior Elite Program", sport: "swimming", icon: faSwimmer },
+    { name: "Senior Elite Program", sport: "swimming", icon: faSwimmer },
+    { name: "Professional Preparatory Program", sport: "swimming", icon: faSwimmer },
+    { name: "Youth Development Program", sport: "swimming", icon: faSwimmer },
 ];
+
+
 
 // Reusable Card Component
 const Card = ({ icon, title, description }) => {
@@ -42,6 +45,7 @@ Card.propTypes = {
     description: PropTypes.string.isRequired,
 };
 
+// Update SelectedProgramsCard component to include icons
 const SelectedProgramsCard = ({ selectedSport }) => {
     const filteredPrograms = programsData.filter(program => program.sport === selectedSport);
 
@@ -53,7 +57,8 @@ const SelectedProgramsCard = ({ selectedSport }) => {
             <ul className="flex flex-col items-start pl-0 space-y-4">
                 {filteredPrograms.map((program, index) => (
                     <li key={index} className="flex items-center justify-between w-full text-muted-foreground">
-                        <span className="flex-1 text-left mr-4">
+                        <span className="flex-1 text-left mr-4 flex items-center">
+                            <FontAwesomeIcon icon={program.icon} className="mr-2" />
                             {program.name}
                         </span>
                         {program.image && (
@@ -128,23 +133,34 @@ const Sidebar = ({ onSportSelect }) => {
     );
 };
 
-// Program List Card Component
 const ProgramListCard = ({ onSportSelect }) => {
     return (
-        <div className="bg-card p-4 mb-6 rounded-lg  shadow-lg text-left w-full"> {/* Added w-full for full width */}
+        <div className="bg-card p-4 mb-6 rounded-lg shadow-lg text-left w-full">
             <h3 className="text-xl font-bold mb-4 text-accent">Our Programs</h3>
             <ul className="flex flex-col items-start pl-0 space-y-2">
                 <li>
-                    <button onClick={() => onSportSelect('rugby')} className="text-primary hover:underline">Rugby</button>
+                    <button onClick={() => onSportSelect('rugby')} className="text-primary hover:underline flex items-center">
+                        <FontAwesomeIcon icon={faFootballBall} className="mr-2 text-black" /> 
+                        Rugby
+                    </button>
                 </li>
                 <li>
-                    <button onClick={() => onSportSelect('football')} className="text-primary hover:underline">Football</button>
+                    <button onClick={() => onSportSelect('football')} className="text-primary hover:underline flex items-center">
+                        <FontAwesomeIcon icon={faFutbol} className="mr-2 text-black" />
+                        Football
+                    </button>
                 </li>
                 <li>
-                    <button onClick={() => onSportSelect('basketball')} className="text-primary hover:underline">Basketball</button>
+                    <button onClick={() => onSportSelect('basketball')} className="text-primary hover:underline flex items-center">
+                        <FontAwesomeIcon icon={faBasketballBall} className="mr-2 text-black" />
+                        Basketball
+                    </button>
                 </li>
                 <li>
-                    <button onClick={() => onSportSelect('swimming')} className="text-primary hover:underline">Swimming</button>
+                    <button onClick={() => onSportSelect('swimming')} className="text-primary hover:underline flex items-center">
+                        <FontAwesomeIcon icon={faSwimmer} className="mr-2 text-black" />
+                        Swimming
+                    </button>
                 </li>
             </ul>
         </div>

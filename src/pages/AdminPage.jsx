@@ -20,46 +20,77 @@ const AdminPage = () => {
   const handleViewChange = (view) => {
     setCurrentView(view);
   };
-   // Content for Events
-  const renderEventsContent = () => (
-    <div>
-      <h2>Manage Events</h2>
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Add New Event</h3>
-        </div>
-        <div className="card-body">
-          <form>
-            <div className="form-group">
-              <label htmlFor="eventName">Event Name</label>
-              <input type="text" className="form-control" id="eventName" placeholder="Enter event name" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="eventDate">Event Date</label>
-              <input type="date" className="form-control" id="eventDate" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="eventImage">Event Image</label>
-              <input type="file" className="form-control" id="eventImage" />
-            </div>
-            <button type="submit" className="btn btn-primary">Add Event</button>
-          </form>
-        </div>
-      </div>
+   
 
-      <div className="card mt-4">
-        <div className="card-header">
-          <h3 className="card-title">Event List</h3>
-        </div>
-        <div className="card-body">
-          <ul>
-            <li>Event 1 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-            <li>Event 2 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-          </ul>
-        </div>
+  // Function to render the content for managing events
+const renderEventsContent = () => (
+  <div>
+    <h2>Manage Events</h2> {/* Main title for the events management section */}
+    
+    <div className="card">
+      <div className="card-header">
+        <h3 className="card-title">Add New Event</h3> {/* Title for the section to add a new event */}
+      </div>
+      <div className="card-body">
+        <form>
+          {/* Input field for the event name */}
+          <div className="form-group">
+            <label htmlFor="eventName">Event Name</label>
+            <input 
+              type="text" 
+              className="form-control" 
+              id="eventName" 
+              placeholder="Enter event name" 
+            />
+          </div>
+
+          {/* Input field for selecting the event date */}
+          <div className="form-group">
+            <label htmlFor="eventDate">Event Date</label>
+            <input 
+              type="date" 
+              className="form-control" 
+              id="eventDate" 
+            />
+          </div>
+
+          {/* Input field for uploading an event image */}
+          <div className="form-group">
+            <label htmlFor="eventImage">Event Image</label>
+            <input 
+              type="file" 
+              className="form-control" 
+              id="eventImage" 
+            />
+          </div>
+
+          {/* Button to submit the new event form */}
+          <button type="submit" className="btn btn-primary">Add Event</button>
+        </form>
       </div>
     </div>
-  );
+
+    {/* Card displaying the list of events */}
+    <div className="card mt-4">
+      <div className="card-header">
+        <h3 className="card-title">Event List</h3> {/* Title for the section displaying existing events */}
+      </div>
+      <div className="card-body">
+        <ul>
+          {/* List of events, each with a delete button */}
+          <li>
+            Event 1 
+            <button className="btn btn-danger btn-sm ml-2">Delete</button> {/* Button to delete Event 1 */}
+          </li>
+          <li>
+            Event 2 
+            <button className="btn btn-danger btn-sm ml-2">Delete</button> {/* Button to delete Event 2 */}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+);
 
   // Content for Blog
   const renderBlogContent = () => (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { faFootballBall, faFutbol, faBasketballBall, faSwimmer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFutbol, faBasketballBall, faSwimmer } from '@fortawesome/free-solid-svg-icons';
+
 
 const buttonClass = 'flex justify-between w-full text-left text-black py-2 px-4 rounded-lg hover:bg-gray-100';
 const iconUp = '&#9650;'; // Up arrow
@@ -53,10 +54,11 @@ const FAQComponent = () => {
               className={`flex items-center cursor-pointer p-2 ${selectedSport === sport ? 'bg-blue-100' : ''} hover:bg-blue-50 rounded-lg`}
               onClick={() => setSelectedSport(sport)}
             >
-              <FontAwesomeIcon 
-                icon={sport === 'rugby' ? faFutbol : sport === 'football' ? faFutbol : sport === 'basketball' ? faBasketballBall : faSwimmer} 
-                className="mr-2 text-black" 
-              />
+<FontAwesomeIcon 
+  icon={sport === 'rugby' ? faFootballBall : sport === 'football' ? faFutbol : sport === 'basketball' ? faBasketballBall : faSwimmer} 
+  className="mr-2 text-black" 
+/>
+
               <span className="text-black font-medium">{sport.charAt(0).toUpperCase() + sport.slice(1)}</span>
             </li>
           ))}
