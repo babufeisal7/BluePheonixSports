@@ -44,7 +44,7 @@ const Testimonials = () => {
         <TestimonialCard
           quote="An excellent product that combines quality and functionality. It has proven to be very effective and is well worth the investment."
           author="Arjun Desai"
-          avatarUrl="https://via.placeholder.com/150"
+          avatarUrl="/public/coach1.jpg"
           twitterLink="https://twitter.com/arjun_11"
           linkedinLink="#"
           facebookLink="#"
@@ -53,7 +53,7 @@ const Testimonials = () => {
         <TestimonialCard
           quote="I’ve been using this product for a few months now, and it has made a significant difference. The design is sleek, and it functions flawlessly."
           author="Nisha Joshi"
-          avatarUrl="https://via.placeholder.com/150"
+          avatarUrl="/public/coach1.jpg"
           twitterLink="https://twitter.com/__nisha"
           linkedinLink="#"
           facebookLink="#"
@@ -62,7 +62,7 @@ const Testimonials = () => {
         <TestimonialCard
           quote="I am thoroughly impressed with this product. It delivers exactly what it promises and has become an essential part of my life."
           author="Priya Patel"
-          avatarUrl="https://via.placeholder.com/150"
+          avatarUrl="/public/coach1.jpg"
           twitterLink="https://twitter.com/__nisha"
           linkedinLink="#"
           facebookLink="#"
@@ -71,7 +71,7 @@ const Testimonials = () => {
         <TestimonialCard
           quote="Their innovative approach has transformed our operations and led to substantial improvements in our processes and overall efficiency."
           author="Jaswinder Singh"
-          avatarUrl="https://via.placeholder.com/150"
+          avatarUrl="/public/coach1.jpg"
           twitterLink="https://twitter.com/_jaswinder_5"
           linkedinLink="#"
           facebookLink="#"

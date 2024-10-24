@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -91,8 +91,9 @@ const Events = () => {
 
     return (
         <section className="py-8 sm:py-12 bg-gradient-to-b from-gray-100 to-white relative">
-            <div className="max-w-7xl mx-auto  px-4">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Upcoming Events</h2>
+            <div className="max-w-7xl mx-auto px-4">
+                {/* Centered heading */}
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center">Upcoming Events</h2>
                 <p className="text-lg sm:text-xl text-center text-black mb-8">Join us for exciting events and sports action!</p>
                 <Slider {...settings} className="flex flex-wrap">
                     {events.map((event, index) => (

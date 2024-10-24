@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrophy, faPeopleArrows, faUsers, faStar } from '@fortawesome/free-solid-svg-icons';
+
 
 // Define reusable styles
 const sectionTitleClasses = "text-3xl md:text-4xl font-bold mb-6 text-center text-primary";
@@ -118,23 +121,28 @@ const AboutusPage = () => {
                 )}
 
                 {activeTab === 'objectives' && (
-                    <section className="mb-12">
-                        <h2 className={sectionTitleClasses}>Objectives</h2>
-                        <ul className={listClasses}>
-                            <li>
-                                <span className={highlightTextClasses}>Develop Talent:</span> Create pathways for athletes to progress through youth, amateur, and professional levels.
-                            </li>
-                            <li>
-                                <span className={highlightTextClasses}>Promote Inclusivity:</span> Ensure that rugby is accessible to everyone, regardless of background or ability.
-                            </li>
-                            <li>
-                                <span className={highlightTextClasses}>Community Engagement:</span> Strengthen ties with local communities through outreach and partnerships.
-                            </li>
-                            <li>
-                                <span className={highlightTextClasses}>Success On and Off the Field:</span> Help athletes grow both as individuals and as team players, preparing them for life beyond sports.
-                            </li>
-                        </ul>
-                    </section>
+         <section className="mb-12">
+    <h2 className={sectionTitleClasses}>Objectives</h2>
+    <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }} className={listClasses}>
+        <li>
+            <FontAwesomeIcon icon={faTrophy} className="mr-2" />
+            <span className={highlightTextClasses}>Develop Talent:</span> Create pathways for athletes to progress through youth, amateur, and professional levels.
+        </li>
+        <li>
+            <FontAwesomeIcon icon={faPeopleArrows} className="mr-2" />
+            <span className={highlightTextClasses}>Promote Inclusivity:</span> Ensure that rugby is accessible to everyone, regardless of background or ability.
+        </li>
+        <li>
+            <FontAwesomeIcon icon={faUsers} className="mr-2" />
+            <span className={highlightTextClasses}>Community Engagement:</span> Strengthen ties with local communities through outreach and partnerships.
+        </li>
+        <li>
+            <FontAwesomeIcon icon={faStar} className="mr-2" />
+            <span className={highlightTextClasses}>Success On and Off the Field:</span> Help athletes grow both as individuals and as team players, preparing them for life beyond sports.
+        </li>
+    </ul>
+</section>
+
                 )}
             </div>
 
