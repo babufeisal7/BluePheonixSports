@@ -48,6 +48,7 @@ const SportsPrograms = () => {
                             )}
                         </div>
                     </div>
+                    {/* Similar updates can be applied to the Football, Basketball, and Swimming programs */}
                 </div>
 
                 {/* Football Program */}
@@ -75,6 +76,7 @@ const SportsPrograms = () => {
                             )}
                         </div>
                     </div>
+                    {/* Similar updates can be applied to the Basketball and Swimming programs */}
                 </div>
 
                 {/* Basketball Program */}
@@ -102,6 +104,7 @@ const SportsPrograms = () => {
                             )}
                         </div>
                     </div>
+                    {/* Similar updates can be applied to the Swimming program */}
                 </div>
 
                 {/* Swimming Program */}

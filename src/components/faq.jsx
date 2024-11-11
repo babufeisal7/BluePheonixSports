@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { faFootballBall, faFutbol, faBasketballBall, faSwimmer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
-const buttonClass = 'flex justify-between w-full text-left text-black py-2 px-4 rounded-lg hover:bg-gray-100';
+const buttonClass = 'flex justify-between w-full text-left text-white py-2 px-4  hover:bg-gray-20';
 const iconUp = '&#9650;'; // Up arrow
 const iconDown = '&#9660;'; // Down arrow
 
@@ -43,23 +42,22 @@ const FAQComponent = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row bg-gray-50 p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col md:flex-row bg-blue-700 p-4 shadow-lg">
       {/* Sidebar with Sports Academy categories */}
-      <div className="w-full md:w-1/4 bg-white p-4 rounded-lg shadow-md">
-        <h2 className="text-lg font-semibold text-black">Sports Academy</h2>
+      <div className="w-full md:w-1/4 bg-blue 800 p-4 rounded-lg shadow-md">
+        <h2 className="text-lg font-semibold text-white">Sports Academy</h2>
         <ul className="mt-4 space-y-2">
           {Object.keys(FAQs).map((sport) => (
             <li
               key={sport}
-              className={`flex items-center cursor-pointer p-2 ${selectedSport === sport ? 'bg-blue-100' : ''} hover:bg-blue-50 rounded-lg`}
+              className={`flex items-center cursor-pointer p-2 ${selectedSport === sport ? 'bg-blue-700' : ''} hover:bg-blue-70 rounded-lg`}
               onClick={() => setSelectedSport(sport)}
             >
-<FontAwesomeIcon 
-  icon={sport === 'rugby' ? faFootballBall : sport === 'football' ? faFutbol : sport === 'basketball' ? faBasketballBall : faSwimmer} 
-  className="mr-2 text-black" 
-/>
-
-              <span className="text-black font-medium">{sport.charAt(0).toUpperCase() + sport.slice(1)}</span>
+              <FontAwesomeIcon 
+                icon={sport === 'rugby' ? faFootballBall : sport === 'football' ? faFutbol : sport === 'basketball' ? faBasketballBall : faSwimmer} 
+                className="mr-2 text-black" 
+              />
+              <span className="text-white font-medium">{sport.charAt(0).toUpperCase() + sport.slice(1)}</span>
             </li>
           ))}
         </ul>
@@ -67,17 +65,17 @@ const FAQComponent = () => {
 
       {/* Main content with FAQ */}
       <div className="w-full md:w-3/4 mt-4 md:mt-0 md:ml-4">
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold text-black">Frequently Asked Questions</h3>
+        <div className="bg-blue 800  sm:p-6 lg:p-8 p-4 rounded-lg shadow-md">
+          <h3 className="text-lg font-semibold text-white">Frequently Asked Questions</h3>
           <div className="mt-4 space-y-4">
             {FAQs[selectedSport].map((faq, index) => (
               <div key={index} className="border-b border-gray-300 pb-2">
                 <button className={buttonClass} onClick={() => toggleContent(index)}>
-                  <span className="font-semibold">{faq.question}</span>
+                  <span className="font-semibold ">{faq.question}</span>
                   <span dangerouslySetInnerHTML={{ __html: openIndex === index ? iconUp : iconDown }} />
                 </button>
                 <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-screen' : 'max-h-0'}`}>
-                  <p className={`mt-2 text-gray-700`}>
+                  <p className={`mt-2 text-white`}>
                     {faq.answer}
                   </p>
                 </div>

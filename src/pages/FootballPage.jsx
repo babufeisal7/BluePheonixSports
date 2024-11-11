@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaTimes } from 'react-icons/fa';
 
+// Styling for the components
 const cardClasses = 'relative rounded-lg overflow-hidden shadow-lg group max-w-md mx-auto bg-white';
 const imageClasses = 'w-full h-60 sm:h-64 md:h-72 object-cover transition-transform duration-300 ease-in-out group-hover:scale-110';
 const overlayClasses = 'absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50';
@@ -41,6 +42,7 @@ const PlayerModal = ({ isOpen, player, onClose }) => {
   );
 };
 
+// Component prop validation
 PlayerModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   player: PropTypes.shape({
@@ -67,6 +69,7 @@ const PlayerCard = ({ name, imgSrc, altText, position, onClick }) => (
   </div>
 );
 
+// PlayerCard prop validation
 PlayerCard.propTypes = {
   name: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
@@ -96,6 +99,7 @@ const CoachCard = ({ name, imgSrc, position, bio, dob, pob, nationality }) => (
   </div>
 );
 
+// CoachCard prop validation
 CoachCard.propTypes = {
   name: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
@@ -106,6 +110,7 @@ CoachCard.propTypes = {
   nationality: PropTypes.string.isRequired,
 };
 
+// Main Football Page
 const FootballPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -121,16 +126,17 @@ const FootballPage = () => {
   };
 
   const players = [
+    // Sample player data
     {
       id: 1,
       name: "Carlos Ramirez",
-      imgSrc: "/photo8.jpg", // Updated image URL
+      imgSrc: "/photo8.jpg",
       altText: "Carlos Ramirez",
       position: "Forward",
       stats: "Goals: 15 | Assists: 8",
       bio: "Carlos is a dynamic forward known for his exceptional scoring ability and agility on the field.",
     },
-    {
+        {
       id: 2,
       name: "Luis Gonzales",
       imgSrc: "/photo9.jpg", // Updated image URL
@@ -246,10 +252,11 @@ const FootballPage = () => {
         Blue Phoenix Rugby Club Players and Coach
       </h1>
 
+      {/* Player Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
         {players.map((player) => (
           <PlayerCard
-            key={player.id} // Use player's id for uniqueness
+            key={player.id}
             name={player.name}
             imgSrc={player.imgSrc}
             altText={player.altText}
@@ -259,8 +266,10 @@ const FootballPage = () => {
         ))}
       </div>
 
+      {/* Modal for Selected Player */}
       <PlayerModal isOpen={isModalOpen} player={selectedPlayer} onClose={handleCloseModal} />
 
+      {/* Coach Card Section */}
       <h1 className="text-4xl font-extrabold text-black mb-8 text-center">
         Meet Our Coach
       </h1>

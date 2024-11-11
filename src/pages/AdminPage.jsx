@@ -4,360 +4,902 @@ import 'admin-lte/dist/js/adminlte.min.js';
 import { Link } from 'react-router-dom';
 
 const AdminPage = () => {
-  // State to track current view
   const [currentView, setCurrentView] = useState('Dashboard');
 
   useEffect(() => {
-    // Initialize AdminLTE (if necessary)
     if (window.$) {
       window.$(document).ready(function () {
-        // Any specific initialization code
+        // AdminLTE initialization
       });
     }
   }, []);
 
-  // Functions to handle view changes
   const handleViewChange = (view) => {
     setCurrentView(view);
   };
-   
 
-  // Function to render the content for managing events
-const renderEventsContent = () => (
-  <div>
-    <h2>Manage Events</h2> {/* Main title for the events management section */}
+// Blog Form Component
+const BlogForm = ({ blog, onChange, onSubmit }) => (
+  <form onSubmit={onSubmit}>
+    {Object.entries(blog).map(([key, value]) => (
+      <div className="form-group" key={key}>
+        <label htmlFor={key}>{key.replace(/([A-Z])/g, ' $1')}</label>
+        <input
+          type="text"
+          className="form-control"
+          id={key}
+          placeholder={`Enter ${key.replace(/([A-Z])/g, ' $1').toLowerCase()}`}
+          value={value}
+          onChange={(e) => onChange(key, e.target.value)}
+        />
+      </div>
+    ))}
+
+    {/* Additional form fields */}
+    <div className="form-group">
+      <label htmlFor="blogTitle">Blog Title</label>
+      <input
+        type="text"
+        className="form-control"
+        id="blogTitle"
+        placeholder="Enter blog title"
+        value={blog.blogTitle || ''}
+        onChange={(e) => onChange('blogTitle', e.target.value)}
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="blogDate">Date</label>
+      <input
+        type="date"
+        className="form-control"
+        id="blogDate"
+        value={blog.blogDate || ''}
+        onChange={(e) => onChange('blogDate', e.target.value)}
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="blogCategory">Category</label>
+      <input
+        type="text"
+        className="form-control"
+        id="blogCategory"
+        placeholder="Enter blog category"
+        value={blog.blogCategory || ''}
+        onChange={(e) => onChange('blogCategory', e.target.value)}
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="blogContent">Blog Content</label>
+      <textarea
+        className="form-control"
+        id="blogContent"
+        rows="4"
+        placeholder="Enter blog content"
+        value={blog.blogContent || ''}
+        onChange={(e) => onChange('blogContent', e.target.value)}
+      ></textarea>
+    </div>
+    <div className="form-group">
+      <label htmlFor="blogImage">Blog Image</label>
+      <input
+        type="file"
+        className="form-control"
+        id="blogImage"
+        onChange={(e) => onChange('blogImage', e.target.files[0])}
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="blogAuthor">Author</label>
+      <input
+        type="text"
+        className="form-control"
+        id="blogAuthor"
+        placeholder="Enter author's name"
+        value={blog.blogAuthor || ''}
+        onChange={(e) => onChange('blogAuthor', e.target.value)}
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="memberImage">Author Image</label>
+      <input
+        type="file"
+        className="form-control"
+        id="memberImage"
+        accept="image/*"
+        onChange={(e) => onChange('memberImage', e.target.files[0])}
+      />
+    </div>
     
-    <div className="card">
-      <div className="card-header">
-        <h3 className="card-title">Add New Event</h3> {/* Title for the section to add a new event */}
-      </div>
-      <div className="card-body">
-        <form>
-          {/* Input field for the event name */}
-          <div className="form-group">
-            <label htmlFor="eventName">Event Name</label>
-            <input 
-              type="text" 
-              className="form-control" 
-              id="eventName" 
-              placeholder="Enter event name" 
-            />
-          </div>
-
-          {/* Input field for selecting the event date */}
-          <div className="form-group">
-            <label htmlFor="eventDate">Event Date</label>
-            <input 
-              type="date" 
-              className="form-control" 
-              id="eventDate" 
-            />
-          </div>
-
-          {/* Input field for uploading an event image */}
-          <div className="form-group">
-            <label htmlFor="eventImage">Event Image</label>
-            <input 
-              type="file" 
-              className="form-control" 
-              id="eventImage" 
-            />
-          </div>
-
-          {/* Button to submit the new event form */}
-          <button type="submit" className="btn btn-primary">Add Event</button>
-        </form>
-      </div>
-    </div>
-
-    {/* Card displaying the list of events */}
-    <div className="card mt-4">
-      <div className="card-header">
-        <h3 className="card-title">Event List</h3> {/* Title for the section displaying existing events */}
-      </div>
-      <div className="card-body">
-        <ul>
-          {/* List of events, each with a delete button */}
-          <li>
-            Event 1 
-            <button className="btn btn-danger btn-sm ml-2">Delete</button> {/* Button to delete Event 1 */}
-          </li>
-          <li>
-            Event 2 
-            <button className="btn btn-danger btn-sm ml-2">Delete</button> {/* Button to delete Event 2 */}
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+    <button type="submit" className="btn btn-primary">Add Blog Post</button>
+  </form>
 );
 
-  // Content for Blog
-  const renderBlogContent = () => (
-    <div>
-      <h2>Manage Blog</h2>
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Add New Blog Post</h3>
-        </div>
-        <div className="card-body">
-          <form>
-            <div className="form-group">
-              <label htmlFor="blogTitle">Blog Title</label>
-              <input type="text" className="form-control" id="blogTitle" placeholder="Enter blog title" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="blogContent">Blog Content</label>
-              <textarea className="form-control" id="blogContent" rows="4" placeholder="Enter blog content"></textarea>
-            </div>
-            <div className="form-group">
-              <label htmlFor="blogImage">Blog Image</label>
-              <input type="file" className="form-control" id="blogImage" />
-            </div>
-            <button type="submit" className="btn btn-primary">Add Blog Post</button>
-          </form>
-        </div>
-      </div>
 
-      <div className="card mt-4">
-        <div className="card-header">
-          <h3 className="card-title">Blog List</h3>
-        </div>
-        <div className="card-body">
-          <ul>
-            <li>Blog Post 1 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-            <li>Blog Post 2 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-          </ul>
-        </div>
-      </div>
+const BlogManager = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [newBlog, setNewBlog] = useState({ title: '', content: '', author: '' });
+  const [editIndex, setEditIndex] = useState(null);
+  const [error, setError] = useState('');
+
+  const handleInputChange = (key, value) => {
+    setNewBlog({ ...newBlog, [key]: value });
+  };
+
+  const handleAddOrUpdateBlog = (e) => {
+    e.preventDefault();
+    const { title, content, author } = newBlog;
+
+    // Basic validation
+    if (!title || !content || !author) {
+      setError('All fields are required!');
+      return;
+    }
+
+    setError('');
+
+    if (editIndex !== null) {
+      setBlogs(blogs.map((blog, idx) => (idx === editIndex ? newBlog : blog)));
+      setEditIndex(null);
+    } else {
+      setBlogs([...blogs, newBlog]);
+    }
+
+    setNewBlog({ title: '', content: '', author: '' });
+  };
+
+  const handleEdit = (index) => {
+    setNewBlog(blogs[index]);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    setBlogs(blogs.filter((_, idx) => idx !== index));
+  };
+
+  return (
+    <div>
+      <h2>Manage Blogs</h2>
+      {error && <div className="alert alert-danger">{error}</div>} {/* Error message display */}
+      <BlogForm blog={newBlog} onChange={handleInputChange} onSubmit={handleAddOrUpdateBlog} />
+      <ul>
+        {blogs.map((blog, index) => (
+          <li key={index}>
+            <strong>{blog.title}</strong><br />
+            Content: {blog.content}<br />
+            Author: {blog.author}<br />
+            <button className="btn btn-primary btn-sm" onClick={() => handleEdit(index)}>
+              Edit
+            </button>
+            <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(index)}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-
-  // Content for Testimonials
-  const renderTestimonialsContent = () => (
-    <div>
-      <h2>Manage Testimonials</h2>
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Add New Testimonial</h3>
-        </div>
-        <div className="card-body">
-          <form>
-            <div className="form-group">
-              <label htmlFor="testimonialName">Name</label>
-              <input type="text" className="form-control" id="testimonialName" placeholder="Enter name" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="testimonialContent">Testimonial</label>
-              <textarea className="form-control" id="testimonialContent" rows="4" placeholder="Enter testimonial"></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary">Add Testimonial</button>
-          </form>
-        </div>
-      </div>
-
-      <div className="card mt-4">
-        <div className="card-header">
-          <h3 className="card-title">Testimonials List</h3>
-        </div>
-        <div className="card-body">
-          <ul>
-            <li>Testimonial 1 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-            <li>Testimonial 2 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Content for Teams
-  const renderTeamsContent = () => (
-    <div>
-      <h2>Manage Teams</h2>
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Add New Team</h3>
-        </div>
-        <div className="card-body">
-          <form>
-            <div className="form-group">
-              <label htmlFor="teamName">Team Name</label>
-              <input type="text" className="form-control" id="teamName" placeholder="Enter team name" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="teamDescription">Team Description</label>
-              <textarea className="form-control" id="teamDescription" rows="4" placeholder="Enter team description"></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary">Add Team</button>
-          </form>
-        </div>
-      </div>
-
-      <div className="card mt-4">
-        <div className="card-header">
-          <h3 className="card-title">Team List</h3>
-        </div>
-        <div className="card-body">
-          <ul>
-            <li>Team 1 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-            <li>Team 2 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Content for Sponsors
-  const renderSponsorsContent = () => (
-    <div>
-      <h2>Manage Sponsors</h2>
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Add New Sponsor</h3>
-        </div>
-        <div className="card-body">
-          <form>
-            <div className="form-group">
-              <label htmlFor="sponsorName">Sponsor Name</label>
-              <input type="text" className="form-control" id="sponsorName" placeholder="Enter sponsor name" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="sponsorLogo">Sponsor Logo</label>
-              <input type="file" className="form-control" id="sponsorLogo" />
-            </div>
-            <button type="submit" className="btn btn-primary">Add Sponsor</button>
-          </form>
-        </div>
-      </div>
-
-      <div className="card mt-4">
-        <div className="card-header">
-          <h3 className="card-title">Sponsor List</h3>
-        </div>
-        <div className="card-body">
-          <ul>
-            <li>Sponsor 1 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-            <li>Sponsor 2 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Content for Members
-  const renderMembersContent = () => (
-    <div>
-      <h2>Manage Members</h2>
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Add New Member</h3>
-        </div>
-        <div className="card-body">
-          <form>
-            <div className="form-group">
-              <label htmlFor="memberName">Member Name</label>
-              <input type="text" className="form-control" id="memberName" placeholder="Enter member name" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="memberEmail">Member Email</label>
-              <input type="email" className="form-control" id="memberEmail" placeholder="Enter email address" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="memberRole">Member Role</label>
-              <input type="text" className="form-control" id="memberRole" placeholder="Enter role" />
-            </div>
-            <button type="submit" className="btn btn-primary">Add Member</button>
-          </form>
-        </div>
-      </div>
-
-      <div className="card mt-4">
-        <div className="card-header">
-          <h3 className="card-title">Members List</h3>
-        </div>
-        <div className="card-body">
-          <ul>
-            <li>Member 1 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-            <li>Member 2 <button className="btn btn-danger btn-sm ml-2">Delete</button></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Main content switcher based on the current view
-const renderContent = () => {
-  switch (currentView) {
-    case 'Blog':
-      return renderBlogContent();
-    case 'Testimonials':
-      return renderTestimonialsContent();
-    case 'Teams':
-      return renderTeamsContent();
-    case 'Sponsors':
-      return renderSponsorsContent();
-    case 'Members':
-      return renderMembersContent();
-    case 'Events': // Add Events case
-      return renderEventsContent(); // Render Events content
-    default:
-      return <div>Welcome to the Admin Dashboard!</div>;
-  }
 };
 
 
+
+
+const TestimonialForm = ({ testimonial, onChange, onSubmit }) => {
+  const [imagePreview, setImagePreview] = useState(null);
+
+  // Function to handle file input change and preview the image
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+        onChange('avatarUrl', reader.result); // Set the base64 URL to the avatarUrl state
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  return (
+    <form onSubmit={onSubmit}>
+      <div className="form-group">
+        <label htmlFor="testimonialName">Author</label>
+        <input
+          type="text"
+          className="form-control"
+          id="testimonialName"
+          placeholder="Enter name"
+          value={testimonial.author}
+          onChange={(e) => onChange('author', e.target.value)}
+        />
+      </div>
+      
+      {/* Author Image Upload */}
+      <div className="form-group">
+        <label htmlFor="avatarUrl">Author Image</label>
+        <input
+          type="file"
+          className="form-control"
+          id="avatarUrl"
+          onChange={handleImageChange}
+        />
+        {imagePreview && (
+          <div className="mt-2">
+            <img
+              src={imagePreview}
+              alt="Author"
+              className="rounded-circle"
+              style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="testimonialContent">Testimonial</label>
+        <textarea
+          className="form-control"
+          id="testimonialContent"
+          rows="4"
+          placeholder="Enter testimonial"
+          value={testimonial.quote}
+          onChange={(e) => onChange('quote', e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="socialLinks">Social Media Links</label>
+        <div>
+          <input
+            type="text"
+            className="form-control mb-2"
+            id="twitterLink"
+            placeholder="Enter Twitter link"
+            value={testimonial.twitterLink}
+            onChange={(e) => onChange('twitterLink', e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control mb-2"
+            id="linkedinLink"
+            placeholder="Enter LinkedIn link"
+            value={testimonial.linkedinLink}
+            onChange={(e) => onChange('linkedinLink', e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control mb-2"
+            id="facebookLink"
+            placeholder="Enter Facebook link"
+            value={testimonial.facebookLink}
+            onChange={(e) => onChange('facebookLink', e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-control mb-2"
+            id="instagramLink"
+            placeholder="Enter Instagram link"
+            value={testimonial.instagramLink}
+            onChange={(e) => onChange('instagramLink', e.target.value)}
+          />
+        </div>
+      </div>
+
+      <button type="submit" className="btn btn-primary">Add Testimonial</button>
+    </form>
+  );
+};
+
+
+const TestimonialsManager = () => {
+  const [testimonials, setTestimonials] = useState([]);
+  const [newTestimonial, setNewTestimonial] = useState({ name: '', quote: '' });
+  const [editIndex, setEditIndex] = useState(null);
+
+  const handleInputChange = (key, value) => setNewTestimonial({ ...newTestimonial, [key]: value });
+
+  const handleAddOrUpdateTestimonial = (e) => {
+    e.preventDefault();
+    if (editIndex !== null) {
+      setTestimonials(testimonials.map((item, idx) => idx === editIndex ? newTestimonial : item));
+      setEditIndex(null);
+    } else {
+      setTestimonials([...testimonials, newTestimonial]);
+    }
+    setNewTestimonial({ name: '', quote: '' });
+  };
+
+  const handleEdit = (index) => {
+    setNewTestimonial(testimonials[index]);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    setTestimonials(testimonials.filter((_, idx) => idx !== index));
+  };
+
+  return (
+    <div>
+      <h2>Manage Testimonials</h2>
+      <TestimonialForm testimonial={newTestimonial} onChange={handleInputChange} onSubmit={handleAddOrUpdateTestimonial} />
+      <ul>
+        {testimonials.map((item, index) => (
+          <li key={index}>
+            <strong>{item.name}</strong><br />
+            "{item.quote}"<br />
+            <button onClick={() => handleEdit(index)}>Edit</button>
+            <button onClick={() => handleDelete(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// Team Form Component
+const TeamForm = ({ team, onChange, onSubmit }) => (
+  <form onSubmit={onSubmit}>
+    <div className="form-group">
+      <label htmlFor="teamName">Team Name</label>
+      <input
+        type="text"
+        className="form-control"
+        id="teamName"
+        placeholder="Enter team name"
+        value={team.teamName}
+        onChange={(e) => onChange('teamName', e.target.value)}
+      />
+    </div>
+    <button type="submit" className="btn btn-primary">Save Team</button>
+  </form>
+);
+
+const TeamsManager = () => {
+  const [teams, setTeams] = useState([]);
+  const [newTeam, setNewTeam] = useState({ teamName: '' });
+  const [editIndex, setEditIndex] = useState(null);
+
+  const handleInputChange = (key, value) => setNewTeam({ ...newTeam, [key]: value });
+
+  const handleAddOrUpdateTeam = (e) => {
+    e.preventDefault();
+    if (editIndex !== null) {
+      setTeams(teams.map((team, idx) => idx === editIndex ? newTeam : team));
+      setEditIndex(null);
+    } else {
+      setTeams([...teams, newTeam]);
+    }
+    setNewTeam({ teamName: '' });
+  };
+
+  const handleEdit = (index) => {
+    setNewTeam(teams[index]);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    setTeams(teams.filter((_, idx) => idx !== index));
+  };
+
+  return (
+    <div>
+      <h2>Manage Teams</h2>
+      <TeamForm team={newTeam} onChange={handleInputChange} onSubmit={handleAddOrUpdateTeam} />
+      <ul>
+        {teams.map((team, index) => (
+          <li key={index}>
+            <strong>{team.teamName}</strong><br />
+            <button onClick={() => handleEdit(index)}>Edit</button>
+            <button onClick={() => handleDelete(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// Sponsor Form Component
+const SponsorForm = ({ sponsor, onChange, onSubmit }) => (
+  <form onSubmit={onSubmit}>
+    <div className="form-group mb-4">
+      <label htmlFor="sponsorName" className="block text-sm font-medium text-gray-700">Sponsor Name</label>
+      <input
+        type="text"
+        className="form-control mt-2 w-full p-2 border border-gray-300 rounded-md"
+        id="sponsorName"
+        placeholder="Enter sponsor name"
+        value={sponsor.sponsorName}
+        onChange={(e) => onChange('sponsorName', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group mb-4">
+      <label htmlFor="sponsorLogo" className="block text-sm font-medium text-gray-700">Sponsor Logo</label>
+      <input
+        type="file"
+        className="form-control mt-2 w-full p-2 border border-gray-300 rounded-md"
+        id="sponsorLogo"
+        onChange={(e) => onChange('sponsorLogo', e.target.files[0])}
+      />
+    </div>
+
+    <button type="submit" className="btn btn-primary">Save sponsor</button>
+  </form>
+);
+
+const SponsorsManager = () => {
+  const [sponsors, setSponsors] = useState([]);
+  const [newSponsor, setNewSponsor] = useState({ sponsorName: '', sponsorLogo: null });
+  const [editIndex, setEditIndex] = useState(null);
+
+  const handleInputChange = (key, value) => {
+    // For file input, we're passing the file directly.
+    setNewSponsor({ ...newSponsor, [key]: value });
+  };
+
+  const handleAddOrUpdateSponsor = (e) => {
+    e.preventDefault();
+    if (editIndex !== null) {
+      setSponsors(sponsors.map((sponsor, idx) => idx === editIndex ? newSponsor : sponsor));
+      setEditIndex(null);
+    } else {
+      setSponsors([...sponsors, newSponsor]);
+    }
+    setNewSponsor({ sponsorName: '', sponsorLogo: null });
+  };
+
+  const handleEdit = (index) => {
+    setNewSponsor(sponsors[index]);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    setSponsors(sponsors.filter((_, idx) => idx !== index));
+  };
+
+  return (
+    <div>
+      <h2>Manage Sponsors</h2>
+      <SponsorForm sponsor={newSponsor} onChange={handleInputChange} onSubmit={handleAddOrUpdateSponsor} />
+      <ul>
+        {sponsors.map((sponsor, index) => (
+          <li key={index} className="mb-4">
+            <strong>{sponsor.sponsorName}</strong><br />
+            {sponsor.sponsorLogo && (
+              <img src={URL.createObjectURL(sponsor.sponsorLogo)} alt="Sponsor Logo" className="w-20 h-20 object-contain my-2" />
+            )}
+            <button
+              className="btn btn-primary btn-sm bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
+              onClick={() => handleEdit(index)}
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-danger btn-sm bg-red-500 text-white px-4 py-2 rounded-md"
+              onClick={() => handleDelete(index)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+
+// Member Form Component
+const MemberForm = ({ member, onChange, onSubmit }) => (
+  <form onSubmit={onSubmit}>
+    <div className="form-group">
+      <label htmlFor="memberName">Member Name</label>
+      <input
+        type="text"
+        className="form-control"
+        id="memberName"
+        placeholder="Enter member name"
+        value={member.memberName}
+        onChange={(e) => onChange('memberName', e.target.value)}
+      />
+    </div>
+    
+    <div className="form-group">
+      <label htmlFor="memberEmail">Member Email</label>
+      <input
+        type="email"
+        className="form-control"
+        id="memberEmail"
+        placeholder="Enter email address"
+        value={member.memberEmail}
+        onChange={(e) => onChange('memberEmail', e.target.value)}
+      />
+    </div>
+    
+    <div className="form-group">
+      <label htmlFor="memberRole">Member Role</label>
+      <input
+        type="text"
+        className="form-control"
+        id="memberRole"
+        placeholder="Enter role"
+        value={member.memberRole}
+        onChange={(e) => onChange('memberRole', e.target.value)}
+      />
+    </div>
+    
+    <div className="form-group">
+      <label htmlFor="memberImage">Member Image</label>
+      <input
+        type="file"
+        className="form-control"
+        id="memberImage"
+        accept="image/*"
+        onChange={(e) => onChange('memberImage', e.target.files[0])}
+      />
+    </div>
+
+    <button type="submit" className="btn btn-primary">Save Member</button>
+  </form>
+);
+
+const MembersManager = () => {
+  const [members, setMembers] = useState([]);
+  const [newMember, setNewMember] = useState({ memberName: '' });
+  const [editIndex, setEditIndex] = useState(null);
+
+  const handleInputChange = (key, value) => setNewMember({ ...newMember, [key]: value });
+
+  const handleAddOrUpdateMember = (e) => {
+    e.preventDefault();
+    if (editIndex !== null) {
+      setMembers(members.map((member, idx) => idx === editIndex ? newMember : member));
+      setEditIndex(null);
+    } else {
+      setMembers([...members, newMember]);
+    }
+    setNewMember({ memberName: '' });
+  };
+
+  const handleEdit = (index) => {
+    setNewMember(members[index]);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    setMembers(members.filter((_, idx) => idx !== index));
+  };
+
+  return (
+    <div>
+      <h2>Manage Members</h2>
+      {/* Render the Member Form with props for member data and handlers */}
+      <MemberForm 
+        member={newMember} 
+        onChange={handleInputChange} 
+        onSubmit={handleAddOrUpdateMember} 
+      />
+      
+      {/* List of members with edit and delete options */}
+      <ul>
+        {members.map((member, index) => (
+          <li key={index}>
+            <strong>{member.memberName}</strong><br />
+            <button onClick={() => handleEdit(index)}>Edit</button>
+            <button onClick={() => handleDelete(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+const EventForm = ({ event, onChange, onSubmit }) => (
+  <form onSubmit={onSubmit} className="space-y-4 p-6 bg-white shadow-lg rounded-lg">
+    <div className="form-group">
+      <label htmlFor="name" className="block text-sm font-medium text-gray-700">Event Name</label>
+      <input
+        type="text"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="name"
+        placeholder="Enter event name"
+        value={event.name}
+        onChange={(e) => onChange('name', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="date" className="block text-sm font-medium text-gray-700">Event Date</label>
+      <input
+        type="date"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="date"
+        value={event.date}
+        onChange={(e) => onChange('date', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="registration" className="block text-sm font-medium text-gray-700">Registration</label>
+      <input
+        type="text"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="registration"
+        placeholder="Enter registration details"
+        value={event.registration}
+        onChange={(e) => onChange('registration', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="organizer" className="block text-sm font-medium text-gray-700">Organizer</label>
+      <input
+        type="text"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="organizer"
+        placeholder="Enter organizer name"
+        value={event.organizer}
+        onChange={(e) => onChange('organizer', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="organizerPhone" className="block text-sm font-medium text-gray-700">Organizer Phone</label>
+      <input
+        type="tel"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="organizerPhone"
+        placeholder="Enter organizer phone number"
+        value={event.organizerPhone}
+        onChange={(e) => onChange('organizerPhone', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="awards" className="block text-sm font-medium text-gray-700">Awards</label>
+      <input
+        type="text"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="awards"
+        placeholder="Enter awards details"
+        value={event.awards}
+        onChange={(e) => onChange('awards', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="catering" className="block text-sm font-medium text-gray-700">Catering</label>
+      <input
+        type="text"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="catering"
+        placeholder="Enter catering details"
+        value={event.catering}
+        onChange={(e) => onChange('catering', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="venue" className="block text-sm font-medium text-gray-700">Venue</label>
+      <input
+        type="text"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="venue"
+        placeholder="Enter venue name"
+        value={event.venue}
+        onChange={(e) => onChange('venue', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="venueLocation" className="block text-sm font-medium text-gray-700">Venue Location</label>
+      <input
+        type="text"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="venueLocation"
+        placeholder="Enter venue location"
+        value={event.venueLocation}
+        onChange={(e) => onChange('venueLocation', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="venuePhone" className="block text-sm font-medium text-gray-700">Venue Phone</label>
+      <input
+        type="tel"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="venuePhone"
+        placeholder="Enter venue phone number"
+        value={event.venuePhone}
+        onChange={(e) => onChange('venuePhone', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="venuePhoneTwo" className="block text-sm font-medium text-gray-700">Venue Phone (Optional)</label>
+      <input
+        type="tel"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="venuePhoneTwo"
+        placeholder="Enter second venue phone number (optional)"
+        value={event.venuePhoneTwo}
+        onChange={(e) => onChange('venuePhoneTwo', e.target.value)}
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="image" className="block text-sm font-medium text-gray-700">Event Image</label>
+      <input
+        type="file"
+        className="form-control w-full p-2 border border-gray-300 rounded-md"
+        id="image"
+        accept="image/*"
+        onChange={(e) => onChange('image', e.target.files[0])}
+      />
+    </div>
+
+    <button type="submit" className="btn btn-primary mt-4 w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+      Save Event
+    </button>
+  </form>
+);
+
+const EventsManager = () => {
+  const [events, setEvents] = useState([]);
+  const [newEvent, setNewEvent] = useState({
+    name: '',
+    date: '',
+    registration: '',
+    organizer: '',
+    organizerPhone: '',
+    awards: '',
+    catering: '',
+    venue: '',
+    venueLocation: '',
+    venuePhone: '',
+    venuePhoneTwo: '',
+    image: null,
+  });
+  const [editIndex, setEditIndex] = useState(null);
+
+  const handleInputChange = (key, value) => setNewEvent({ ...newEvent, [key]: value });
+
+  const handleAddOrUpdateEvent = (e) => {
+    e.preventDefault();
+    if (editIndex !== null) {
+      setEvents(events.map((event, idx) => (idx === editIndex ? newEvent : event)));
+      setEditIndex(null);
+    } else {
+      setEvents([...events, newEvent]);
+    }
+    setNewEvent({
+      name: '',
+      date: '',
+      registration: '',
+      organizer: '',
+      organizerPhone: '',
+      awards: '',
+      catering: '',
+      venue: '',
+      venueLocation: '',
+      venuePhone: '',
+      venuePhoneTwo: '',
+      image: null,
+    });
+  };
+
+  const handleEdit = (index) => {
+    setNewEvent(events[index]);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    setEvents(events.filter((_, idx) => idx !== index));
+  };
+
+  return (
+    <div className="p-4">
+      <h2 className="text-xl font-semibold mb-4">Manage Events</h2>
+      <EventForm event={newEvent} onChange={handleInputChange} onSubmit={handleAddOrUpdateEvent} />
+      <ul className="mt-4">
+        {events.map((event, index) => (
+          <li key={index} className="border-b pb-4 mb-4">
+            <div>
+              <strong className="text-lg">{event.name}</strong><br />
+              <span className="text-sm text-gray-600">Date: {event.date}</span><br />
+              <span className="text-sm text-gray-600">Location: {event.location}</span><br />
+              {event.registration && <span className="text-sm text-gray-600">Registration: {event.registration}</span>}<br />
+              {event.organizer && <span className="text-sm text-gray-600">Organizer: {event.organizer}</span>}<br />
+              {event.awards && <span className="text-sm text-gray-600">Awards: {event.awards}</span>}<br />
+              <div className="mt-2">
+                <button
+                  className="btn btn-primary btn-sm bg-blue-500 text-white rounded px-4 py-2"
+                  onClick={() => handleEdit(index)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="btn btn-danger btn-sm ml-2 bg-red-500 text-white rounded px-4 py-2"
+                  onClick={() => handleDelete(index)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+  const renderContent = () => {
+    switch (currentView) {
+      case 'Blog':
+        return <BlogManager />;
+      case 'Testimonials':
+        return <TestimonialsManager />;
+      case 'Teams':
+        return <TeamsManager />;
+      case 'Sponsors':
+        return <SponsorsManager />;
+      case 'Members':
+        return <MembersManager />;
+        case 'Events':
+          return <EventsManager />;
+      default:
+        return <div>Welcome to the Admin Dashboard!</div>;
+    }
+  };
+  
+
   return (
     <div className="wrapper">
-      {/* Sidebar */}
       <aside className="main-sidebar sidebar-dark-primary elevation-4">
         <Link to="/" className="brand-link">
           <span className="brand-text font-weight-light">Admin Dashboard</span>
         </Link>
         <div className="sidebar">
           <nav className="mt-2">
-            <ul className="nav nav-pills nav-sidebar flex-column" role="menu">
-              <li className="nav-item">
-                <button className="nav-link" onClick={() => handleViewChange('Dashboard')}>
-                  Dashboard
-                </button>
-              </li>
-          <li className="nav-item">
-  <button className="nav-link" onClick={() => handleViewChange('Events')}>
-    Events
-  </button>
-</li>
-
-              <li className="nav-item">
-                <button className="nav-link" onClick={() => handleViewChange('Blog')}>
-                  Blog
-                </button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link" onClick={() => handleViewChange('Testimonials')}>
-                  Testimonials
-                </button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link" onClick={() => handleViewChange('Teams')}>
-                  Teams
-                </button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link" onClick={() => handleViewChange('Sponsors')}>
-                  Sponsors
-                </button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link" onClick={() => handleViewChange('Members')}>
-                  Members
-                </button>
-              </li>
-            </ul>
+          <ul className="nav nav-pills nav-sidebar flex-column" role="menu">
+  <li className="nav-item">
+    <button className="nav-link" onClick={() => handleViewChange('Dashboard')}>
+      Dashboard
+    </button>
+  </li>
+  <li className="nav-item">
+    <button className="nav-link" onClick={() => handleViewChange('Blog')}>
+      Blog
+    </button>
+  </li>
+  <li className="nav-item">
+    <button className="nav-link" onClick={() => handleViewChange('Testimonials')}>
+      Testimonials
+    </button>
+  </li>
+  <li className="nav-item">
+    <button className="nav-link" onClick={() => handleViewChange('Teams')}>
+      Teams
+    </button>
+  </li>
+  <li className="nav-item">
+    <button className="nav-link" onClick={() => handleViewChange('Sponsors')}>
+      Sponsors
+    </button>
+  </li>
+  <li className="nav-item">
+    <button className="nav-link" onClick={() => handleViewChange('Members')}>
+      Members
+    </button>
+  </li>
+  <li className="nav-item">
+    <button className="nav-link" onClick={() => handleViewChange('Events')}>
+      Events
+    </button>
+  </li>
+</ul>
           </nav>
         </div>
       </aside>
 
-      {/* Main Content */}
       <div className="content-wrapper">
         <section className="content">
           <div className="container-fluid">

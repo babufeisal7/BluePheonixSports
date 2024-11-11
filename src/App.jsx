@@ -26,7 +26,7 @@ import Faq from './components/faq';
 import SportsProgramPage from './pages/SportsProgramPage';
 import Testimonials from "./components/Testimonials";
 import AdminPage from './pages/AdminPage';
-import HomePage from './pages/HomePage';
+
 
 const Home = () => (
   <>
@@ -34,13 +34,12 @@ const Home = () => (
     <Aboutus />
     <Sportsprograms />
     <Services />
-    <Events />
     <Ourteams />
+    <Events />
     <Gallery />
-    <Achievements />
-   
     <Testimonials />
-    <Faq />
+    <Achievements />
+    
   </>
 );
 
@@ -77,9 +76,10 @@ const AppContent = () => {
       </Routes>
 
       <Experts />
-      <Blog />
-      <Sponsers />
       <Joinus />
+      <Blog />
+      <Faq />
+      <Sponsers />
       <Footer />
     </>
   );
