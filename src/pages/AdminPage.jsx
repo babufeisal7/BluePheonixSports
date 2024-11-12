@@ -335,59 +335,182 @@ const TestimonialsManager = () => {
   );
 };
 
-// Team Form Component
-const TeamForm = ({ team, onChange, onSubmit }) => (
-  <form onSubmit={onSubmit}>
-    <div className="form-group">
-      <label htmlFor="teamName">Team Name</label>
-      <input
-        type="text"
-        className="form-control"
-        id="teamName"
-        placeholder="Enter team name"
-        value={team.teamName}
-        onChange={(e) => onChange('teamName', e.target.value)}
-      />
-    </div>
-    <button type="submit" className="btn btn-primary">Save Team</button>
-  </form>
-);
+const PlayerForm = ({ player, onChange, onSubmit, isEditing }) => {
+  const [imagePreview, setImagePreview] = useState(player.imgSrc || '');
 
-const TeamsManager = () => {
-  const [teams, setTeams] = useState([]);
-  const [newTeam, setNewTeam] = useState({ teamName: '' });
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Generate a URL for the file
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreview(imageUrl);
+      onChange('imgSrc', file); // Update the state with the file object
+    }
+  };
+
+  useEffect(() => {
+    // Ensure that the image preview is updated when the player imgSrc changes
+    if (player.imgSrc) {
+      setImagePreview(URL.createObjectURL(player.imgSrc));
+    }
+  }, [player.imgSrc]);
+
+  return (
+    <form onSubmit={onSubmit}>
+      {/* Player ID - Hidden from the user */}
+      <input
+        type="hidden"
+        value={player.id}
+        onChange={(e) => onChange('id', e.target.value)}
+      />
+
+      <div className="form-group">
+        <label htmlFor="playerName">Player Name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="playerName"
+          placeholder="Enter player name"
+          value={player.name}
+          onChange={(e) => onChange('name', e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="playerImgSrc">Player Image</label>
+        <input
+          type="file"
+          className="form-control"
+          id="playerImgSrc"
+          onChange={handleFileChange}
+        />
+        {imagePreview && (
+          <div className="mt-2">
+            <img src={imagePreview} alt="Player" style={{ width: 100, height: 100 }} />
+          </div>
+        )}
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="playerAltText">Image Alt Text</label>
+        <input
+          type="text"
+          className="form-control"
+          id="playerAltText"
+          placeholder="Enter image alt text"
+          value={player.altText}
+          onChange={(e) => onChange('altText', e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="playerPosition">Position</label>
+        <input
+          type="text"
+          className="form-control"
+          id="playerPosition"
+          placeholder="Enter position"
+          value={player.position}
+          onChange={(e) => onChange('position', e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="playerStats">Stats</label>
+        <textarea
+          className="form-control"
+          id="playerStats"
+          placeholder="Enter player stats"
+          value={player.stats}
+          onChange={(e) => onChange('stats', e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="playerBio">Bio</label>
+        <textarea
+          className="form-control"
+          id="playerBio"
+          placeholder="Enter player bio"
+          value={player.bio}
+          onChange={(e) => onChange('bio', e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="playerExperience">Experience</label>
+        <textarea
+          className="form-control"
+          id="playerExperience"
+          placeholder="Enter player experience"
+          value={player.experience}
+          onChange={(e) => onChange('experience', e.target.value)}
+        />
+      </div>
+
+      <button type="submit" className="btn btn-primary">{isEditing ? 'Update Player' : 'Add Player'}</button>
+    </form>
+  );
+};
+
+const SportManager = ({ sportName }) => {
+  const [players, setPlayers] = useState([]);
+  const [newPlayer, setNewPlayer] = useState({
+    id: '',
+    name: '',
+    imgSrc: '',
+    altText: '',
+    position: '',
+    stats: '',
+    bio: '',
+    experience: ''
+  });
   const [editIndex, setEditIndex] = useState(null);
 
-  const handleInputChange = (key, value) => setNewTeam({ ...newTeam, [key]: value });
+  const handleInputChange = (key, value) => setNewPlayer({ ...newPlayer, [key]: value });
 
-  const handleAddOrUpdateTeam = (e) => {
+  const handleAddOrUpdatePlayer = (e) => {
     e.preventDefault();
     if (editIndex !== null) {
-      setTeams(teams.map((team, idx) => idx === editIndex ? newTeam : team));
+      setPlayers(players.map((player, idx) => idx === editIndex ? newPlayer : player));
       setEditIndex(null);
     } else {
-      setTeams([...teams, newTeam]);
+      setPlayers([...players, newPlayer]);
     }
-    setNewTeam({ teamName: '' });
+    setNewPlayer({
+      id: '',
+      name: '',
+      imgSrc: '',
+      altText: '',
+      position: '',
+      stats: '',
+      bio: '',
+      experience: ''
+    });
   };
 
   const handleEdit = (index) => {
-    setNewTeam(teams[index]);
+    setNewPlayer(players[index]);
     setEditIndex(index);
   };
 
   const handleDelete = (index) => {
-    setTeams(teams.filter((_, idx) => idx !== index));
+    setPlayers(players.filter((_, idx) => idx !== index));
   };
 
   return (
     <div>
-      <h2>Manage Teams</h2>
-      <TeamForm team={newTeam} onChange={handleInputChange} onSubmit={handleAddOrUpdateTeam} />
+      <h2>{sportName} Players</h2>
+      <PlayerForm player={newPlayer} onChange={handleInputChange} onSubmit={handleAddOrUpdatePlayer} />
       <ul>
-        {teams.map((team, index) => (
+        {players.map((player, index) => (
           <li key={index}>
-            <strong>{team.teamName}</strong><br />
+            <strong>{player.name}</strong><br />
+            <img src={player.imgSrc} alt={player.altText} style={{ width: 100, height: 100 }} /><br />
+            Position: {player.position}<br />
+            Stats: {player.stats}<br />
+            Bio: {player.bio}<br />
+            Experience: {player.experience}<br />
             <button onClick={() => handleEdit(index)}>Edit</button>
             <button onClick={() => handleDelete(index)}>Delete</button>
           </li>
@@ -396,6 +519,9 @@ const TeamsManager = () => {
     </div>
   );
 };
+
+
+
 
 // Sponsor Form Component
 const SponsorForm = ({ sponsor, onChange, onSubmit }) => (
@@ -486,6 +612,92 @@ const SponsorsManager = () => {
   );
 };
 
+const GalleryUploadForm = ({ sportName, onImageUpload }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (selectedImage) {
+      onImageUpload(sportName, selectedImage);
+      setSelectedImage(null);
+    }
+  };
+
+  return (
+    <div>
+      <h3>Upload Image for {sportName}</h3>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="imageUpload">Choose Image</label>
+          <input
+            type="file"
+            className="form-control"
+            id="imageUpload"
+            onChange={handleImageChange}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">Upload Image</button>
+      </form>
+    </div>
+  );
+};
+
+
+const Gallery = () => {
+  const [galleries, setGalleries] = useState({
+    Rugby: [],
+    Football: [],
+    Basketball: [],
+    Swimming: [],
+  });
+
+  const handleImageUpload = (sportName, image) => {
+    // Create a new FormData object to handle image upload if needed (e.g., to an API)
+    const newImage = URL.createObjectURL(image);
+    setGalleries({
+      ...galleries,
+      [sportName]: [...galleries[sportName], newImage],
+    });
+  };
+
+  return (
+    <div>
+      <h2>Sports Gallery</h2>
+
+      {/* Gallery Upload Form for each sport */}
+      <GalleryUploadForm sportName="Rugby" onImageUpload={handleImageUpload} />
+      <GalleryUploadForm sportName="Football" onImageUpload={handleImageUpload} />
+      <GalleryUploadForm sportName="Basketball" onImageUpload={handleImageUpload} />
+      <GalleryUploadForm sportName="Swimming" onImageUpload={handleImageUpload} />
+
+      {/* Display Gallery for Each Sport */}
+      <div className="gallery-section">
+        {Object.keys(galleries).map((sportName) => (
+          <div key={sportName}>
+            <h3>{sportName} Gallery</h3>
+            <div className="gallery-images">
+              {galleries[sportName].map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Uploaded for ${sportName}`}
+                  className="gallery-image"
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 // Member Form Component
 const MemberForm = ({ member, onChange, onSubmit }) => (
@@ -831,25 +1043,33 @@ const EventsManager = () => {
   );
 };
 
-  const renderContent = () => {
-    switch (currentView) {
-      case 'Blog':
-        return <BlogManager />;
-      case 'Testimonials':
-        return <TestimonialsManager />;
-      case 'Teams':
-        return <TeamsManager />;
-      case 'Sponsors':
-        return <SponsorsManager />;
-      case 'Members':
-        return <MembersManager />;
-        case 'Events':
-          return <EventsManager />;
-      default:
-        return <div>Welcome to the Admin Dashboard!</div>;
-    }
-  };
-  
+const renderContent = () => {
+  switch (currentView) {
+    case 'Blog':
+      return <BlogManager />;
+    case 'Testimonials':
+      return <TestimonialsManager />;
+          case 'Rugby':
+      return <SportManager sportName="Rugby" />;
+    case 'Football':
+      return <SportManager sportName="Football" />;
+    case 'Basketball':
+      return <SportManager sportName="Basketball" />;
+    case 'Swimming':
+      return <SportManager sportName="Swimming" />;
+    case 'Sponsors':
+      return <SponsorsManager />;
+    case 'Gallery':
+      return <Gallery />;   
+    case 'Members':
+      return <MembersManager />;
+    case 'Events':
+      return <EventsManager />;
+   
+    default:
+      return <div>Welcome to the Admin Dashboard!</div>;
+  }
+};
 
   return (
     <div className="wrapper">
@@ -865,6 +1085,8 @@ const EventsManager = () => {
       Dashboard
     </button>
   </li>
+  
+ 
   <li className="nav-item">
     <button className="nav-link" onClick={() => handleViewChange('Blog')}>
       Blog
@@ -875,16 +1097,39 @@ const EventsManager = () => {
       Testimonials
     </button>
   </li>
+ 
   <li className="nav-item">
-    <button className="nav-link" onClick={() => handleViewChange('Teams')}>
-      Teams
-    </button>
-  </li>
+  <button className="nav-link" onClick={() => handleViewChange('Rugby')}>
+    Rugby
+  </button>
+</li>
+<li className="nav-item">
+  <button className="nav-link" onClick={() => handleViewChange('Football')}>
+    Football
+  </button>
+</li>
+<li className="nav-item">
+  <button className="nav-link" onClick={() => handleViewChange('Basketball')}>
+    Basketball
+  </button>
+</li>
+<li className="nav-item">
+  <button className="nav-link" onClick={() => handleViewChange('Swimming')}>
+    Swimming
+  </button>
+</li>
+
   <li className="nav-item">
     <button className="nav-link" onClick={() => handleViewChange('Sponsors')}>
       Sponsors
     </button>
   </li>
+
+        <li className="nav-item">
+        <button className="nav-link" onClick={() => handleViewChange('Gallery')}>
+          Gallery
+        </button>
+      </li>
   <li className="nav-item">
     <button className="nav-link" onClick={() => handleViewChange('Members')}>
       Members
