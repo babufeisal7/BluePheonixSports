@@ -50,7 +50,7 @@ const FAQComponent = () => {
           {Object.keys(FAQs).map((sport) => (
             <li
               key={sport}
-              className={`flex items-center cursor-pointer p-2 ${selectedSport === sport ? 'bg-blue-700' : ''} hover:bg-blue-70 rounded-lg`}
+              className={`flex items-center cursor-pointer p-2 ${selectedSport === sport ? 'bg-blue-800' : ''} hover:bg-blue-700 rounded-lg`}
               onClick={() => setSelectedSport(sport)}
             >
               <FontAwesomeIcon 

@@ -830,18 +830,6 @@ const EventForm = ({ event, onChange, onSubmit }) => (
     </div>
 
     <div className="form-group">
-      <label htmlFor="registration" className="block text-sm font-medium text-gray-700">Registration</label>
-      <input
-        type="text"
-        className="form-control w-full p-2 border border-gray-300 rounded-md"
-        id="registration"
-        placeholder="Enter registration details"
-        value={event.registration}
-        onChange={(e) => onChange('registration', e.target.value)}
-      />
-    </div>
-
-    <div className="form-group">
       <label htmlFor="organizer" className="block text-sm font-medium text-gray-700">Organizer</label>
       <input
         type="text"
@@ -914,18 +902,6 @@ const EventForm = ({ event, onChange, onSubmit }) => (
     </div>
 
     <div className="form-group">
-      <label htmlFor="venuePhone" className="block text-sm font-medium text-gray-700">Venue Phone</label>
-      <input
-        type="tel"
-        className="form-control w-full p-2 border border-gray-300 rounded-md"
-        id="venuePhone"
-        placeholder="Enter venue phone number"
-        value={event.venuePhone}
-        onChange={(e) => onChange('venuePhone', e.target.value)}
-      />
-    </div>
-
-    <div className="form-group">
       <label htmlFor="venuePhoneTwo" className="block text-sm font-medium text-gray-700">Venue Phone (Optional)</label>
       <input
         type="tel"
@@ -959,14 +935,12 @@ const EventsManager = () => {
   const [newEvent, setNewEvent] = useState({
     name: '',
     date: '',
-    registration: '',
     organizer: '',
     organizerPhone: '',
     awards: '',
     catering: '',
     venue: '',
     venueLocation: '',
-    venuePhone: '',
     venuePhoneTwo: '',
     image: null,
   });
@@ -985,14 +959,12 @@ const EventsManager = () => {
     setNewEvent({
       name: '',
       date: '',
-      registration: '',
       organizer: '',
       organizerPhone: '',
       awards: '',
       catering: '',
       venue: '',
       venueLocation: '',
-      venuePhone: '',
       venuePhoneTwo: '',
       image: null,
     });
@@ -1100,22 +1072,22 @@ const renderContent = () => {
  
   <li className="nav-item">
   <button className="nav-link" onClick={() => handleViewChange('Rugby')}>
-    Rugby
+    Rugby Team
   </button>
 </li>
 <li className="nav-item">
   <button className="nav-link" onClick={() => handleViewChange('Football')}>
-    Football
+    Football Team
   </button>
 </li>
 <li className="nav-item">
   <button className="nav-link" onClick={() => handleViewChange('Basketball')}>
-    Basketball
+    Basketball Team
   </button>
 </li>
 <li className="nav-item">
   <button className="nav-link" onClick={() => handleViewChange('Swimming')}>
-    Swimming
+    Swimming Team
   </button>
 </li>
 

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSchool, faUsers, faCalendarAlt, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 
 // Custom class for increased icon size
-const iconSize = 'h-[2.80rem] w-[2.80rem]'; // Increased size
+const iconSize = 'h-[2.80rem] w-[2.80rem] '; // Increased size
 
 const services = [
     {
@@ -29,7 +29,7 @@ const services = [
 ];
 
 const ServiceCard = ({ title, description, icon }) => (
-    <div className="relative bg-white p-6 rounded-lg shadow-lg text-black text-sm sm:text-base text-muted-foreground mb-4 fade-in border border-blue-500">
+    <div className="relative bg-white p-6 rounded-lg shadow-lg text-black text-sm sm:text-base text-muted-foreground mb-4 fade-in border border-blue-500 ">
         <div className="absolute top-12 left-4">
             {icon}
         </div>
@@ -49,7 +49,7 @@ ServiceCard.propTypes = {
 };
 
 const Services = () => (
-    <div id="services" className="relative py-12">
+    <div id="services" className="relative py-12 ">
         {/* Background Image for the Services section */}
         <div
             className="absolute inset-0 bg-cover bg-center"

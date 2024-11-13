@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy, faPeopleArrows, faUsers, faStar } from '@fortawesome/free-solid-svg-icons';
 
 
+
 // Define reusable styles
 const sectionTitleClasses = "text-3xl md:text-4xl font-bold mb-6 text-center text-primary";
 const sectionTextClasses = "text-lg md:text-xl mb-6 ";
