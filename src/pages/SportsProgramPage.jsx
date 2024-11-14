@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFootballBall, faFutbol, faBasketballBall, faSwimmer, faTrophy, faUserFriends, faMedal } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
-
 const programsData = [
     { name: "Junior Elite Program", sport: "rugby", icon: faFootballBall },
     { name: "Senior Elite Program", sport: "rugby", icon: faFootballBall },
@@ -23,8 +22,6 @@ const programsData = [
     { name: "Professional Preparatory Program", sport: "swimming", icon: faSwimmer },
     { name: "Youth Development Program", sport: "swimming", icon: faSwimmer },
 ];
-
-
 
 // Reusable Card Component
 const Card = ({ icon, title, description }) => {
@@ -61,20 +58,12 @@ const SelectedProgramsCard = ({ selectedSport }) => {
                             <FontAwesomeIcon icon={program.icon} className="mr-2" />
                             {program.name}
                         </span>
-                        {program.image && (
-                            <img 
-                                src={program.image} 
-                                alt={program.name} 
-                                className="w-16 h-16 rounded ml-4" // Adjust the size as needed
-                            />
-                        )}
                     </li>
                 ))}
             </ul>
         </div>
     );
 };
-
 
 // Key Components Section
 const KeyComponents = ({ selectedSport }) => {
@@ -90,7 +79,6 @@ const KeyComponents = ({ selectedSport }) => {
                     title={`Introduction to ${selectedSport.charAt(0).toUpperCase() + selectedSport.slice(1)}`}
                     description="Details about our coaching approach and philosophy."
                 />
-                {/* Additional Cards */}
                 <Card 
                     icon={faTrophy}
                     title="Age-Specific Training"
@@ -124,7 +112,7 @@ const KeyComponents = ({ selectedSport }) => {
 // Sidebar Component
 const Sidebar = ({ onSportSelect }) => {
     return (
-        <div className="w-80  flex flex-col items-start"> {/* Changed items-center to items-start */}
+        <div className="w-80  flex flex-col items-start"> 
             <h2 className="text-2xl font-bold mb-4 text-primary text-left">Sports Programs</h2>
             <ProgramListCard onSportSelect={onSportSelect} />
             <ProgramCard />
@@ -167,7 +155,6 @@ const ProgramListCard = ({ onSportSelect }) => {
     );
 };
 
-
 // Program Card Component
 const ProgramCard = () => {
     return (
@@ -192,16 +179,12 @@ const ProgramCard = () => {
         </div>
     );
 };
-
-
-
-// Social Links Card Component
 const SocialLinksCard = () => {
     return (
-        <div className="bg-card p-4 rounded-lg shadow-lg ">
-            <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
-            <div className="flex justify-center space-x-3">
-                <a href="#" className="text-muted-foreground">Facebook</a>
+        <div className="bg-card text-black p-4 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
+            <div className="flex space-x-4">
+                         <a href="#" className="text-muted-foreground">Facebook</a>
                 <a href="#" className="text-muted-foreground">Twitter</a>
                 <a href="#" className="text-muted-foreground">Instagram</a>
             </div>
@@ -209,17 +192,18 @@ const SocialLinksCard = () => {
     );
 };
 
-// SportsProgramPage Component with Sidebar
+// Main Component
 const SportsProgramPage = () => {
-    const [selectedSport, setSelectedSport] = useState('rugby'); // Default selected sport
+    const [selectedSport, setSelectedSport] = useState('rugby');
+    const handleSportSelect = (sport) => setSelectedSport(sport);
 
     return (
-        <div className="flex flex-col lg:flex-row">
-            <div className="flex-1 p-6"> {/* Main Content Area */}
+        <div className="flex flex-col md:flex-row">
+            <Sidebar onSportSelect={handleSportSelect} />
+            <div className="flex-1 p-6">
                 <SelectedProgramsCard selectedSport={selectedSport} />
                 <KeyComponents selectedSport={selectedSport} />
             </div>
-            <Sidebar onSportSelect={setSelectedSport} />
         </div>
     );
 };

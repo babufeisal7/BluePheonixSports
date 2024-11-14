@@ -1,324 +1,173 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
-const sharedClasses = {
-  card: 'bg-card rounded-lg shadow-md p-4 transition-transform transform hover:scale-105',
-  primaryText: 'text-primary hover:text-primary/80 transition-colors text-sm',
-  primaryBtn: 'bg-primary text-primary-foreground hover:bg-primary/80 mt-2 p-2 rounded transition-colors text-sm',
-  sidebar: 'bg-card p-4 rounded-lg w-[342.4px]',
-  sidebarItem: 'flex items-start space-x-4 text-primary hover:text-primary/80 transition-colors border-b border-gray-300 pb-4 mb-4 text-sm',
-  searchInput: 'border border-border rounded-lg p-2 w-full focus:ring-2 focus:ring-primary transition-shadow duration-200 text-sm',
-  tagsSection: 'mt-4',
-  tagItem: 'inline-block px-3 py-1 mr-1 mb-1 bg-blue-200 text-blue-800 rounded-full text-xs border border-blue-300',
-  socialIcons: 'flex space-x-4 mt-4',
-  socialIcon: 'text-blue-600 hover:text-blue-800 transition-colors duration-300',
-  pagination: 'flex justify-center space-x-4 mt-6',
-  titleRecentPosts: 'text-base font-semibold mb-2 text-secondary',
-  titleTags: 'text-base font-semibold mb-2 text-secondary',
-};
+const blogPosts = [
+  {
+    id: 1,
+    title: "The Rise of Rugby at Blue Phoenix",
+    date: "November 10, 2024",
+    category: "Rugby",
+    excerpt: "Discover how Blue Phoenix Rugby Club has risen in ranks...",
+    image: "/public/image1.jpg",
+  },
+  {
+    id: 2,
+    title: "Top 5 Training Tips for Young Athletes",
+    date: "October 25, 2024",
+    category: "Training",
+    excerpt: "Improve your game with these essential tips...",
+    image: "/public/image2.jpg",
+  },
+  {
+    id: 3,
+    title: "Upcoming Rugby Events You Don’t Want to Miss",
+    date: "October 15, 2024",
+    category: "Rugby",
+    excerpt: "Join us at our upcoming rugby events...",
+    image: "/public/image3.jpg",
+  },
+  {
+    id: 4,
+    title: "Football Training: Building Strong Foundations",
+    date: "September 30, 2024",
+    category: "Football",
+    excerpt: "Learn the fundamentals of football and improve your skills...",
+    image: "/public/image4.jpg",
+  },
+  {
+    id: 5,
+    title: "Basketball Drills for Beginners",
+    date: "September 22, 2024",
+    category: "Basketball",
+    excerpt: "Master these essential basketball drills to improve your game...",
+    image: "/public/image5.jpg",
+  },
+  {
+    id: 6,
+    title: "Swimming Techniques for Better Performance",
+    date: "September 10, 2024",
+    category: "Swimming",
+    excerpt: "Enhance your swimming skills with these advanced techniques...",
+    image: "/public/image6.jpg",
+  },
+  {
+    id: 7,
+    title: "Healthy Eating for Athletes",
+    date: "August 25, 2024",
+    category: "Health",
+    excerpt: "Fuel your body with the best foods for peak performance...",
+    image: "/public/image7.jpg",
+  },
+  {
+    id: 8,
+    title: "The Importance of Mental Health in Sports",
+    date: "August 10, 2024",
+    category: "Health",
+    excerpt: "Taking care of your mental health is as important as physical fitness...",
+    image: "/public/image8.jpg",
+  },
+  {
+    id: 9,
+    title: "Upcoming Sports Events at Blue Phoenix",
+    date: "July 25, 2024",
+    category: "Events",
+    excerpt: "Check out the upcoming sports events you should be a part of...",
+    image: "/public/image9.jpg",
+  },
+  // Add more blog posts as needed
+];
 
+const categories = ["All", "Rugby", "Football", "Basketball", "Swimming", "Events", "Health"];
 
-const Sidebar = ({ posts }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const filteredPosts = posts.filter(post =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <aside className={sharedClasses.sidebar}>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        placeholder="Search posts..."
-        className={sharedClasses.searchInput}
-      />
-      <h2 className={sharedClasses.titleRecentPosts}>Recent Posts</h2>
-      <ul>
-        {filteredPosts.map((post, index) => (
-          <li key={index} className={sharedClasses.sidebarItem}>
-            <img
-              src={post.authorImage}
-              alt={post.author}
-              className="w-16 h-16 rounded-full border-2 border-gray-300 object-cover mr-4"
-            />
-            <div>
-              <h3 className="text-base font-bold">
-                <a href={post.url} className="hover:underline text-primary">{post.title}</a>
-              </h3>
-              <p className="text-xs text-gray-500">{post.date}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div className={sharedClasses.tagsSection}>
-        <h3 className={sharedClasses.titleTags}>Tags</h3>
-        <span className={sharedClasses.tagItem}>Rugby</span>
-        <span className={sharedClasses.tagItem}>Football</span>
-        <span className={sharedClasses.tagItem}>Events</span>
-        <span className={sharedClasses.tagItem}>Health</span>
-        <span className={sharedClasses.tagItem}>Fitness</span>
-      </div>
-      <div className={sharedClasses.socialIcons}>
-        <a href="https://facebook.com" className={sharedClasses.socialIcon} aria-label="Facebook">
-          <FaFacebook size={24} />
-        </a>
-        <a href="https://twitter.com" className={sharedClasses.socialIcon} aria-label="Twitter">
-          <FaTwitter size={24} />
-        </a>
-        <a href="https://instagram.com" className={sharedClasses.socialIcon} aria-label="Instagram">
-          <FaInstagram size={24} />
-        </a>
-      </div>
-    </aside>
-  );
-};
-
-
-const MainContent = ({ posts }) => {
-  return (
-    <main className="w-full md:w-3/4 p-6">
-      <h1 className="text-4xl font-bold mb-4 text-primary">Blog</h1>
-      <div className="space-y-6">
-        {posts.map((post, index) => (
-          <article key={index} className={sharedClasses.card}>
-            <img
-              src={post.image}
-              alt={post.title}
-              className="w-full h-80 object-cover rounded-t-lg mb-4"
-            />
-            <h2 className="text-xl font-bold mb-4 text-accent">
-              <a href={post.url} className="hover:underline text-primary">{post.title}</a>
-            </h2>
-            
-            <p className="text-muted-foreground">{post.content}</p>
-            <a href={post.url} className={sharedClasses.primaryBtn}>Read More</a>
-            <p className="text-sm text-gray-500 mb-2">{post.date} | {post.category}</p>
-            <div className="flex items-center mt-4">
-              <img
-                src={post.authorImage}
-                alt={post.author}
-                className="w-16 h-16 rounded-full border-2 border-gray-300 object-cover mr-4"
-              />
-              <div>
-                <p className="text-lg font-semibold text-primary">{post.author}</p>
-                <p className="text-sm text-gray-500">{post.role}</p>
-              </div>
-            </div>
-            
-          </article>
-        ))}
-      </div>
-    </main>
-  );
-};
-
-MainContent.propTypes = {
-  posts: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      authorImage: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
-
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const getPaginationButtons = () => {
-    const buttons = [];
-    for (let i = 1; i <= totalPages; i++) {
-      buttons.push(
-        <button
-          key={i}
-          onClick={() => onPageChange(i)}
-          className={`px-4 py-2 ${i === currentPage ? 'bg-primary text-primary-foreground' : 'bg-gray-700 text-black'} rounded hover:bg-primary hover:text-primary-foreground transition-all duration-300`}
-        >
-          {i}
-        </button>
-      );
-    }
-    return buttons;
-  };
-
-  return (
-    <div className={sharedClasses.pagination}>
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="px-4 py-2 text-white bg-primary rounded hover:bg-primary/80 disabled:bg-gray-300 transition-colors duration-300"
-      >
-        Previous
-      </button>
-      {getPaginationButtons()}
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="px-4 py-2 text-white bg-primary rounded hover:bg-primary/80 disabled:bg-gray-700 transition-colors duration-300"
-      >
-        Next
-      </button>
-    </div>
-  );
-};
-
-Pagination.propTypes = {
-  currentPage: PropTypes.number.isRequired,
-  totalPages: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-};
-
-const BlogComponent = () => {
-  const postsPerPage = 5;
+const BlogPage = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 3;
 
-  const blogPosts = [
-    {
-      date: "Aug 11, 2024",
-      category: "Rugby",
-      title: "The Evolution of Rugby Training Techniques",
-      content: "Discover the latest advancements in rugby training techniques and how they are transforming the game at Blue Phoenix Sports.",
-      author: "James Anderson",
-      role: "Rugby Coach",
-      image: "/photo8.jpg",
-      authorImage: "/coach3.jpg",
-      url: "/blog/rugby-training-techniques",
-    },
-    {
-      date: "Aug 10, 2024",
-      category: "Football",
-      title: "Enhancing Performance Through Football Tactics",
-      content: "Learn about innovative football tactics and strategies being implemented at Blue Phoenix Sports to maximize team performance.",
-      author: "Sarah Williams",
-      role: "Football Strategist",
-      image: "/football6.jpg",
-      authorImage: "/coach2.jpg",
-      url: "/blog/football-tactics",
-    },
-    {
-      date: "Aug 09, 2024",
-      category: "Events",
-      title: "Upcoming Blue Phoenix Sports Tournaments and Events",
-      content: "Stay informed about our upcoming tournaments and events at Blue Phoenix Sports, and find out how you can participate.",
-      author: "Michael Lee",
-      role: "Event Coordinator",
-      image: "/photo13.jpg",
-      authorImage: "/coach2.jpg",
-      url: "/blog/upcoming-tournaments",
-    },
-    {
-      date: "Aug 08, 2024",
-      category: "Health",
-      title: "Nutrition Tips for Peak Athletic Performance",
-      content: "Explore essential nutrition tips to enhance athletic performance and overall health for athletes at Blue Phoenix Sports.",
-      author: "Emma Clark",
-      role: "Nutritionist",
-      image: "/nutrition.jpg",
-      authorImage: "/coach3.jpg",
-      url: "/blog/nutrition-tips",
-    },
-    {
-      date: "Aug 07, 2024",
-      category: "Fitness",
-      title: "Core Muscle Strength: Key to Athletic Success",
-      content: "Understand the importance of core muscle strength and how it benefits athletes in various sports at Blue Phoenix Sports.",
-      author: "Robert King",
-      role: "Fitness Trainer",
-      image: "/strength.jpg",
-      authorImage: "/coach1.jpg",
-      url: "/blog/core-muscle-strength",
-    },
-    {
-      date: "Aug 05, 2024",
-      category: "Rugby",
-      title: "The Future of Rugby: Innovations and Trends",
-      content: "An in-depth look at the future of rugby, including new technologies and trends shaping the sport at Blue Phoenix Sports.",
-      author: "Alice Thompson",
-      role: "Rugby Analyst",
-      image: "/rugby4.jpg",
-      authorImage: "/coach2.jpg",
-      url: "/blog/future-of-rugby",
-    },
-    {
-      date: "Aug 04, 2024",
-      category: "Football",
-      title: "Building a Winning Football Team: Strategies and Insights",
-      content: "Explore strategies for building a winning football team, with insights and advice from Blue Phoenix Sports experts.",
-      author: "David Lee",
-      role: "Football Coach",
-      image: "/football5.jpg",
-      authorImage: "/coach3.jpg",
-      url: "/blog/building-winning-football-team",
-    },
-    {
-      date: "Aug 03, 2024",
-      category: "Basketball",
-      title: "Basketball Skills Development: Tips and Techniques",
-      content: "Learn essential basketball skills and techniques to enhance your performance on the court at Blue Phoenix Sports.",
-      author: "Sophia Brown",
-      role: "Basketball Coach",
-      image: "/basketball4.jpg",
-      authorImage: "/coach1.jpg",
-      url: "/blog/basketball-skills-development",
-    },
-    {
-      date: "Aug 02, 2024",
-      category: "Fitness",
-      title: "Maximizing Your Workout: Effective Fitness Routines",
-      content: "Discover effective fitness routines to maximize your workout and achieve your fitness goals at Blue Phoenix Sports.",
-      author: "Liam Harris",
-      role: "Personal Trainer",
-      image: "/keeper.jpg",
-      authorImage: "/coach3.jpg",
-      url: "/blog/maximizing-your-workout",
-    },
-    {
-      date: "Aug 01, 2024",
-      category: "Health",
-      title: "Mental Health in Sports: Strategies for Success",
-      content: "Understand the importance of mental health in sports and learn strategies to maintain a healthy mindset at Blue Phoenix Sports.",
-      author: "Olivia Green",
-      role: "Sports Psychologist",
-      image: "/vegetables.jpg",
-      authorImage: "/coach1.jpg",
-      url: "/blog/mental-health-in-sports",
-    },
-    
-  ];
-
-  const totalPages = Math.ceil(blogPosts.length / postsPerPage);
-  const currentPosts = blogPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
-
-  const handlePageChange = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
+  const handleSearchChange = (e) => setSearchTerm(e.target.value);
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
   };
 
+  const filteredPosts = blogPosts
+    .filter((post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (selectedCategory === "All" || post.category === selectedCategory)
+    );
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <div className="flex flex-col bg-background text-foreground min-h-screen">
-      <div className="flex flex-1">
-        <MainContent posts={currentPosts} />
-        <Sidebar posts={blogPosts} />
+    <div className="bg-gray-100 py-10 px-6 md:px-12 lg:px-24">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-primary">Our Blog</h1>
+        <p className="text-muted-foreground mt-2">
+          Stay updated with the latest news, tips, and stories from Blue Phoenix Rugby Club.
+        </p>
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+      
+      {/* Search and Category Filter on Same Line */}
+      <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
+        {/* Search Bar */}
+        <input
+          type="text"
+          placeholder="Search posts..."
+          className="w-full md:w-1/3 px-4 py-2 border border-gray-300 rounded-full text-sm"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        
+        {/* Category Filter */}
+        <div className="flex flex-wrap gap-2">
+          {categories.map((category) => (
+            <button
+              key={category}
+              className={`py-2 px-4 text-sm rounded-full transition-all duration-300 
+                ${selectedCategory === category ? "bg-blue text-white" : "bg-gray-200 hover:bg-gray-300"}`}
+              onClick={() => handleCategoryChange(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Blog Cards */}
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {currentPosts.map((post) => (
+          <div key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
+            <div className="p-6">
+              <h3 className="text-2xl font-bold text-primary">{post.title}</h3>
+              <p className="text-sm text-muted-foreground mb-4">{post.date}</p>
+              <p className="text-muted-foreground mb-4">{post.excerpt}</p>
+              <button className="bg-blue text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+                Read More
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-8">
+        {Array.from({ length: Math.ceil(filteredPosts.length / postsPerPage) }, (_, i) => (
+          <button
+            key={i}
+            className={`mx-1 px-4 py-2 rounded-lg ${currentPage === i + 1 ? "bg-blue text-white" : "bg-gray-200"}`}
+            onClick={() => paginate(i + 1)}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default BlogComponent;
+export default BlogPage;
