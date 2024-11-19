@@ -4,22 +4,22 @@ import { faFootballBall, faFutbol, faBasketballBall, faSwimmer, faTrophy, faUser
 import PropTypes from 'prop-types';
 
 const programsData = [
-    { name: "Junior Elite Program", sport: "rugby", icon: faFootballBall },
+    { name: "Junior Elite Program", sport: "rugby", icon: faFootballBall, pdfLink: "/path/to/rugby-junior-elite.pdf" },
     { name: "Senior Elite Program", sport: "rugby", icon: faFootballBall },
     { name: "Professional Preparatory Program", sport: "rugby", icon: faFootballBall },
     { name: "Youth Development Program", sport: "rugby", icon: faFootballBall },
-    { name: "Junior Elite Program", sport: "football", icon: faFutbol },
+    { name: "Junior Elite Program", sport: "football", icon: faFutbol ,  pdfLink: "/path/to/football-junior-elite.pdf" },
     { name: "Senior Elite Program", sport: "football", icon: faFutbol },
     { name: "Goalkeeper Academy", sport: "football", icon: faFutbol },
-    { name: "Professional Preparatory Program", sport: "football", icon: faFutbol },
+    { name: "Professional Preparatory Program", sport: "football", icon: faFutbol},
     { name: "Youth Development Program", sport: "football", icon: faFutbol },
-    { name: "Junior Elite Program", sport: "basketball", icon: faBasketballBall },
-    { name: "Senior Elite Program", sport: "basketball", icon: faBasketballBall },
-    { name: "Professional Preparatory Program", sport: "basketball", icon: faBasketballBall },
+    { name: "Junior Elite Program", sport: "basketball", icon: faBasketballBall, pdfLink: "/path/to/basketball-junior-elite.pdf" },
+    { name: "Senior Elite Program", sport: "basketball", icon: faBasketballBall},
+    { name: "Professional Preparatory Program", sport: "basketball", icon: faBasketballBall},
     { name: "Youth Development Program", sport: "basketball", icon: faBasketballBall },
-    { name: "Junior Elite Program", sport: "swimming", icon: faSwimmer },
+    { name: "Junior Elite Program", sport: "swimming", icon: faSwimmer, pdfLink: "/path/to/swimming-junior-elite.pdf" },
     { name: "Senior Elite Program", sport: "swimming", icon: faSwimmer },
-    { name: "Professional Preparatory Program", sport: "swimming", icon: faSwimmer },
+    { name: "Professional Preparatory Program", sport: "swimming", icon: faSwimmer},
     { name: "Youth Development Program", sport: "swimming", icon: faSwimmer },
 ];
 
@@ -44,7 +44,18 @@ Card.propTypes = {
 
 // Update SelectedProgramsCard component to include icons
 const SelectedProgramsCard = ({ selectedSport }) => {
+    // Filter programs for the selected sport
     const filteredPrograms = programsData.filter(program => program.sport === selectedSport);
+
+    // Reorder the programs to place the specific categories first
+    const priorityPrograms = ["Junior Elite Program"];
+    
+    // Split the filtered programs into priority and others
+    const prioritized = filteredPrograms.filter(program => priorityPrograms.includes(program.name));
+    const otherPrograms = filteredPrograms.filter(program => !priorityPrograms.includes(program.name));
+
+    // Combine the prioritized programs at the start of the list
+    const orderedPrograms = [...prioritized, ...otherPrograms];
 
     return (
         <div className="bg-card p-6 mb-6 rounded-lg shadow-lg text-center">
@@ -52,12 +63,20 @@ const SelectedProgramsCard = ({ selectedSport }) => {
                 Programs for {selectedSport.charAt(0).toUpperCase() + selectedSport.slice(1)}
             </h3>
             <ul className="flex flex-col items-start pl-0 space-y-4">
-                {filteredPrograms.map((program, index) => (
+                {orderedPrograms.map((program, index) => (
                     <li key={index} className="flex items-center justify-between w-full text-muted-foreground">
                         <span className="flex-1 text-left mr-4 flex items-center">
                             <FontAwesomeIcon icon={program.icon} className="mr-2" />
                             {program.name}
                         </span>
+                        {/* Conditionally render the Download PDF Button */}
+                        {priorityPrograms.includes(program.name) && (
+                            <a href={program.pdfLink} download className="text-primary hover:underline">
+                                <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+                                    Download PDF
+                                </button>
+                            </a>
+                        )}
                     </li>
                 ))}
             </ul>
@@ -112,14 +131,13 @@ const KeyComponents = ({ selectedSport }) => {
 // Sidebar Component
 const Sidebar = ({ onSportSelect }) => {
     return (
-        <div className="w-80  flex flex-col items-start"> 
+        <div className="w-80 flex flex-col items-start">
             <h2 className="text-2xl font-bold mb-4 text-primary text-left">Sports Programs</h2>
             <ProgramListCard onSportSelect={onSportSelect} />
-            <ProgramCard />
-            <SocialLinksCard />
         </div>
     );
 };
+
 
 const ProgramListCard = ({ onSportSelect }) => {
     return (

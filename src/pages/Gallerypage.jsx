@@ -1,34 +1,25 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-
-const items = [
-    // Example items
-    { src: '/photo8.jpg', alt: 'Rugby Tournament Highlights 1', type: 'image', description: 'Rugby Tournament Highlights', link: '/categories/rugby-tournament' },
-    { src: '/photo9.jpg', alt: 'Rugby Tournament Highlights 2', type: 'image', description: 'Rugby Tournament Highlights', link: '/categories/rugby-tournament' },
-    { src: '/video1.mp4', alt: 'Rugby Tournament Highlights Video 1', type: 'video', link: '/categories/rugby-tournament' },
-
-    // Football
-    { src: '/football1.jpg', alt: 'Football Championship Moments 1', type: 'image', description: 'Football Championship Moments', link: '/categories/football-championship' },
-    { src: '/football2.jpg', alt: 'Football Championship Moments 2', type: 'image', description: 'Football Championship Moments', link: '/categories/football-championship' },
-    { src: '/footballvid.mp4', alt: 'Football Championship Highlights Video 1', type: 'video', link: '/categories/football-championship' },
-
-    // Basketball
-    { src: '/basketball1.jpg', alt: 'Basketball Finals Excitement 1', type: 'image', description: 'Basketball Finals Excitement', link: '/categories/basketball-finals' },
-    { src: '/basketball2.jpg', alt: 'Basketball Finals Excitement 2', type: 'image', description: 'Basketball Finals Excitement', link: '/categories/basketball-finals' },
-    { src: '/basketballvid.mp4', alt: 'Basketball Finals Highlights Video 1', type: 'video', link: '/categories/basketball-finals' },
-
-    // Swimming
-    { src: '/swimming1.jpg', alt: 'Swimming Competition Action 1', type: 'image', description: 'Swimming Competition Action', link: '/categories/swimming-competition' },
-    { src: '/swimming2.jpg', alt: 'Swimming Competition Action 2', type: 'image', description: 'Swimming Competition Action', link: '/categories/swimming-competition' },
-    { src: '/swimmingvid.mp4', alt: 'Swimming Competition Highlights Video 1', type: 'video', link: '/categories/swimming-competition' },
-];
+import Masonry from 'react-masonry-css';
 
 const GalleryPage = () => {
+    const [items, setItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [volume, setVolume] = useState(1);  // Volume control (0 to 1)
     const [isCCActive, setIsCCActive] = useState(false); // Closed Captions
     const videoRef = useRef(null);
+
+    // Fetch items from the API
+    useEffect(() => {
+        const fetchItems = async () => {
+            const response = await fetch('/db.json');
+            const data = await response.json();
+            setItems(data.items); // Store items in state
+        };
+
+        fetchItems();
+    }, []);
 
     const handleClick = (item) => {
         setSelectedItem(item);
@@ -53,6 +44,14 @@ const GalleryPage = () => {
         setIsCCActive(!isCCActive);
     };
 
+    // Masonry grid breakpoint layout
+    const breakpoints = {
+        default: 4,
+        1100: 3,
+        700: 2,
+        500: 1,
+    };
+
     return (
         <div className="p-4 bg-gray-100">
             <div className="gallery-header mb-8">
@@ -60,12 +59,15 @@ const GalleryPage = () => {
                 <h2 className="text-xl text-center">Explore our collection</h2>
             </div>
 
-            {/* Optimized Grid Layout */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {/* Masonry Grid Layout with Increased Space */}
+            <Masonry
+                className="flex gap-6"  // Increased gap for more space between items
+                breakpointCols={breakpoints}
+            >
                 {items.map((item, index) => (
                     <div
                         key={index}
-                        className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105"
+                        className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 mb-6" // Added bottom margin for vertical space
                         onClick={() => handleClick(item)}
                     >
                         {item.type === 'video' ? (
@@ -93,47 +95,55 @@ const GalleryPage = () => {
                         )}
                     </div>
                 ))}
-            </div>
+            </Masonry>
 
             {/* Modal for Viewing Clicked Item */}
             {selectedItem && (
-                <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
-                    <div className="relative bg-white p-4 rounded-lg max-w-4xl w-full">
+                <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 transition-opacity duration-300 opacity-100">
+                    <div className="relative bg-white p-6 rounded-lg max-w-4xl w-full shadow-xl">
+                        {/* Close Button Above the Content */}
                         <button
-                            className="absolute top-0 right-0 p-2 text-xl text-white bg-gray-800 rounded-full"
+                            className="absolute top-4 right-4 p-3 text-2xl text-white bg-blue-600 rounded-full hover:bg-blue-700 focus:outline-none transition duration-200"
                             onClick={handleCloseModal}
                         >
                             &times;
                         </button>
 
-                        {selectedItem.type === 'video' ? (
-                            <div>
-                                <video
-                                    ref={videoRef}
+                        {/* Content */}
+                        <div className="text-center">
+                            {selectedItem.type === 'video' ? (
+                                <div className="relative mb-4">
+                                    <video
+                                        ref={videoRef}
+                                        src={selectedItem.src}
+                                        alt={selectedItem.alt}
+                                        className="w-full h-auto object-contain max-h-[80vh] mx-auto" // Adjusted for object-contain
+                                        controls // Default controls enabled
+                                        autoPlay={isVideoPlaying}
+                                    >
+                                        {isCCActive && (
+                                            <track
+                                                kind="subtitles"
+                                                src="path/to/your/cc-file.vtt"
+                                                srcLang="en"
+                                                label="English"
+                                            />
+                                        )}
+                                    </video>
+                                </div>
+                            ) : (
+                                <img
                                     src={selectedItem.src}
                                     alt={selectedItem.alt}
-                                    className="w-full max-w-4xl h-auto max-h-[80vh] object-cover mx-auto" // Max height set
-                                    controls // Default controls enabled
-                                    autoPlay={isVideoPlaying}
-                                >
-                                    {isCCActive && (
-                                        <track
-                                            kind="subtitles"
-                                            src="path/to/your/cc-file.vtt"
-                                            srcLang="en"
-                                            label="English"
-                                        />
-                                    )}
-                                </video>
-                            </div>
-                        ) : (
-                            <img
-                                src={selectedItem.src}
-                                alt={selectedItem.alt}
-                                className="w-full max-h-[80vh] object-cover mx-auto"
+                                    className="w-full max-h-[80vh] object-contain mx-auto"
+                                />
+                            )}
 
-                            />
-                        )}
+                            {/* Description */}
+                            {selectedItem.description && (
+                                <p className="text-lg text-gray-700 mt-4">{selectedItem.description}</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

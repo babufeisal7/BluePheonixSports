@@ -1,21 +1,22 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 
 // Layouts
-import MainLayout from './Layouts/MainLayout';
+import MainLayout from './Layouts/MainLayout'; // Optional if needed for specific routes
 
-// Pages
-import HomePage from './pages/HomePage';
-import RugbyPage from './pages/RugbyPage'; 
-import FootballPage from './pages/FootballPage'; 
-import BasketballPage from './pages/BasketballPage'; 
-import SwimmingPage from './pages/SwimmingPage';
-import Gallerypage from './pages/Gallerypage'; 
-import Eventspage from './pages/Eventspage';
-import AboutusPage from './pages/AboutusPage';
-import BlogPage from './pages/BlogPage';
-import SportsProgramPage from './pages/SportsProgramPage';
-import AdminPage from './pages/AdminPage';
+// Pages (lazy-loaded for optimization)
+const HomePage = React.lazy(() => import('./pages/HomePage'));
+const RugbyPage = React.lazy(() => import('./pages/RugbyPage'));
+const FootballPage = React.lazy(() => import('./pages/FootballPage'));
+const BasketballPage = React.lazy(() => import('./pages/BasketballPage'));
+const SwimmingPage = React.lazy(() => import('./pages/SwimmingPage'));
+const Gallerypage = React.lazy(() => import('./pages/Gallerypage'));
+const Eventspage = React.lazy(() => import('./pages/Eventspage'));
+const AboutusPage = React.lazy(() => import('./pages/AboutusPage'));
+const BlogPage = React.lazy(() => import('./pages/BlogPage'));
+const SportsProgramPage = React.lazy(() => import('./pages/SportsProgramPage'));
+const AdminPage = React.lazy(() => import('./pages/AdminPage'));
+const NotFound = React.lazy(() => import('./pages/NotFound')); // Catch-all route
 
 // Components
 import Navbar from "./components/navbar";
@@ -28,11 +29,23 @@ import Ourteams from "./components/ourteams";
 import Gallery from './components/gallery';
 import Achievements from "./components/achievements";
 import Testimonials from "./components/Testimonials";
-import Joinus from './components/joinus';
+import Contactus from './components/contactus';
 import Faq from './components/faq';
 import Sponsers from './components/sponsers';
 import Footer from './components/footer';
-import Experts from './components/experts'; 
+import Experts from './components/experts';
+
+// Wrapper for shared global components
+const Layout = ({ children }) => (
+  <>
+    {children}
+    <Contactus />
+    <Testimonials />
+    <Faq />
+    <Sponsers />
+    <Footer />
+  </>
+);
 
 // Main Home Layout
 const Home = () => (
@@ -43,10 +56,9 @@ const Home = () => (
     <Services />
     <Ourteams />
     <Events />
-    <Gallery />
-    <Testimonials />
     <Achievements />
-    
+    <Gallery />
+    <Experts />
   </>
 );
 
@@ -54,34 +66,32 @@ const Home = () => (
 const AppContent = () => {
   const location = useLocation();
 
-  // Define routes where Navbar should not be shown
-  const noNavbarRoutes = ["/admin"]; 
+  // Dynamic Navbar logic
+  const shouldShowNavbar = !location.pathname.startsWith("/admin");
 
   return (
     <>
       {/* Conditionally render the Navbar */}
-      {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
-      
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/aboutus" element={<AboutusPage />} />
-        <Route path="/events" element={<Eventspage />} />
-        <Route path="/gallery" element={<Gallerypage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/join" element={<Joinus />} />
-        <Route path="/teams/rugby" element={<RugbyPage />} />
-        <Route path="/teams/football" element={<FootballPage />} />
-        <Route path="/teams/basketball" element={<BasketballPage />} />
-        <Route path="/teams/swimming" element={<SwimmingPage />} />
-        <Route path="/sports-programs" element={<SportsProgramPage />} />
-        <Route path="/admin" element={<AdminPage />} /> {/* Admin page */}
-      </Routes>
+      {shouldShowNavbar && <Navbar />}
 
-      {/* Footer, JoinUs, Faq, Experts, Sponsers - Rendered below routes */}
-      <Joinus />
-      <Faq />
-      <Sponsers />
-      <Footer />
+      {/* Lazy-loaded routes with a fallback */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/aboutus" element={<AboutusPage />} />
+          <Route path="/events" element={<Eventspage />} />
+          <Route path="/gallery" element={<Gallerypage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contactus" element={<Contactus />} />
+          <Route path="/teams/rugby" element={<RugbyPage />} />
+          <Route path="/teams/football" element={<FootballPage />} />
+          <Route path="/teams/basketball" element={<BasketballPage />} />
+          <Route path="/teams/swimming" element={<SwimmingPage />} />
+          <Route path="/sports-programs" element={<SportsProgramPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
+        </Routes>
+      </Suspense>
     </>
   );
 };
@@ -90,7 +100,9 @@ const AppContent = () => {
 const App = () => {
   return (
     <Router>
-      <AppContent />
+      <Layout>
+        <AppContent />
+      </Layout>
     </Router>
   );
 };

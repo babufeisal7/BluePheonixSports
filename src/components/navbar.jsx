@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
-import PropTypes from 'prop-types';  // Import PropTypes for validation
+import PropTypes from 'prop-types';
 import logo from "../assets/images/logo.jpg";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 
@@ -62,26 +62,28 @@ const Navbar = () => {
                             <img className="h-12 w-auto" src={logo} alt="Blue Phoenix Sports" />
                         </Link>
 
-                        {/* Desktop Menu */}
+                        {/* Desktop and Tablet Menu */}
                         <div className="hidden md:flex space-x-2 md:ml-auto">
                             <NavLink to="/" label="Home" />
                             <NavLink to="/Aboutus" label="About Us" />
                             <NavLink to="/#services" label="Services" />
                             <NavLink to="/Events" label="Events" />
-                          <Dropdown
-                              isOpen={isProgramsDropdownOpen}
-                              toggleDropdown={toggleProgramsDropdown}
-                              label="Sports Programs"
-                              items={[
-                                  { to: "/sports-programs#rugby", label: "Rugby" },
-                                  { to: "/sports-programs#football", label: "Football" },
-                                  { to: "/sports-programs#basketball", label: "Basketball" },
-                                  { to: "/sports-programs#swimming", label: "Swimming" },
+                            
+                            {/* Dropdown for Sports Programs */}
+                            <Dropdown
+                                isOpen={isProgramsDropdownOpen}
+                                toggleDropdown={toggleProgramsDropdown}
+                                label="Sports Programs"
+                                items={[
+                                    { to: "/sports-programs#rugby", label: "Rugby" },
+                                    { to: "/sports-programs#football", label: "Football" },
+                                    { to: "/sports-programs#basketball", label: "Basketball" },
+                                    { to: "/sports-programs#swimming", label: "Swimming" },
                                 ]}
                                 onOptionClick={handleOptionClick}
-                              />
+                            />
 
-
+                            {/* Dropdown for Teams */}
                             <Dropdown
                                 isOpen={isTeamsDropdownOpen}
                                 toggleDropdown={toggleTeamsDropdown}
@@ -98,10 +100,10 @@ const Navbar = () => {
                             <NavLink to="/gallery" label="Gallery" />
                             <NavLink to="/Blog" label="Blog" />
                             <Link
-                                to="/join"
-                                className="bg-orange-600 hover:bg-orange-700 text-white  py-3 px-5 rounded-full shadow-lg border border-white-700 transition duration-300 ease-in-out transform hover:scale-105"
+                                to="/contactus"
+                                className="bg-orange-600 hover:bg-orange-700 text-white sm:px-6 md:px-8  py-2 px-4 rounded-full shadow-lg border border-white-700 transition duration-300 ease-in-out transform hover:scale-105"
                             >
-                                Join Us
+                                Contact Us
                             </Link>
                         </div>
                     </div>
@@ -152,11 +154,11 @@ const Navbar = () => {
                     <NavLink to="/gallery" label="Gallery" onClick={handleOptionClick} />
                     <NavLink to="/Blog" label="Blog" onClick={handleOptionClick} />
                     <Link
-                        to="/join"
-                        className="block text-center bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mt-4"
+                        to="/Contactus"
+                        className="block text-center bg-orange-600 hover:bg-orange-700 text-white font-bold sm:px-6 md:px-8  py-2 px-4  rounded mt-4"
                         onClick={handleOptionClick}
                     >
-                        Join Us
+                        Contact Us
                     </Link>
                 </div>
             )}
@@ -198,7 +200,7 @@ const Dropdown = ({ isOpen, toggleDropdown, label, items, onOptionClick }) => (
                     <Link
                         key={item.to}
                         to={item.to}
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded-md"
+                        className="block px-4 py-2 text-gray-800 hover:bg-blue-100"
                         onClick={onOptionClick}
                     >
                         {item.label}
@@ -213,12 +215,7 @@ Dropdown.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     toggleDropdown: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-            to: PropTypes.string.isRequired,
-            label: PropTypes.string.isRequired,
-        })
-    ).isRequired,
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
     onOptionClick: PropTypes.func.isRequired,
 };
 

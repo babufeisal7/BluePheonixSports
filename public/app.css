@@ -1,19 +1,30 @@
+/* Global Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body,
 html {
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    /* Optional: Add your preferred font */
+}
+
+body {
     padding-top: 60px;
     /* Ensure content starts below the navbar */
 }
 
+/* Layout Containers */
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 16px;
-    box-sizing: border-box;
 }
 
 img,
@@ -22,62 +33,21 @@ video {
     height: auto;
 }
 
+/* Headings */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    line-height: 1.2;
     margin-top: 60px;
     /* Ensure headers don't overlap with navbar */
+    line-height: 1.2;
+    font-weight: normal;
 }
 
 p {
-    margin: 0;
-    padding: 0;
     font-size: 1rem;
-}
-
-/* Mobile Font Sizes */
-@media (max-width: 992px) {
-    h1 {
-        font-size: 1.75rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    p {
-        font-size: 0.875rem;
-    }
-
-    button {
-        padding: 8px 16px;
-        font-size: 0.875rem;
-    }
-}
-
-/* Responsive Card Styles */
-.card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin: 16px;
-    box-sizing: border-box;
-    animation: fadeIn 0.5s ease forwards;
-}
-
-@media (max-width: 768px) {
-    .card {
-        margin: 8px;
-        padding: 12px;
-    }
 }
 
 /* Button Styles */
@@ -96,27 +66,39 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Flex and Grid Containers */
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+/* Card Styles */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin: 16px;
+    animation: fadeIn 0.5s ease forwards;
 }
 
-.flex-item {
-    flex: 1 1 auto;
+@media (max-width: 768px) {
+    .card {
+        margin: 8px;
+        padding: 12px;
+    }
+}
+
+/* Flex and Grid Layouts */
+.flex-container,
+.grid-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
 }
 
 .grid-item {
     background: #f4f4f4;
     padding: 16px;
-    box-sizing: border-box;
 }
 
 /* Navbar Styles */
@@ -178,7 +160,7 @@ nav .container {
 }
 
 /* Mobile Navbar Styles */
-@media (max-width: 1024px) {
+@media (max-width: 414px) {
     .navbar-menu {
         display: none;
     }
@@ -212,7 +194,7 @@ nav .container {
     color: #1e3a8a;
 }
 
-/* Slide in from left animation */
+/* Animations */
 @keyframes slideInFromLeft {
     from {
         opacity: 0;
@@ -225,16 +207,10 @@ nav .container {
     }
 }
 
-.animate-slide-in {
-    animation: slideInFromLeft 0.6s ease forwards;
-}
-
-/* Fade-in Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(20px);
-        /* Slide in from below */
     }
 
     to {
@@ -243,18 +219,134 @@ nav .container {
     }
 }
 
+.animate-slide-in {
+    animation: slideInFromLeft 0.6s ease forwards;
+}
+
 .animate-fade-in {
     animation: fadeIn 0.6s ease forwards;
 }
 
-/* For smoother mobile experience */
-@media (max-width: 768px) {
-    .animate-fade-in {
-        animation: fadeIn 1s ease-in forwards;
-        /* Faster animation on mobile */
+/* Mobile Responsiveness (360px to 414px) */
+@media (max-width: 414px) {
+    h1 {
+        font-size: 1.5rem;
     }
 
-    .animate-slide-in {
-        animation: slideInFromLeft 0.6s ease forwards;
+    h2 {
+        font-size: 1.25rem;
     }
+
+    p {
+        font-size: 0.875rem;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+    }
+
+    .container {
+        padding: 0 8px;
+    }
+
+    .navbar-logo {
+        height: 2.5rem;
+    }
+
+    .navbar-link {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Tablet Responsiveness (601px to 1280px) */
+@media (max-width: 1280px) and (min-width: 601px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .navbar-logo {
+        height: 3rem;
+    }
+
+    .navbar-link {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Desktop Responsiveness (1024px to 1920px) */
+@media (max-width: 1920px) and (min-width: 1024px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .container {
+        max-width: 1200px;
+        padding: 0 16px;
+    }
+
+    .navbar-logo {
+        height: 3.5rem;
+    }
+
+    .navbar-link {
+        padding: 1rem 1.5rem;
+    }
+}
+
+/* Additional adjustments for larger desktop screens */
+@media (min-width: 1920px) {
+    .container {
+        width: 100%;
+        padding: 0 40px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+}
+
+.slick-dots.custom-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.slick-dots.custom-dots li button:before {
+    font-size: 12px;
+    color: #333;
+}
+
+.slick-dots.custom-dots li.slick-active button:before {
+    color: #1e40af;
+    /* Active dot color */
 }

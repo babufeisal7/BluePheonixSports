@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types'; // Import PropTypes
 
 // Classes for styling
-const cardClasses = 'bg-blue-700 p-4 sm:p-6 rounded-lg shadow-lg text-center text-white'; // Responsive padding
+const cardClasses = 'bg-blue-700 p-4 sm:p-6 rounded-lg shadow-lg text-center text-white transition-transform transform hover:scale-105 hover:shadow-xl duration-300 ease-in-out'; // Added transition classes for hover effect
 const titleClasses = 'text-2xl sm:text-3xl font-bold mb-4 text-white'; // Responsive title size
 const valueClasses = 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2'; // Responsive value size
 const textClasses = 'text-base sm:text-lg'; // Responsive text size

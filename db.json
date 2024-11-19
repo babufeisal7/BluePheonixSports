@@ -1,0 +1,465 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "The Rise of Rugby at Blue Phoenix",
+      "date": "November 10, 2024",
+      "category": "Rugby",
+      "excerpt": "Discover how Blue Phoenix Rugby Club has risen in ranks...",
+      "image": "/image1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Top 5 Training Tips for Young Athletes",
+      "date": "October 25, 2024",
+      "category": "Training",
+      "excerpt": "Improve your game with these essential tips...",
+      "image": "/image2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Upcoming Rugby Events You Don’t Want to Miss",
+      "date": "October 15, 2024",
+      "category": "Rugby",
+      "excerpt": "Join us at our upcoming rugby events...",
+      "image": "/image3.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Football Training: Building Strong Foundations",
+      "date": "September 30, 2024",
+      "category": "Football",
+      "excerpt": "Learn the fundamentals of football and improve your skills...",
+      "image": "/football1.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Basketball Drills for Beginners",
+      "date": "September 22, 2024",
+      "category": "Basketball",
+      "excerpt": "Master these essential basketball drills to improve your game...",
+      "image": "/basketball2.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Swimming Techniques for Better Performance",
+      "date": "September 10, 2024",
+      "category": "Swimming",
+      "excerpt": "Enhance your swimming skills with these advanced techniques...",
+      "image": "/swimming1.jpg"
+    },
+    {
+      "id": 7,
+      "title": "Healthy Eating for Athletes",
+      "date": "August 25, 2024",
+      "category": "Health",
+      "excerpt": "Fuel your body with the best foods for peak performance...",
+      "image": "/image4.jpg"
+    },
+    {
+      "id": 8,
+      "title": "The Importance of Mental Health in Sports",
+      "date": "August 10, 2024",
+      "category": "Health",
+      "excerpt": "Taking care of your mental health is as important as physical fitness...",
+      "image": "/photo8.jpg"
+    },
+    {
+      "id": 9,
+      "title": "Upcoming Sports Events at Blue Phoenix",
+      "date": "July 25, 2024",
+      "category": "Events",
+      "excerpt": "Check out the upcoming sports events you should be a part of...",
+      "image": "/photo6.jpg"
+    }
+  ],
+
+  "events": [
+    {
+      "id": 1,
+      "title": "CURA 7s",
+      "date": "September 14, 2024",
+      "image": "/photo71.jpg",
+      "description": "A thrilling 7s rugby tournament.",
+      "category": "rugby"
+    },
+    {
+      "id": 2,
+      "title": "Football Super Cup",
+      "date": "March 5, 2025",
+      "image": "/football3.jpg",
+      "description": "The premier football event of the year.",
+      "category": "football"
+    },
+    {
+      "id": 3,
+      "title": "Kisubi 10s",
+      "date": "November 20, 2024",
+      "image": "/photo9.jpg",
+      "description": "A competitive 10s rugby tournament.",
+      "category": "rugby"
+    },
+    {
+      "id": 4,
+      "title": "Basketball PlayOffs",
+      "date": "May 25, 2025",
+      "image": "/basketball4.jpg",
+      "description": "Exciting basketball playoffs with top teams.",
+      "category": "basketball"
+    },
+    {
+      "id": 5,
+      "title": "Uganda Cup",
+      "date": "December 15, 2024",
+      "image": "/photo6.jpg",
+      "description": "Annual Uganda Cup for rugby teams.",
+      "category": "rugby"
+    },
+    {
+      "id": 6,
+      "title": "Swimming Championship",
+      "date": "January 10, 2025",
+      "image": "/swimming3.jpg",
+      "description": "A championship for swimmers across various categories.",
+      "category": "swimming"
+    },
+    {
+      "id": 7,
+      "title": "Football Super Cup",
+      "date": "March 5, 2025",
+      "image": "/football4.jpg",
+      "description": "Another Football Super Cup event.",
+      "category": "football"
+    },
+    {
+      "id": 8,
+      "title": "Central League",
+      "date": "October 5, 2024",
+      "image": "/photo10.jpg",
+      "description": "A regional sports league featuring various sports.",
+      "category": "multi-sport"
+    },
+    {
+      "id": 9,
+      "title": "Basketball Finals",
+      "date": "February 15, 2025",
+      "image": "/basketball2.jpg",
+      "description": "The finals of the basketball league.",
+      "category": "basketball"
+    },
+    {
+      "id": 10,
+      "title": "Athletics Meet",
+      "date": "April 20, 2025",
+      "image": "/photo6.jpg",
+      "description": "An athletics meet featuring various track and field events.",
+      "category": "athletics"
+    }
+  ],
+
+  "experts": [
+    {
+      "id": 1,
+      "name": "Balya Dennis Abel",
+      "role": "CEO",
+      "imgSrc": "/coach1.jpg",
+      "bio": "Visionary leader and strategist."
+    },
+    {
+      "id": 2,
+      "name": "Muhindo Joshua Kazimoto",
+      "role": "Sports Administrator",
+      "imgSrc": "/coach2.jpg",
+      "bio": "Expert in sports management."
+    },
+    {
+      "id": 3,
+      "name": "Asea Louis James",
+      "role": "Marketing and Communication",
+      "imgSrc": "/coach3.jpg",
+      "bio": "Builds our brand and connects with the community."
+    },
+    {
+      "id": 4,
+      "name": "Okello Rodney",
+      "role": "Finance Manager",
+      "imgSrc": "/coach4.jpg",
+      "bio": "Manages our financial health."
+    },
+    {
+      "id": 5,
+      "name": "Luyima Andrew Kalali",
+      "role": "Executive President",
+      "imgSrc": "/coach1.jpg",
+      "bio": "Leads our strategic initiatives."
+    },
+    {
+      "id": 6,
+      "name": "Mariah Tal",
+      "role": "Head Coach",
+      "imgSrc": "/coach2.jpg",
+      "bio": "Expert in youth development."
+    },
+    {
+      "id": 7,
+      "name": "Jerome Bell",
+      "role": "Assistant Coach",
+      "imgSrc": "/coach3.jpg",
+      "bio": "Tactical genius and player developer."
+    },
+    {
+      "id": 8,
+      "name": "Guy Hawkins",
+      "role": "Fitness Trainer",
+      "imgSrc": "/coach4.jpg",
+      "bio": "Enhances athlete performance."
+    },
+    {
+      "id": 9,
+      "name": "Savannah Nguyen",
+      "role": "Nutritionist",
+      "imgSrc": "/coach1.jpg",
+      "bio": "Specializes in sports nutrition."
+    },
+    {
+      "id": 10,
+      "name": "Liam Smith",
+      "role": "Mental Coach",
+      "imgSrc": "/coach2.jpg",
+      "bio": "Focuses on mental resilience."
+    },
+    {
+      "id": 11,
+      "name": "Olivia Johnson",
+      "role": "Youth Coach",
+      "imgSrc": "/coach3.jpg",
+      "bio": "Passionate about coaching youth."
+    },
+    {
+      "id": 12,
+      "name": "Emily Clark",
+      "role": "Strategy Coach",
+      "imgSrc": "/coach4.jpg",
+      "bio": "Expert in tactical coaching and game strategies."
+    },
+    {
+      "id": 13,
+      "name": "David Turner",
+      "role": "Conditioning Coach",
+      "imgSrc": "/coach1.jpg",
+      "bio": "Focuses on strength and conditioning."
+    },
+    {
+      "id": 14,
+      "name": "Jessica Taylor",
+      "role": "Recovery Specialist",
+      "imgSrc": "/coach2.jpg",
+      "bio": "Ensures optimal recovery for athletes."
+    },
+    {
+      "id": 15,
+      "name": "Andrew Watson",
+      "role": "Performance Analyst",
+      "imgSrc": "/coach3.jpg",
+      "bio": "Analyzes player and team performance data."
+    },
+    {
+      "id": 16,
+      "name": "Chloe Anderson",
+      "role": "Sports Psychologist",
+      "imgSrc": "/coach4.jpg",
+      "bio": "Helps athletes with mental and emotional performance."
+    },
+    {
+      "id": 17,
+      "name": "Michael Ross",
+      "role": "Goalkeeping Coach",
+      "imgSrc": "/coach1.jpg",
+      "bio": "Specializes in training goalkeepers."
+    },
+    {
+      "id": 18,
+      "name": "Sophia Martin",
+      "role": "Player Development Coach",
+      "imgSrc": "/coach2.jpg",
+      "bio": "Focuses on developing players’ technical skills."
+    }
+  ],
+  
+ 
+  "items": [
+    {
+      "src": "/photo8.jpg",
+      "alt": "Rugby Tournament Highlights 1",
+      "type": "image",
+      "description": "Rugby Tournament Highlights",
+      "link": "/categories/rugby-tournament"
+    },
+    {
+      "src": "/photo9.jpg",
+      "alt": "Rugby Tournament Highlights 2",
+      "type": "image",
+      "description": "Rugby Tournament Highlights",
+      "link": "/categories/rugby-tournament"
+    },
+    
+    {
+      "src": "/video1.mp4",
+      "alt": "Rugby Tournament Highlights Video 1",
+      "type": "video",
+      "link": "/categories/rugby-tournament"
+    },
+    {
+      "src": "/football1.jpg",
+      "alt": "Football Championship Moments 1",
+      "type": "image",
+      "description": "Football Championship Moments",
+      "link": "/categories/football-championship"
+    },
+    {
+      "src": "/football2.jpg",
+      "alt": "Football Championship Moments 2",
+      "type": "image",
+      "description": "Football Championship Moments",
+      "link": "/categories/football-championship"
+    },
+    {
+      "src": "/video2.mp4",
+      "alt": "Football Championship Highlights Video 1",
+      "type": "video",
+      "link": "/categories/football-championship"
+    },
+    {
+      "src": "/basketball1.jpg",
+      "alt": "Basketball Finals Excitement 1",
+      "type": "image",
+      "description": "Basketball Finals Excitement",
+      "link": "/categories/basketball-finals"
+    },
+    {
+      "src": "/basketball2.jpg",
+      "alt": "Basketball Finals Excitement 2",
+      "type": "image",
+      "description": "Basketball Finals Excitement",
+      "link": "/categories/basketball-finals"
+    },
+    {
+      "src": "/video1.mp4",
+      "alt": "Basketball Finals Highlights Video 1",
+      "type": "video",
+      "link": "/categories/basketball-finals"
+    },
+    {
+      "src": "/swimming1.jpg",
+      "alt": "Swimming Competition Action 1",
+      "type": "image",
+      "description": "Swimming Competition Action",
+      "link": "/categories/swimming-competition"
+    },
+    {
+      "src": "/swimming2.jpg",
+      "alt": "Swimming Competition Action 2",
+      "type": "image",
+      "description": "Swimming Competition Action",
+      "link": "/categories/swimming-competition"
+    },
+    {
+      "src": "/video2.mp4",
+      "alt": "Swimming Competition Highlights Video 1",
+      "type": "video",
+      "link": "/categories/swimming-competition"
+    }
+  ],
+  
+  "programs": [
+    {
+      "name": "Junior Elite Program",
+      "sport": "rugby",
+      "icon": "faFootballBall",
+      "pdfLink": "/path/to/rugby-junior-elite.pdf"
+    },
+    {
+      "name": "Senior Elite Program",
+      "sport": "rugby",
+      "icon": "faFootballBall"
+    },
+    {
+      "name": "Professional Preparatory Program",
+      "sport": "rugby",
+      "icon": "faFootballBall"
+    },
+    {
+      "name": "Youth Development Program",
+      "sport": "rugby",
+      "icon": "faFootballBall"
+    },
+    {
+      "name": "Junior Elite Program",
+      "sport": "football",
+      "icon": "faFutbol",
+      "pdfLink": "/path/to/football-junior-elite.pdf"
+    },
+    {
+      "name": "Senior Elite Program",
+      "sport": "football",
+      "icon": "faFutbol"
+    },
+    {
+      "name": "Goalkeeper Academy",
+      "sport": "football",
+      "icon": "faFutbol"
+    },
+    {
+      "name": "Professional Preparatory Program",
+      "sport": "football",
+      "icon": "faFutbol"
+    },
+    {
+      "name": "Youth Development Program",
+      "sport": "football",
+      "icon": "faFutbol"
+    },
+    {
+      "name": "Junior Elite Program",
+      "sport": "basketball",
+      "icon": "faBasketballBall",
+      "pdfLink": "/path/to/basketball-junior-elite.pdf"
+    },
+    {
+      "name": "Senior Elite Program",
+      "sport": "basketball",
+      "icon": "faBasketballBall"
+    },
+    {
+      "name": "Professional Preparatory Program",
+      "sport": "basketball",
+      "icon": "faBasketballBall"
+    },
+    {
+      "name": "Youth Development Program",
+      "sport": "basketball",
+      "icon": "faBasketballBall"
+    },
+    {
+      "name": "Junior Elite Program",
+      "sport": "swimming",
+      "icon": "faSwimmer",
+      "pdfLink": "/path/to/swimming-junior-elite.pdf"
+    },
+    {
+      "name": "Senior Elite Program",
+      "sport": "swimming",
+      "icon": "faSwimmer"
+    },
+    {
+      "name": "Professional Preparatory Program",
+      "sport": "swimming",
+      "icon": "faSwimmer"
+    },
+    {
+      "name": "Youth Development Program",
+      "sport": "swimming",
+      "icon": "faSwimmer"
+    }
+  ]
+}
