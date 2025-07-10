@@ -66,7 +66,7 @@ const Navbar = () => {
                         <div className="hidden md:flex space-x-2 md:ml-auto">
                             <NavLink to="/" label="Home" />
                             <NavLink to="/Aboutus" label="About Us" />
-                            <NavLink to="/#services" label="Services" />
+                            <NavLink to="/services" label="Services" />
                             <NavLink to="/Events" label="Events" />
                             
                             {/* Dropdown for Sports Programs */}
@@ -75,10 +75,10 @@ const Navbar = () => {
                                 toggleDropdown={toggleProgramsDropdown}
                                 label="Sports Programs"
                                 items={[
-                                    { to: "/sports-programs#rugby", label: "Rugby" },
-                                    { to: "/sports-programs#football", label: "Football" },
-                                    { to: "/sports-programs#basketball", label: "Basketball" },
-                                    { to: "/sports-programs#swimming", label: "Swimming" },
+                                    { to: "/rugby-program", label: "Rugby" },
+                                    { to: "/football-program", label: "Football" },
+                                    { to: "/basketball-program", label: "Basketball" },
+                                    { to: "/swimming-program", label: "Swimming" },
                                 ]}
                                 onOptionClick={handleOptionClick}
                             />
@@ -122,7 +122,7 @@ const Navbar = () => {
                 <div className="md:hidden bg-blue-700 py-4">
                     <NavLink to="/" label="Home" onClick={handleOptionClick} />
                     <NavLink to="/Aboutus" label="About Us" onClick={handleOptionClick} />
-                    <NavLink to="/#services" label="Services" onClick={handleOptionClick} />
+                    <NavLink to="/services" label="Services" onClick={handleOptionClick} />
                     <NavLink to="/Events" label="Events" onClick={handleOptionClick} />
 
                     <Dropdown
@@ -130,10 +130,10 @@ const Navbar = () => {
                         toggleDropdown={toggleProgramsDropdown}
                         label="Sports Programs"
                         items={[
-                            { to: "/sports-programs#rugby", label: "Rugby" },
-                            { to: "/sports-programs#football", label: "Football" },
-                            { to: "/sports-programs#basketball", label: "Basketball" },
-                            { to: "/sports-programs#swimming", label: "Swimming" },
+                            { to: "/rugby-program", label: "Rugby" },
+                            { to: "/football-program", label: "Football" },
+                            { to: "/basketball-program", label: "Basketball" },
+                            { to: "/swimming-program", label: "Swimming" },
                         ]}
                         onOptionClick={handleOptionClick}
                     />

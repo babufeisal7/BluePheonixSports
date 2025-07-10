@@ -143,6 +143,7 @@ const GalleryPage = () => {
                             {selectedItem.description && (
                                 <p className="text-lg text-gray-700 mt-4">{selectedItem.description}</p>
                             )}
+                            
                         </div>
                     </div>
                 </div>

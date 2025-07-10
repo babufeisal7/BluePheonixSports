@@ -1,127 +1,153 @@
-import React, { useState, useEffect } from 'react'; 
-import Slider from 'react-slick'; 
-import 'slick-carousel/slick/slick.css'; 
-import 'slick-carousel/slick/slick-theme.css'; 
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { FaLinkedin, FaTwitter, FaGlobe } from 'react-icons/fa';
 
-// Shared Tailwind CSS classes for card design
-const cardClasses = 'relative rounded-lg overflow-hidden shadow-lg group transform transition-transform duration-300 hover:scale-105 hover:shadow-xl mx-4';
-const imageClasses = 'w-full h-60 sm:h-64 md:h-72 lg:h-80 xl:h-96 object-cover transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-2';
-const overlayClasses = 'absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50 transition-opacity duration-300';
-const textClasses = 'absolute bottom-0 p-4 sm:p-6 text-white transition-all duration-300 ease-in-out transform group-hover:translate-y-2';
-const nameClasses = 'text-lg sm:text-xl md:text-2xl font-semibold mt-2 transition-transform duration-300 ease-in-out group-hover:scale-110';
-const titleClasses = 'text-sm sm:text-base md:text-lg transition-transform duration-300 ease-in-out group-hover:scale-110';
+const expertData = [
+  {
+    id: 1,
+    name: "Dr. Sarah Johnson",
+    role: "Neuroscience",
+    imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+    social: {
+      linkedin: "#",
+      twitter: "#"
+    }
+  },
+  {
+    id: 2,
+    name: "James Chen",
+    role: "AI Specialist",
+    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    social: {
+      linkedin: "#",
+      website: "#"
+    }
+  },
+  {
+    id: 3,
+    name: "James Chen",
+    role: "AI Specialist",
+    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    social: {
+      linkedin: "#",
+      website: "#"
+    }
+  },
+  {
+    id: 4,
+    name: "James Chen",
+    role: "AI Specialist",
+    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    social: {
+      linkedin: "#",
+      website: "#"
+    }
+  },
+  {
+    id: 5,
+    name: "James Chen",
+    role: "AI Specialist",
+    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    social: {
+      linkedin: "#",
+      website: "#"
+    }
+  },
+  // ... (other experts remain the same)
+];
 
-const ExpertCard = ({ name, role, imgSrc, bio }) => (
-    <div className={cardClasses}>
-        <img src={imgSrc} alt={name} className={imageClasses} />
-        <div className={overlayClasses}></div>
-        <div className={textClasses}>
-            <h3 className={nameClasses}>{name}</h3>
-            <span className={titleClasses}>{role}</span>
-            <p className="text-xs sm:text-sm">{bio}</p>
+const ExpertCard = ({ expert }) => {
+  return (
+    <div className="relative rounded-xl overflow-hidden shadow-md bg-white mx-2 h-full transition-transform duration-300 hover:scale-[1.02]">
+      <div className="relative h-80 md:h-96"> {/* Increased height */}
+        <img 
+          src={`${expert.imgSrc}?w=600&h=1000&fit=crop&crop=faces`} 
+          alt={expert.name}
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+      </div>
+      
+      <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+        <h3 className="text-xl font-bold">{expert.name}</h3>
+        <p className="text-blue-100 mb-3">{expert.role}</p>
+        
+        <div className="flex space-x-4">
+          {expert.social.linkedin && (
+            <a href={expert.social.linkedin} className="hover:text-blue-300 transition">
+              <FaLinkedin className="w-5 h-5" />
+            </a>
+          )}
+          {expert.social.twitter && (
+            <a href={expert.social.twitter} className="hover:text-blue-300 transition">
+              <FaTwitter className="w-5 h-5" />
+            </a>
+          )}
+          {expert.social.website && (
+            <a href={expert.social.website} className="hover:text-blue-300 transition">
+              <FaGlobe className="w-5 h-5" />
+            </a>
+          )}
         </div>
+      </div>
     </div>
-);
-
-ExpertCard.propTypes = {
-    name: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    bio: PropTypes.string.isRequired,
+  );
 };
 
-ExpertCard.displayName = 'ExpertCard';
-
 const Experts = () => {
-    const [experts, setExperts] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [loading, setLoading] = useState(true);
+  const [experts, setExperts] = useState([]);
 
-    useEffect(() => {
-        const fetchExperts = async () => {
-            try {
-                const response = await fetch('/db.json'); // Replace with your actual path to db.json
-                const data = await response.json();
-                setExperts(data.experts); // Assuming the JSON structure contains an 'experts' array
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching experts data:", error);
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    setExperts(expertData);
+  }, []);
 
-        fetchExperts();
-    }, []);
-
-    useEffect(() => {
-        if (!loading && experts.length > 0) {
-            const intervalId = setInterval(() => {
-                setCurrentIndex((prevIndex) =>
-                    prevIndex === experts.length - 1 ? 0 : prevIndex + 1
-                );
-            }, 3000);
-
-            return () => clearInterval(intervalId);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3, // Show fewer cards to accommodate taller images
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2
         }
-    }, [experts, loading]);
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1
+        }
+      }
+    ]
+  };
 
-    const goToSlide = (index) => {
-        setCurrentIndex(index);
-    };
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-800 mb-3">Our Expert Team</h2>
+          <p className="text-lg text-gray-600">Leading professionals in their fields</p>
+        </div>
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: false,
-        afterChange: (current) => setCurrentIndex(current),
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 640,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    };
-
-    return (
-        <section className="py-8 sm:py-12 bg-gray-200">
-            <div className="max-w-7xl mx-auto px-4">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center">Meet Our Experts</h2>
-                <p className="text-lg sm:text-xl text-center text-black mb-8">Learn from the best in the field!</p>
-                
-                {loading ? (
-                    <p className="text-center text-lg">Loading experts...</p>
-                ) : (
-                    <Slider {...settings} className="flex flex-wrap">
-                        {experts.map((expert, index) => (
-                            <ExpertCard
-                                key={index}
-                                name={expert.name}
-                                role={expert.role}
-                                imgSrc={expert.imgSrc}
-                                bio={expert.bio}
-                            />
-                        ))}
-                    </Slider>
-                )}
-            </div>
-        </section>
-    );
+        <div className="px-4">
+          <Slider {...settings}>
+            {experts.map((expert) => (
+              <div key={expert.id} className="px-2 h-full">
+                <ExpertCard expert={expert} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Experts;
