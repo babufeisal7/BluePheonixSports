@@ -1,279 +1,398 @@
-import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { 
-  FaHeartbeat, 
-  FaClipboardList, 
-  FaChartLine, 
-  FaStethoscope, 
-  FaComments, 
-  FaRunning, 
-  FaFutbol, 
-  FaBasketballBall, 
-  FaSwimmer,
+import React, { useState, useMemo } from 'react';
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import {
+  FaHeartbeat,
+  FaClipboardList,
+  FaChartLine,
+  FaStethoscope,
+  FaComments,
   FaUserCircle,
   FaCog,
   FaSignOutAlt,
   FaTimes,
-  FaBars
-} from "react-icons/fa";
+  FaBars,
+  FaBell,
+  FaSearch,
+  FaCalendarAlt,
+  FaUserMd
+} from 'react-icons/fa';
 
-// Mock data
+// Profile Data
 const medicProfile = {
-  name: "Dr. Sarah Johnson",
-  role: "Head Sports Physician",
-  avatar: "/public/coach2.jpg",
-  specialty: "Orthopedics & Sports Medicine",
+  name: 'Dr. Sarah Johnson',
+  role: 'Head Sports Physician',
+  avatar: '/coach2.jpg',
+  specialty: 'Orthopedics & Sports Medicine',
   yearsExperience: 12,
-  contact: "sarah.j@bluephoenix.com",
-  teams: ["Rugby", "Football", "Swimming"]
+  contact: 'sarah.j@bluephoenix.com',
+  teams: ['Rugby', 'Football', 'Swimming'],
+  notifications: 3,
+  upcomingAppointments: 2
 };
 
-const featuredBlogs = [
-  {
-    id: 1,
-    title: "Concussion Protocols in Contact Sports",
-    excerpt: "Learn the latest guidelines for identifying and managing concussions.",
-    image: "/public/image4.jpg",
-    category: "Neurology"
-  },
-  // ... other blog items
+const navItems = [
+  { icon: <FaStethoscope />, text: 'Injury Logs', path: '/dashboard/medic/injury-logs' },
+  { icon: <FaHeartbeat />, text: 'Health Reports', path: '/dashboard/medic/health-reports' },
+  { icon: <FaClipboardList />, text: 'Recovery Tracker', path: '/dashboard/medic/recovery-tracker' },
+  { icon: <FaChartLine />, text: 'Upload Reports', path: '/dashboard/medic/medical-upload' },
+  { icon: <FaComments />, text: 'Messages', path: '/dashboard/medic/messaging' }
+];
+
+const quickActions = [
+  { icon: <FaUserMd />, text: 'New Patient', path: '/dashboard/medic/add-patient' },
+  { icon: <FaClipboardList />, text: 'Quick Report', path: '/dashboard/medic/quick-report' },
+  { icon: <FaCalendarAlt />, text: 'Schedule', path: '/dashboard/medic/schedule' }
 ];
 
 const MedicDashboard = () => {
-  const [isMobile, setIsMobile] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const location = useLocation();
+  const firstName = useMemo(() => medicProfile.name.split(' ')[0], []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setSidebarOpen(true);
-      } else {
-        setSidebarOpen(false);
-      }
-    };
-
-    // Initial check
-    handleResize();
-    
-    // Add event listener
-    window.addEventListener('resize', handleResize);
-    
-    // Clean up
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    if (isMobile) {
-      setSidebarOpen(false);
-    }
-  };
+  // Check if we're on a sub-route
+  const isSubRoute = location.pathname !== '/dashboard/medic';
 
   return (
     <div className="flex min-h-screen bg-gray-50 text-gray-800 relative">
       {/* Mobile Header */}
-      {isMobile && (
-        <header className="fixed top-0 left-0 right-0 bg-blue-900 text-white p-4 flex justify-between items-center z-30 shadow-md">
-          <button 
-            onClick={toggleSidebar}
-            className="p-2 rounded-md hover:bg-blue-700 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <FaBars className="text-xl" />
-          </button>
-          <h1 className="text-xl font-bold">Blue Phoenix Sports</h1>
-          <div className="w-8"></div> {/* Spacer for alignment */}
-        </header>
-      )}
+      <header className="fixed top-0 left-0 right-0 bg-blue-900 text-white p-4 flex justify-between items-center z-30 md:hidden shadow-md">
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="p-2 rounded-md hover:bg-blue-700 transition-colors"
+          aria-label="Open menu"
+        >
+          <FaBars className="text-xl" />
+        </button>
+        <h1 className="text-xl font-bold">Blue Phoenix Sports</h1>
+        <div className="relative">
+          <FaBell className="text-xl" />
+          {medicProfile.notifications > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              {medicProfile.notifications}
+            </span>
+          )}
+        </div>
+      </header>
 
       {/* Sidebar */}
-      <aside 
-        className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
-        md:translate-x-0 transform transition-transform duration-300 ease-in-out
-        w-64 bg-blue-900 text-white p-6 flex flex-col fixed md:sticky top-0 h-screen z-20`}
+      <aside
+        className={`fixed top-0 left-0 h-full z-20 w-64 bg-gradient-to-b from-blue-900 to-blue-800 text-white p-6 transform transition-transform duration-300 ease-in-out
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:sticky`}
       >
-        {isMobile && (
-          <button 
-            onClick={toggleSidebar}
-            className="absolute top-4 right-4 p-1 rounded-md hover:bg-blue-700 transition-colors"
-            aria-label="Close menu"
-          >
-            <FaTimes className="text-xl" />
-          </button>
-        )}
+        <button
+          onClick={() => setSidebarOpen(false)}
+          className="absolute top-4 right-4 p-1 rounded-md hover:bg-blue-700 transition-colors md:hidden"
+          aria-label="Close menu"
+        >
+          <FaTimes className="text-xl" />
+        </button>
 
-        <div className="flex items-center gap-4 mb-8 mt-4 md:mt-0">
-          <img 
-            src={medicProfile.avatar} 
-            alt={medicProfile.name}
-            className="w-12 h-12 rounded-full object-cover border-2 border-white"
-          />
+        {/* Profile Info */}
+        <div className="flex items-center gap-4 mb-8 mt-4">
+          <div className="relative">
+            <img
+              src={medicProfile.avatar}
+              alt={medicProfile.name}
+              className="w-12 h-12 rounded-full object-cover border-2 border-white"
+              loading="lazy"
+            />
+            <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border border-white"></span>
+          </div>
           <div>
             <h2 className="text-xl font-bold">{medicProfile.name}</h2>
             <p className="text-sm text-blue-200">{medicProfile.role}</p>
           </div>
         </div>
 
-        <nav className="flex flex-col gap-2 text-lg flex-1">
-          {[
-            { icon: <FaStethoscope />, text: "Injury Logs", path: "/dashboard/medic/injury-logs" },
-            { icon: <FaHeartbeat />, text: "Health Reports", path: "/dashboard/medic/health-reports" },
-            { icon: <FaClipboardList />, text: "Recovery Tracker", path: "/dashboard/medic/recovery-tracker" },
-            { icon: <FaChartLine />, text: "Upload Reports", path: "/dashboard/medic/medical-upload" },
-            { icon: <FaComments />, text: "Messages", path: "/dashboard/medic/messaging" }
-          ].map((item, index) => (
-            <a 
-              key={index}
-              href={item.path}
-              onClick={closeSidebar}
+        {/* Search Bar */}
+        <div className="relative mb-6">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-blue-800 text-white placeholder-blue-300 rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <FaSearch className="absolute left-3 top-3 text-blue-300" />
+        </div>
+
+        {/* Navigation Links */}
+        <nav className="flex flex-col gap-1 text-lg flex-1">
+          {navItems.map(({ icon, text, path }) => (
+            <Link
+              key={path}
+              to={path}
+              onClick={() => setSidebarOpen(false)}
               className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors"
             >
-              {item.icon}
-              {item.text}
-            </a>
+              <span className="text-blue-300">{icon}</span>
+              <span>{text}</span>
+            </Link>
           ))}
         </nav>
 
+        {/* Quick Actions */}
+        <div className="mt-6 pt-4 border-t border-blue-700">
+          <h3 className="text-xs uppercase text-blue-400 mb-2 px-3">Quick Actions</h3>
+          {quickActions.map(({ icon, text, path }) => (
+            <Link
+              key={path}
+              to={path}
+              onClick={() => setSidebarOpen(false)}
+              className="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-blue-700 transition-colors text-sm"
+            >
+              <span className="text-blue-300">{icon}</span>
+              <span>{text}</span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Footer Links */}
         <div className="mt-auto pt-4 border-t border-blue-700">
-          <a 
-            href="/dashboard/medic/profile" 
-            onClick={closeSidebar}
-            className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors"
+          <Link
+            to="/dashboard/medic/profile"
+            onClick={() => setSidebarOpen(false)}
+            className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-sm"
           >
-            <FaUserCircle /> My Profile
-          </a>
-          <a 
-            href="/settings" 
-            onClick={closeSidebar}
-            className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors"
+            <FaUserCircle className="text-blue-300" /> <span>My Profile</span>
+          </Link>
+          <Link
+            to="/dashboard/medic/settings"
+            onClick={() => setSidebarOpen(false)}
+            className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-sm"
           >
-            <FaCog /> Settings
-          </a>
-          <a 
-            href="/logout" 
-            onClick={closeSidebar}
-            className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100"
+            <FaCog className="text-blue-300" /> <span>Settings</span>
+          </Link>
+          <Link
+            to="/logout"
+            onClick={() => setSidebarOpen(false)}
+            className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100 text-sm"
           >
-            <FaSignOutAlt /> Logout
-          </a>
-          <div className="pt-4 text-sm text-blue-300 select-none">
-            &copy; {new Date().getFullYear()} Blue Phoenix Sports
+            <FaSignOutAlt /> <span>Logout</span>
+          </Link>
+          <div className="pt-4 text-xs text-blue-300 select-none">
+            © {new Date().getFullYear()} Blue Phoenix Sports
           </div>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className={`flex-1 p-6 md:p-8 overflow-auto ${isMobile ? 'pt-20' : ''}`}>
-        {/* Profile Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-          <h1 className="text-2xl md:text-4xl font-bold text-blue-900">
-            Welcome back, <span className="text-blue-600">{medicProfile.name.split(' ')[0]}</span>
-          </h1>
-          
-          <div className="flex items-center gap-4 bg-white p-3 md:p-4 rounded-lg shadow-sm w-full md:w-auto">
-            <img 
-              src={medicProfile.avatar} 
-              alt={medicProfile.name}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
-            />
-            <div>
-              <h3 className="font-semibold text-sm md:text-base">{medicProfile.role}</h3>
-              <p className="text-xs md:text-sm text-gray-600">{medicProfile.specialty}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Profile Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
-          <ProfileCard 
-            title="Experience" 
-            value={`${medicProfile.yearsExperience}+ years`}
-            icon={<FaStethoscope className="text-blue-500" />}
-          />
-          <ProfileCard 
-            title="Specialty" 
-            value={medicProfile.specialty}
-            icon={<FaHeartbeat className="text-red-500" />}
-          />
-          <ProfileCard 
-            title="Assigned Teams" 
-            value={medicProfile.teams.join(", ")}
-            icon={<FaFutbol className="text-green-500" />}
-          />
-        </div>
-
-        {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {/* Patient Monitoring */}
-          <DashboardCard 
-            title="Patient Monitoring" 
-            content="Track vitals, injury status, and medical flags in real-time."
-          />
-
-          {/* Health Tips with Images */}
-          <section className="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 hover:shadow-xl transition">
-            <h2 className="text-lg md:text-xl font-semibold text-blue-800 p-4 md:p-6 pb-0">Health Tips & Blog</h2>
-            <div className="p-4 md:p-6 pt-2 md:pt-3">
-              <p className="text-gray-600 mb-3 md:mb-4 text-sm md:text-base">Latest health education articles:</p>
-              <div className="space-y-3 md:space-y-4">
-                {featuredBlogs.map(blog => (
-                  <BlogPreview key={blog.id} blog={blog} />
-                ))}
-              </div>
-              <button className="mt-3 md:mt-4 text-sm text-blue-600 hover:text-blue-800 font-medium">
-                View all articles →
-              </button>
-            </div>
-          </section>
-
-          {/* Other dashboard cards... */}
+      <main className="flex-1 p-6 md:p-8 overflow-auto pt-20 md:pt-8">
+        {isSubRoute ? (
           <Outlet />
-        </div>
+        ) : (
+          <>
+            {/* Dashboard Home Content */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-blue-900">
+                  Welcome back, <span className="text-blue-600">{firstName}</span>
+                </h1>
+                <p className="text-gray-500">Here's what's happening today</p>
+              </div>
+
+              {/* Quick Stats */}
+              <div className="flex flex-wrap gap-4">
+                <div className="bg-white p-3 rounded-lg shadow-sm flex items-center gap-3">
+                  <div className="p-2 bg-blue-100 rounded-full text-blue-600">
+                    <FaCalendarAlt />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">Appointments</p>
+                    <p className="font-semibold">{medicProfile.upcomingAppointments}</p>
+                  </div>
+                </div>
+                <div className="bg-white p-3 rounded-lg shadow-sm flex items-center gap-3">
+                  <div className="p-2 bg-green-100 rounded-full text-green-600">
+                    <FaHeartbeat />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">Active Patients</p>
+                    <p className="font-semibold">24</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Profile Summary Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+              <div className="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                <div className="p-3 bg-blue-100 rounded-full text-blue-600">
+                  <FaStethoscope />
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Experience</h3>
+                  <p className="text-lg font-semibold">{medicProfile.yearsExperience}+ years</p>
+                </div>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                <div className="p-3 bg-purple-100 rounded-full text-purple-600">
+                  <FaHeartbeat />
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Specialty</h3>
+                  <p className="text-lg font-semibold">{medicProfile.specialty}</p>
+                </div>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                <div className="p-3 bg-green-100 rounded-full text-green-600">
+                  <FaUserMd />
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Assigned Teams</h3>
+                  <p className="text-lg font-semibold">{medicProfile.teams.join(', ')}</p>
+                </div>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm flex items-start gap-4">
+                <div className="p-3 bg-amber-100 rounded-full text-amber-600">
+                  <FaComments />
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Contact</h3>
+                  <p className="text-lg font-semibold">{medicProfile.contact}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Dashboard Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Left Column */}
+              <div className="lg:col-span-2 space-y-6">
+                <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition">
+                  <div className="flex justify-between items-start mb-4">
+                    <h2 className="text-lg font-semibold text-blue-800">Patient Monitoring</h2>
+                    <Link to="/dashboard/medic/health-reports" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                      View Dashboard →
+                    </Link>
+                  </div>
+                  <p className="text-gray-600">Track vitals, injury status, and medical flags in real-time.</p>
+                </section>
+                
+                <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition">
+                  <div className="flex justify-between items-start mb-4">
+                    <h2 className="text-lg font-semibold text-blue-800">Recent Injury Reports</h2>
+                    <Link to="/dashboard/medic/injury-logs" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                      View All →
+                    </Link>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between p-3 hover:bg-gray-50 rounded-lg transition">
+                      <div>
+                        <h3 className="font-medium">Michael Johnson</h3>
+                        <p className="text-sm text-gray-600">ACL Tear</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs text-gray-500">2 days ago</p>
+                        <span className="text-xs px-2 py-1 rounded-full bg-red-100 text-red-800">
+                          High
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-start justify-between p-3 hover:bg-gray-50 rounded-lg transition">
+                      <div>
+                        <h3 className="font-medium">Sarah Williams</h3>
+                        <p className="text-sm text-gray-600">Concussion</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs text-gray-500">5 days ago</p>
+                        <span className="text-xs px-2 py-1 rounded-full bg-amber-100 text-amber-800">
+                          Medium
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              {/* Right Column */}
+              <div className="space-y-6">
+                <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition">
+                  <div className="flex justify-between items-start mb-4">
+                    <h2 className="text-lg font-semibold text-blue-800">Upcoming Appointments</h2>
+                    <Link to="/dashboard/medic/schedule" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                      View Calendar →
+                    </Link>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between p-3 hover:bg-gray-50 rounded-lg transition">
+                      <div>
+                        <h3 className="font-medium">David Miller</h3>
+                        <p className="text-sm text-gray-600">Follow-up</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium">10:30 AM</p>
+                        <button className="text-xs text-blue-600 hover:text-blue-800 mt-1">
+                          Details
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex items-start justify-between p-3 hover:bg-gray-50 rounded-lg transition">
+                      <div>
+                        <h3 className="font-medium">Emma Wilson</h3>
+                        <p className="text-sm text-gray-600">Initial Assessment</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium">2:15 PM</p>
+                        <button className="text-xs text-blue-600 hover:text-blue-800 mt-1">
+                          Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition">
+                  <div className="flex justify-between items-start mb-4">
+                    <h2 className="text-lg font-semibold text-blue-800">Health Tips & Resources</h2>
+                    <Link to="/dashboard/medic/blogs" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                      View All Articles →
+                    </Link>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex gap-4 items-start group">
+                      <img 
+                        src="/image4.jpg" 
+                        alt="Concussion Protocols" 
+                        className="w-16 h-16 object-cover rounded-md group-hover:opacity-90 transition" 
+                        loading="lazy" 
+                      />
+                      <div>
+                        <h3 className="font-medium text-blue-700 line-clamp-1 group-hover:text-blue-800 transition text-base">
+                          Concussion Protocols in Contact Sports
+                        </h3>
+                        <p className="text-xs text-gray-500">Neurology</p>
+                        <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                          Learn the latest guidelines for identifying and managing concussions.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4 items-start group">
+                      <img 
+                        src="/image5.jpg" 
+                        alt="Preventing ACL Injuries" 
+                        className="w-16 h-16 object-cover rounded-md group-hover:opacity-90 transition" 
+                        loading="lazy" 
+                      />
+                      <div>
+                        <h3 className="font-medium text-blue-700 line-clamp-1 group-hover:text-blue-800 transition text-base">
+                          Preventing ACL Injuries
+                        </h3>
+                        <p className="text-xs text-gray-500">Orthopedics</p>
+                        <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                          Key strengthening exercises to protect your knees.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </>
+        )}
       </main>
     </div>
   );
 };
-
-// Reusable Components
-const DashboardCard = ({ title, content }) => (
-  <section className="bg-white rounded-lg shadow-md p-4 md:p-6 transform hover:-translate-y-1 hover:shadow-xl transition">
-    <h2 className="text-lg md:text-xl font-semibold text-blue-800 mb-2">{title}</h2>
-    <p className="text-gray-600 text-sm md:text-base">{content}</p>
-  </section>
-);
-
-const ProfileCard = ({ title, value, icon }) => (
-  <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm flex items-start gap-3 md:gap-4">
-    <div className="p-2 md:p-3 bg-blue-50 rounded-full text-blue-600">
-      {icon}
-    </div>
-    <div>
-      <h3 className="text-xs md:text-sm font-medium text-gray-500">{title}</h3>
-      <p className="text-base md:text-lg font-semibold">{value}</p>
-    </div>
-  </div>
-);
-
-const BlogPreview = ({ blog }) => (
-  <div className="flex gap-2 md:gap-3 items-start group">
-    <img 
-      src={blog.image} 
-      alt={blog.title}
-      className="w-12 h-12 md:w-16 md:h-16 object-cover rounded-md group-hover:opacity-90 transition"
-      loading="lazy"
-    />
-    <div>
-      <h3 className="font-medium text-blue-700 line-clamp-1 group-hover:text-blue-800 transition text-sm md:text-base">
-        {blog.title}
-      </h3>
-      <p className="text-xs text-gray-500">{blog.category}</p>
-      <p className="text-xs md:text-sm text-gray-600 mt-1 line-clamp-2">{blog.excerpt}</p>
-    </div>
-  </div>
-);
 
 export default MedicDashboard;

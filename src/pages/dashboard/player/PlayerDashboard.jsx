@@ -95,7 +95,7 @@ const PlayerDashboard = () => {
             </Link>
           ))}
 
-          <Link to="/settings" onClick={closeSidebar} className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors">
+          <Link to="/dashboard/player/settings" onClick={closeSidebar} className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors">
             <FaCog /> Settings
           </Link>
 

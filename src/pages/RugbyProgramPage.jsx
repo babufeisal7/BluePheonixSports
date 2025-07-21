@@ -1,32 +1,126 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
+import { FaRegCalendarAlt, FaMapMarkerAlt, FaDollarSign, FaStar, FaArrowRight } from 'react-icons/fa';
+import { IoMdTime } from 'react-icons/io';
+import { GiRugbyConversion } from 'react-icons/gi';
 
 const RugbyProgramPage = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+
   const coaches = [
     {
       id: 1,
-      name: 'Coach James Wilson',
+      name: 'Coach David Wilson',
       role: 'Head Coach',
-      description: 'Former professional player with 10+ years coaching experience',
-      imgSrc: '/coach1.jpg', // Replace with actual image paths
+      description: 'Former professional rugby player with 15 years coaching experience. Specializes in forward play and set pieces.',
+      imgSrc: '/coach-david.jpg',
+      achievements: ['National Championship winner', 'Developed 10 professional players', 'Coach of the Year 2019']
     },
     {
       id: 2,
-      name: 'Coach Sarah Johnson',
-      role: 'Skills Coach',
-      description: 'Specializes in youth development and technical skills',
-      imgSrc: '/coach2.jpg',
+      name: 'Coach Sarah O\'Connor',
+      role: 'Backs Coach',
+      description: 'International rugby veteran specializing in backline attack and defensive systems.',
+      imgSrc: '/coach-sarah.jpg',
+      achievements: ['50 international caps', 'Backline play specialist', 'Led league in try assists']
     },
     {
       id: 3,
-      name: 'Coach Michael Brown',
+      name: 'Coach James Tanaka',
       role: 'Strength Coach',
-      description: 'Certified strength and conditioning specialist',
-      imgSrc: '/coach3.jpg',
+      description: 'Certified performance specialist with focus on rugby-specific conditioning.',
+      imgSrc: '/coach-james.jpg',
+      achievements: ['World Rugby certified', 'Worked with national team athletes', 'Injury prevention expert']
     },
+    {
+      id: 4,
+      name: 'Coach Emma Patel',
+      role: 'Youth Development',
+      description: 'Specializes in fundamental skill building for young rugby players.',
+      imgSrc: '/coach-emma.jpg',
+      achievements: ['12+ years youth coaching', 'World Rugby Level 3 certified', 'Player-first philosophy']
+    }
+  ];
+
+  const testimonials = [
+    {
+      id: 1,
+      quote: "The physical and technical development I've experienced here is unmatched. My game has transformed completely.",
+      author: "Michael T.",
+      role: "Club Player",
+      rating: 5
+    },
+    {
+      id: 2,
+      quote: "Not only has my rugby improved, but I've gained confidence and leadership skills that help in all areas of life.",
+      author: "Olivia P.",
+      role: "U18 Player",
+      rating: 5
+    },
+    {
+      id: 3,
+      quote: "Coach Wilson's understanding of the game is incredible. My rugby IQ has improved dramatically.",
+      author: "Samuel R.",
+      role: "Academy Prospect",
+      rating: 5
+    },
+    {
+      id: 4,
+      quote: "The strength training program helped me increase my power and endurance significantly in one season!",
+      author: "Jessica L.",
+      role: "Women's Team Captain",
+      rating: 4
+    }
+  ];
+
+  const programLevels = [
+    {
+      name: "Junior Rugby (Ages 8-12)",
+      description: "Focus on basic skills, teamwork, and enjoyment of the game",
+      features: ["Twice weekly sessions", "Non-contact introduction", "Fun rugby activities"]
+    },
+    {
+      name: "Youth Rugby (Ages 13-16)",
+      description: "Development of core skills and introduction to contact rugby",
+      features: ["Position-specific training", "Game situation drills", "Strength fundamentals"]
+    },
+    {
+      name: "Senior Academy (Ages 17-21)",
+      description: "High performance training for serious players",
+      features: ["Advanced skill work", "Video analysis", "Professional pathway support"]
+    },
+    {
+      name: "Adult Rugby",
+      description: "Competitive play for all skill levels",
+      features: ["Men's and Women's teams", "League competitions", "Social rugby options"]
+    }
+  ];
+
+  const upcomingEvents = [
+    {
+      id: 1,
+      title: "Open Trials - Summer Season",
+      date: "June 10, 2024",
+      time: "4:00 PM - 6:00 PM",
+      location: "Main Field"
+    },
+    {
+      id: 2,
+      title: "Tackle Technique Clinic",
+      date: "June 17, 2024",
+      time: "5:30 PM - 7:30 PM",
+      location: "Field 2"
+    },
+    {
+      id: 3,
+      title: "Parent Information Session",
+      date: "June 5, 2024",
+      time: "6:00 PM - 7:00 PM",
+      location: "Clubhouse"
+    }
   ];
 
   const settings = {
@@ -40,97 +134,377 @@ const RugbyProgramPage = () => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
+        settings: { slidesToShow: 2 },
       },
       {
         breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
+        settings: { slidesToShow: 1 },
       },
     ],
   };
 
+  const testimonialSettings = {
+    ...settings,
+    slidesToShow: 2,
+    autoplaySpeed: 5000
+  };
+
+  const renderStars = (rating) => {
+    return Array(5).fill(0).map((_, i) => (
+      <FaStar key={i} className={i < rating ? "text-yellow-400 inline" : "text-gray-300 inline"} />
+    ));
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Hero Section */}
-      <div className="relative rounded-lg overflow-hidden mb-12">
-        <img src="/rugby-header.jpg" alt="Rugby Team" className="w-full h-96 object-cover" />
-        <div className="absolute inset-0 bg-blue-900 bg-opacity-50 flex items-center justify-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white">Rugby Development Program</h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Hero Section with Video Background Option */}
+      <div className="relative rounded-xl overflow-hidden mb-12 shadow-xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-green-900 to-green-700 opacity-75"></div>
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="w-full h-[500px] object-cover"
+          poster="/rugby-header.jpg"
+        >
+          <source src="/rugby-training.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+            Rugby Excellence
+          </h1>
+          <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl drop-shadow-md">
+            Premier rugby development for players at all levels
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              to="/register"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition-all duration-300 transform hover:scale-105"
+            >
+              Register Now <FaArrowRight className="ml-2" />
+            </Link>
+            <Link
+              to="/schedule-tour"
+              className="bg-transparent hover:bg-white hover:text-green-800 text-white font-bold py-3 px-8 rounded-full inline-flex items-center border-2 border-white transition-all duration-300"
+            >
+              Schedule a Visit
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Program Overview */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-blue-800 mb-6">Program Overview</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <p className="text-lg mb-4">
-              Our Rugby Development Program is designed to nurture talent, build skills, and develop 
-              well-rounded athletes who excel both on and off the field.
-            </p>
-            <p className="mb-4">
-              We offer comprehensive training for players of all skill levels, from beginners to 
-              advanced competitors, with a focus on technical skills, tactical awareness, physical 
-              conditioning, and mental toughness.
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mb-6">
-              <li>Age groups: U10, U12, U14, U16, U18, and Senior</li>
-              <li>Professional coaching staff with international experience</li>
-              <li>Strength and conditioning programs</li>
-              <li>Nutritional guidance</li>
-              <li>Competitive match schedule</li>
-            </ul>
-          </div>
-          <div className="bg-blue-50 p-6 rounded-lg">
-            <h3 className="text-xl font-semibold text-blue-800 mb-4">Program Details</h3>
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-medium">Training Schedule</h4>
-                <p>Monday & Wednesday: 4:30pm - 6:30pm</p>
-                <p>Saturday: 9:00am - 11:00am</p>
+      {/* Program Navigation Tabs */}
+      <div className="flex flex-wrap border-b border-gray-200 mb-12">
+        {['overview', 'levels', 'coaches', 'schedule', 'results'].map((tab) => (
+          <button
+            key={tab}
+            className={`px-6 py-3 font-medium text-lg transition-colors duration-200 ${activeTab === tab ? 'text-green-800 border-b-2 border-green-800' : 'text-gray-600 hover:text-green-700'}`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab Content */}
+      <div className="mb-16">
+        {activeTab === 'overview' && (
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-3xl font-bold text-green-800 mb-6">Program Philosophy</h2>
+              <p className="text-lg mb-6">
+                Our Rugby Development Program takes a comprehensive approach to player development, focusing on technical skills, 
+                game understanding, physical conditioning, and teamwork. We believe in developing complete rugby players who 
+                excel in all facets of the game while upholding the values of sportsmanship.
+              </p>
+              
+              <div className="bg-green-50 p-6 rounded-xl mb-8">
+                <h3 className="text-xl font-semibold text-green-800 mb-4 flex items-center">
+                  <GiRugbyConversion className="mr-2" /> What Makes Us Different
+                </h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <span className="bg-green-800 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                    <span>Small coach-to-player ratios (max 6:1)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="bg-green-800 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                    <span>Video analysis and performance tracking</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="bg-green-800 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                    <span>Professional pathway support for elite players</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="bg-green-800 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">4</span>
+                    <span>Nutrition and injury prevention workshops</span>
+                  </li>
+                </ul>
               </div>
-              <div>
-                <h4 className="font-medium">Season</h4>
-                <p>Year-round program with seasonal breaks</p>
-              </div>
-              <div>
-                <h4 className="font-medium">Location</h4>
-                <p>Blue Phoenix Sports Complex - Field 1</p>
-              </div>
-              <div>
-                <h4 className="font-medium">Fees</h4>
-                <p>$250/month (scholarships available)</p>
+            </div>
+
+            <div className="bg-green-800 text-white p-8 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold mb-6">Program Highlights</h3>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="bg-red-500 p-3 rounded-lg mr-4 flex-shrink-0">
+                    <IoMdTime className="text-xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Training Schedule</h4>
+                    <p>Tuesday & Thursday: 5:30pm - 7:30pm</p>
+                    <p>Saturday: 9:00am - 11:00am (match days vary)</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-red-500 p-3 rounded-lg mr-4 flex-shrink-0">
+                    <FaRegCalendarAlt />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Season</h4>
+                    <p>August - May with summer 7s program</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-red-500 p-3 rounded-lg mr-4 flex-shrink-0">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Location</h4>
+                    <p>Green Dragon Rugby Club - Pitch 1</p>
+                    <p className="text-green-200 mt-1">1500 Rugby Lane, Springfield</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-red-500 p-3 rounded-lg mr-4 flex-shrink-0">
+                    <FaDollarSign />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Fees</h4>
+                    <p>$250/month (discounts for siblings and annual payment)</p>
+                    <p className="text-green-200 mt-1">Scholarships available based on need</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        )}
 
-      {/* Coaches Section (Carousel) */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-blue-800 mb-6">Meet Our Coaches</h2>
-
-        <Slider {...settings}>
-          {coaches.map(coach => (
-            <div key={coach.id} className="px-3 h-full">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col transition-transform duration-300 hover:scale-[1.02]">
-                <div className="h-48 bg-gray-200 overflow-hidden">
-                  <img
-                    src={coach.imgSrc}
-                    alt={coach.name}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    onError={e => e.target.src = '/default-coach.jpg'} // fallback image if needed
-                  />
+        {activeTab === 'levels' && (
+          <div>
+            <h2 className="text-3xl font-bold text-green-800 mb-8">Program Levels</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {programLevels.map((level, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                  <div className="bg-green-800 text-white p-4">
+                    <h3 className="text-xl font-bold text-center">{level.name}</h3>
+                  </div>
+                  <div className="p-6">
+                    <p className="text-gray-600 mb-4">{level.description}</p>
+                    <ul className="space-y-2">
+                      {level.features.map((feature, i) => (
+                        <li key={i} className="flex items-start">
+                          <span className="text-green-500 mr-2">✓</span>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button className="mt-6 w-full bg-green-100 hover:bg-green-200 text-green-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                      Learn More
+                    </button>
+                  </div>
                 </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-semibold">{coach.name}</h3>
-                  <p className="text-blue-600 mb-2">{coach.role}</p>
-                  <p className="text-sm flex-grow">{coach.description}</p>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'coaches' && (
+          <div>
+            <h2 className="text-3xl font-bold text-green-800 mb-6">Meet Our Coaching Staff</h2>
+            <p className="max-w-3xl text-lg mb-8">
+              Our coaching staff brings a wealth of playing and coaching experience at the highest levels of rugby.
+              Each coach specializes in specific areas of player development to provide comprehensive training.
+            </p>
+            
+            <Slider {...settings}>
+              {coaches.map(coach => (
+                <div key={coach.id} className="px-3 h-full focus:outline-none">
+                  <div className="bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-lg">
+                    <div className="h-64 bg-gray-200 overflow-hidden relative">
+                      <img
+                        src={coach.imgSrc}
+                        alt={coach.name}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        loading="lazy"
+                        onError={e => (e.target.src = '/default-coach.jpg')}
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-20"></div>
+                      <div className="absolute bottom-4 left-4">
+                        <h3 className="text-xl font-bold text-white">{coach.name}</h3>
+                        <p className="text-red-300 font-medium">{coach.role}</p>
+                      </div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-grow">
+                      <p className="text-gray-700 mb-4 flex-grow">{coach.description}</p>
+                      <div className="mt-4">
+                        <h4 className="font-semibold text-green-800 mb-2">Notable Achievements:</h4>
+                        <ul className="space-y-1">
+                          {coach.achievements.map((achievement, i) => (
+                            <li key={i} className="flex items-start">
+                              <span className="text-red-500 mr-2">•</span>
+                              <span className="text-sm">{achievement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        )}
+
+        {activeTab === 'schedule' && (
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-3xl font-bold text-green-800 mb-6">Upcoming Events</h2>
+              <div className="space-y-6">
+                {upcomingEvents.map(event => (
+                  <div key={event.id} className="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500 hover:shadow-lg transition-shadow duration-300">
+                    <h3 className="text-xl font-bold text-green-800 mb-2">{event.title}</h3>
+                    <div className="flex items-center text-gray-600 mb-1">
+                      <FaRegCalendarAlt className="mr-2 text-red-500" />
+                      <span>{event.date}</span>
+                    </div>
+                    <div className="flex items-center text-gray-600 mb-1">
+                      <IoMdTime className="mr-2 text-red-500" />
+                      <span>{event.time}</span>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <FaMapMarkerAlt className="mr-2 text-red-500" />
+                      <span>{event.location}</span>
+                    </div>
+                    <button className="mt-4 text-red-600 font-medium hover:text-red-700 flex items-center">
+                      More details <FaArrowRight className="ml-1" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div>
+              <h2 className="text-3xl font-bold text-green-800 mb-6">Weekly Schedule</h2>
+              <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                <div className="grid grid-cols-1 divide-y divide-gray-200">
+                  {[
+                    { day: 'Monday', time: 'Rest Day', activity: 'Recovery Session', level: 'Optional' },
+                    { day: 'Tuesday', time: '5:30 PM - 7:30 PM', activity: 'Skills & Drills', level: 'All Levels' },
+                    { day: 'Wednesday', time: '4:30 PM - 6:30 PM', activity: 'Strength & Conditioning', level: 'U16+' },
+                    { day: 'Thursday', time: '5:30 PM - 7:30 PM', activity: 'Team Play & Scrimmages', level: 'All Levels' },
+                    { day: 'Friday', time: 'Rest Day', activity: 'Optional Skills Session', level: '' },
+                    { day: 'Saturday', time: '9:00 AM - 11:00 AM', activity: 'Match Days/Game Prep', level: 'All Teams' }
+                  ].map((item, index) => (
+                    <div key={index} className="p-4 hover:bg-green-50 transition-colors duration-200">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h3 className="font-bold text-lg">{item.day}</h3>
+                          <p className="text-gray-600">{item.time}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-medium">{item.activity}</p>
+                          {item.level && <p className="text-sm text-gray-500">{item.level}</p>}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'results' && (
+          <div>
+            <h2 className="text-3xl font-bold text-green-800 mb-6">Our Results Speak for Themselves</h2>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="bg-white p-6 rounded-xl shadow-md text-center">
+                <div className="text-5xl font-bold text-green-800 mb-2">18+</div>
+                <div className="text-lg font-medium">Players signed to professional contracts</div>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-md text-center">
+                <div className="text-5xl font-bold text-green-800 mb-2">95%</div>
+                <div className="text-lg font-medium">Player satisfaction rate</div>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-md text-center">
+                <div className="text-5xl font-bold text-green-800 mb-2">12</div>
+                <div className="text-lg font-medium">League championships last season</div>
+              </div>
+            </div>
+
+            <div className="mb-12">
+              <h3 className="text-2xl font-bold text-green-800 mb-6">Success Stories</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <div className="flex items-start mb-4">
+                    <img src="/player-success1.jpg" alt="Success story" className="w-16 h-16 rounded-full object-cover mr-4" />
+                    <div>
+                      <h4 className="font-bold">Thomas Wilson</h4>
+                      <p className="text-gray-600">Professional Rugby Player</p>
+                      <div className="mt-1">{renderStars(5)}</div>
+                    </div>
+                  </div>
+                  <p className="text-gray-700">
+                    "The program's focus on my weaknesses and consistent feedback helped me earn a professional contract. 
+                    Coach David's connections were invaluable during recruitment."
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <div className="flex items-start mb-4">
+                    <img src="/player-success2.jpg" alt="Success story" className="w-16 h-16 rounded-full object-cover mr-4" />
+                    <div>
+                      <h4 className="font-bold">Emma Johnson</h4>
+                      <p className="text-gray-600">National Team Selection</p>
+                      <div className="mt-1">{renderStars(5)}</div>
+                    </div>
+                  </div>
+                  <p className="text-gray-700">
+                    "Coach Sarah transformed my understanding of backline play. Went from club player to national team in two seasons. 
+                    The video analysis was a game-changer."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Testimonials Section */}
+      <section className="mb-16">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold text-green-800">What Players & Parents Say</h2>
+          <Link to="/testimonials" className="text-green-600 hover:text-green-800 font-medium">
+            View All Testimonials →
+          </Link>
+        </div>
+        
+        <Slider {...testimonialSettings}>
+          {testimonials.map(testimonial => (
+            <div key={testimonial.id} className="px-3">
+              <div className="bg-white p-8 rounded-xl shadow-md h-full">
+                <div className="mb-4">
+                  {renderStars(testimonial.rating)}
+                </div>
+                <blockquote className="text-lg italic mb-6">
+                  "{testimonial.quote}"
+                </blockquote>
+                <div className="font-semibold">
+                  <p>{testimonial.author}</p>
+                  <p className="text-gray-600 text-sm">{testimonial.role}</p>
                 </div>
               </div>
             </div>
@@ -138,46 +512,87 @@ const RugbyProgramPage = () => {
         </Slider>
       </section>
 
-      {/* Testimonials */}
+      {/* FAQ Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-bold text-blue-800 mb-6">Player Testimonials</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {[1, 2].map((testimonial) => (
-            <div key={testimonial} className="bg-blue-50 p-6 rounded-lg">
-              <p className="italic mb-4">
-                "{testimonial === 1
-                  ? 'The rugby program transformed my game completely. The coaches are incredibly knowledgeable and supportive.'
-                  : "I've developed not just as a player but as a person through this program. Highly recommend!"}"
-              </p>
-              <p className="font-semibold">
-                — {testimonial === 1 ? 'David M., U16 Player' : 'Emily R., Senior Team Captain'}
-              </p>
+        <h2 className="text-3xl font-bold text-green-800 mb-8">Frequently Asked Questions</h2>
+        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+          {[
+            {
+              question: "What equipment does my child need for rugby training?",
+              answer: "Players need rugby boots, mouthguard, and training kit. We provide all other equipment including tackle pads and balls."
+            },
+            {
+              question: "How are players grouped during training?",
+              answer: "Players are grouped by age, experience, and position to ensure appropriate development. We assess regularly and may move players."
+            },
+            {
+              question: "Do you offer financial assistance?",
+              answer: "Yes, we offer need-based scholarships and payment plans. Contact our office for application details."
+            },
+            {
+              question: "What's your injury policy?",
+              answer: "We have certified medical staff at all sessions. Serious injuries are referred immediately to medical professionals."
+            }
+          ].map((faq, index) => (
+            <div key={index} className="border-b border-gray-200 last:border-b-0">
+              <button className="w-full text-left p-6 hover:bg-green-50 transition-colors duration-200 flex justify-between items-center">
+                <h3 className="text-lg font-medium">{faq.question}</h3>
+                <svg className="w-5 h-5 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div className="px-6 pb-6 pt-2 text-gray-700 hidden">
+                {faq.answer}
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="text-center bg-blue-800 text-white py-12 rounded-lg">
-        <h2 className="text-3xl font-bold mb-4">Ready to Join Our Rugby Program?</h2>
-        <p className="mb-8 max-w-2xl mx-auto">
-          Whether you're new to rugby or an experienced player, we have a place for you in our program.
-        </p>
-        <div className="space-x-4">
-          <Link
-            to="/contactus"
-            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full inline-block"
-          >
-            Contact Us
-          </Link>
-          <Link
-            to="/teams/rugby"
-            className="bg-white hover:bg-gray-100 text-blue-800 font-bold py-3 px-8 rounded-full inline-block"
-          >
-            Meet Our Teams
-          </Link>
+      {/* CTA Section */}
+      <section className="text-center bg-gradient-to-r from-green-800 to-green-600 text-white py-16 rounded-xl shadow-xl mb-8">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Take Your Rugby to the Next Level?</h2>
+          <p className="text-xl mb-8">
+            Join the region's most comprehensive rugby development program today.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              to="/register"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-full inline-flex items-center transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Register Now <FaArrowRight className="ml-2" />
+            </Link>
+            <Link
+              to="/contact"
+              className="bg-transparent hover:bg-white hover:text-green-800 text-white font-bold py-4 px-10 rounded-full inline-flex items-center border-2 border-white transition-all duration-300 shadow-lg"
+            >
+              Contact Our Staff
+            </Link>
+          </div>
+          <p className="mt-6 text-green-200">
+            Have questions? Call us at (555) 123-4567 or email info@greendragonrugby.com
+          </p>
         </div>
       </section>
+
+      {/* Newsletter Signup */}
+      <div className="bg-green-50 rounded-xl p-8 text-center">
+        <h3 className="text-2xl font-bold text-green-800 mb-2">Stay Updated</h3>
+        <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+          Sign up for our newsletter to receive training tips, program updates, and special offers.
+        </p>
+        <div className="flex max-w-md mx-auto">
+          <input 
+            type="email" 
+            placeholder="Your email address" 
+            className="flex-grow px-4 py-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          <button className="bg-green-800 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-r-lg transition-colors duration-200">
+            Subscribe
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

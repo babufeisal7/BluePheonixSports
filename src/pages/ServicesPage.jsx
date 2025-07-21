@@ -9,13 +9,18 @@ import {
   faFutbol,
   faSwimmer,
   faInfoCircle,
-  faStar,
   faCheckCircle
 } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
 
 const USD_TO_UGX = 3700;
 
 const iconSize = 'h-[2.80rem] w-[2.80rem] text-blue-600';
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const professionalServices = [
   {
@@ -23,7 +28,7 @@ const professionalServices = [
     description:
       'We design, implement, and manage school-wide sports programs that inspire and develop young athletes. Our team works with educators to craft tailored training calendars, recruit skilled coaches, and organize competitive inter-school events that align with academic goals.',
     icon: <FontAwesomeIcon icon={faSchool} className={iconSize} />,
-    image: '/public/image1.jpg',
+    image: '/image1.jpg',
     price: 'Custom Quote',
     features: [
       'Custom term schedules',
@@ -38,7 +43,7 @@ const professionalServices = [
     description:
       'We handle team operations from recruitment to matchday logistics. Our service includes strength and conditioning plans, scouting, injury prevention strategies, and advanced video analysis to improve team performance and cohesion.',
     icon: <FontAwesomeIcon icon={faUsers} className={iconSize} />,
-    image: '/public/coach1.jpg',
+    image: '/coach1.jpg',
     price: 'From 1,000,000 UGX/month',
     features: [
       'Team building & strategy sessions',
@@ -53,7 +58,7 @@ const professionalServices = [
     description:
       'Let us take the stress out of organizing your sports events. From concept to execution, we manage everything: venue sourcing, permits, branded materials, ticketing, security, and results tracking — ensuring a memorable experience.',
     icon: <FontAwesomeIcon icon={faCalendarAlt} className={iconSize} />,
-    image: '/public/coach1.jpg',
+    image: '/coach1.jpg',
     price: 'From 1,000,000 UGX/event',
     features: [
       'Venue booking & setup',
@@ -68,7 +73,7 @@ const professionalServices = [
     description:
       'Boost team identity and generate revenue with high-quality branded merchandise. We offer design support and fulfillment for jerseys, tracksuits, caps, bags, and fan gear — all customizable and delivered on time.',
     icon: <FontAwesomeIcon icon={faShoppingBag} className={iconSize} />,
-    image: '/public/coach1.jpg',
+    image: '/coach1.jpg',
     price: 'From 50,000 UGX/item',
     features: [
       'Custom jersey printing',
@@ -140,7 +145,6 @@ const youthPrograms = [
     ],
     highlight: 'Limited spots'
   },
-
 ];
 
 const ServicesPage = () => {
@@ -285,7 +289,7 @@ const ServicesPage = () => {
           {/* Program Comparison */}
           <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
             <h3 className="text-2xl font-bold text-blue-800 mb-6 text-center">Program Comparison</h3>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mb-8">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-gray-200">
@@ -297,10 +301,10 @@ const ServicesPage = () => {
                 </thead>
                 <tbody>
                   {[
-                    { key: 'Training frequency', values: ['3 sessions/week', '3-4 sessions/week', 'Daily sessions', '3 sessions/week'] },
-                    { key: 'Age groups', values: ['8-18 years', '6-18 years', '4+ years', '8-18 years'] },
-                    { key: 'Competitions', values: ['Monthly tournaments', 'Bi-weekly matches', 'Quarterly meets', 'Team tournaments'] },
-                    { key: 'Equipment provided', values: ['Uniform included', 'Shin guards', 'Swim cap', 'Basketball gear'] }
+                    { key: 'Training frequency', values: ['3 sessions/week', '3-4 sessions/week', '3 sessions/week', 'Daily sessions available'] },
+                    { key: 'Age groups', values: ['8-18 years', '6-18 years', '8-18 years', '4+ years'] },
+                    { key: 'Competitions', values: ['Monthly tournaments', 'Bi-weekly matches', 'Team competitions', 'Quarterly meets'] },
+                    { key: 'Equipment provided', values: ['Uniform included', 'Shin guards', 'Basketball gear', 'Swim cap'] }
                   ].map(({ key, values }, ri) => (
                     <tr key={ri} className="border-b border-gray-100">
                       <td className="py-3 font-medium">{key}</td>
@@ -312,7 +316,28 @@ const ServicesPage = () => {
                 </tbody>
               </table>
             </div>
+
+           
           </div>
+           {/* Call to Action */}
+            <motion.section
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl p-8 md:p-12 text-center text-white"
+            >
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Join Our Community</h2>
+              <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
+                Become part of the Blue Phoenix family and elevate your game to the next level.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold text-lg shadow-lg"
+              >
+                Get Started Today
+              </motion.button>
+            </motion.section>
         </div>
       )}
     </div>

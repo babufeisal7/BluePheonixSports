@@ -1,106 +1,425 @@
-import React from "react";
+import React, { useState, useRef } from 'react';
+import { FaUser, FaTrophy, FaCertificate, FaCalendarAlt, FaPhone, FaEnvelope, FaEdit, FaSave, FaUpload, FaTimes, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CoachProfile = () => {
-  const coach = {
-    name: "Coach Daniel Mwangi",
-    photo: "/public/coach2.jpg", // placeholder avatar
-    bio: "Experienced rugby coach with 10+ years training elite athletes and youth teams. Passionate about skill development and sportsmanship.",
-    email: "daniel.mwangi@example.com",
-    phone: "+256 700 123 456",
+  const [profile, setProfile] = useState({
+    name: 'Coach Daniel Mwangi',
+    specialty: 'Rugby Performance',
+    licenseNumber: 'WR12345678',
+    yearsExperience: 12,
+    team: 'National Rugby Academy',
+    phone: '+256 700 123 456',
+    email: 'daniel.mwangi@rugbyacademy.com',
+    bio: 'Experienced rugby coach with 10+ years training elite athletes and youth teams. Passionate about skill development and sportsmanship.',
+    certifications: ['World Rugby Level 3', 'Strength & Conditioning Specialist'],
+    specialties: ['Backline Play', 'Defensive Systems', 'Kicking Technique'],
+    availability: ['Mon-Tue: 8am-4pm', 'Wed-Thu: 9am-5pm', 'Fri: Team Training'],
     social: {
-      twitter: "https://twitter.com/coachdaniel",
-      linkedin: "https://linkedin.com/in/coachdanielmwangi",
-    },
+      twitter: 'https://twitter.com/coachdaniel',
+      linkedin: 'https://linkedin.com/in/coachdanielmwangi'
+    }
+  });
+  
+  const [isEditing, setIsEditing] = useState(false);
+  const [profileImage, setProfileImage] = useState('/public/coach2.jpg');
+  const [tempImage, setTempImage] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfile(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleCertificationChange = (index, value) => {
+    const updatedCerts = [...profile.certifications];
+    updatedCerts[index] = value;
+    setProfile(prev => ({ ...prev, certifications: updatedCerts }));
+  };
+
+  const addCertification = () => {
+    setProfile(prev => ({
+      ...prev,
+      certifications: [...prev.certifications, '']
+    }));
+  };
+
+  const removeCertification = (index) => {
+    const updatedCerts = profile.certifications.filter((_, i) => i !== index);
+    setProfile(prev => ({ ...prev, certifications: updatedCerts }));
+  };
+
+  const handleSpecialtyChange = (index, value) => {
+    const updatedSpecialties = [...profile.specialties];
+    updatedSpecialties[index] = value;
+    setProfile(prev => ({ ...prev, specialties: updatedSpecialties }));
+  };
+
+  const addSpecialty = () => {
+    setProfile(prev => ({
+      ...prev,
+      specialties: [...prev.specialties, '']
+    }));
+  };
+
+  const removeSpecialty = (index) => {
+    const updatedSpecialties = profile.specialties.filter((_, i) => i !== index);
+    setProfile(prev => ({ ...prev, specialties: updatedSpecialties }));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (!file.type.match('image.*')) {
+        toast.error('Please select an image file');
+        return;
+      }
+
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error('Image must be less than 2MB');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        setTempImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const saveProfile = () => {
+    if (tempImage) {
+      setProfileImage(tempImage);
+      setTempImage(null);
+    }
+    setIsEditing(false);
+    toast.success('Profile updated successfully!');
   };
 
   return (
-    <div className="p-6 bg-white rounded shadow max-w-md mx-auto">
-      <h2 className="text-2xl font-semibold mb-6 text-center">Coach Profile</h2>
-      <div className="flex flex-col items-center space-y-4">
-        <img
-          src={coach.photo}
-          alt={`${coach.name} photo`}
-          className="w-32 h-32 rounded-full object-cover shadow-md"
-        />
-        <h3 className="text-xl font-bold">{coach.name}</h3>
-        <p className="text-gray-700 text-center">{coach.bio}</p>
+    <div className="max-w-6xl mx-auto p-6">
+      <div className="flex items-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-800 flex items-center">
+          <FaUser className="mr-3 text-blue-600" />
+          Coach Profile
+        </h1>
+        <div className="ml-auto">
+          {isEditing ? (
+            <button
+              onClick={saveProfile}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
+            >
+              <FaSave className="mr-2" /> Save Profile
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsEditing(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
+            >
+              <FaEdit className="mr-2" /> Edit Profile
+            </button>
+          )}
+        </div>
       </div>
 
-      <div className="mt-6 space-y-3">
-        <div className="flex items-center space-x-3">
-          <svg
-            className="w-5 h-5 text-blue-600"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-          >
-            <path d="M16 12H8m0 0l4-4m0 8l-4-4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <a
-            href={`mailto:${coach.email}`}
-            className="text-blue-600 hover:underline"
-            aria-label={`Email ${coach.name}`}
-          >
-            {coach.email}
-          </a>
-        </div>
+      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="md:flex">
+          <div className="md:w-1/3 bg-gray-50 p-6 flex flex-col items-center">
+            <div className="relative mb-4">
+              <img
+                src={tempImage || profileImage}
+                alt="Profile"
+                className="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg"
+              />
+              {isEditing && (
+                <>
+                  <button
+                    onClick={() => fileInputRef.current.click()}
+                    className="absolute bottom-0 right-0 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700"
+                  >
+                    <FaUpload />
+                  </button>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
+                </>
+              )}
+            </div>
+            
+            {isEditing ? (
+              <input
+                type="text"
+                name="name"
+                value={profile.name}
+                onChange={handleInputChange}
+                className="text-xl font-bold text-center mb-1 p-2 border rounded"
+              />
+            ) : (
+              <h2 className="text-xl font-bold text-center mb-1">{profile.name}</h2>
+            )}
+            
+            {isEditing ? (
+              <input
+                type="text"
+                name="specialty"
+                value={profile.specialty}
+                onChange={handleInputChange}
+                className="text-blue-600 text-center mb-4 p-2 border rounded"
+              />
+            ) : (
+              <p className="text-blue-600 text-center mb-4">{profile.specialty}</p>
+            )}
 
-        <div className="flex items-center space-x-3">
-          <svg
-            className="w-5 h-5 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M22 16.92V21a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.53 19.53 0 01-6-6 19.79 19.79 0 01-3.07-8.64A2 2 0 013 2h4.09a2 2 0 012 1.72c.12.81.37 1.6.74 2.31a2 2 0 01-.45 2.11L9.21 8.79a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.71.37 1.5.62 2.31.74a2 2 0 011.72 2z"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <a href={`tel:${coach.phone}`} className="text-green-600 hover:underline" aria-label={`Call ${coach.name}`}>
-            {coach.phone}
-          </a>
-        </div>
+            <div className="w-full space-y-3">
+              <div className="flex items-center">
+                <FaTrophy className="text-gray-500 mr-2" />
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="team"
+                    value={profile.team}
+                    onChange={handleInputChange}
+                    className="flex-1 p-2 border rounded"
+                  />
+                ) : (
+                  <span>{profile.team}</span>
+                )}
+              </div>
+              
+              <div className="flex items-center">
+                <FaCertificate className="text-gray-500 mr-2" />
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="licenseNumber"
+                    value={profile.licenseNumber}
+                    onChange={handleInputChange}
+                    className="flex-1 p-2 border rounded"
+                  />
+                ) : (
+                  <span>License: {profile.licenseNumber}</span>
+                )}
+              </div>
+              
+              <div className="flex items-center">
+                <FaCalendarAlt className="text-gray-500 mr-2" />
+                {isEditing ? (
+                  <input
+                    type="number"
+                    name="yearsExperience"
+                    value={profile.yearsExperience}
+                    onChange={handleInputChange}
+                    className="w-16 p-2 border rounded"
+                  />
+                ) : (
+                  <span>{profile.yearsExperience} years experience</span>
+                )}
+              </div>
+              
+              <div className="flex items-center">
+                <FaPhone className="text-gray-500 mr-2" />
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="phone"
+                    value={profile.phone}
+                    onChange={handleInputChange}
+                    className="flex-1 p-2 border rounded"
+                  />
+                ) : (
+                  <span>{profile.phone}</span>
+                )}
+              </div>
+              
+              <div className="flex items-center">
+                <FaEnvelope className="text-gray-500 mr-2" />
+                {isEditing ? (
+                  <input
+                    type="email"
+                    name="email"
+                    value={profile.email}
+                    onChange={handleInputChange}
+                    className="flex-1 p-2 border rounded"
+                  />
+                ) : (
+                  <span>{profile.email}</span>
+                )}
+              </div>
+            </div>
 
-        <div className="flex space-x-6 justify-center mt-4">
-          <a
-            href={coach.social.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${coach.name} Twitter`}
-            className="text-blue-500 hover:text-blue-700"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0022.4.4a9 9 0 01-2.88 1.1 4.52 4.52 0 00-7.69 4.12A12.83 12.83 0 013 4.8a4.52 4.52 0 001.4 6.03 4.52 4.52 0 01-2.05-.56v.06a4.52 4.52 0 003.63 4.44 4.52 4.52 0 01-2.04.08 4.52 4.52 0 004.22 3.15A9.06 9.06 0 012 19.5a12.8 12.8 0 006.92 2.02c8.3 0 12.84-6.9 12.84-12.87 0-.2 0-.42-.02-.62A9.22 9.22 0 0023 3z" />
-            </svg>
-          </a>
+            {!isEditing && (
+              <div className="flex space-x-4 mt-4">
+                <a
+                  href={profile.social.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-600"
+                >
+                  <FaTwitter size={20} />
+                </a>
+                <a
+                  href={profile.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-700 hover:text-blue-900"
+                >
+                  <FaLinkedin size={20} />
+                </a>
+              </div>
+            )}
+          </div>
 
-          <a
-            href={coach.social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${coach.name} LinkedIn`}
-            className="text-blue-700 hover:text-blue-900"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M19 0h-14a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5v-14a5 5 0 00-5-5zm-11.5 20h-3v-11h3zm-1.5-12.268a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zm13 12.268h-3v-5.605c0-1.337-.027-3.06-1.866-3.06-1.867 0-2.154 1.459-2.154 2.963v5.702h-3v-11h2.881v1.507h.041a3.154 3.154 0 012.839-1.56c3.037 0 3.6 2 3.6 4.59z" />
-            </svg>
-          </a>
+          <div className="md:w-2/3 p-6">
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-3 border-b pb-2">Coach Bio</h3>
+              {isEditing ? (
+                <textarea
+                  name="bio"
+                  value={profile.bio}
+                  onChange={handleInputChange}
+                  rows="4"
+                  className="w-full p-3 border rounded"
+                />
+              ) : (
+                <p className="text-gray-700">{profile.bio}</p>
+              )}
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-3 border-b pb-2">Specialties</h3>
+              {isEditing ? (
+                <div className="space-y-2">
+                  {profile.specialties.map((specialty, index) => (
+                    <div key={index} className="flex items-center">
+                      <input
+                        type="text"
+                        value={specialty}
+                        onChange={(e) => handleSpecialtyChange(index, e.target.value)}
+                        className="flex-1 p-2 border rounded mr-2"
+                      />
+                      <button
+                        onClick={() => removeSpecialty(index)}
+                        className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                      >
+                        <FaTimes />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    onClick={addSpecialty}
+                    className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600"
+                  >
+                    Add Specialty
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {profile.specialties.map((specialty, index) => (
+                    <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                      {specialty}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-3 border-b pb-2">Certifications</h3>
+              {isEditing ? (
+                <div className="space-y-2">
+                  {profile.certifications.map((cert, index) => (
+                    <div key={index} className="flex items-center">
+                      <input
+                        type="text"
+                        value={cert}
+                        onChange={(e) => handleCertificationChange(index, e.target.value)}
+                        className="flex-1 p-2 border rounded mr-2"
+                      />
+                      <button
+                        onClick={() => removeCertification(index)}
+                        className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                      >
+                        <FaTimes />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    onClick={addCertification}
+                    className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600"
+                  >
+                    Add Certification
+                  </button>
+                </div>
+              ) : (
+                <ul className="list-disc pl-5 space-y-1">
+                  {profile.certifications.map((cert, index) => (
+                    <li key={index} className="text-gray-700">{cert}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-3 border-b pb-2">Availability</h3>
+              {isEditing ? (
+                <div className="space-y-2">
+                  {profile.availability.map((slot, index) => (
+                    <div key={index} className="flex items-center">
+                      <input
+                        type="text"
+                        value={slot}
+                        onChange={(e) => {
+                          const updatedAvailability = [...profile.availability];
+                          updatedAvailability[index] = e.target.value;
+                          setProfile(prev => ({ ...prev, availability: updatedAvailability }));
+                        }}
+                        className="flex-1 p-2 border rounded mr-2"
+                      />
+                      <button
+                        onClick={() => {
+                          const updatedAvailability = profile.availability.filter((_, i) => i !== index);
+                          setProfile(prev => ({ ...prev, availability: updatedAvailability }));
+                        }}
+                        className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                      >
+                        <FaTimes />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    onClick={() => {
+                      setProfile(prev => ({
+                        ...prev,
+                        availability: [...prev.availability, '']
+                      }));
+                    }}
+                    className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600"
+                  >
+                    Add Time Slot
+                  </button>
+                </div>
+              ) : (
+                <ul className="space-y-2">
+                  {profile.availability.map((slot, index) => (
+                    <li key={index} className="text-gray-700 flex items-center">
+                      <FaCalendarAlt className="text-gray-500 mr-2" />
+                      {slot}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </div>
       </div>
+
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

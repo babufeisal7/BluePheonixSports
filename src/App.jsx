@@ -1,4 +1,4 @@
-import React, { Suspense } from "react"; 
+import React, { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -22,7 +22,7 @@ const RugbyProgramPage = React.lazy(() => import('./pages/RugbyProgramPage'));
 const FootballProgramPage = React.lazy(() => import('./pages/FootballProgramPage'));
 const BasketballProgramPage = React.lazy(() => import('./pages/BasketballProgramPage'));
 const SwimmingProgramPage = React.lazy(() => import('./pages/SwimmingProgramPage'));
-const ServicesPage = React.lazy(() => import('./pages/ServicesPage')); // <-- New Services page
+const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 // Auth
@@ -48,7 +48,7 @@ const Performance = React.lazy(() => import('./pages/dashboard/coach/Performance
 const CoachProfile = React.lazy(() => import('./pages/dashboard/coach/CoachProfile'));
 const Achievements = React.lazy(() => import('./pages/dashboard/coach/Achievements'));
 const Reports = React.lazy(() => import('./pages/dashboard/coach/Reports'));
-const Settings = React.lazy(() => import('./pages/dashboard/coach/Settings'));
+const CoachSettings = React.lazy(() => import('./pages/dashboard/coach/CoachSettings')); // Fixed path
 
 // Player Routes
 const MyProfile = React.lazy(() => import('./pages/dashboard/player/MyProfile'));
@@ -61,6 +61,7 @@ const PlayerMessages = React.lazy(() => import('./pages/dashboard/player/Message
 const PlayerResources = React.lazy(() => import('./pages/dashboard/player/Resources'));
 const TrainingTracker = React.lazy(() => import('./pages/dashboard/player/TrainingTracker'));
 const MatchTracker = React.lazy(() => import('./pages/dashboard/player/MatchTracker'));
+const PlayerSettings = React.lazy(() => import('./pages/dashboard/player/PlayerSettings'));
 
 // Medic Routes
 const InjuryLogs = React.lazy(() => import('./pages/dashboard/medic/InjuryLogs'));
@@ -69,6 +70,10 @@ const RecoveryTracker = React.lazy(() => import('./pages/dashboard/medic/Recover
 const MedicalUpload = React.lazy(() => import('./pages/dashboard/medic/MedicalUpload'));
 const MedicMessaging = React.lazy(() => import('./pages/dashboard/medic/Messaging'));
 const MedicProfile = React.lazy(() => import('./pages/dashboard/medic/MedicProfile'));
+const AddPatient = React.lazy(() => import('./pages/dashboard/medic/AddPatient'));
+const QuickReport = React.lazy(() => import('./pages/dashboard/medic/QuickReport'));
+const MedicSchedule = React.lazy(() => import('./pages/dashboard/medic/Schedule'));
+const MedicSettings = React.lazy(() => import('./pages/dashboard/medic/MedicSettings'));
 
 // Components
 import Navbar from "./components/navbar";
@@ -146,7 +151,7 @@ const AppContent = () => {
           <Route path="/swimming-program" element={<Layout><SwimmingProgramPage /></Layout>} />
 
           {/* Services Page */}
-          <Route path="/services" element={<Layout><ServicesPage /></Layout>} />  {/* <-- Added Services */}
+          <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
 
           {/* Auth */}
           <Route path="/login" element={<LoginPage />} />
@@ -158,12 +163,18 @@ const AppContent = () => {
 
             {/* Medic Routes */}
             <Route path="medic" element={<MedicDashboard />}>
+              <Route index element={<Navigate to="injury-logs" replace />} />
               <Route path="injury-logs" element={<InjuryLogs />} />
               <Route path="health-reports" element={<HealthReports />} />
               <Route path="recovery-tracker" element={<RecoveryTracker />} />
               <Route path="medical-upload" element={<MedicalUpload />} />
               <Route path="messaging" element={<MedicMessaging />} />
               <Route path="profile" element={<MedicProfile />} />
+              <Route path="add-patient" element={<AddPatient />} />
+              <Route path="quick-report" element={<QuickReport />} />
+              <Route path="schedule" element={<MedicSchedule />} />
+              <Route path="settings" element={<MedicSettings />} />
+              <Route path="*" element={<Navigate to="injury-logs" replace />} />
             </Route>
 
             {/* Player Routes */}
@@ -179,6 +190,7 @@ const AppContent = () => {
               <Route path="resources" element={<PlayerResources />} />
               <Route path="training-tracker" element={<TrainingTracker />} />
               <Route path="match-tracker" element={<MatchTracker />} />
+              <Route path="settings" element={<PlayerSettings />} />
             </Route>
 
             {/* Coach Routes */}
@@ -197,7 +209,7 @@ const AppContent = () => {
               <Route path="achievements" element={<Achievements />} />
               <Route path="reports" element={<Reports />} />
               <Route path="profile" element={<CoachProfile />} />
-              <Route path="settings" element={<Settings />} />
+              <Route path="settings" element={<CoachSettings />} />
             </Route>
           </Route>
 
