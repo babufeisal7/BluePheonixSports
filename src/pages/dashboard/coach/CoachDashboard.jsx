@@ -98,125 +98,125 @@ const CoachDashboard = () => {
         <h1 className="text-lg font-bold">Coach Dashboard</h1>
         <div className="w-8"></div> {/* Spacer for alignment */}
       </header>
+{/* Sidebar - Mobile overlay */}
+<aside className={`${sidebarOpen ? "fixed inset-0 z-50 md:relative" : "hidden"} bg-blue-900 text-white p-6 flex flex-col md:w-64 md:block md:sticky md:top-0 md:h-screen overflow-y-auto`}>
+  <div className="flex items-center justify-between mb-8">
+    <div className="flex items-center gap-4">
+      <img 
+        src={coachProfile.avatar} 
+        alt={coachProfile.name}
+        className="w-10 h-10 rounded-full object-cover border-2 border-white"
+      />
+      <div>
+        <h2 className="text-xl font-bold line-clamp-1">{coachProfile.name.split(' ')[0]}</h2>
+        <p className="text-xs text-blue-200">{coachProfile.role}</p>
+      </div>
+    </div>
+    <button 
+      onClick={toggleSidebar}
+      className="text-white p-1 rounded hover:bg-blue-700 md:hidden"
+    >
+      <FiX size={20} />
+    </button>
+  </div>
 
-      {/* Sidebar - Mobile overlay */}
-      <aside className={`${sidebarOpen ? "fixed inset-0 z-50 md:relative" : "hidden"} bg-blue-900 text-white p-6 flex flex-col md:w-64 md:block md:sticky md:top-0 md:h-screen`}>
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <img 
-              src={coachProfile.avatar} 
-              alt={coachProfile.name}
-              className="w-10 h-10 rounded-full object-cover border-2 border-white"
-            />
-            <div>
-              <h2 className="text-xl font-bold line-clamp-1">{coachProfile.name.split(' ')[0]}</h2>
-              <p className="text-xs text-blue-200">{coachProfile.role}</p>
-            </div>
-          </div>
-          <button 
-            onClick={toggleSidebar}
-            className="text-white p-1 rounded hover:bg-blue-700 md:hidden"
-          >
-            <FiX size={20} />
-          </button>
-        </div>
+  {/* Navigation */}
+  <nav className="flex-1 flex flex-col gap-1">
+    {/* Dashboard Home */}
+    <NavLink
+      to=""
+      end
+      onClick={closeSidebar}
+      className={({ isActive }) =>
+        `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+          isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+        }`
+      }
+    >
+      <FiHome className="text-lg" />
+      Dashboard
+    </NavLink>
 
-        {/* Navigation */}
-        <nav className="flex-1 flex flex-col gap-1 overflow-y-auto">
-          {/* Dashboard Home */}
-          <NavLink
-            to=""
-            end
-            onClick={closeSidebar}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-                isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-              }`
-            }
-          >
-            <FiHome className="text-lg" />
-            Dashboard
-          </NavLink>
+    {/* Features (first 6) */}
+    {features.slice(0, 6).map(({ name, path, icon }) => (
+      <NavLink
+        key={name}
+        to={path}
+        onClick={closeSidebar}
+        className={({ isActive }) =>
+          `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+            isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+          }`
+        }
+      >
+        <span className="text-lg">{icon}</span>
+        <span>{name}</span>
+      </NavLink>
+    ))}
 
-          {/* Features (first 6) */}
-          {features.slice(0, 6).map(({ name, path, icon }) => (
-            <NavLink
-              key={name}
-              to={path}
-              onClick={closeSidebar}
-              className={({ isActive }) =>
-                `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-                  isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-                }`
-              }
-            >
-              <span className="text-lg">{icon}</span>
-              <span>{name}</span>
-            </NavLink>
-          ))}
+    {/* Divider */}
+    <div className="pt-4 border-t border-blue-700" />
 
-          {/* Divider */}
-          <div className="pt-4 border-t border-blue-700" />
+    {/* Features (remaining) */}
+    {features.slice(6).map(({ name, path, icon }) => (
+      <NavLink
+        key={name}
+        to={path}
+        onClick={closeSidebar}
+        className={({ isActive }) =>
+          `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+            isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+          }`
+        }
+      >
+        <span className="text-lg">{icon}</span>
+        <span>{name}</span>
+      </NavLink>
+    ))}
 
-          {/* Features (remaining) */}
-          {features.slice(6).map(({ name, path, icon }) => (
-            <NavLink
-              key={name}
-              to={path}
-              onClick={closeSidebar}
-              className={({ isActive }) =>
-                `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-                  isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-                }`
-              }
-            >
-              <span className="text-lg">{icon}</span>
-              <span>{name}</span>
-            </NavLink>
-          ))}
+    {/* Profile and Settings */}
+    <NavLink
+      to="profile"
+      onClick={closeSidebar}
+      className={({ isActive }) =>
+        `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+          isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+        }`
+      }
+    >
+      <FiUser className="text-lg" />
+      My Profile
+    </NavLink>
+    <NavLink
+      to="settings"
+      onClick={closeSidebar}
+      className={({ isActive }) =>
+        `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+          isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+        }`
+      }
+    >
+      <FiSettings className="text-lg" />
+      Settings
+    </NavLink>
 
-          {/* Profile and Settings */}
-          <NavLink
-            to="profile"
-            onClick={closeSidebar}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-                isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-              }`
-            }
-          >
-            <FiUser className="text-lg" />
-            My Profile
-          </NavLink>
-          <NavLink
-            to="settings"
-            onClick={closeSidebar}
-            className={({ isActive }) =>
-              `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-                isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-              }`
-            }
-          >
-            <FiSettings className="text-lg" />
-            Settings
-          </NavLink>
+    {/* Logout */}
+    <NavLink
+      to="logout"
+      onClick={closeSidebar}
+      className={`flex items-center gap-3 py-2 px-3 rounded-md transition-colors hover:bg-blue-700 text-red-200 hover:text-red-100`}
+    >
+      <FiLogOut className="text-lg" />
+      Logout
+    </NavLink>
 
-          {/* Logout */}
-          <NavLink
-            to="logout"
-            onClick={closeSidebar}
-            className={`flex items-center gap-3 py-2 px-3 rounded-md transition-colors hover:bg-blue-700 text-red-200 hover:text-red-100`}
-          >
-            <FiLogOut className="text-lg" />
-            Logout
-          </NavLink>
+    {/* Footer text */}
+    <div className="pt-4 text-sm text-blue-300 select-none">
+      &copy; {new Date().getFullYear()} Blue Phoenix Sports
+    </div>
+  </nav>
+</aside>
 
-          {/* Footer text */}
-          <div className="pt-4 text-sm text-blue-300 select-none">
-            &copy; {new Date().getFullYear()} Blue Phoenix Sports
-          </div>
-        </nav>
-      </aside>
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-8 overflow-auto">

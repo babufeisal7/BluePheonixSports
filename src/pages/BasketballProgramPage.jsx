@@ -511,42 +511,8 @@ const BasketballProgramPage = () => {
         </Slider>
       </section>
 
-      {/* FAQ Section */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-blue-800 mb-8">Frequently Asked Questions</h2>
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          {[
-            {
-              question: "What should my child bring to training sessions?",
-              answer: "Players should bring basketball shoes (indoor and outdoor), a water bottle, and any required medical items. We provide basketballs and training equipment."
-            },
-            {
-              question: "How are players grouped during training?",
-              answer: "Players are grouped by age, skill level, and position to ensure appropriate development. We regularly assess and may move players between groups."
-            },
-            {
-              question: "Do you offer financial assistance?",
-              answer: "Yes, we offer need-based scholarships and payment plans. Contact our office for application details."
-            },
-            {
-              question: "What's your cancellation policy?",
-              answer: "We require 24 hours notice for session cancellations. Monthly fees can be paused for injuries with doctor's note."
-            }
-          ].map((faq, index) => (
-            <div key={index} className="border-b border-gray-200 last:border-b-0">
-              <button className="w-full text-left p-6 hover:bg-blue-50 transition-colors duration-200 flex justify-between items-center">
-                <h3 className="text-lg font-medium">{faq.question}</h3>
-                <svg className="w-5 h-5 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-              <div className="px-6 pb-6 pt-2 text-gray-700 hidden">
-                {faq.answer}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+
+  
 
       {/* CTA Section */}
       <section className="text-center bg-gradient-to-r from-blue-800 to-blue-600 text-white py-16 rounded-xl shadow-xl mb-8">
@@ -562,12 +528,6 @@ const BasketballProgramPage = () => {
             >
               Register Now <FaArrowRight className="ml-2" />
             </Link>
-            <Link
-              to="/contact"
-              className="bg-transparent hover:bg-white hover:text-blue-800 text-white font-bold py-4 px-10 rounded-full inline-flex items-center border-2 border-white transition-all duration-300 shadow-lg"
-            >
-              Contact Our Staff
-            </Link>
           </div>
           <p className="mt-6 text-blue-200">
             Have questions? Call us at (555) 123-4567 or email info@bluephoenixhoops.com
@@ -575,23 +535,6 @@ const BasketballProgramPage = () => {
         </div>
       </section>
 
-      {/* Newsletter Signup */}
-      <div className="bg-blue-50 rounded-xl p-8 text-center">
-        <h3 className="text-2xl font-bold text-blue-800 mb-2">Stay Updated</h3>
-        <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-          Sign up for our newsletter to receive training tips, program updates, and special offers.
-        </p>
-        <div className="flex max-w-md mx-auto">
-          <input 
-            type="email" 
-            placeholder="Your email address" 
-            className="flex-grow px-4 py-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-r-lg transition-colors duration-200">
-            Subscribe
-          </button>
-        </div>
-      </div>
     </div>
   );
 };

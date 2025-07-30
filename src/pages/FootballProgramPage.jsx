@@ -509,42 +509,7 @@ const FootballProgramPage = () => {
         </Slider>
       </section>
 
-      {/* FAQ Section */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-green-800 mb-8">Frequently Asked Questions</h2>
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          {[
-            {
-              question: "What equipment does my child need for training?",
-              answer: "Players need football boots (cleats), shin guards, a water bottle, and appropriate training clothing. Goalkeepers should bring goalkeeper gloves."
-            },
-            {
-              question: "How often do teams compete in tournaments?",
-              answer: "Our teams typically participate in 3-4 tournaments per season, plus league play. Tournament selection is based on team level and development goals."
-            },
-            {
-              question: "What's the policy for inclement weather?",
-              answer: "Training is only canceled for severe weather. We utilize indoor facilities when possible. Cancellations are communicated via our team app at least 2 hours prior."
-            },
-            {
-              question: "How are playing time decisions made?",
-              answer: "For competitive teams, playing time is earned through training performance, attitude, and tactical fit. Development teams focus on equal participation."
-            }
-          ].map((faq, index) => (
-            <div key={index} className="border-b border-gray-200 last:border-b-0">
-              <button className="w-full text-left p-6 hover:bg-green-50 transition-colors duration-200 flex justify-between items-center">
-                <h3 className="text-lg font-medium">{faq.question}</h3>
-                <svg className="w-5 h-5 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-              <div className="px-6 pb-6 pt-2 text-gray-700 hidden">
-                {faq.answer}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* CTA Section */}
       <section className="text-center bg-gradient-to-r from-green-800 to-green-600 text-white py-16 rounded-xl shadow-xl mb-8">
@@ -560,12 +525,7 @@ const FootballProgramPage = () => {
             >
               Register Now <FaArrowRight className="ml-2" />
             </Link>
-            <Link
-              to="/contact"
-              className="bg-transparent hover:bg-white hover:text-green-800 text-white font-bold py-4 px-10 rounded-full inline-flex items-center border-2 border-white transition-all duration-300 shadow-lg"
-            >
-              Contact Our Staff
-            </Link>
+           
           </div>
           <p className="mt-6 text-green-200">
             Have questions? Call us at (555) 123-4567 or email info@bluephoenixfootball.com

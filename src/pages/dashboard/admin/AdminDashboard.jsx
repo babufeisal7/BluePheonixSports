@@ -82,78 +82,87 @@ const AdminDashboard = () => {
         <div className="w-8" /> {/* Spacer */}
       </header>
 
-      {/* Sidebar */}
-      <aside className={cn(
-        "transition-all duration-300 ease-in-out z-50 md:relative",
-        sidebarOpen ? "fixed inset-0 md:translate-x-0" : "hidden",
-        darkMode ? "bg-gray-800" : "bg-blue-900",
-        "text-white p-4 flex flex-col md:w-64 md:block md:sticky md:top-0 md:h-screen"
-      )}>
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <img src={adminProfile.avatar} alt={adminProfile.name} className="w-10 h-10 rounded-full object-cover border-2 border-white" />
-            <div>
-              <h2 className="text-lg font-bold truncate">{adminProfile.name}</h2>
-              <p className="text-xs text-blue-200 truncate">{adminProfile.role}</p>
-            </div>
-          </div>
-          <button onClick={toggleSidebar} className="md:hidden text-white" aria-label="Close Sidebar">
-            <FiX size={20} />
-          </button>
-        </div>
+{/* Sidebar */}
+<aside className={cn(
+  "transition-all duration-300 ease-in-out z-50 md:relative",
+  sidebarOpen ? "fixed inset-0 md:translate-x-0" : "hidden",
+  darkMode ? "bg-gray-800" : "bg-blue-900",
+  "text-white p-4 flex flex-col md:w-64 md:block md:sticky md:top-0 md:h-screen overflow-y-auto"
+)}>
+  <div className="flex items-center justify-between mb-8">
+    <div className="flex items-center gap-4">
+      <img
+        src={adminProfile.avatar}
+        alt={adminProfile.name}
+        className="w-10 h-10 rounded-full object-cover border-2 border-white"
+      />
+      <div>
+        <h2 className="text-lg font-bold truncate">{adminProfile.name}</h2>
+        <p className="text-xs text-blue-200 truncate">{adminProfile.role}</p>
+      </div>
+    </div>
+    <button
+      onClick={toggleSidebar}
+      className="md:hidden text-white"
+      aria-label="Close Sidebar"
+    >
+      <FiX size={20} />
+    </button>
+  </div>
 
-        {/* Nav Links */}
-        <nav className="flex-1 overflow-y-auto flex flex-col gap-1">
-          <NavLink
-            to=""
-            end
-            onClick={() => isMobile && setSidebarOpen(false)}
-            className={({ isActive }) => cn(
-              "flex items-center gap-3 py-2 px-3 rounded-md transition-colors",
-              isActive ? "bg-blue-700" : "hover:bg-blue-700"
-            )}
-          >
-            <FiHome className="text-lg" />
-            Dashboard
-          </NavLink>
+  {/* Nav Links */}
+  <nav className="flex-1 flex flex-col gap-1">
+    <NavLink
+      to=""
+      end
+      onClick={() => isMobile && setSidebarOpen(false)}
+      className={({ isActive }) => cn(
+        "flex items-center gap-3 py-2 px-3 rounded-md transition-colors",
+        isActive ? "bg-blue-700" : "hover:bg-blue-700"
+      )}
+    >
+      <FiHome className="text-lg" />
+      Dashboard
+    </NavLink>
 
-          {features.map(({ name, path, icon }) => (
-            <NavLink
-              key={name}
-              to={path}
-              onClick={() => isMobile && setSidebarOpen(false)}
-              className={({ isActive }) => cn(
-                "flex items-center gap-3 py-2 px-3 rounded-md transition-colors",
-                isActive ? "bg-blue-700" : "hover:bg-blue-700"
-              )}
-            >
-              {icon}
-              {name}
-            </NavLink>
-          ))}
+    {features.map(({ name, path, icon }) => (
+      <NavLink
+        key={name}
+        to={path}
+        onClick={() => isMobile && setSidebarOpen(false)}
+        className={({ isActive }) => cn(
+          "flex items-center gap-3 py-2 px-3 rounded-md transition-colors",
+          isActive ? "bg-blue-700" : "hover:bg-blue-700"
+        )}
+      >
+        {icon}
+        {name}
+      </NavLink>
+    ))}
 
-          <div className="pt-4 border-t border-blue-700 mt-4">
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-blue-700 transition-colors w-full"
-              aria-label="Toggle Dark Mode"
-            >
-              {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-            </button>
-            <button
-              onClick={() => navigate("/logout")}
-              className="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100 w-full"
-              aria-label="Logout"
-            >
-              <FiLogOut className="text-lg" />
-              Logout
-            </button>
-            <div className="pt-4 text-xs text-blue-300 text-center select-none">
-              &copy; {new Date().getFullYear()} Sports Admin
-            </div>
-          </div>
-        </nav>
-      </aside>
+    <div className="pt-4 border-t border-blue-700 mt-4">
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-blue-700 transition-colors w-full"
+        aria-label="Toggle Dark Mode"
+      >
+        {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+      </button>
+      <button
+        onClick={() => navigate("/logout")}
+        className="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100 w-full"
+        aria-label="Logout"
+      >
+        <FiLogOut className="text-lg" />
+        Logout
+      </button>
+      <div className="pt-4 text-xs text-blue-300 text-center select-none">
+        &copy; {new Date().getFullYear()} Sports Admin
+      </div>
+    </div>
+  </nav>
+</aside>
+
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-6 overflow-auto">
