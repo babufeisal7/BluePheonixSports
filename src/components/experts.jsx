@@ -9,7 +9,7 @@ const expertData = [
     id: 1,
     name: "Dr. Sarah Johnson",
     role: "Neuroscience",
-    imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+    imgSrc: "coach1.jpg",
     social: {
       linkedin: "#",
       twitter: "#"
@@ -19,7 +19,7 @@ const expertData = [
     id: 2,
     name: "James Chen",
     role: "AI Specialist",
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    imgSrc: "coach2.jpg",
     social: {
       linkedin: "#",
       website: "#"
@@ -29,7 +29,7 @@ const expertData = [
     id: 3,
     name: "James Chen",
     role: "AI Specialist",
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    imgSrc: "keeper.jpg",
     social: {
       linkedin: "#",
       website: "#"
@@ -39,7 +39,7 @@ const expertData = [
     id: 4,
     name: "James Chen",
     role: "AI Specialist",
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    imgSrc: "coach3.jpg",
     social: {
       linkedin: "#",
       website: "#"
@@ -49,7 +49,7 @@ const expertData = [
     id: 5,
     name: "James Chen",
     role: "AI Specialist",
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    imgSrc: "coach2.jpg",
     social: {
       linkedin: "#",
       website: "#"

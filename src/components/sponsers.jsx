@@ -1,45 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const sponsorData = [
-    { name: 'Stanbic Bank', logo: '/images/stanbic-bank.png' },
-    { name: 'NxtRadio', logo: '/images/nxtradio.png' },
-    { name: "King's Park", logo: '/images/kings-park.png' },
-];
-
 const Sponsors = () => {
-    return (
-        <div className="bg-gray-100 py-16 sm:py-20 lg:py-24">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
-                    Trusted by our valued sponsors
-                </h2>
-                <div className="mx-auto mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:max-w-xl sm:grid-cols-3 sm:gap-x-8 lg:max-w-7xl lg:grid-cols-5 lg:gap-x-10">
-                    {sponsorData.map((sponsor) => (
-                        <div key={sponsor.name} className="flex items-center justify-center">
-                            <img
-                                src={sponsor.logo}
-                                alt={`${sponsor.name} Logo`}
-                                className="max-h-12 w-full object-contain"
-                                width={158}
-                                height={48}
-                                loading="lazy"
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
+  const sponsors = [
+    { name: 'Stanbic Bank', logo: '/logo.jpg' },
+    { name: 'NxtRadio', logo: '/logo.jpg' },
+    { name: "King's Park", logo: '/logo.jpg' },
+    // Add more sponsors as needed
+  ];
+
+  return (
+    <section className="bg-gray-50 py-16 sm:py-20 lg:py-24 px-4">
+      <div className="mx-auto max-w-7xl">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            Our Valued Sponsors
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+            We're proud to partner with these industry leaders
+          </p>
         </div>
-    );
+
+        <div className="flex flex-wrap justify-center gap-8">
+          {sponsors.map((sponsor) => (
+            <div 
+              key={sponsor.name}
+              className="flex flex-col items-center justify-center w-full max-w-xs p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              <div className="flex items-center justify-center h-24 w-full">
+                <img
+                  src={sponsor.logo}
+                  alt={`${sponsor.name} Logo`}
+                  className="max-h-16 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  width={158}
+                  height={48}
+                  loading="lazy"
+                />
+              </div>
+              <span className="mt-3 text-sm font-medium text-gray-500">
+                {sponsor.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 Sponsors.propTypes = {
-    sponsors: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            logo: PropTypes.string.isRequired,
-        })
-    ),
+  sponsors: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      logo: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 export default Sponsors;

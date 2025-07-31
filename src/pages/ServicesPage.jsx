@@ -9,24 +9,39 @@ import {
   faFutbol,
   faSwimmer,
   faInfoCircle,
-  faCheckCircle
+  faCheckCircle,
+  faStar
 } from '@fortawesome/free-solid-svg-icons';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const USD_TO_UGX = 3700;
 
-const iconSize = 'h-[2.80rem] w-[2.80rem] text-blue-600';
+const iconSize = 'h-12 w-12 text-blue-600 p-2 bg-blue-50 rounded-lg';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
 
+const cardHoverVariants = {
+  hover: { y: -5, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }
+};
+
 const professionalServices = [
   {
     title: 'Schools Sports Management',
     description:
-      'We design, implement, and manage school-wide sports programs that inspire and develop young athletes. Our team works with educators to craft tailored training calendars, recruit skilled coaches, and organize competitive inter-school events that align with academic goals.',
+      'We design, implement, and manage school-wide sports programs that inspire and develop young athletes.',
     icon: <FontAwesomeIcon icon={faSchool} className={iconSize} />,
     image: '/image1.jpg',
     price: 'Custom Quote',
@@ -36,12 +51,13 @@ const professionalServices = [
       'Inter-school competition setup',
       'PE curriculum support',
       'Student performance tracking'
-    ]
+    ],
+    accentColor: 'bg-indigo-600'
   },
   {
     title: 'Sports Team Management',
     description:
-      'We handle team operations from recruitment to matchday logistics. Our service includes strength and conditioning plans, scouting, injury prevention strategies, and advanced video analysis to improve team performance and cohesion.',
+      'We handle team operations from recruitment to matchday logistics with comprehensive performance solutions.',
     icon: <FontAwesomeIcon icon={faUsers} className={iconSize} />,
     image: '/coach1.jpg',
     price: 'From 1,000,000 UGX/month',
@@ -51,12 +67,13 @@ const professionalServices = [
       'Fitness & injury management',
       'Match analysis reports',
       'Fixture planning & logistics'
-    ]
+    ],
+    accentColor: 'bg-blue-600'
   },
   {
     title: 'Sports Events Management',
     description:
-      'Let us take the stress out of organizing your sports events. From concept to execution, we manage everything: venue sourcing, permits, branded materials, ticketing, security, and results tracking — ensuring a memorable experience.',
+      'From concept to execution, we manage everything ensuring a memorable experience for all participants.',
     icon: <FontAwesomeIcon icon={faCalendarAlt} className={iconSize} />,
     image: '/coach1.jpg',
     price: 'From 1,000,000 UGX/event',
@@ -66,12 +83,13 @@ const professionalServices = [
       'Sponsorship & branding',
       'Ticketing & access control',
       'Post-event reporting'
-    ]
+    ],
+    accentColor: 'bg-teal-600'
   },
   {
     title: 'Merchandise Sales',
     description:
-      'Boost team identity and generate revenue with high-quality branded merchandise. We offer design support and fulfillment for jerseys, tracksuits, caps, bags, and fan gear — all customizable and delivered on time.',
+      'Boost team identity with high-quality branded merchandise with design support and fulfillment.',
     icon: <FontAwesomeIcon icon={faShoppingBag} className={iconSize} />,
     image: '/coach1.jpg',
     price: 'From 50,000 UGX/item',
@@ -81,69 +99,69 @@ const professionalServices = [
       'On-demand delivery',
       'Fan store setup',
       'Merch design support'
-    ]
+    ],
+    accentColor: 'bg-purple-600'
   }
 ];
 
 const youthPrograms = [
   {
     title: 'Rugby Program',
-    ageRange: 'For ages 8 – 18 | Boys & Girls',
-    icon: <FontAwesomeIcon icon={faRunning} className="text-4xl text-blue-600 mb-4" />,
+    ageRange: 'Ages 8 – 18 | Boys & Girls',
+    icon: <FontAwesomeIcon icon={faRunning} className={iconSize} />,
     priceUSD: 100,
     features: [
       'Weekly training (3 sessions)',
       'Match fixtures and tournaments',
       'Nutrition & strength sessions',
       'Uniform included',
-      'Player performance tracking',
-      'Leadership & teamwork workshops'
+      'Player performance tracking'
     ],
-    highlight: 'Most popular'
+    highlight: 'Most popular',
+    accentColor: 'bg-red-600'
   },
   {
     title: 'Football Program',
-    ageRange: 'For ages 6 – 18 | Boys & Girls',
-    icon: <FontAwesomeIcon icon={faFutbol} className="text-4xl text-blue-600 mb-4" />,
+    ageRange: 'Ages 6 – 18 | Boys & Girls',
+    icon: <FontAwesomeIcon icon={faFutbol} className={iconSize} />,
     priceUSD: 100,
     features: [
       '3–4 weekly sessions',
       'Goalkeeper training',
       'Video match analysis',
       'College recruitment support',
-      'Fitness & conditioning',
-      'Tournament exposure'
-    ]
+      'Fitness & conditioning'
+    ],
+    accentColor: 'bg-green-600'
   },
-
   {
     title: 'Basketball Program',
-    ageRange: 'For ages 8 – 18 | Boys & Girls',
-    icon: <FontAwesomeIcon icon={faUsers} className="text-4xl text-blue-600 mb-4" />,
+    ageRange: 'Ages 8 – 18 | Boys & Girls',
+    icon: <FontAwesomeIcon icon={faUsers} className={iconSize} />,
     priceUSD: 100,
     features: [
       '3 sessions per week',
       'Skill-based drills & scrimmages',
       'Strength and agility training',
-      'Team competitions & tournaments',
-      'Basketball IQ & game strategy',
-      'Progress assessments'
-    ]
+      'Team competitions',
+      'Basketball IQ development'
+    ],
+    accentColor: 'bg-orange-600'
   },
   {
     title: 'Swimming Program',
-    ageRange: 'For ages 4+ | Beginners to Advanced',
-    icon: <FontAwesomeIcon icon={faSwimmer} className="text-4xl text-blue-600 mb-4" />,
+    ageRange: 'Ages 4+ | All Levels',
+    icon: <FontAwesomeIcon icon={faSwimmer} className={iconSize} />,
     priceUSD: 100,
     features: [
       'Daily sessions available',
       'Olympic-sized pool access',
-      'Stroke technique and dryland training',
+      'Stroke technique training',
       'Competitive swim meets',
-      'Aquatic safety & breathing control',
-      'Strength building routines'
+      'Aquatic safety training'
     ],
-    highlight: 'Limited spots'
+    highlight: 'Limited spots',
+    accentColor: 'bg-cyan-600'
   },
 ];
 
@@ -159,186 +177,272 @@ const ServicesPage = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gray-50">
       {/* Header */}
       <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-4">Our Services & Programs</h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <motion.h1 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-4xl md:text-5xl font-bold text-blue-800 mb-4"
+        >
+          Our Services & Programs
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1 }}
+          className="text-xl text-gray-600 max-w-3xl mx-auto"
+        >
           Comprehensive sports management solutions and youth development programs to nurture talent at all levels.
-        </p>
+        </motion.p>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center mt-8 mb-12">
-          <div className="inline-flex bg-white rounded-full p-1 shadow-md">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="flex justify-center mt-8 mb-12"
+        >
+          <div className="inline-flex bg-white rounded-full p-1 shadow-md border border-gray-200">
             <button
               onClick={() => setActiveTab('services')}
-              className={`px-6 py-2 rounded-full font-medium transition ${
-                activeTab === 'services' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                activeTab === 'services' 
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg' 
+                  : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
               Professional Services
             </button>
             <button
               onClick={() => setActiveTab('programs')}
-              className={`px-6 py-2 rounded-full font-medium transition ${
-                activeTab === 'programs' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                activeTab === 'programs' 
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg' 
+                  : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
               Youth Programs
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Services Section */}
       {activeTab === 'services' && (
-        <div className="mb-20">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="mb-20"
+        >
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             {professionalServices.map((service, index) => (
-              <div
+              <motion.div
                 key={index}
-                className={`bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 ${
+                variants={itemVariants}
+                whileHover="hover"
+                variants={cardHoverVariants}
+                className={`bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 transition-all duration-300 ${
                   expandedService === index ? 'ring-2 ring-blue-500' : ''
                 }`}
               >
-                <img src={service.image} alt={service.title} className="w-full h-48 object-cover" />
+                <div className={`h-2 ${service.accentColor}`}></div>
                 <div className="p-6">
-                  <div className="flex items-start">
-                    <div className="mr-6">{service.icon}</div>
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      {service.icon}
+                    </div>
                     <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-blue-800 mb-2">{service.title}</h3>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.title}</h3>
                       <p className="text-gray-600 mb-4">{service.description}</p>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mt-6">
                         <span className="text-xl font-bold text-blue-700">{service.price}</span>
-                        <button
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                           onClick={() => toggleServiceExpand(index)}
                           className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
                         >
                           <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
                           {expandedService === index ? 'Less details' : 'More details'}
-                        </button>
+                        </motion.button>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {expandedService === index && (
-                  <div className="bg-blue-50 px-6 py-4 border-t border-gray-200">
-                    <h4 className="font-bold text-blue-800 mb-3">Service Features:</h4>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-start">
-                          <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mt-1 mr-2" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition">
-                      Request Service
-                    </button>
-                  </div>
-                )}
-              </div>
+                <AnimatePresence>
+                  {expandedService === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-gray-50 px-6 py-4 border-t border-gray-200 overflow-hidden"
+                    >
+                      <h4 className="font-bold text-gray-800 mb-3">Service Features:</h4>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, i) => (
+                          <li key={i} className="flex items-start">
+                            <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                            <span className="text-gray-700">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="mt-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-md"
+                      >
+                        Request Service
+                      </motion.button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
 
       {/* Youth Programs Section */}
       {activeTab === 'programs' && (
-        <div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-blue-800 mb-2">Youth Development Programs</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <motion.h2 
+              variants={itemVariants}
+              className="text-3xl font-bold text-blue-800 mb-2"
+            >
+              Youth Development Programs
+            </motion.h2>
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+            >
               Our programs are designed to develop young athletes both on and off the field.
-            </p>
+            </motion.p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {youthPrograms.map((program, index) => (
-              <div
+              <motion.div
                 key={index}
-                className={`bg-white rounded-xl shadow-lg p-6 text-center border border-gray-200 hover:shadow-xl transition relative ${
+                variants={itemVariants}
+                whileHover="hover"
+                className={`relative bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 transition-all ${
                   program.highlight ? 'border-blue-500' : ''
                 }`}
               >
                 {program.highlight && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-sm font-bold px-4 py-1 rounded-full">
+                  <div className="absolute top-0 right-0 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 transform translate-x-2 -translate-y-2 rotate-12 shadow-sm">
                     {program.highlight}
                   </div>
                 )}
-                {program.icon}
-                <h2 className="text-2xl font-bold text-blue-800 mb-2">{program.title}</h2>
-                <p className="text-gray-600 mb-6">{program.ageRange}</p>
-                <p className="text-4xl font-extrabold text-blue-800 mb-2">
-                  {(program.priceUSD * USD_TO_UGX).toLocaleString()} UGX
-                </p>
-                <p className="text-gray-500 mb-6 text-sm">≈ ${program.priceUSD}/month</p>
-                <ul className="text-left space-y-3 mb-8">
-                  {program.features.map((feature, i) => (
-                    <li key={i} className="flex items-start">
-                      <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mt-1 mr-2" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition">
-                  Enroll Now
-                </button>
-              </div>
+                
+                <div className={`h-2 ${program.accentColor}`}></div>
+                
+                <div className="p-6 text-center">
+                  <div className="flex justify-center mb-4">
+                    <div className={`p-3 rounded-lg ${program.accentColor.replace('bg-', 'bg-opacity-10 ')}`}>
+                      {program.icon}
+                    </div>
+                  </div>
+                  
+                  <h2 className="text-xl font-bold text-gray-900 mb-1">{program.title}</h2>
+                  <p className="text-gray-600 text-sm mb-6">{program.ageRange}</p>
+                  
+                  <div className="mb-6">
+                    <p className="text-3xl font-extrabold text-gray-900">
+                      {(program.priceUSD * USD_TO_UGX).toLocaleString()} UGX
+                    </p>
+                    <p className="text-gray-500 text-sm">≈ ${program.priceUSD}/month</p>
+                  </div>
+                  
+                  <ul className="text-left space-y-3 mb-8">
+                    {program.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className={`w-full ${program.accentColor} hover:${program.accentColor.replace('600', '700')} text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-md`}
+                  >
+                    Enroll Now
+                  </motion.button>
+                </div>
+              </motion.div>
             ))}
           </div>
 
           {/* Program Comparison */}
-          <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
+          <motion.div 
+            variants={itemVariants}
+            className="bg-white rounded-xl shadow-lg p-8 mb-12 border border-gray-200"
+          >
             <h3 className="text-2xl font-bold text-blue-800 mb-6 text-center">Program Comparison</h3>
-            <div className="overflow-x-auto mb-8">
+            <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-gray-200">
-                    <th className="text-left pb-4">Features</th>
+                    <th className="text-left pb-4 text-gray-600 font-medium">Features</th>
                     {youthPrograms.map((program, i) => (
-                      <th key={i} className="text-center pb-4">{program.title}</th>
+                      <th key={i} className="text-center pb-4 text-gray-900 font-medium">
+                        {program.title}
+                        {program.highlight && (
+                          <span className="ml-2 text-yellow-500">
+                            <FontAwesomeIcon icon={faStar} size="xs" />
+                          </span>
+                        )}
+                      </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { key: 'Training frequency', values: ['3 sessions/week', '3-4 sessions/week', '3 sessions/week', 'Daily sessions available'] },
+                    { key: 'Training frequency', values: ['3 sessions/week', '3-4 sessions/week', '3 sessions/week', 'Daily sessions'] },
                     { key: 'Age groups', values: ['8-18 years', '6-18 years', '8-18 years', '4+ years'] },
-                    { key: 'Competitions', values: ['Monthly tournaments', 'Bi-weekly matches', 'Team competitions', 'Quarterly meets'] },
-                    { key: 'Equipment provided', values: ['Uniform included', 'Shin guards', 'Basketball gear', 'Swim cap'] }
+                    { key: 'Competitions', values: ['Monthly', 'Bi-weekly', 'Team comps', 'Quarterly'] },
+                    { key: 'Equipment', values: ['Uniform', 'Shin guards', 'Basketball gear', 'Swim cap'] }
                   ].map(({ key, values }, ri) => (
-                    <tr key={ri} className="border-b border-gray-100">
-                      <td className="py-3 font-medium">{key}</td>
+                    <tr key={ri} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-3 font-medium text-gray-600">{key}</td>
                       {values.map((val, idx) => (
-                        <td key={idx} className="text-center py-3">{val}</td>
+                        <td key={idx} className="text-center py-3 text-gray-700">{val}</td>
                       ))}
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+          </motion.div>
 
-           
-          </div>
-           {/* Call to Action */}
-            <motion.section
-              variants={itemVariants}
-              initial="hidden"
-              animate="visible"
-              className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl p-8 md:p-12 text-center text-white"
+          {/* Call to Action */}
+          <motion.section
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 md:p-12 text-center text-white shadow-xl"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Join Our Community</h2>
+            <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto opacity-90">
+              Become part of the Blue Phoenix family and elevate your game to the next level.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all"
             >
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Join Our Community</h2>
-              <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
-                Become part of the Blue Phoenix family and elevate your game to the next level.
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold text-lg shadow-lg"
-              >
-                Get Started Today
-              </motion.button>
-            </motion.section>
-        </div>
+              Get Started Today
+            </motion.button>
+          </motion.section>
+        </motion.div>
       )}
     </div>
   );
