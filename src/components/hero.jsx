@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const mediaItems = [
   { type: 'image', src: '/photo12.jpg',  },
-  { type: 'video', src: '/video1.mp4',  },
-  { type: 'image', src: '/football1.jpg',  },
   { type: 'video', src: '/swimmingvid.mp4', },
+  { type: 'image', src: '/football1.jpg',  },
+  { type: 'video', src: '/video1.mp4',  },
   { type: 'image', src: '/basketball4.jpg',  },
 ];
 
