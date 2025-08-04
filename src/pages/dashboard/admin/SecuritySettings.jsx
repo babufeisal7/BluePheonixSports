@@ -1,203 +1,494 @@
-import React from "react";
+import React, { useState } from 'react';
+import { 
+  FiLock, 
+  FiShield, 
+  FiKey, 
+  FiUser, 
+  FiLogIn, 
+  FiList, 
+  FiAlertCircle, 
+  FiCheckCircle, 
+  FiXCircle,
+  FiDownload,
+  FiSave,
+  FiPlus
+} from 'react-icons/fi';
 
 const SecuritySettings = () => {
+  // State for password policy
+  const [passwordPolicy, setPasswordPolicy] = useState({
+    minLength: 8,
+    expiryDays: 90,
+    requirements: {
+      uppercase: true,
+      lowercase: true,
+      numbers: true,
+      symbols: true
+    }
+  });
+
+  // State for authentication settings
+  const [authSettings, setAuthSettings] = useState({
+    twoFactor: 'Require 2FA for admins',
+    maxAttempts: 5,
+    lockoutDuration: 30,
+    defaultMethod: 'Password Only'
+  });
+
+  // State for session security
+  const [sessionSettings, setSessionSettings] = useState({
+    protectionLevel: 'Enhanced protection',
+    ipWhitelist: ['192.168.1.0/24', '10.0.0.0/8'],
+    defaultPermissions: 'Standard Access',
+    logActivities: true
+  });
+
+  // State for new IP range input
+  const [newIpRange, setNewIpRange] = useState('');
+
+  // Sample security logs data
+  const [securityLogs, setSecurityLogs] = useState([
+    {
+      id: 1,
+      type: 'Failed login',
+      severity: 'medium',
+      user: 'admin@bluephoenix.com',
+      timestamp: '2024-12-03 14:32:15'
+    },
+    {
+      id: 2,
+      type: 'Password changed',
+      severity: 'low',
+      user: 'john.smith@email.com',
+      timestamp: '2024-12-03 13:45:22'
+    },
+    {
+      id: 3,
+      type: 'Unauthorized access',
+      severity: 'high',
+      user: 'unknown',
+      timestamp: '2024-12-03 12:18:45'
+    },
+    {
+      id: 4,
+      type: 'User created',
+      severity: 'low',
+      user: 'sarah.johnson@email.com',
+      timestamp: '2024-12-03 11:30:12'
+    }
+  ]);
+
+  // Handle password policy changes
+  const handlePasswordPolicyChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    
+    if (type === 'checkbox') {
+      setPasswordPolicy(prev => ({
+        ...prev,
+        requirements: {
+          ...prev.requirements,
+          [name]: checked
+        }
+      }));
+    } else {
+      setPasswordPolicy(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+  };
+
+  // Handle authentication settings changes
+  const handleAuthSettingsChange = (e) => {
+    const { name, value } = e.target;
+    setAuthSettings(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle session settings changes
+  const handleSessionSettingsChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    
+    setSessionSettings(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  // Add new IP range to whitelist
+  const addIpRange = () => {
+    if (newIpRange.trim() && !sessionSettings.ipWhitelist.includes(newIpRange.trim())) {
+      setSessionSettings(prev => ({
+        ...prev,
+        ipWhitelist: [...prev.ipWhitelist, newIpRange.trim()]
+      }));
+      setNewIpRange('');
+    }
+  };
+
+  // Remove IP range from whitelist
+  const removeIpRange = (ip) => {
+    setSessionSettings(prev => ({
+      ...prev,
+      ipWhitelist: prev.ipWhitelist.filter(range => range !== ip)
+    }));
+  };
+
+  // Save all settings
+  const saveSettings = () => {
+    // In a real app, you would send this to your backend
+    console.log('Saving settings:', {
+      passwordPolicy,
+      authSettings,
+      sessionSettings
+    });
+    alert('Settings saved successfully!');
+  };
+
+  // Export logs
+  const exportLogs = () => {
+    // In a real app, this would generate a downloadable file
+    console.log('Exporting logs:', securityLogs);
+    alert('Logs exported successfully!');
+  };
+
+  // Get severity icon and color
+  const getSeverityInfo = (severity) => {
+    switch (severity) {
+      case 'high':
+        return { icon: <FiAlertCircle className="text-red-500" />, color: 'text-red-600' };
+      case 'medium':
+        return { icon: <FiAlertCircle className="text-yellow-500" />, color: 'text-yellow-600' };
+      case 'low':
+        return { icon: <FiCheckCircle className="text-green-500" />, color: 'text-green-600' };
+      default:
+        return { icon: null, color: 'text-gray-600' };
+    }
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-4">
+    <div className="max-w-6xl mx-auto px-4 py-6">
       {/* Page Header */}
-      <div className="mb-4">
-        <h2 className="text-xl font-bold mb-1">Blue Phoenix Sports</h2>
-        <p className="text-sm text-gray-600">Security Settings</p>
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-1 flex items-center">
+          <FiShield className="mr-2" /> Blue Phoenix Sports Security
+        </h2>
+        <p className="text-sm text-gray-500">Manage your organization's security settings</p>
       </div>
 
-      {/* Security Overview */}
-      <div className="bg-white shadow rounded-lg p-4 mb-4">
-        <h3 className="text-lg font-semibold mb-3">🔐 Security Overview</h3>
-        <div className="grid grid-cols-2 gap-2 text-center mb-2">
-          <div className="bg-green-100 p-3 rounded">
-            <div className="text-lg font-bold">Secure</div>
-            <div className="text-xs text-green-800">Security Scan</div>
-          </div>
-          <div className="bg-blue-100 p-3 rounded">
-            <div className="text-lg font-bold">15</div>
-            <div className="text-xs text-blue-800">Active Sessions</div>
-          </div>
-          <div className="bg-yellow-100 p-3 rounded">
-            <div className="text-lg font-bold">3</div>
-            <div className="text-xs text-yellow-800">Alerts</div>
-          </div>
-          <div className="bg-red-100 p-3 rounded">
-            <div className="text-lg font-bold">847</div>
-            <div className="text-xs text-red-800">Audit Logs</div>
+      {/* Security Overview Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="bg-white rounded-lg shadow p-4 border-l-4 border-green-500">
+          <div className="flex items-center">
+            <div className="p-2 rounded-full bg-green-100 mr-3">
+              <FiCheckCircle className="text-green-500" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-500">Security Status</p>
+              <h3 className="font-bold text-gray-800">Secure</h3>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Password Policy */}
-      <div className="bg-white shadow rounded-lg p-4 mb-4">
-        <h4 className="font-semibold mb-3">🔑 Password Policy</h4>
-        <div className="space-y-3">
-          <div>
-            <label className="block text-sm font-medium mb-1">Minimum Length</label>
-            <input 
-              type="number" 
-              defaultValue={8} 
-              className="w-full border rounded px-3 py-2 text-sm" 
-            />
+        
+        <div className="bg-white rounded-lg shadow p-4 border-l-4 border-blue-500">
+          <div className="flex items-center">
+            <div className="p-2 rounded-full bg-blue-100 mr-3">
+              <FiUser className="text-blue-500" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-500">Active Sessions</p>
+              <h3 className="font-bold text-gray-800">15</h3>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Expiry (days)</label>
-            <input 
-              type="number" 
-              defaultValue={90} 
-              className="w-full border rounded px-3 py-2 text-sm" 
-            />
+        </div>
+        
+        <div className="bg-white rounded-lg shadow p-4 border-l-4 border-yellow-500">
+          <div className="flex items-center">
+            <div className="p-2 rounded-full bg-yellow-100 mr-3">
+              <FiAlertCircle className="text-yellow-500" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-500">Active Alerts</p>
+              <h3 className="font-bold text-gray-800">3</h3>
+            </div>
           </div>
-          <div className="mt-2 space-y-2">
-            <label className="text-sm font-medium">Requirements</label>
-            <div className="flex items-center">
-              <input type="checkbox" defaultChecked className="mr-2" />
-              <span className="text-sm">Uppercase letters</span>
+        </div>
+        
+        <div className="bg-white rounded-lg shadow p-4 border-l-4 border-red-500">
+          <div className="flex items-center">
+            <div className="p-2 rounded-full bg-red-100 mr-3">
+              <FiList className="text-red-500" />
             </div>
-            <div className="flex items-center">
-              <input type="checkbox" defaultChecked className="mr-2" />
-              <span className="text-sm">Lowercase letters</span>
-            </div>
-            <div className="flex items-center">
-              <input type="checkbox" defaultChecked className="mr-2" />
-              <span className="text-sm">Numbers</span>
-            </div>
-            <div className="flex items-center">
-              <input type="checkbox" defaultChecked className="mr-2" />
-              <span className="text-sm">Symbols</span>
+            <div>
+              <p className="text-xs text-gray-500">Audit Logs</p>
+              <h3 className="font-bold text-gray-800">847</h3>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Authentication */}
-      <div className="bg-white shadow rounded-lg p-4 mb-4">
-        <h4 className="font-semibold mb-3">🔐 Authentication</h4>
-        <div className="space-y-3">
+      {/* Password Policy Section */}
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+          <FiKey className="mr-2" /> Password Policy
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium mb-1">Two-Factor Auth</label>
-            <select className="w-full border rounded px-3 py-2 text-sm">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Minimum Length</label>
+            <input 
+              type="number" 
+              name="minLength"
+              value={passwordPolicy.minLength}
+              onChange={handlePasswordPolicyChange}
+              min="6"
+              max="32"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Expiry (days)</label>
+            <input 
+              type="number" 
+              name="expiryDays"
+              value={passwordPolicy.expiryDays}
+              onChange={handlePasswordPolicyChange}
+              min="30"
+              max="365"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        </div>
+        
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">Password Requirements</label>
+          <div className="space-y-2">
+            {Object.entries(passwordPolicy.requirements).map(([key, value]) => (
+              <div key={key} className="flex items-center">
+                <input
+                  type="checkbox"
+                  id={`req-${key}`}
+                  name={key}
+                  checked={value}
+                  onChange={handlePasswordPolicyChange}
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                />
+                <label htmlFor={`req-${key}`} className="ml-2 block text-sm text-gray-700 capitalize">
+                  {key}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Authentication Section */}
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+          <FiLock className="mr-2" /> Authentication Settings
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Two-Factor Authentication</label>
+            <select
+              name="twoFactor"
+              value={authSettings.twoFactor}
+              onChange={handleAuthSettingsChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
               <option>Require 2FA for admins</option>
               <option>Optional 2FA</option>
+              <option>Require 2FA for all users</option>
             </select>
           </div>
+          
           <div>
-            <label className="block text-sm font-medium mb-1">Max Login Attempts</label>
-            <input 
-              type="number" 
-              defaultValue={5} 
-              className="w-full border rounded px-3 py-2 text-sm" 
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Lockout Duration (min)</label>
-            <input 
-              type="number" 
-              defaultValue={30} 
-              className="w-full border rounded px-3 py-2 text-sm" 
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Default Auth Method</label>
-            <select className="w-full border rounded px-3 py-2 text-sm">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Default Authentication Method</label>
+            <select
+              name="defaultMethod"
+              value={authSettings.defaultMethod}
+              onChange={handleAuthSettingsChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
               <option>Password Only</option>
               <option>2FA with OTP</option>
               <option>Biometric</option>
+              <option>Password + Security Key</option>
             </select>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Max Login Attempts</label>
+            <input 
+              type="number" 
+              name="maxAttempts"
+              value={authSettings.maxAttempts}
+              onChange={handleAuthSettingsChange}
+              min="1"
+              max="10"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Lockout Duration (minutes)</label>
+            <input 
+              type="number" 
+              name="lockoutDuration"
+              value={authSettings.lockoutDuration}
+              onChange={handleAuthSettingsChange}
+              min="1"
+              max="1440"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
           </div>
         </div>
       </div>
 
-      {/* Session & Access Control */}
-      <div className="bg-white shadow rounded-lg p-4 mb-4">
-        <h4 className="font-semibold mb-3">🛡️ Session Security</h4>
-        <div className="space-y-3">
+      {/* Session Security Section */}
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+          <FiLogIn className="mr-2" /> Session Security
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium mb-1">Session Protection</label>
-            <select className="w-full border rounded px-3 py-2 text-sm">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Session Protection Level</label>
+            <select
+              name="protectionLevel"
+              value={sessionSettings.protectionLevel}
+              onChange={handleSessionSettingsChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
               <option>Enhanced protection</option>
               <option>Standard</option>
+              <option>Basic</option>
             </select>
           </div>
+          
           <div>
-            <label className="block text-sm font-medium mb-1">IP Whitelist</label>
-            <textarea
-              className="w-full border rounded px-3 py-2 text-sm"
-              rows="2"
-              defaultValue={`192.168.1.0/24\n10.0.0.0/8`}
-            />
-          </div>
-          <button className="w-full sm:w-auto px-3 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm">
-            Add IP Range
-          </button>
-          <div>
-            <label className="block text-sm font-medium mb-1">Default Permissions</label>
-            <select className="w-full border rounded px-3 py-2 text-sm">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Default Permissions</label>
+            <select
+              name="defaultPermissions"
+              value={sessionSettings.defaultPermissions}
+              onChange={handleSessionSettingsChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
               <option>Standard Access</option>
               <option>Admin Only</option>
               <option>Custom</option>
+              <option>Read Only</option>
             </select>
           </div>
-          <div className="flex items-center">
-            <input type="checkbox" defaultChecked className="mr-2" />
-            <span className="text-sm">Log all user activities</span>
+        </div>
+        
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">IP Whitelist</label>
+          <div className="space-y-2 mb-3">
+            {sessionSettings.ipWhitelist.map((ip, index) => (
+              <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
+                <span className="text-sm font-mono">{ip}</span>
+                <button 
+                  onClick={() => removeIpRange(ip)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  <FiXCircle />
+                </button>
+              </div>
+            ))}
           </div>
+          
+          <div className="flex">
+            <input
+              type="text"
+              value={newIpRange}
+              onChange={(e) => setNewIpRange(e.target.value)}
+              placeholder="Enter IP range (e.g., 192.168.1.0/24)"
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <button
+              onClick={addIpRange}
+              className="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center"
+            >
+              <FiPlus className="mr-1" /> Add
+            </button>
+          </div>
+        </div>
+        
+        <div className="mt-4 flex items-center">
+          <input
+            type="checkbox"
+            id="logActivities"
+            name="logActivities"
+            checked={sessionSettings.logActivities}
+            onChange={handleSessionSettingsChange}
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+          />
+          <label htmlFor="logActivities" className="ml-2 block text-sm text-gray-700">
+            Log all user activities
+          </label>
         </div>
       </div>
 
-      {/* Security Logs */}
-      <div className="bg-white shadow rounded-lg p-4 mb-4">
-        <h4 className="font-semibold mb-3">📋 Security Logs</h4>
-        <div className="space-y-3 text-sm">
-          <div className="border-b pb-2">
-            <div className="flex justify-between">
-              <span className="font-medium">Failed login</span>
-              <span className="text-yellow-600">medium</span>
-            </div>
-            <p className="text-xs">admin@bluephoenix.com</p>
-            <p className="text-xs text-gray-500">2024-12-03 14:32:15</p>
-          </div>
-          <div className="border-b pb-2">
-            <div className="flex justify-between">
-              <span className="font-medium">Password changed</span>
-              <span className="text-green-600">low</span>
-            </div>
-            <p className="text-xs">john.smith@email.com</p>
-            <p className="text-xs text-gray-500">2024-12-03 13:45:22</p>
-          </div>
-          <div className="border-b pb-2">
-            <div className="flex justify-between">
-              <span className="font-medium">Unauthorized access</span>
-              <span className="text-red-600">high</span>
-            </div>
-            <p className="text-xs">unknown</p>
-            <p className="text-xs text-gray-500">2024-12-03 12:18:45</p>
-          </div>
-          <div>
-            <div className="flex justify-between">
-              <span className="font-medium">User created</span>
-              <span className="text-green-600">low</span>
-            </div>
-            <p className="text-xs">sarah.johnson@email.com</p>
-            <p className="text-xs text-gray-500">2024-12-03 11:30:12</p>
-          </div>
+      {/* Security Logs Section */}
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold text-gray-800 flex items-center">
+            <FiList className="mr-2" /> Security Logs
+          </h3>
+          <button 
+            onClick={exportLogs}
+            className="text-sm text-blue-600 hover:text-blue-800 flex items-center"
+          >
+            <FiDownload className="mr-1" /> Export Logs
+          </button>
         </div>
-        <button className="mt-3 text-blue-600 hover:underline text-sm">
+        
+        <div className="space-y-4">
+          {securityLogs.map(log => {
+            const { icon, color } = getSeverityInfo(log.severity);
+            return (
+              <div key={log.id} className="border-b border-gray-200 pb-3 last:border-0 last:pb-0">
+                <div className="flex justify-between items-start">
+                  <div className="flex items-center">
+                    <div className="mr-3">{icon}</div>
+                    <div>
+                      <p className="font-medium text-gray-800">{log.type}</p>
+                      <p className="text-xs text-gray-500">{log.user}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className={`text-xs font-medium ${color}`}>{log.severity}</span>
+                    <p className="text-xs text-gray-500">{log.timestamp}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        
+        <button className="mt-4 text-sm text-blue-600 hover:text-blue-800 flex items-center">
           View All Logs
         </button>
       </div>
 
-      {/* Actions */}
-      <div className="flex flex-col sm:flex-row gap-2 mt-4">
-        <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm">
-          Save Settings
+      {/* Action Buttons */}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <button
+          onClick={saveSettings}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center"
+        >
+          <FiSave className="mr-2" /> Save Settings
         </button>
-        <button className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition text-sm">
-          Export Logs
+        <button
+          onClick={exportLogs}
+          className="px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 flex items-center justify-center"
+        >
+          <FiDownload className="mr-2" /> Export Logs
         </button>
       </div>
     </div>

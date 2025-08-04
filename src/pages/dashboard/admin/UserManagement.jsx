@@ -7,11 +7,57 @@ const AGE_GROUPS = ['U8-U10', 'U11-U15', 'U16-U18', 'U19+'];
 const GENDERS = ['Male', 'Female', 'Non-binary', 'Other'];
 const STATUSES = ['active', 'inactive', 'pending'];
 
-// Initial data
+// Default avatar images
+const DEFAULT_AVATARS = {
+  admin: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+  coach: 'https://cdn-icons-png.flaticon.com/512/2583/2583344.png',
+  medic: 'https://cdn-icons-png.flaticon.com/512/2785/2785402.png',
+  player: 'https://cdn-icons-png.flaticon.com/512/236/236832.png',
+  staff: 'https://cdn-icons-png.flaticon.com/512/1077/1077012.png',
+  default: 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
+};
+
+// Sport icons
+const SPORT_ICONS = {
+  Rugby: 'https://cdn-icons-png.flaticon.com/512/5024/5024049.png',
+  Football: 'https://cdn-icons-png.flaticon.com/512/4498/4498016.png',
+  Basketball: 'https://cdn-icons-png.flaticon.com/512/5024/5024034.png',
+  Swimming: 'https://cdn-icons-png.flaticon.com/512/5024/5024051.png',
+  Tennis: 'https://cdn-icons-png.flaticon.com/512/5024/5024063.png',
+  Volleyball: 'https://cdn-icons-png.flaticon.com/512/5024/5024065.png'
+};
+
+// Initial data with avatar URLs
 const initialUsers = [
-  { id: 1, name: 'Alice Coach', email: 'alice@coach.com', role: 'coach', sport: 'Rugby', status: 'active' },
-  { id: 2, name: 'Bob Medic', email: 'bob@medic.com', role: 'medic', sport: 'Football', status: 'active' },
-  { id: 3, name: 'Charlie Player', email: 'charlie@player.com', role: 'player', sport: 'Basketball', ageGroup: 'U11-U15', gender: 'Male', status: 'active' },
+  { 
+    id: 1, 
+    name: 'Alice Coach', 
+    email: 'alice@coach.com', 
+    role: 'coach', 
+    sport: 'Rugby', 
+    status: 'active',
+    avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+  },
+  { 
+    id: 2, 
+    name: 'Bob Medic', 
+    email: 'bob@medic.com', 
+    role: 'medic', 
+    sport: 'Football', 
+    status: 'active',
+    avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
+  },
+  { 
+    id: 3, 
+    name: 'Charlie Player', 
+    email: 'charlie@player.com', 
+    role: 'player', 
+    sport: 'Basketball', 
+    ageGroup: 'U11-U15', 
+    gender: 'Male', 
+    status: 'active',
+    avatar: 'https://randomuser.me/api/portraits/men/22.jpg'
+  },
 ];
 
 const UserManagement = () => {
@@ -30,7 +76,8 @@ const UserManagement = () => {
     sport: '',
     ageGroup: '',
     gender: '',
-    status: 'active'
+    status: 'active',
+    avatar: ''
   });
   const [editingId, setEditingId] = useState(null);
   const [sortConfig, setSortConfig] = useState({ key: 'name', direction: 'asc' });
@@ -48,10 +95,10 @@ const UserManagement = () => {
     if (filters.status) result = result.filter(user => user.status === filters.status);
     if (filters.search) {
       const searchTerm = filters.search.toLowerCase();
-      result = result.filter(user => 
+      result = result.filter(user => (
         user.name.toLowerCase().includes(searchTerm) || 
         user.email.toLowerCase().includes(searchTerm)
-      );
+      ));
     }
 
     // Apply sorting
@@ -99,12 +146,21 @@ const UserManagement = () => {
     return true;
   };
 
+  const generateRandomAvatar = (gender) => {
+    const randomId = Math.floor(Math.random() * 99) + 1;
+    const genderPath = gender === 'Female' ? 'women' : 'men';
+    return `https://randomuser.me/api/portraits/${genderPath}/${randomId}.jpg`;
+  };
+
   const handleAddUser = useCallback(() => {
     if (!validateUser(newUser)) return;
     
+    const avatar = newUser.avatar || 
+      (newUser.gender ? generateRandomAvatar(newUser.gender) : DEFAULT_AVATARS[newUser.role] || DEFAULT_AVATARS.default);
+    
     setUsers(prevUsers => [
       ...prevUsers, 
-      { ...newUser, id: Date.now() }
+      { ...newUser, id: Date.now(), avatar }
     ]);
     
     setNewUser({ 
@@ -114,7 +170,8 @@ const UserManagement = () => {
       sport: '',
       ageGroup: '',
       gender: '',
-      status: 'active'
+      status: 'active',
+      avatar: ''
     });
     
     showNotification('User added successfully');
@@ -138,7 +195,8 @@ const UserManagement = () => {
       sport: '',
       ageGroup: '',
       gender: '',
-      status: 'active'
+      status: 'active',
+      avatar: ''
     });
     
     showNotification('User updated successfully');
@@ -154,7 +212,8 @@ const UserManagement = () => {
       sport: user.sport || '',
       ageGroup: user.ageGroup || '',
       gender: user.gender || '',
-      status: user.status || 'active'
+      status: user.status || 'active',
+      avatar: user.avatar || ''
     });
     setActiveTab('addEdit');
   }, []);
@@ -186,7 +245,7 @@ const UserManagement = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-2 max-w-full">
+    <div className="container mx-auto p-4 max-w-full">
       {/* Mobile Header */}
       <div className="md:hidden flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">User Management</h2>
@@ -232,7 +291,8 @@ const UserManagement = () => {
                   sport: '',
                   ageGroup: '',
                   gender: '',
-                  status: 'active'
+                  status: 'active',
+                  avatar: ''
                 });
                 setActiveTab('addEdit');
                 setMobileMenuOpen(false);
@@ -280,7 +340,8 @@ const UserManagement = () => {
               sport: '',
               ageGroup: '',
               gender: '',
-              status: 'active'
+              status: 'active',
+              avatar: ''
             });
             setActiveTab('addEdit');
           }}
@@ -290,11 +351,11 @@ const UserManagement = () => {
         </button>
       </div>
 
-      {/* Filters Section - Mobile */}
+      {/* Filters Section */}
       {activeTab === 'filters' && (
         <div className="bg-white p-4 rounded-lg shadow-md mb-6">
           <h3 className="text-lg font-semibold mb-4">Filters</h3>
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <SelectFilter 
               label="Role"
               value={filters.role}
@@ -326,20 +387,20 @@ const UserManagement = () => {
                 placeholder="Search by name or email"
                 value={filters.search}
                 onChange={(e) => handleFilterChange('search', e.target.value)}
-                className="w-full border p-2 rounded"
+                className="w-full border p-2 rounded focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
           </div>
           <button
             onClick={() => setActiveTab('users')}
-            className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md"
+            className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
           >
             Apply Filters
           </button>
         </div>
       )}
 
-      {/* User Table Section - Mobile */}
+      {/* User Table Section */}
       {activeTab === 'users' && (
         <div className="bg-white p-4 rounded-lg shadow-md mb-6">
           <div className="flex justify-between items-center mb-4">
@@ -349,6 +410,102 @@ const UserManagement = () => {
             </div>
           </div>
           
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200 hidden md:table">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    User
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Role
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Sport
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredUsers.length > 0 ? (
+                  filteredUsers.map((user) => (
+                    <tr key={user.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-10 w-10">
+                            <img className="h-10 w-10 rounded-full" src={user.avatar || DEFAULT_AVATARS[user.role] || DEFAULT_AVATARS.default} alt="" />
+                          </div>
+                          <div className="ml-4">
+                            <div className="text-sm font-medium text-gray-900">{user.name}</div>
+                            <div className="text-sm text-gray-500">{user.email}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900 capitalize">{user.role}</div>
+                        {user.ageGroup && <div className="text-sm text-gray-500">{user.ageGroup}</div>}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {user.sport && (
+                          <div className="flex items-center">
+                            <img src={SPORT_ICONS[user.sport]} alt={user.sport} className="h-5 w-5 mr-2" />
+                            <span className="text-sm text-gray-900">{user.sport}</span>
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          user.status === 'active' ? 'bg-green-100 text-green-800' :
+                          user.status === 'inactive' ? 'bg-red-100 text-red-800' :
+                          'bg-yellow-100 text-yellow-800'
+                        }`}>
+                          {user.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => handleEdit(user)}
+                            className="text-blue-600 hover:text-blue-900"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleStatusChange(
+                              user.id, 
+                              user.status === 'active' ? 'inactive' : 'active'
+                            )}
+                            className="text-indigo-600 hover:text-indigo-900"
+                          >
+                            {user.status === 'active' ? 'Deactivate' : 'Activate'}
+                          </button>
+                          <button
+                            onClick={() => handleDelete(user.id)}
+                            className="text-red-600 hover:text-red-900"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="px-6 py-4 text-center text-gray-500">
+                      No users found matching your criteria.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile view */}
           <MobileUserList 
             users={filteredUsers} 
             onDelete={handleDelete}
@@ -361,7 +518,7 @@ const UserManagement = () => {
         </div>
       )}
 
-      {/* Add/Edit User Section - Mobile */}
+      {/* Add/Edit User Section */}
       {activeTab === 'addEdit' && (
         <div className="bg-white p-4 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold mb-4">
@@ -388,7 +545,8 @@ const UserManagement = () => {
                 sport: '',
                 ageGroup: '',
                 gender: '',
-                status: 'active'
+                status: 'active',
+                avatar: ''
               });
               setActiveTab('users');
             }}
@@ -406,7 +564,7 @@ const SelectFilter = React.memo(({ label, value, onChange, options, placeholder 
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full border p-2 rounded"
+      className="w-full border p-2 rounded focus:ring-blue-500 focus:border-blue-500"
     >
       <option value="">{placeholder}</option>
       {options.map(option => (
@@ -420,55 +578,70 @@ const SelectFilter = React.memo(({ label, value, onChange, options, placeholder 
 
 const MobileUserList = React.memo(({ users, onDelete, onEdit, onStatusChange }) => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 md:hidden">
       {users.length > 0 ? (
         users.map((user) => (
           <div key={user.id} className="border rounded-lg p-3">
-            <div className="flex justify-between items-start">
-              <div>
-                <h4 className="font-medium">{user.name}</h4>
-                <p className="text-sm text-gray-600">{user.email}</p>
-              </div>
-              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                user.status === 'active' ? 'bg-green-100 text-green-800' :
-                user.status === 'inactive' ? 'bg-red-100 text-red-800' :
-                'bg-yellow-100 text-yellow-800'
-              }`}>
-                {user.status}
-              </span>
-            </div>
-            
-            <div className="mt-2 text-sm">
-              <p><span className="font-medium">Role:</span> {user.role}</p>
-              <p><span className="font-medium">Sport:</span> {user.sport || '-'}</p>
-              {user.ageGroup && <p><span className="font-medium">Age Group:</span> {user.ageGroup}</p>}
-              {user.gender && <p><span className="font-medium">Gender:</span> {user.gender}</p>}
-            </div>
-            
-            <div className="mt-3 flex justify-between">
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => onEdit(user)}
-                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => onStatusChange(
-                    user.id, 
-                    user.status === 'active' ? 'inactive' : 'active'
+            <div className="flex items-start space-x-3">
+              <img 
+                src={user.avatar || DEFAULT_AVATARS[user.role] || DEFAULT_AVATARS.default} 
+                alt={user.name}
+                className="h-12 w-12 rounded-full object-cover"
+              />
+              <div className="flex-1">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="font-medium">{user.name}</h4>
+                    <p className="text-sm text-gray-600">{user.email}</p>
+                  </div>
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                    user.status === 'active' ? 'bg-green-100 text-green-800' :
+                    user.status === 'inactive' ? 'bg-red-100 text-red-800' :
+                    'bg-yellow-100 text-yellow-800'
+                  }`}>
+                    {user.status}
+                  </span>
+                </div>
+                
+                <div className="mt-2 text-sm">
+                  <p><span className="font-medium">Role:</span> {user.role}</p>
+                  {user.sport && (
+                    <p className="flex items-center">
+                      <span className="font-medium">Sport:</span> 
+                      <img src={SPORT_ICONS[user.sport]} alt={user.sport} className="h-4 w-4 ml-1 mr-1" />
+                      {user.sport}
+                    </p>
                   )}
-                  className="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
-                >
-                  {user.status === 'active' ? 'Deactivate' : 'Activate'}
-                </button>
+                  {user.ageGroup && <p><span className="font-medium">Age Group:</span> {user.ageGroup}</p>}
+                  {user.gender && <p><span className="font-medium">Gender:</span> {user.gender}</p>}
+                </div>
+                
+                <div className="mt-3 flex justify-between">
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => onEdit(user)}
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => onStatusChange(
+                        user.id, 
+                        user.status === 'active' ? 'inactive' : 'active'
+                      )}
+                      className="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
+                    >
+                      {user.status === 'active' ? 'Deactivate' : 'Activate'}
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => onDelete(user.id)}
+                    className="text-red-600 hover:text-red-800 text-sm font-medium"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-              <button
-                onClick={() => onDelete(user.id)}
-                className="text-red-600 hover:text-red-800 text-sm font-medium"
-              >
-                Delete
-              </button>
             </div>
           </div>
         ))
@@ -496,6 +669,16 @@ const MobileAddEditUserForm = React.memo(({
 }) => {
   return (
     <div className="space-y-4">
+      {editingId && newUser.avatar && (
+        <div className="flex justify-center">
+          <img 
+            src={newUser.avatar} 
+            alt="User Avatar" 
+            className="h-20 w-20 rounded-full object-cover border-2 border-gray-200"
+          />
+        </div>
+      )}
+      
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
         <input
@@ -503,7 +686,7 @@ const MobileAddEditUserForm = React.memo(({
           placeholder="Full Name"
           value={newUser.name}
           onChange={(e) => onInputChange('name', e.target.value)}
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
@@ -515,7 +698,7 @@ const MobileAddEditUserForm = React.memo(({
           placeholder="Email"
           value={newUser.email}
           onChange={(e) => onInputChange('email', e.target.value)}
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
@@ -567,7 +750,7 @@ const MobileAddEditUserForm = React.memo(({
       <div className="flex space-x-3">
         <button
           onClick={onCancel}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
         >
           Cancel
         </button>
@@ -577,7 +760,7 @@ const MobileAddEditUserForm = React.memo(({
             editingId 
               ? 'bg-yellow-600 hover:bg-yellow-700' 
               : 'bg-blue-600 hover:bg-blue-700'
-          }`}
+          } transition-colors`}
         >
           {editingId ? 'Update' : 'Add'}
         </button>

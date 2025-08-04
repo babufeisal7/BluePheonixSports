@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { 
   FiDownload, 
   FiEye, 
@@ -13,7 +13,12 @@ import {
   FiBarChart2,
   FiActivity,
   FiUsers,
-  FiDollarSign
+  FiDollarSign,
+  FiTag,
+  FiLink,
+  FiClock,
+  FiFile,
+  FiPrinter
 } from "react-icons/fi";
 
 // SVG images as data URLs with more detailed visuals
@@ -41,7 +46,14 @@ const sampleReports = [
     tags: ["performance", "monthly", "metrics"],
     relatedReports: [2, 3],
     downloadCount: 142,
-    lastAccessed: "2025-07-15"
+    lastAccessed: "2025-07-15",
+    sections: [
+      { title: "Executive Summary", page: 1 },
+      { title: "Player Performance Metrics", page: 5 },
+      { title: "Team Statistics", page: 12 },
+      { title: "Comparative Analysis", page: 18 },
+      { title: "Recommendations", page: 22 }
+    ]
   },
   { 
     id: 2, 
@@ -58,7 +70,14 @@ const sampleReports = [
     tags: ["injuries", "medical", "recovery"],
     relatedReports: [1, 5],
     downloadCount: 87,
-    lastAccessed: "2025-07-10"
+    lastAccessed: "2025-07-10",
+    sections: [
+      { title: "Injury Overview", page: 1 },
+      { title: "Player Status", page: 4 },
+      { title: "Recovery Timelines", page: 8 },
+      { title: "Rehabilitation Plans", page: 12 },
+      { title: "Medical Recommendations", page: 15 }
+    ]
   },
   { 
     id: 3, 
@@ -75,7 +94,14 @@ const sampleReports = [
     tags: ["training", "attendance", "performance"],
     relatedReports: [1, 4],
     downloadCount: 95,
-    lastAccessed: "2025-07-05"
+    lastAccessed: "2025-07-05",
+    sections: [
+      { title: "Attendance Summary", page: 1 },
+      { title: "Session Breakdown", page: 6 },
+      { title: "Performance Metrics", page: 12 },
+      { title: "Coach Evaluations", page: 20 },
+      { title: "Improvement Areas", page: 28 }
+    ]
   },
   { 
     id: 4, 
@@ -92,7 +118,14 @@ const sampleReports = [
     tags: ["finance", "quarterly", "budget"],
     relatedReports: [3, 5],
     downloadCount: 63,
-    lastAccessed: "2025-07-01"
+    lastAccessed: "2025-07-01",
+    sections: [
+      { title: "Financial Overview", page: 1 },
+      { title: "Revenue Analysis", page: 8 },
+      { title: "Expense Breakdown", page: 15 },
+      { title: "Budget vs Actuals", page: 25 },
+      { title: "Projections", page: 35 }
+    ]
   },
   { 
     id: 5, 
@@ -109,7 +142,14 @@ const sampleReports = [
     tags: ["scouting", "transfers", "targets"],
     relatedReports: [2, 4],
     downloadCount: 28,
-    lastAccessed: "2025-07-12"
+    lastAccessed: "2025-07-12",
+    sections: [
+      { title: "Target List", page: 1 },
+      { title: "Player Profiles", page: 5 },
+      { title: "Performance Analysis", page: 15 },
+      { title: "Video Highlights", page: 25 },
+      { title: "Scouting Recommendations", page: 40 }
+    ]
   },
 ];
 
@@ -150,26 +190,28 @@ const Reports = () => {
   const [sortOption, setSortOption] = useState("date-desc");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  // Filter, sort and paginate reports
-  const filteredReports = sampleReports.filter(report => {
-    const search = searchTerm.toLowerCase();
-    const matchesSearch = 
-      report.title.toLowerCase().includes(search) || 
-      report.description.toLowerCase().includes(search) ||
-      report.tags.some(tag => tag.toLowerCase().includes(search));
+  // Memoize filtered reports to prevent unnecessary recalculations
+  const filteredReports = useMemo(() => {
+    return sampleReports.filter(report => {
+      const search = searchTerm.toLowerCase();
+      const matchesSearch = 
+        report.title.toLowerCase().includes(search) || 
+        report.description.toLowerCase().includes(search) ||
+        report.tags.some(tag => tag.toLowerCase().includes(search));
 
-    const matchesStatus = filterStatus === "All" || report.status === filterStatus;
-    const matchesType = filterType === "All" || report.type === filterType;
-    
-    return matchesSearch && matchesStatus && matchesType;
-  }).sort((a, b) => {
-    if (sortOption === "date-desc") return new Date(b.date) - new Date(a.date);
-    if (sortOption === "date-asc") return new Date(a.date) - new Date(b.date);
-    if (sortOption === "title-asc") return a.title.localeCompare(b.title);
-    if (sortOption === "title-desc") return b.title.localeCompare(a.title);
-    if (sortOption === "downloads-desc") return b.downloadCount - a.downloadCount;
-    return 0;
-  });
+      const matchesStatus = filterStatus === "All" || report.status === filterStatus;
+      const matchesType = filterType === "All" || report.type === filterType;
+      
+      return matchesSearch && matchesStatus && matchesType;
+    }).sort((a, b) => {
+      if (sortOption === "date-desc") return new Date(b.date) - new Date(a.date);
+      if (sortOption === "date-asc") return new Date(a.date) - new Date(b.date);
+      if (sortOption === "title-asc") return a.title.localeCompare(b.title);
+      if (sortOption === "title-desc") return b.title.localeCompare(a.title);
+      if (sortOption === "downloads-desc") return b.downloadCount - a.downloadCount;
+      return 0;
+    });
+  }, [searchTerm, filterStatus, filterType, sortOption]);
 
   // Pagination logic
   const indexOfLastReport = currentPage * reportsPerPage;
@@ -181,14 +223,16 @@ const Reports = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // Download handler
-  const handleDownload = (id) => {
+  const handleDownload = (id, e) => {
+    if (e) e.stopPropagation();
     const report = sampleReports.find(r => r.id === id);
     console.log(`Downloading: ${report.title}`);
     // Real download logic here
   };
 
   // View report detail
-  const handleViewReport = (report) => {
+  const handleViewReport = (report, e) => {
+    if (e) e.stopPropagation();
     setSelectedReport(report);
   };
 
@@ -206,11 +250,13 @@ const Reports = () => {
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
-  // Fixed formatFileSize function to avoid errors
-  const formatFileSize = (sizeString) => {
-    // Your sampleReports have sizes as strings like "4.2 MB"
-    // So we just return them as-is.
-    return sizeString;
+  // Format file size (placeholder - in a real app you'd handle actual file sizes)
+  const formatFileSize = (sizeString) => sizeString;
+
+  // Get related reports for the detail view
+  const getRelatedReports = (report) => {
+    if (!report.relatedReports) return [];
+    return sampleReports.filter(r => report.relatedReports.includes(r.id));
   };
 
   return (
@@ -224,7 +270,10 @@ const Reports = () => {
           </p>
         </div>
         <div className="flex gap-3">
-          <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-colors shadow-sm">
+          <button 
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-colors shadow-sm"
+            onClick={() => console.log("Generate Report clicked")}
+          >
             <FiPlus size={18} /> Generate Report
           </button>
         </div>
@@ -315,19 +364,27 @@ const Reports = () => {
       {/* Reports List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {currentReports.length === 0 ? (
-          <p className="col-span-full text-center text-gray-500">No reports found.</p>
+          <div className="col-span-full text-center py-10">
+            <p className="text-gray-500 text-lg">No reports match your search criteria.</p>
+            <button 
+              onClick={resetFilters}
+              className="mt-2 text-blue-600 hover:underline"
+            >
+              Clear all filters
+            </button>
+          </div>
         ) : (
           currentReports.map(report => (
             <div 
               key={report.id} 
-              onClick={() => handleViewReport(report)}
-              className="cursor-pointer border rounded-xl shadow-sm hover:shadow-md transition-shadow bg-white flex flex-col"
+              onClick={(e) => handleViewReport(report, e)}
+              className="cursor-pointer border rounded-xl shadow-sm hover:shadow-md transition-shadow bg-white flex flex-col group"
             >
               <div className="relative h-36 rounded-t-xl overflow-hidden bg-gray-100 flex items-center justify-center">
                 <img 
                   src={report.image} 
                   alt={`${report.type} report icon`} 
-                  className="h-24 w-auto select-none pointer-events-none"
+                  className="h-24 w-auto select-none pointer-events-none transition-transform group-hover:scale-105"
                   draggable={false}
                 />
                 <span className={`absolute top-3 left-3 text-xs font-semibold px-2 py-0.5 rounded ${statusColors[report.status] || "bg-gray-100 text-gray-800"}`}>
@@ -339,7 +396,7 @@ const Reports = () => {
               </div>
 
               <div className="p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold mb-1">{report.title}</h3>
+                <h3 className="text-lg font-semibold mb-1 group-hover:text-blue-600 transition-colors">{report.title}</h3>
                 <p className="text-sm text-gray-600 flex-grow">{report.description.length > 70 ? report.description.slice(0, 70) + "…" : report.description}</p>
                 <div className="mt-2 text-xs text-gray-500 flex justify-between">
                   <span><strong>Pages:</strong> {report.pages}</span>
@@ -354,19 +411,13 @@ const Reports = () => {
                 <div className="mt-4 flex gap-3">
                   <button 
                     className="flex items-center gap-1 text-blue-600 hover:underline text-sm" 
-                    onClick={e => {
-                      e.stopPropagation();
-                      handleDownload(report.id);
-                    }}
+                    onClick={(e) => handleDownload(report.id, e)}
                   >
                     <FiDownload /> Download
                   </button>
                   <button 
                     className="flex items-center gap-1 text-green-600 hover:underline text-sm" 
-                    onClick={e => {
-                      e.stopPropagation();
-                      handleViewReport(report);
-                    }}
+                    onClick={(e) => handleViewReport(report, e)}
                   >
                     <FiEye /> View
                   </button>
@@ -417,49 +468,152 @@ const Reports = () => {
           tabIndex={-1}
         >
           <div 
-            className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 relative"
+            className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 relative"
             onClick={e => e.stopPropagation()}
           >
             <button 
               onClick={() => setSelectedReport(null)} 
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-colors"
               aria-label="Close details modal"
             >
               <FiX size={24} />
             </button>
 
-            <div className="flex flex-col md:flex-row gap-6">
-              <img 
-                src={selectedReport.image} 
-                alt={`${selectedReport.type} report icon`} 
-                className="h-32 w-auto"
-                draggable={false}
-              />
-              <div>
-                <h2 className="text-2xl font-bold mb-2">{selectedReport.title}</h2>
-                <p className="text-gray-700 mb-4">{selectedReport.description}</p>
-
-                <div className="space-y-2 text-sm text-gray-600">
-                  <p><strong>Status:</strong> <span className={`${statusColors[selectedReport.status] || "text-gray-800"}`}>{selectedReport.status}</span></p>
-                  <p><strong>Type:</strong> <span className={`${typeColors[selectedReport.type] || "text-gray-800"}`}>{selectedReport.type}</span></p>
-                  <p><strong>Author:</strong> {selectedReport.author}</p>
-                  <p><strong>Date:</strong> {formatDate(selectedReport.date)}</p>
-                  <p><strong>Pages:</strong> {selectedReport.pages}</p>
-                  <p><strong>File Size:</strong> {formatFileSize(selectedReport.fileSize)}</p>
-                  <p><strong>Tags:</strong> {selectedReport.tags.join(", ")}</p>
-                  <p><strong>Downloads:</strong> {selectedReport.downloadCount}</p>
-                  <p><strong>Last Accessed:</strong> {formatDate(selectedReport.lastAccessed)}</p>
+            <div className="flex flex-col lg:flex-row gap-6">
+              <div className="lg:w-1/3">
+                <div className="bg-gray-100 rounded-lg p-4 flex items-center justify-center">
+                  <img 
+                    src={selectedReport.image} 
+                    alt={`${selectedReport.type} report icon`} 
+                    className="h-48 w-auto"
+                    draggable={false}
+                  />
                 </div>
-
-                <div className="mt-6 flex gap-4">
+                
+                <div className="mt-4 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs font-semibold px-2 py-1 rounded ${statusColors[selectedReport.status] || "bg-gray-100 text-gray-800"}`}>
+                      {selectedReport.status}
+                    </span>
+                    <span className={`text-xs font-semibold px-2 py-1 rounded flex items-center ${typeColors[selectedReport.type] || "bg-gray-100 text-gray-800"}`}>
+                      {typeIcons[selectedReport.type]}{selectedReport.type}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <FiFile className="text-gray-400" />
+                    <span>{selectedReport.format}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <FiClock className="text-gray-400" />
+                    <span>Last accessed: {formatDate(selectedReport.lastAccessed)}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <FiDownload className="text-gray-400" />
+                    <span>Downloads: {selectedReport.downloadCount}</span>
+                  </div>
+                </div>
+                
+                <div className="mt-4">
+                  <h3 className="font-medium text-gray-900 mb-2">Tags</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedReport.tags.map(tag => (
+                      <span key={tag} className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800">
+                        <FiTag size={12} /> {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                
+                {getRelatedReports(selectedReport).length > 0 && (
+                  <div className="mt-4">
+                    <h3 className="font-medium text-gray-900 mb-2">Related Reports</h3>
+                    <ul className="space-y-2">
+                      {getRelatedReports(selectedReport).map(report => (
+                        <li key={report.id}>
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleViewReport(report);
+                            }}
+                            className="text-sm text-blue-600 hover:underline flex items-center gap-1"
+                          >
+                            <FiLink size={14} /> {report.title}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              
+              <div className="lg:w-2/3">
+                <h2 className="text-2xl font-bold mb-2">{selectedReport.title}</h2>
+                <p className="text-gray-700 mb-6">{selectedReport.description}</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h3 className="font-medium text-gray-900 mb-2">Report Details</h3>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li><strong>Author:</strong> {selectedReport.author}</li>
+                      <li><strong>Created:</strong> {formatDate(selectedReport.date)}</li>
+                      <li><strong>Pages:</strong> {selectedReport.pages}</li>
+                      <li><strong>File Size:</strong> {formatFileSize(selectedReport.fileSize)}</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h3 className="font-medium text-gray-900 mb-2">Statistics</h3>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li><strong>Downloads:</strong> {selectedReport.downloadCount}</li>
+                      <li><strong>Last Accessed:</strong> {formatDate(selectedReport.lastAccessed)}</li>
+                      <li><strong>Status:</strong> <span className={`${statusColors[selectedReport.status] || "text-gray-800"}`}>{selectedReport.status}</span></li>
+                      <li><strong>Type:</strong> <span className={`${typeColors[selectedReport.type] || "text-gray-800"}`}>{selectedReport.type}</span></li>
+                    </ul>
+                  </div>
+                </div>
+                
+                {selectedReport.sections && selectedReport.sections.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="font-medium text-gray-900 mb-2">Report Sections</h3>
+                    <div className="border rounded-lg overflow-hidden">
+                      <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Section</th>
+                            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Page</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          {selectedReport.sections.map((section, index) => (
+                            <tr key={index} className="hover:bg-gray-50">
+                              <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{section.title}</td>
+                              <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{section.page}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="flex flex-wrap gap-4">
                   <button 
                     className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                    onClick={() => handleDownload(selectedReport.id)}
+                    onClick={(e) => handleDownload(selectedReport.id, e)}
                   >
-                    <FiDownload /> Download
+                    <FiDownload /> Download Report
                   </button>
                   <button 
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition"
+                    onClick={() => console.log("Print report")}
+                  >
+                    <FiPrinter /> Print
+                  </button>
+                  <button 
+                    className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-800 rounded-lg hover:bg-gray-100 transition"
                     onClick={() => setSelectedReport(null)}
                   >
                     Close
@@ -470,7 +624,6 @@ const Reports = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };
