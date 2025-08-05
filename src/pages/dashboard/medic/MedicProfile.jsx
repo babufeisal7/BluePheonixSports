@@ -18,7 +18,7 @@ const MedicProfile = () => {
   });
   
   const [isEditing, setIsEditing] = useState(false);
-  const [profileImage, setProfileImage] = useState('https://randomuser.me/api/portraits/women/65.jpg');
+  const [profileImage, setProfileImage] = useState('/pro11.jpg');
   const [tempImage, setTempImage] = useState(null);
   const fileInputRef = useRef(null);
 

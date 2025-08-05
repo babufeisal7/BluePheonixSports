@@ -54,10 +54,10 @@ const initialMessages = [
 
 // Avatar mapping
 const avatarMap = {
-  coach: "https://randomuser.me/api/portraits/men/32.jpg",
-  medic: "https://randomuser.me/api/portraits/women/44.jpg",
-  admin: "https://randomuser.me/api/portraits/men/22.jpg",
-  player: "https://randomuser.me/api/portraits/women/68.jpg",
+  coach: "/coach1.jpg",
+  medic: "/coach2.jpg",
+  admin: "/coach3.jpg",
+  player: "/image1.jpg",
   team: "https://cdn-icons-png.flaticon.com/512/1830/1830839.png",
   staff: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png"
 };

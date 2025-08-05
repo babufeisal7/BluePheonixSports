@@ -39,7 +39,7 @@ const HealthReports = ({ teamId }) => {
             lastCheckup: '2023-05-15',
             injuries: [],
             fitnessLevel: 92,
-            imageUrl: 'https://randomuser.me/api/portraits/men/32.jpg',
+            imageUrl: '/pro11.jpg',
             medicalHistory: [
               {
                 id: 101,
@@ -72,7 +72,7 @@ const HealthReports = ({ teamId }) => {
             lastCheckup: '2023-06-20',
             injuries: ['Sprained ankle (Grade 2)'],
             fitnessLevel: 65,
-            imageUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
+            imageUrl: '/image3.jpg',
             medicalHistory: [
               {
                 id: 102,

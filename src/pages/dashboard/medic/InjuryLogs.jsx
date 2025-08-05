@@ -34,7 +34,7 @@ const InjuryLogs = () => {
             severity: "high", 
             status: "active", 
             recoveryTime: "4-6 weeks",
-            imageUrl: "https://randomuser.me/api/portraits/men/32.jpg"
+            imageUrl: "/pro11.jpg"
           },
           { 
             id: 2, 
@@ -44,7 +44,7 @@ const InjuryLogs = () => {
             severity: "medium", 
             status: "recovering", 
             recoveryTime: "2-3 weeks",
-            imageUrl: "https://randomuser.me/api/portraits/women/44.jpg"
+            imageUrl: "/pro1.jpg"
           },
           { 
             id: 3, 
@@ -54,7 +54,7 @@ const InjuryLogs = () => {
             severity: "high", 
             status: "active", 
             recoveryTime: "6-8 weeks",
-            imageUrl: "https://randomuser.me/api/portraits/men/75.jpg"
+            imageUrl: "/image2.jpg"
           },
           { 
             id: 4, 
@@ -64,7 +64,7 @@ const InjuryLogs = () => {
             severity: "critical", 
             status: "recovering", 
             recoveryTime: "8-10 weeks",
-            imageUrl: "https://randomuser.me/api/portraits/women/68.jpg"
+            imageUrl: "/pro11.jpg"
           },
           { 
             id: 5, 
@@ -74,7 +74,7 @@ const InjuryLogs = () => {
             severity: "high", 
             status: "recovered", 
             recoveryTime: "3-4 weeks",
-            imageUrl: "https://randomuser.me/api/portraits/men/22.jpg"
+            imageUrl: "/photo9.jpg"
           },
         ];
         

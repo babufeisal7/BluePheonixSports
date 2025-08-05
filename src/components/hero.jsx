@@ -109,7 +109,7 @@ const Hero = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 z-10 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-12">
                 <div className="text-center text-white max-w-4xl">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in-up">
-                        Welcome to <span className="text-blue-400">Blue Phoenix</span> Sports
+                        Welcome to <span className="text-orange-400">Blue Phoenix</span> Sports
                     </h1>
                     <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 animate-fade-in-up delay-100">
                         Elevate your game with our premier sports programs and community spirit!

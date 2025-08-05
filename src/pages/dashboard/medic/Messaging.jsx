@@ -5,9 +5,9 @@ import { IoMdSend } from 'react-icons/io';
 const MedicMessaging = () => {
   // Sample data
   const users = [
-    { id: 1, name: 'Admin Team', role: 'admin', image: 'https://randomuser.me/api/portraits/lego/1.jpg', online: true },
-    { id: 2, name: 'John Player', role: 'player', image: 'https://randomuser.me/api/portraits/men/32.jpg', online: true },
-    { id: 3, name: 'Sarah Coach', role: 'coach', image: 'https://randomuser.me/api/portraits/women/44.jpg', online: false },
+    { id: 1, name: 'Admin Team', role: 'admin', image: '/pro11.jpg', online: true },
+    { id: 2, name: 'John Player', role: 'player', image: '/keeper.jpg', online: true },
+    { id: 3, name: 'Sarah Coach', role: 'coach', image: '/coach2.jpg', online: false },
   ];
 
   const [messages, setMessages] = useState([

@@ -197,7 +197,7 @@ const SwimmingProgramPage = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Hero Section */}
       <div className="relative rounded-xl overflow-hidden mb-12 shadow-xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-75"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-50"></div>
         <video 
           autoPlay 
           loop 
@@ -658,7 +658,7 @@ const SwimmingProgramPage = () => {
 
                     {/* Testimonial quote */}
                     <div className="relative flex-grow mb-6">
-                      <FaQuoteLeft className="absolute top-0 left-0 text-blue-100 text-4xl" />
+                      <FaQuoteLeft className="absolute top-0 left-0 text-blue-100 text-3xl" />
                       <blockquote className="text-gray-700 text-lg pl-10 relative z-10">
                         {testimonial.quote}
                       </blockquote>

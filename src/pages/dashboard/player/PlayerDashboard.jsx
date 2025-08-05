@@ -99,7 +99,7 @@ const PlayerDashboard = () => {
             <FaCog /> Settings
           </Link>
 
-          <Link to="/logout" onClick={closeSidebar} className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100">
+          <Link to="/" onClick={closeSidebar} className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100">
             <FaSignOutAlt /> Logout
           </Link>
 

@@ -91,7 +91,7 @@ const PlayerProfile = () => {
       "Top Scorer U18 League 2024",
       "Most Improved Player 2023"
     ],
-    imageUrl: "/public/image3.jpg",
+    imageUrl: "/public/pro1.jpg",
     medicalNotes: "Player has no current medical restrictions. Last physical exam was completed on Jan 15, 2024.",
     coachNotes: "John has shown excellent improvement in his passing accuracy this season. Needs to work on defensive positioning.",
   });

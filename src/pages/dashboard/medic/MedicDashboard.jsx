@@ -21,11 +21,11 @@ import {
 const medicProfile = {
   name: 'Dr. Sarah Johnson',
   role: 'Head Sports Physician',
-  avatar: '/coach2.jpg',
+  avatar: '/pro11.jpg',
   specialty: 'Orthopedics & Sports Medicine',
   yearsExperience: 12,
-  contact: 'sarah.j@bluephoenix.com',
-  teams: ['Rugby', 'Football', 'Swimming'],
+  contact: 'sarah.j@gmail.com',
+  teams: ['Rugby', 'Football', 'Basketball', 'Swimming'],
   notifications: 3,
   upcomingAppointments: 2
 };
@@ -68,7 +68,7 @@ const MedicDashboard = () => {
         <div className="relative">
           <FaBell className="text-xl" />
           {medicProfile.notifications > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-sm rounded-full h-5 w-5 flex items-center justify-center">
               {medicProfile.notifications}
             </span>
           )}
@@ -89,7 +89,7 @@ const MedicDashboard = () => {
         </button>
 
         {/* Profile Info */}
-        <div className="flex items-center gap-4 mb-8 mt-4">
+        <div className="flex items-center gap-4 mb-6 mt-2">
           <div className="relative">
             <img
               src={medicProfile.avatar}
@@ -133,7 +133,7 @@ const MedicDashboard = () => {
         </nav>
 
         {/* Quick Actions */}
-        <div className="mt-6 pt-4 border-t border-blue-700">
+        <div className="mt-7 pt-6 border-t border-blue-700">
           <h3 className="text-xs uppercase text-blue-400 mb-2 px-3">Quick Actions</h3>
           {quickActions.map(({ icon, text, path }) => (
             <Link
@@ -165,7 +165,7 @@ const MedicDashboard = () => {
             <FaCog className="text-blue-300" /> <span>Settings</span>
           </Link>
           <Link
-            to="/logout"
+            to="/"
             onClick={() => setSidebarOpen(false)}
             className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100 text-sm"
           >

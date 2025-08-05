@@ -212,7 +212,7 @@ const BasketballProgramPage = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Hero Section */}
       <div className="relative rounded-xl overflow-hidden mb-12 shadow-xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-75"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-50"></div>
         <video 
           autoPlay 
           loop 

@@ -32,7 +32,7 @@ const CoachSettings = () => {
     hourlyRate: 120
   });
 
-  const [profileImage, setProfileImage] = useState('https://randomuser.me/api/portraits/men/42.jpg');
+  const [profileImage, setProfileImage] = useState('/pro11.jpg');
   const [tempImage, setTempImage] = useState(null);
   const fileInputRef = React.useRef(null);
 

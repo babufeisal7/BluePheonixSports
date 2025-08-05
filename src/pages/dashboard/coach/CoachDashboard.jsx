@@ -202,7 +202,7 @@ const CoachDashboard = () => {
 
     {/* Logout */}
     <NavLink
-      to="logout"
+      to="/"
       onClick={closeSidebar}
       className={`flex items-center gap-3 py-2 px-3 rounded-md transition-colors hover:bg-blue-700 text-red-200 hover:text-red-100`}
     >

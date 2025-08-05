@@ -22,7 +22,7 @@ const PlayerSettings = () => {
     language: 'en'
   });
 
-  const [profileImage, setProfileImage] = useState('https://randomuser.me/api/portraits/men/22.jpg');
+  const [profileImage, setProfileImage] = useState('/pro11.jpg');
   const [tempImage, setTempImage] = useState(null);
 
   const handleInputChange = (e) => {

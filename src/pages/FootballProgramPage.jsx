@@ -200,7 +200,7 @@ const FootballProgramPage = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Hero Section */}
       <div className="relative rounded-xl overflow-hidden mb-12 shadow-xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-75"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-50"></div>
         <video 
           autoPlay 
           loop 
@@ -560,10 +560,10 @@ const FootballProgramPage = () => {
                 >
                   <div className="flex items-start mb-4">
                     <img 
-                      src="/football-success1.jpg" 
+                      src="/football1.jpg" 
                       alt="Success story" 
                       className="w-16 h-16 rounded-full object-cover mr-4 border-2 border-blue-100"
-                      onError={e => (e.target.src = '/default-player.jpg')}
+                      onError={e => (e.target.src = '/football4.jpg')}
                     />
                     <div>
                       <h4 className="font-bold">Jamie Kowalski</h4>

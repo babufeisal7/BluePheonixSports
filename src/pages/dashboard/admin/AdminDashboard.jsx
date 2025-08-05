@@ -149,7 +149,7 @@ const AdminDashboard = () => {
         {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
       </button>
       <button
-        onClick={() => navigate("/logout")}
+        onClick={() => navigate("/")}
         className="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100 w-full"
         aria-label="Logout"
       >

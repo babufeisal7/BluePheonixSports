@@ -130,7 +130,7 @@ const FootballPage = () => {
     {
       id: 1,
       name: "Carlos Ramirez",
-      imgSrc: "/photo8.jpg",
+      imgSrc: "/football1.jpg",
       altText: "Carlos Ramirez",
       position: "Forward",
       stats: "Goals: 15 | Assists: 8",
@@ -139,7 +139,7 @@ const FootballPage = () => {
         {
       id: 2,
       name: "Luis Gonzales",
-      imgSrc: "/photo9.jpg", // Updated image URL
+      imgSrc: "/football2.jpg", 
       altText: "Luis Gonzales",
       position: "Midfielder",
       stats: "Goals: 7 | Assists: 12",
@@ -148,7 +148,7 @@ const FootballPage = () => {
     {
       id: 3,
       name: "Marco Silva",
-      imgSrc: "/photo10.jpg", // Updated image URL
+      imgSrc: "/football3.jpg", 
       altText: "Marco Silva",
       position: "Defender",
       stats: "Tackles: 20 | Blocks: 10",
@@ -157,7 +157,7 @@ const FootballPage = () => {
     {
       id: 4,
       name: "David Martinez",
-      imgSrc: "/image1.jpg", // Updated image URL
+      imgSrc: "/keeper.jpg", 
       altText: "David Martinez",
       position: "Goalkeeper",
       stats: "Saves: 50 | Clean Sheets: 7",
@@ -166,7 +166,7 @@ const FootballPage = () => {
     {
       id: 5,
       name: "Diego Torres",
-      imgSrc: "/image2.jpg", // Updated image URL
+      imgSrc: "/image2.jpg", 
       altText: "Diego Torres",
       position: "Forward",
       stats: "Goals: 12 | Assists: 10",
@@ -175,7 +175,7 @@ const FootballPage = () => {
     {
       id: 6,
       name: "Antonio Ruiz",
-      imgSrc: "/image3.jpg", // Updated image URL
+      imgSrc: "/image3.jpg", 
       altText: "Antonio Ruiz",
       position: "Midfielder",
       stats: "Goals: 6 | Assists: 15",
@@ -184,7 +184,7 @@ const FootballPage = () => {
     {
       id: 7,
       name: "Rafael Castillo",
-      imgSrc: "/image4.jpg", // Updated image URL
+      imgSrc: "/football5.jpg", 
       altText: "Rafael Castillo",
       position: "Defender",
       stats: "Tackles: 25 | Interceptions: 15",
@@ -193,7 +193,7 @@ const FootballPage = () => {
     {
       id: 8,
       name: "Jorge Moreno",
-      imgSrc: "/photo11.jpg", // Updated image URL
+      imgSrc: "/photo11.jpg", 
       altText: "Jorge Moreno",
       position: "Goalkeeper",
       stats: "Saves: 40 | Clean Sheets: 6",
@@ -202,7 +202,7 @@ const FootballPage = () => {
     {
       id: 9,
       name: "Pedro Fernandez",
-      imgSrc: "/photo8.jpg", // Updated image URL
+      imgSrc: "/football6.jpg", 
       altText: "Pedro Fernandez",
       position: "Forward",
       stats: "Goals: 10 | Assists: 5",
@@ -211,7 +211,7 @@ const FootballPage = () => {
     {
       id: 10,
       name: "Luis Martinez",
-      imgSrc: "/photo9.jpg", // Updated image URL
+      imgSrc: "/football4.jpg", 
       altText: "Luis Martinez",
       position: "Midfielder",
       stats: "Goals: 8 | Assists: 10",
@@ -220,7 +220,7 @@ const FootballPage = () => {
     {
       id: 11,
       name: "Ricardo Vega",
-      imgSrc: "/photo10.jpg", // Updated image URL
+      imgSrc: "/photo10.jpg",
       altText: "Ricardo Vega",
       position: "Defender",
       stats: "Tackles: 30 | Clearances: 12",
@@ -229,7 +229,7 @@ const FootballPage = () => {
     {
       id: 12,
       name: "Miguel Santos",
-      imgSrc: "/image1.jpg", // Updated image URL
+      imgSrc: "/football3.jpg", 
       altText: "Miguel Santos",
       position: "Goalkeeper",
       stats: "Saves: 55 | Clean Sheets: 8",
@@ -238,7 +238,7 @@ const FootballPage = () => {
     {
       id: 13,
       name: "Juan Carlos",
-      imgSrc: "/image2.jpg", // Updated image URL
+      imgSrc: "/football4.jpg", 
       altText: "Juan Carlos",
       position: "Forward",
       stats: "Goals: 9 | Assists: 6",
@@ -274,13 +274,13 @@ const FootballPage = () => {
         Meet Our Coach
       </h1>
       <CoachCard
-        name="Juan Rodriguez"
-        imgSrc="/coach.jpg"
+        name="Muheki Mathew"
+        imgSrc="/coach3.jpg"
         position="Head Coach"
-        bio="Juan has over 20 years of coaching experience and has led various teams to championship victories."
+        bio="Muheki has over 20 years of coaching experience and has led various teams to championship victories."
         dob="March 15, 1980"
-        pob="Madrid, Spain"
-        nationality="Spanish"
+        pob="kampala, Uganda"
+        nationality="Ugandan"
       />
     </div>
   );

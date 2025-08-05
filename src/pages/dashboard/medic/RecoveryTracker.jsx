@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   FaUserInjured, FaRunning, FaCalendarAlt, FaChartLine, FaPlus, 
   FaNotesMedical, FaFileMedical, FaFileDownload, FaFilePdf, 
-  FaUserMd, FaClinicMedical, FaProcedures, FaEdit  // Added FaEdit here
+  FaUserMd, FaClinicMedical, FaProcedures, FaEdit  
 } from 'react-icons/fa';
 import { 
   IoMdFitness, IoMdAlert, IoMdCheckmarkCircle 
@@ -20,7 +20,7 @@ const RecoveryTracker = () => {
       id: 1,
       name: 'John Doe',
       injury: 'ACL Tear (Grade 3)',
-      image: 'https://randomuser.me/api/portraits/men/32.jpg',
+      image: '/pro1.jpg',
       position: 'Forward',
       team: 'First Team',
       startDate: '2023-06-15',
@@ -102,7 +102,7 @@ const RecoveryTracker = () => {
       id: 2,
       name: 'Sarah Smith',
       injury: 'Recurrent Shoulder Dislocation',
-      image: 'https://randomuser.me/api/portraits/women/44.jpg',
+      image: '/photo9.jpg',
       position: 'Goalkeeper',
       team: 'First Team',
       startDate: '2023-07-10',

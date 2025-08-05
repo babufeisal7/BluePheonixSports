@@ -9,7 +9,7 @@ const mockPlayers = [
     position: "Forward",
     sex: "Male",
     status: "Active",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    avatar: "/coach1.jpg",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const mockPlayers = [
     position: "Midfielder",
     sex: "Female",
     status: "Injured",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    avatar: "/coach1.jpg",
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const mockPlayers = [
     position: "Defender",
     sex: "Male",
     status: "Active",
-    avatar: "https://randomuser.me/api/portraits/men/56.jpg",
+    avatar:"/coach2.jpg",
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ const mockPlayers = [
     position: "Goalkeeper",
     sex: "Female",
     status: "Active",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    avatar: "/coach3.jpg",
   },
 ];
 

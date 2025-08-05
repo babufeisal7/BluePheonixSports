@@ -78,18 +78,18 @@ const CoachCard = () => (
   <div className="bg-white rounded-lg shadow-lg max-w-4xl mx-auto p-8">
     <div className="flex flex-col md:flex-row items-center">
       <div className="w-full md:w-1/2 p-4">
-        <img className="w-full h-64 object-cover rounded-lg shadow-md" src="/photo5.jpg" alt="Coach Image" />
+        <img className="w-full h-64 object-cover rounded-lg shadow-md" src="/basketball4.jpg" alt="Coach Image" />
       </div>
       <div className="w-full md:w-1/2 p-4">
-        <h2 className="text-3xl font-bold text-primary">COACH NAME</h2>
+        <h2 className="text-3xl font-bold text-primary">Marlon Babu</h2>
         <h3 className="text-xl text-secondary-foreground">HEAD COACH</h3>
         <p className="mt-4 text-muted-foreground">
-          Brief bio about the coach's background and achievements.
+          Marlon has over 20 years of coaching experience and has led various teams to championship victories
         </p>
         <div className="mt-4 text-sm text-gray-600">
-          <p><strong>Date of birth:</strong> Date here</p>
-          <p><strong>Place of birth:</strong> Place here</p>
-          <p><strong>Nationality:</strong> Nationality here</p>
+          <p><strong>Date of birth:</strong> March 15, 1980</p>
+          <p><strong>Place of birth:</strong> kampala, Uganda</p>
+          <p><strong>Nationality:</strong> Ugandan</p>
         </div>
       </div>
     </div>
@@ -111,18 +111,18 @@ const BasketballPage = () => {
   };
 
   const players = [
-    { name: "Jordan Rivers", imgSrc: "/photo11.jpg", altText: "Jordan Rivers", position: "Point Guard", bio: "Jordan is known for his incredible speed and court vision.", stats: "20 points, 8 assists per game" },
-    { name: "Isaiah Carter", imgSrc: "/photo12.jpg", altText: "Isaiah Carter", position: "Shooting Guard", bio: "Isaiah is a sharpshooter with a knack for hitting clutch shots.", stats: "25 points, 5 rebounds per game" },
-    { name: "Marcus Allen", imgSrc: "/photo10.jpg", altText: "Marcus Allen", position: "Small Forward", bio: "Marcus is an athletic player with great defensive skills.", stats: "18 points, 7 rebounds per game" },
-    { name: "DeAndre Simmons", imgSrc: "/photo8.jpg", altText: "DeAndre Simmons", position: "Power Forward", bio: "DeAndre is known for his strong post moves and rebounding ability.", stats: "15 points, 10 rebounds per game" },
-    { name: "Trey Parker", imgSrc: "/photo8.jpg", altText: "Trey Parker", position: "Center", bio: "Trey is a dominant presence in the paint and an excellent shot-blocker.", stats: "12 points, 11 rebounds per game" },
+    { name: "Jordan Rivers", imgSrc: "/basketball1.jpg", altText: "Jordan Rivers", position: "Point Guard", bio: "Jordan is known for his incredible speed and court vision.", stats: "20 points, 8 assists per game" },
+    { name: "Isaiah Carter", imgSrc: "/basketball2.jpg", altText: "Isaiah Carter", position: "Shooting Guard", bio: "Isaiah is a sharpshooter with a knack for hitting clutch shots.", stats: "25 points, 5 rebounds per game" },
+    { name: "Marcus Allen", imgSrc: "/basketball3.jpg", altText: "Marcus Allen", position: "Small Forward", bio: "Marcus is an athletic player with great defensive skills.", stats: "18 points, 7 rebounds per game" },
+    { name: "DeAndre Simmons", imgSrc: "/basketball2.jpg", altText: "DeAndre Simmons", position: "Power Forward", bio: "DeAndre is known for his strong post moves and rebounding ability.", stats: "15 points, 10 rebounds per game" },
+    { name: "Trey Parker", imgSrc: "/basketball5.jpg", altText: "Trey Parker", position: "Center", bio: "Trey is a dominant presence in the paint and an excellent shot-blocker.", stats: "12 points, 11 rebounds per game" },
     { name: "Liam Foster", imgSrc: "/photo6.jpg", altText: "Liam Foster", position: "Point Guard", bio: "Liam is known for his leadership on and off the court.", stats: "22 points, 7 assists per game" },
     { name: "Noah Taylor", imgSrc: "/photo8.jpg", altText: "Noah Taylor", position: "Shooting Guard", bio: "Noah has a deadly three-point shot and excellent footwork.", stats: "23 points, 4 rebounds per game" },
-    { name: "Ethan King", imgSrc: "/photo8.jpg", altText: "Ethan King", position: "Small Forward", bio: "Ethan is a versatile scorer who can play multiple positions.", stats: "19 points, 6 rebounds per game" },
+    { name: "Ethan King", imgSrc: "/basketball1.jpg", altText: "Ethan King", position: "Small Forward", bio: "Ethan is a versatile scorer who can play multiple positions.", stats: "19 points, 6 rebounds per game" },
     { name: "Oliver Scott", imgSrc: "/photo9.jpg", altText: "Oliver Scott", position: "Power Forward", bio: "Oliver brings size and strength to the team, excelling in post play.", stats: "16 points, 9 rebounds per game" },
-    { name: "Lucas Rivera", imgSrc: "/photo10.jpg", altText: "Lucas Rivera", position: "Center", bio: "Lucas is an elite shot-blocker and rim protector.", stats: "14 points, 10 rebounds per game" },
+    { name: "Lucas Rivera", imgSrc: "/basketball7.jpg", altText: "Lucas Rivera", position: "Center", bio: "Lucas is an elite shot-blocker and rim protector.", stats: "14 points, 10 rebounds per game" },
     { name: "Mason Brooks", imgSrc: "/photo11.jpg", altText: "Mason Brooks", position: "Small Forward", bio: "Mason is an athletic player known for his quickness and agility.", stats: "21 points, 5 rebounds per game" },
-    { name: "James Bennett", imgSrc: "/photo12.jpg", altText: "James Bennett", position: "Shooting Guard", bio: "James is a crafty scorer with a high basketball IQ.", stats: "17 points, 3 assists per game" },
+    { name: "James Bennett", imgSrc: "/basketball1.jpg", altText: "James Bennett", position: "Shooting Guard", bio: "James is a crafty scorer with a high basketball IQ.", stats: "17 points, 3 assists per game" },
   ];
   
   return (

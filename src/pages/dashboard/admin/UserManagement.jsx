@@ -9,12 +9,12 @@ const STATUSES = ['active', 'inactive', 'pending'];
 
 // Default avatar images
 const DEFAULT_AVATARS = {
-  admin: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-  coach: 'https://cdn-icons-png.flaticon.com/512/2583/2583344.png',
-  medic: 'https://cdn-icons-png.flaticon.com/512/2785/2785402.png',
-  player: 'https://cdn-icons-png.flaticon.com/512/236/236832.png',
-  staff: 'https://cdn-icons-png.flaticon.com/512/1077/1077012.png',
-  default: 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
+  admin: 'coach2.jpg',
+  coach: '/coach1.jpg',
+  medic: '/coach2.jpg',
+  player: '/coach3.jpg',
+  staff: '/coach1.jpg',
+  default: '/coach3.jpg'
 };
 
 // Sport icons
@@ -36,7 +36,7 @@ const initialUsers = [
     role: 'coach', 
     sport: 'Rugby', 
     status: 'active',
-    avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+    avatar: '/coach1.jpg'
   },
   { 
     id: 2, 
@@ -45,7 +45,7 @@ const initialUsers = [
     role: 'medic', 
     sport: 'Football', 
     status: 'active',
-    avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
+    avatar: '/coach2.jpg'
   },
   { 
     id: 3, 
@@ -56,7 +56,7 @@ const initialUsers = [
     ageGroup: 'U11-U15', 
     gender: 'Male', 
     status: 'active',
-    avatar: 'https://randomuser.me/api/portraits/men/22.jpg'
+    avatar: '/coach3.jpg'
   },
 ];
 

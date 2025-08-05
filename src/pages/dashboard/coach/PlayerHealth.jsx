@@ -26,7 +26,7 @@ const playersData = [
     recoveryProgress: 100,
     nextCheckup: "2025-08-01",
     medicalNotes: "No issues reported. Maintaining peak condition.",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+    avatar: "/photo11.jpg"
   },
   { 
     id: 2, 
@@ -38,7 +38,7 @@ const playersData = [
     recoveryProgress: 35,
     nextCheckup: "2025-07-15",
     medicalNotes: "Limited mobility. Physical therapy 3x/week. No contact drills.",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+    avatar: "/photo12.jpg"
   },
   { 
     id: 3, 
@@ -50,7 +50,7 @@ const playersData = [
     recoveryProgress: 75,
     nextCheckup: "2025-07-20",
     medicalNotes: "Light training approved. Monitor for any discomfort.",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+    avatar: "/photo10.jpg"
   },
   { 
     id: 4, 
@@ -62,7 +62,7 @@ const playersData = [
     recoveryProgress: 100,
     nextCheckup: "2025-07-25",
     medicalNotes: "Regular checkup showed excellent condition.",
-    avatar: "https://randomuser.me/api/portraits/women/63.jpg"
+    avatar: "/photo8.jpg"
   },
   { 
     id: 5, 
@@ -74,7 +74,7 @@ const playersData = [
     recoveryProgress: 15,
     nextCheckup: "2025-07-10",
     medicalNotes: "Post-surgery recovery. Long-term rehabilitation program.",
-    avatar: "https://randomuser.me/api/portraits/men/75.jpg"
+    avatar: "/photo13.jpg"
   },
   { 
     id: 6, 
@@ -86,7 +86,7 @@ const playersData = [
     recoveryProgress: 90,
     nextCheckup: "2025-07-12",
     medicalNotes: "Final evaluation before full clearance expected next week.",
-    avatar: "https://randomuser.me/api/portraits/women/85.jpg"
+    avatar: "/photo71.jpg"
   },
 ];
 

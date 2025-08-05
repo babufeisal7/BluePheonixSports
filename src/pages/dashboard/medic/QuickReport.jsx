@@ -8,7 +8,7 @@ const QuickReport = () => {
   const [formData, setFormData] = useState({
     patientId: '',
     patientName: '',
-    patientImage: 'https://randomuser.me/api/portraits/lego/5.jpg',
+    patientImage: '/pro11.jpg',
     injuryType: '',
     severity: 'medium',
     date: new Date().toISOString().split('T')[0],
@@ -23,9 +23,9 @@ const QuickReport = () => {
   const fileInputRef = React.useRef(null);
 
   const patients = [
-    { id: 'P001', name: 'John Doe', image: 'https://randomuser.me/api/portraits/men/32.jpg' },
-    { id: 'P002', name: 'Sarah Smith', image: 'https://randomuser.me/api/portraits/women/44.jpg' },
-    { id: 'P003', name: 'Mike Johnson', image: 'https://randomuser.me/api/portraits/men/75.jpg' }
+    { id: 'P001', name: 'John Doe', image: '/image9.jpg' },
+    { id: 'P002', name: 'Sarah Smith', image: 'pro1.jpg' },
+    { id: 'P003', name: 'Mike Johnson', image: '/photo9.jpg' }
   ];
 
   const injuries = [

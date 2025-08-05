@@ -15,7 +15,7 @@ const sampleResources = [
     type: "guide",
     date: "2025-07-05",
     downloads: 124,
-    image: "/images/training-guide.jpg",
+    image: "/pro11.jpg",
     description: "Comprehensive guide to seasonal training schedules and periodization",
   },
   {
@@ -24,7 +24,7 @@ const sampleResources = [
     type: "plan",
     date: "2025-06-28",
     downloads: 89,
-    image: "/images/nutrition-plan.jpg",
+    image: "/strength.jpg",
     description: "Tailored nutrition strategies for summer training conditions",
   },
   {
@@ -33,7 +33,7 @@ const sampleResources = [
     type: "material",
     date: "2025-07-01",
     downloads: 56,
-    image: "/images/coaching-materials.jpg",
+    image: "/football1.jpg",
     description: "Advanced coaching techniques and session planning",
   },
   {
@@ -42,7 +42,7 @@ const sampleResources = [
     type: "video",
     date: "2025-07-10",
     downloads: 203,
-    image: "/images/recovery-video.jpg",
+    image: "/photo9.jpg",
     description: "5-part video series on post-training recovery methods",
   },
 ];
@@ -99,7 +99,7 @@ const Resources = () => {
             className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
             fill="none"
             stroke="currentColor"
-            viewBox="0 0 24 24"
+            viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path

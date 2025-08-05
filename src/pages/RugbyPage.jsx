@@ -273,13 +273,13 @@ const RugbyPage = () => {
         Meet Our Coach
       </h1>
       <CoachCard
-        name="Richard Johnson"
-        imgSrc="/coach.jpg"
+        name="Balya Denis"
+        imgSrc="/coach1.jpg"
         position="Head Coach"
-        bio="Richard has 15 years of professional coaching experience, having played internationally before transitioning to coaching. He specializes in forward play and set-piece strategies."
-        dob="June 22, 1978"
-        pob="Auckland, New Zealand"
-        nationality="New Zealander"
+        bio="Denis has 15 years of professional coaching experience, having played internationally before transitioning to coaching. He specializes in forward play and set-piece strategies."
+        dob="June 22, 1996"
+        pob="buziga, Uganda"
+        nationality="Ugandan"
       />
     </div>
   );
