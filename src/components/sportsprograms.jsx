@@ -7,8 +7,8 @@ const headerClasses = 'text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-whit
 const programCardClasses = 'bg-blue-700 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg text-white text-left'; 
 const programTitleClasses = 'text-xl sm:text-2xl md:text-3xl font-semibold mb-2';
 const buttonClasses = 'flex items-center bg-blue-600 text-white rounded-lg py-2 px-3 sm:py-2.5 sm:px-4 md:py-3 md:px-6 mt-4 opacity-80 hover:opacity-100 transition-opacity duration-300';
-const imageClasses = 'w-full h-32 object-cover rounded-lg mb-4 sm:w-48 sm:h-32'; 
-const contentClasses = 'mt-4 sm:mt-6 text-left space-y-4 mb-6'; 
+const imageClasses = 'w-full h-32 object-cover rounded-lg mb-4 sm:w-48 sm:h-32'; // Make image responsive
+const contentClasses = 'mt-4 sm:mt-6 text-left space-y-4 mb-6'; // Added margin-bottom here
 const downloadButtonClasses = 'mt-4 bg-green-600 text-white rounded-lg py-2 px-4 hover:bg-green-700 transition-colors duration-300';
 
 const SportsPrograms = () => {
@@ -25,9 +25,9 @@ const SportsPrograms = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Rugby Program */}
                 <div id="rugby" className={programCardClasses}>
-                    <div className="flex flex-col sm:flex-row items-center space-x-4"> 
+                    <div className="flex flex-col sm:flex-row items-center space-x-4"> {/* Added space-x-4 for horizontal space */}
                         <img src="/photo71.jpg" alt="Rugby" className={imageClasses} />
-                        <div className="flex-1 mt-4 sm:mt-0"> 
+                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
                             <h2 className={programTitleClasses}>Rugby Program</h2>
                             <button
                                 onClick={() => toggleDropdown('rugby')}
@@ -44,7 +44,7 @@ const SportsPrograms = () => {
                                     <p><strong>Schedule:</strong> Training sessions are held three times a week, with additional opportunities for competitive matches and tournaments throughout the season.</p>
                                     <p><strong>Benefits:</strong> Improve your rugby skills, build strong team bonds, and enjoy the excitement of competitive play.</p>
                                     {/* Download button inside dropdown content */}
-                                    <a href="/rugby-program"  className={downloadButtonClasses}>View more...</a>
+                                    <a href="/rugby-program.pdf" download className={downloadButtonClasses}>Download Program PDF</a>
                                 </div>
                             )}
                         </div>
@@ -53,9 +53,9 @@ const SportsPrograms = () => {
 
                 {/* Football Program */}
                 <div id="football" className={programCardClasses}>
-                    <div className="flex flex-col sm:flex-row items-center space-x-4"> 
+                    <div className="flex flex-col sm:flex-row items-center space-x-4"> {/* Added space-x-4 for horizontal space */}
                         <img src="/football1.jpg" alt="Football" className={imageClasses} />
-                        <div className="flex-1 mt-4 sm:mt-0"> 
+                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
                             <h2 className={programTitleClasses}>Football Program</h2>
                             <button
                                 onClick={() => toggleDropdown('football')}
@@ -72,7 +72,7 @@ const SportsPrograms = () => {
                                     <p><strong>Schedule:</strong> Practices are held twice a week, with matches scheduled on weekends and special events during the season.</p>
                                     <p><strong>Benefits:</strong> Enhance your football skills, gain valuable game experience, and be part of a dynamic team.</p>
                                     {/* Download button inside dropdown content */}
-                                    <a href="/football-program" className={downloadButtonClasses}>View more...</a>
+                                    <a href="/football-program.pdf" download className={downloadButtonClasses}>Download Program PDF</a>
                                 </div>
                             )}
                         </div>
@@ -81,9 +81,9 @@ const SportsPrograms = () => {
 
                 {/* Basketball Program */}
                 <div id="basketball" className={programCardClasses}>
-                    <div className="flex flex-col sm:flex-row items-center space-x-4"> 
+                    <div className="flex flex-col sm:flex-row items-center space-x-4"> {/* Added space-x-4 for horizontal space */}
                         <img src="/basketball6.jpg" alt="Basketball" className={imageClasses} />
-                        <div className="flex-1 mt-4 sm:mt-0"> 
+                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
                             <h2 className={programTitleClasses}>Basketball Program</h2>
                             <button
                                 onClick={() => toggleDropdown('basketball')}
@@ -100,7 +100,7 @@ const SportsPrograms = () => {
                                     <p><strong>Schedule:</strong> Training sessions are scheduled twice a week with opportunities for competitive games and tournaments.</p>
                                     <p><strong>Benefits:</strong> Improve your basketball skills, fitness, and teamwork through structured training and competitive experiences.</p>
                                     {/* Download button inside dropdown content */}
-                                    <a href="/basketball-program"  className={downloadButtonClasses}>View more...</a>
+                                    <a href="/basketball-program.pdf" download className={downloadButtonClasses}>Download Program PDF</a>
                                 </div>
                             )}
                         </div>
@@ -109,9 +109,9 @@ const SportsPrograms = () => {
 
                 {/* Swimming Program */}
                 <div id="swimming" className={programCardClasses}>
-                    <div className="flex flex-col sm:flex-row items-center space-x-4"> 
+                    <div className="flex flex-col sm:flex-row items-center space-x-4"> {/* Added space-x-4 for horizontal space */}
                         <img src="/swimming1.jpg" alt="Swimming" className={imageClasses} />
-                        <div className="flex-1 mt-4 sm:mt-0"> 
+                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
                             <h2 className={programTitleClasses}>Swimming Program</h2>
                             <button
                                 onClick={() => toggleDropdown('swimming')}
@@ -128,7 +128,7 @@ const SportsPrograms = () => {
                                     <p><strong>Schedule:</strong> Training is available four times a week, with additional opportunities for swim meets and competitive events.</p>
                                     <p><strong>Benefits:</strong> Achieve your swimming goals, improve your fitness, and compete at the highest level.</p>
                                     {/* Download button inside dropdown content */}
-                                    <a href="/swimming-program" className={downloadButtonClasses}>View more...</a>
+                                    <a href="/swimming-program.pdf" download className={downloadButtonClasses}>Download Program PDF</a>
                                 </div>
                             )}
                         </div>
