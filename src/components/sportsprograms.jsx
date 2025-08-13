@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 // Classes for styling
 const containerClasses = 'bg-blue-800 p-4 sm:p-6 md:p-8 lg:p-10 shadow-lg text-center';
@@ -7,9 +8,31 @@ const headerClasses = 'text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-whit
 const programCardClasses = 'bg-blue-700 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg text-white text-left'; 
 const programTitleClasses = 'text-xl sm:text-2xl md:text-3xl font-semibold mb-2';
 const buttonClasses = 'flex items-center bg-blue-600 text-white rounded-lg py-2 px-3 sm:py-2.5 sm:px-4 md:py-3 md:px-6 mt-4 opacity-80 hover:opacity-100 transition-opacity duration-300';
-const imageClasses = 'w-full h-32 object-cover rounded-lg mb-4 sm:w-48 sm:h-32'; // Make image responsive
-const contentClasses = 'mt-4 sm:mt-6 text-left space-y-4 mb-6'; // Added margin-bottom here
-const downloadButtonClasses = 'mt-4 bg-green-600 text-white rounded-lg py-2 px-4 hover:bg-green-700 transition-colors duration-300';
+const imageClasses = 'w-full h-32 object-cover rounded-lg mb-4 sm:w-48 sm:h-32';
+const contentClasses = 'mt-4 sm:mt-6 text-left space-y-4 mb-6';
+
+// New small, gradient, glowing button
+const pageLinkClasses = `
+  mt-4
+  inline-block
+  text-white
+  font-semibold
+  px-4
+  py-2
+  rounded-lg
+  bg-gradient-to-r from-purple-500 to-purple-600
+  shadow-md
+  hover:shadow-lg
+  transform
+  transition
+  duration-300
+  hover:scale-105
+  hover:from-purple-600 hover:to-purple-700
+  focus:outline-none
+  focus:ring-2
+  focus:ring-purple-400
+  focus:ring-opacity-50
+`;
 
 const SportsPrograms = () => {
     const [activeProgram, setActiveProgram] = useState(null);
@@ -25,9 +48,9 @@ const SportsPrograms = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Rugby Program */}
                 <div id="rugby" className={programCardClasses}>
-                    <div className="flex flex-col sm:flex-row items-center space-x-4"> {/* Added space-x-4 for horizontal space */}
+                    <div className="flex flex-col sm:flex-row items-center space-x-4">
                         <img src="/photo71.jpg" alt="Rugby" className={imageClasses} />
-                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
+                        <div className="flex-1 mt-4 sm:mt-0">
                             <h2 className={programTitleClasses}>Rugby Program</h2>
                             <button
                                 onClick={() => toggleDropdown('rugby')}
@@ -38,13 +61,12 @@ const SportsPrograms = () => {
                             </button>
                             {activeProgram === 'rugby' && (
                                 <div className={contentClasses}>
-                                    <p><strong>Overview:</strong> Our Rugby Program is dedicated to building well-rounded athletes with advanced skills and a deep understanding of the game. We emphasize teamwork, strategy, and physical conditioning to prepare players for competitive play.</p>
-                                    <p><strong>Training Focus:</strong> Participants will work on technical skills, tactical awareness, and physical fitness. Our coaching staff uses proven methods to enhance player performance and team cohesion.</p>
-                                    <p><strong>Coaching Staff:</strong> Led by experienced coaches with extensive backgrounds in rugby, our team is committed to providing top-notch training and guidance.</p>
-                                    <p><strong>Schedule:</strong> Training sessions are held three times a week, with additional opportunities for competitive matches and tournaments throughout the season.</p>
-                                    <p><strong>Benefits:</strong> Improve your rugby skills, build strong team bonds, and enjoy the excitement of competitive play.</p>
-                                    {/* Download button inside dropdown content */}
-                                    <a href="/rugby-program.pdf" download className={downloadButtonClasses}>Download Program PDF</a>
+                                    <p><strong>Overview:</strong> Our Rugby Program builds well-rounded athletes with advanced skills and deep game understanding. Teamwork, strategy, and physical conditioning are emphasized.</p>
+                                    <p><strong>Training Focus:</strong> Technical skills, tactical awareness, and physical fitness are covered in our training sessions.</p>
+                                    <p><strong>Coaching Staff:</strong> Experienced coaches provide top-notch guidance.</p>
+                                    <p><strong>Schedule:</strong> Three training sessions per week plus competitive matches and tournaments.</p>
+                                    <p><strong>Benefits:</strong> Enhance skills, teamwork, and enjoy competitive play.</p>
+                                    <Link to="/rugby-program" className={pageLinkClasses}>Go to Rugby Program</Link>
                                 </div>
                             )}
                         </div>
@@ -53,9 +75,9 @@ const SportsPrograms = () => {
 
                 {/* Football Program */}
                 <div id="football" className={programCardClasses}>
-                    <div className="flex flex-col sm:flex-row items-center space-x-4"> {/* Added space-x-4 for horizontal space */}
+                    <div className="flex flex-col sm:flex-row items-center space-x-4">
                         <img src="/football1.jpg" alt="Football" className={imageClasses} />
-                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
+                        <div className="flex-1 mt-4 sm:mt-0">
                             <h2 className={programTitleClasses}>Football Program</h2>
                             <button
                                 onClick={() => toggleDropdown('football')}
@@ -66,13 +88,12 @@ const SportsPrograms = () => {
                             </button>
                             {activeProgram === 'football' && (
                                 <div className={contentClasses}>
-                                    <p><strong>Overview:</strong> The Football Program focuses on developing technical skills and game understanding. We offer a structured training environment to help players excel on and off the field.</p>
-                                    <p><strong>Training Focus:</strong> Our training sessions cover all aspects of football, including dribbling, passing, shooting, and tactical play.</p>
-                                    <p><strong>Coaching Staff:</strong> Our coaches bring a wealth of experience and expertise, providing personalized instruction to each player.</p>
-                                    <p><strong>Schedule:</strong> Practices are held twice a week, with matches scheduled on weekends and special events during the season.</p>
-                                    <p><strong>Benefits:</strong> Enhance your football skills, gain valuable game experience, and be part of a dynamic team.</p>
-                                    {/* Download button inside dropdown content */}
-                                    <a href="/football-program.pdf" download className={downloadButtonClasses}>Download Program PDF</a>
+                                    <p><strong>Overview:</strong> The Football Program develops technical skills and game understanding in a structured environment.</p>
+                                    <p><strong>Training Focus:</strong> Dribbling, passing, shooting, and tactical play.</p>
+                                    <p><strong>Coaching Staff:</strong> Experienced coaches provide personalized instruction.</p>
+                                    <p><strong>Schedule:</strong> Practices twice a week, matches on weekends.</p>
+                                    <p><strong>Benefits:</strong> Improve skills, gain experience, join a dynamic team.</p>
+                                    <Link to="/football-program" className={pageLinkClasses}>Go to Football Program Page</Link>
                                 </div>
                             )}
                         </div>
@@ -81,9 +102,9 @@ const SportsPrograms = () => {
 
                 {/* Basketball Program */}
                 <div id="basketball" className={programCardClasses}>
-                    <div className="flex flex-col sm:flex-row items-center space-x-4"> {/* Added space-x-4 for horizontal space */}
+                    <div className="flex flex-col sm:flex-row items-center space-x-4">
                         <img src="/basketball6.jpg" alt="Basketball" className={imageClasses} />
-                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
+                        <div className="flex-1 mt-4 sm:mt-0">
                             <h2 className={programTitleClasses}>Basketball Program</h2>
                             <button
                                 onClick={() => toggleDropdown('basketball')}
@@ -94,13 +115,12 @@ const SportsPrograms = () => {
                             </button>
                             {activeProgram === 'basketball' && (
                                 <div className={contentClasses}>
-                                    <p><strong>Overview:</strong> The Basketball Program is designed to develop players’ skills and strategies through intensive training and competitive play.</p>
-                                    <p><strong>Training Focus:</strong> Focus areas include shooting accuracy, defensive techniques, and team play strategies.</p>
-                                    <p><strong>Coaching Staff:</strong> Our basketball coaches have a proven track record and offer expert guidance to help players reach their potential.</p>
-                                    <p><strong>Schedule:</strong> Training sessions are scheduled twice a week with opportunities for competitive games and tournaments.</p>
-                                    <p><strong>Benefits:</strong> Improve your basketball skills, fitness, and teamwork through structured training and competitive experiences.</p>
-                                    {/* Download button inside dropdown content */}
-                                    <a href="/basketball-program.pdf" download className={downloadButtonClasses}>Download Program PDF</a>
+                                    <p><strong>Overview:</strong> The Basketball Program develops skills and strategies through training and competitive play.</p>
+                                    <p><strong>Training Focus:</strong> Shooting, defense, and team strategies.</p>
+                                    <p><strong>Coaching Staff:</strong> Expert coaches with proven track record.</p>
+                                    <p><strong>Schedule:</strong> Two sessions per week plus competitive games.</p>
+                                    <p><strong>Benefits:</strong> Improve skills, fitness, and teamwork.</p>
+                                    <Link to="/basketball-program" className={pageLinkClasses}>Go to Basketball Program Page</Link>
                                 </div>
                             )}
                         </div>
@@ -109,9 +129,9 @@ const SportsPrograms = () => {
 
                 {/* Swimming Program */}
                 <div id="swimming" className={programCardClasses}>
-                    <div className="flex flex-col sm:flex-row items-center space-x-4"> {/* Added space-x-4 for horizontal space */}
+                    <div className="flex flex-col sm:flex-row items-center space-x-4">
                         <img src="/swimming1.jpg" alt="Swimming" className={imageClasses} />
-                        <div className="flex-1 mt-4 sm:mt-0"> {/* Adjusted margin */}
+                        <div className="flex-1 mt-4 sm:mt-0">
                             <h2 className={programTitleClasses}>Swimming Program</h2>
                             <button
                                 onClick={() => toggleDropdown('swimming')}
@@ -122,13 +142,12 @@ const SportsPrograms = () => {
                             </button>
                             {activeProgram === 'swimming' && (
                                 <div className={contentClasses}>
-                                    <p><strong>Overview:</strong> Our Swimming Program is dedicated to improving swimming technique and performance through focused training.</p>
-                                    <p><strong>Training Focus:</strong> Participants work on stroke technique, endurance, and speed through regular practice and expert coaching.</p>
-                                    <p><strong>Coaching Staff:</strong> Experienced swim coaches provide personalized instruction and support to swimmers of all levels.</p>
-                                    <p><strong>Schedule:</strong> Training is available four times a week, with additional opportunities for swim meets and competitive events.</p>
-                                    <p><strong>Benefits:</strong> Achieve your swimming goals, improve your fitness, and compete at the highest level.</p>
-                                    {/* Download button inside dropdown content */}
-                                    <a href="/swimming-program.pdf" download className={downloadButtonClasses}>Download Program PDF</a>
+                                    <p><strong>Overview:</strong> Focused on improving swimming technique and performance through training.</p>
+                                    <p><strong>Training Focus:</strong> Stroke technique, endurance, and speed.</p>
+                                    <p><strong>Coaching Staff:</strong> Experienced coaches provide personalized support.</p>
+                                    <p><strong>Schedule:</strong> Four sessions per week plus competitive events.</p>
+                                    <p><strong>Benefits:</strong> Improve swimming skills, fitness, and compete at high level.</p>
+                                    <Link to="/swimming-program" className={pageLinkClasses}>Go to Swimming Program Page</Link>
                                 </div>
                             )}
                         </div>

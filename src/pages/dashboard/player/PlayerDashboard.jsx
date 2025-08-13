@@ -11,7 +11,8 @@ import {
   FaSignOutAlt,
   FaArrowLeft,
   FaBars,
-  FaTimes
+  FaTimes,
+  FaBell
 } from "react-icons/fa";
 
 const playerProfile = {
@@ -43,6 +44,7 @@ const PlayerDashboard = () => {
   const isProfile = location.pathname.includes("my-profile");
   const [isMobile, setIsMobile] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [notifications] = useState(3);
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,16 +61,25 @@ const PlayerDashboard = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50 text-gray-800 relative">
+      {/* Mobile Header */}
       {isMobile && (
         <header className="fixed top-0 left-0 right-0 bg-blue-900 text-white p-4 flex justify-between items-center z-30 shadow-md">
           <button onClick={toggleSidebar} className="p-2 rounded-md hover:bg-blue-700 transition-colors">
             <FaBars className="text-xl" />
           </button>
           <h1 className="text-xl font-bold">Player Dashboard</h1>
-          <div className="w-8"></div>
+          <div className="relative">
+            <FaBell className="text-xl" />
+            {notifications > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {notifications}
+              </span>
+            )}
+          </div>
         </header>
       )}
 
+      {/* Sidebar - Maintained original links */}
       <aside className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transform transition-transform duration-300 ease-in-out w-64 bg-blue-900 text-white p-6 flex flex-col fixed md:sticky top-0 h-screen z-20`}>
         {isMobile && (
           <button onClick={toggleSidebar} className="absolute top-4 right-4 p-1 rounded-md hover:bg-blue-700 transition-colors">
@@ -85,21 +96,38 @@ const PlayerDashboard = () => {
         </div>
 
         <nav className="flex flex-col gap-2 text-lg flex-1 overflow-y-auto">
-          <Link to="my-profile" onClick={closeSidebar} className={`flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors ${isProfile ? "bg-blue-700" : ""}`}>
+          <Link 
+            to="my-profile" 
+            onClick={closeSidebar} 
+            className={`flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors ${isProfile ? "bg-blue-700" : ""}`}
+          >
             <FaUserCircle /> My Profile
           </Link>
 
           {features.map(({ name, path, icon }) => (
-            <Link to={path} key={name} onClick={closeSidebar} className={`flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors ${location.pathname.includes(path) ? "bg-blue-700" : ""}`}>
+            <Link 
+              to={path} 
+              key={name} 
+              onClick={closeSidebar} 
+              className={`flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors ${location.pathname.includes(path) ? "bg-blue-700" : ""}`}
+            >
               {icon} {name}
             </Link>
           ))}
 
-          <Link to="/dashboard/player/settings" onClick={closeSidebar} className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors">
+          <Link 
+            to="/dashboard/player/settings" 
+            onClick={closeSidebar} 
+            className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors"
+          >
             <FaCog /> Settings
           </Link>
 
-          <Link to="/" onClick={closeSidebar} className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100">
+          <Link 
+            to="/" 
+            onClick={closeSidebar} 
+            className="flex items-center gap-3 py-3 px-3 rounded-md hover:bg-blue-700 transition-colors text-red-200 hover:text-red-100"
+          >
             <FaSignOutAlt /> Logout
           </Link>
 
@@ -109,13 +137,16 @@ const PlayerDashboard = () => {
         </nav>
       </aside>
 
+      {/* Main Content - Structured to prevent mixed components */}
       <main className={`flex-1 p-4 md:p-6 lg:p-8 overflow-auto ${isMobile ? 'pt-20' : ''}`}>
+        {/* Back button when not on root */}
         {!isRoot && !isProfile && (
           <Link to="/dashboard/player" className="flex items-center gap-2 text-blue-600 mb-4 md:mb-6">
             <FaArrowLeft /> Back to Dashboard
           </Link>
         )}
 
+        {/* Profile header when not on profile page */}
         {!isProfile && (
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900">
@@ -131,17 +162,25 @@ const PlayerDashboard = () => {
           </div>
         )}
 
+        {/* Dashboard Home Content */}
         {isRoot && (
-          <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="space-y-6">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
               <StatCard title="Matches Played" value={playerProfile.stats.matchesPlayed} icon={<FaFutbol className="text-green-500" />} />
               <StatCard title="Goals Scored" value={playerProfile.stats.goalsScored} icon={<FaChartLine className="text-blue-500" />} />
               <StatCard title="Fitness Score" value={`${playerProfile.stats.fitnessScore}%`} icon={<FaHeartbeat className="text-red-500" />} />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+            {/* Features Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {features.map(({ name, path, icon, description }) => (
-                <Link to={path} key={name} onClick={closeSidebar} className="bg-white p-4 md:p-6 rounded-lg shadow-md hover:shadow-xl transition hover:-translate-y-1">
+                <Link 
+                  to={path} 
+                  key={name} 
+                  onClick={closeSidebar} 
+                  className="bg-white p-4 md:p-6 rounded-lg shadow-md hover:shadow-xl transition hover:-translate-y-1"
+                >
                   <div className="flex items-center gap-3 md:gap-4">
                     <div className="text-xl md:text-2xl text-blue-600">{icon}</div>
                     <div>
@@ -152,10 +191,11 @@ const PlayerDashboard = () => {
                 </Link>
               ))}
             </div>
-          </>
+          </div>
         )}
 
-        <div className={!isRoot ? "bg-white rounded-lg shadow-md p-4 md:p-6" : ""}>
+        {/* Outlet Container - Consistent styling */}
+        <div className={!isRoot ? "bg-white rounded-lg shadow-md p-4 md:p-6 mt-6" : ""}>
           <Outlet />
         </div>
       </main>
@@ -163,6 +203,7 @@ const PlayerDashboard = () => {
   );
 };
 
+// StatCard component remains unchanged
 const StatCard = ({ title, value, icon }) => (
   <div className="bg-white rounded-lg shadow-md p-4 md:p-6 flex items-start gap-3 md:gap-4">
     <div className="p-2 md:p-3 bg-blue-50 rounded-full text-blue-600">{icon}</div>

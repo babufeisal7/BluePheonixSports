@@ -98,125 +98,125 @@ const CoachDashboard = () => {
         <h1 className="text-lg font-bold">Coach Dashboard</h1>
         <div className="w-8"></div> {/* Spacer for alignment */}
       </header>
-{/* Sidebar - Mobile overlay */}
-<aside className={`${sidebarOpen ? "fixed inset-0 z-50 md:relative" : "hidden"} bg-blue-900 text-white p-6 flex flex-col md:w-64 md:block md:sticky md:top-0 md:h-screen overflow-y-auto`}>
-  <div className="flex items-center justify-between mb-8">
-    <div className="flex items-center gap-4">
-      <img 
-        src={coachProfile.avatar} 
-        alt={coachProfile.name}
-        className="w-10 h-10 rounded-full object-cover border-2 border-white"
-      />
-      <div>
-        <h2 className="text-xl font-bold line-clamp-1">{coachProfile.name.split(' ')[0]}</h2>
-        <p className="text-xs text-blue-200">{coachProfile.role}</p>
-      </div>
-    </div>
-    <button 
-      onClick={toggleSidebar}
-      className="text-white p-1 rounded hover:bg-blue-700 md:hidden"
-    >
-      <FiX size={20} />
-    </button>
-  </div>
 
-  {/* Navigation */}
-  <nav className="flex-1 flex flex-col gap-1">
-    {/* Dashboard Home */}
-    <NavLink
-      to=""
-      end
-      onClick={closeSidebar}
-      className={({ isActive }) =>
-        `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-          isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-        }`
-      }
-    >
-      <FiHome className="text-lg" />
-      Dashboard
-    </NavLink>
+      {/* Sidebar - Mobile overlay */}
+      <aside className={`${sidebarOpen ? "fixed inset-0 z-50 md:relative" : "hidden"} bg-blue-900 text-white p-6 flex flex-col md:w-64 md:block md:sticky md:top-0 md:h-screen overflow-y-auto`}>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <img 
+              src={coachProfile.avatar} 
+              alt={coachProfile.name}
+              className="w-10 h-10 rounded-full object-cover border-2 border-white"
+            />
+            <div>
+              <h2 className="text-xl font-bold line-clamp-1">{coachProfile.name.split(' ')[0]}</h2>
+              <p className="text-xs text-blue-200">{coachProfile.role}</p>
+            </div>
+          </div>
+          <button 
+            onClick={toggleSidebar}
+            className="text-white p-1 rounded hover:bg-blue-700 md:hidden"
+          >
+            <FiX size={20} />
+          </button>
+        </div>
 
-    {/* Features (first 6) */}
-    {features.slice(0, 6).map(({ name, path, icon }) => (
-      <NavLink
-        key={name}
-        to={path}
-        onClick={closeSidebar}
-        className={({ isActive }) =>
-          `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-            isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-          }`
-        }
-      >
-        <span className="text-lg">{icon}</span>
-        <span>{name}</span>
-      </NavLink>
-    ))}
+        {/* Navigation */}
+        <nav className="flex-1 flex flex-col gap-1">
+          {/* Dashboard Home */}
+          <NavLink
+            to=""
+            end
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+                isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+              }`
+            }
+          >
+            <FiHome className="text-lg" />
+            Dashboard
+          </NavLink>
 
-    {/* Divider */}
-    <div className="pt-4 border-t border-blue-700" />
+          {/* Features (first 6) */}
+          {features.slice(0, 6).map(({ name, path, icon }) => (
+            <NavLink
+              key={name}
+              to={path}
+              onClick={closeSidebar}
+              className={({ isActive }) =>
+                `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+                  isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+                }`
+              }
+            >
+              <span className="text-lg">{icon}</span>
+              <span>{name}</span>
+            </NavLink>
+          ))}
 
-    {/* Features (remaining) */}
-    {features.slice(6).map(({ name, path, icon }) => (
-      <NavLink
-        key={name}
-        to={path}
-        onClick={closeSidebar}
-        className={({ isActive }) =>
-          `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-            isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-          }`
-        }
-      >
-        <span className="text-lg">{icon}</span>
-        <span>{name}</span>
-      </NavLink>
-    ))}
+          {/* Divider */}
+          <div className="pt-4 border-t border-blue-700" />
 
-    {/* Profile and Settings */}
-    <NavLink
-      to="profile"
-      onClick={closeSidebar}
-      className={({ isActive }) =>
-        `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-          isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-        }`
-      }
-    >
-      <FiUser className="text-lg" />
-      My Profile
-    </NavLink>
-    <NavLink
-      to="settings"
-      onClick={closeSidebar}
-      className={({ isActive }) =>
-        `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
-          isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
-        }`
-      }
-    >
-      <FiSettings className="text-lg" />
-      Settings
-    </NavLink>
+          {/* Features (remaining) */}
+          {features.slice(6).map(({ name, path, icon }) => (
+            <NavLink
+              key={name}
+              to={path}
+              onClick={closeSidebar}
+              className={({ isActive }) =>
+                `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+                  isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+                }`
+              }
+            >
+              <span className="text-lg">{icon}</span>
+              <span>{name}</span>
+            </NavLink>
+          ))}
 
-    {/* Logout */}
-    <NavLink
-      to="/"
-      onClick={closeSidebar}
-      className={`flex items-center gap-3 py-2 px-3 rounded-md transition-colors hover:bg-blue-700 text-red-200 hover:text-red-100`}
-    >
-      <FiLogOut className="text-lg" />
-      Logout
-    </NavLink>
+          {/* Profile and Settings */}
+          <NavLink
+            to="profile"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+                isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+              }`
+            }
+          >
+            <FiUser className="text-lg" />
+            My Profile
+          </NavLink>
+          <NavLink
+            to="settings"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `flex items-center gap-3 py-2 px-3 rounded-md transition-colors ${
+                isActive ? "bg-blue-700 text-white" : "hover:bg-blue-700"
+              }`
+            }
+          >
+            <FiSettings className="text-lg" />
+            Settings
+          </NavLink>
 
-    {/* Footer text */}
-    <div className="pt-4 text-sm text-blue-300 select-none">
-      &copy; {new Date().getFullYear()} Blue Phoenix Sports
-    </div>
-  </nav>
-</aside>
+          {/* Logout */}
+          <NavLink
+            to="/"
+            onClick={closeSidebar}
+            className={`flex items-center gap-3 py-2 px-3 rounded-md transition-colors hover:bg-blue-700 text-red-200 hover:text-red-100`}
+          >
+            <FiLogOut className="text-lg" />
+            Logout
+          </NavLink>
 
+          {/* Footer text */}
+          <div className="pt-4 text-sm text-blue-300 select-none">
+            &copy; {new Date().getFullYear()} Blue Phoenix Sports
+          </div>
+        </nav>
+      </aside>
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-8 overflow-auto">
@@ -250,61 +250,72 @@ const CoachDashboard = () => {
           </div>
         )}
 
-        {/* Stats cards on dashboard root */}
+        {/* Dashboard Summary Content (shown on root in mobile and desktop) */}
         {isRoot && (
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            <StatCard title="Players" value={coachProfile.stats.totalPlayers} icon={<FiUsers className="text-blue-500" />} />
-            <StatCard title="Matches" value={coachProfile.stats.upcomingMatches} icon={<FaCalendarAlt className="text-green-500" />} />
-            <StatCard title="Trainings" value={coachProfile.stats.trainingSessions} icon={<FaDumbbell className="text-orange-500" />} />
-            <StatCard title="Messages" value={coachProfile.stats.messages} icon={<FaEnvelope className="text-purple-500" />} />
-          </div>
-        )}
-
-        {/* Quick Actions on dashboard root */}
-        {isRoot && (
-          <div className="mb-6">
-            <h2 className="text-lg font-semibold mb-3 text-gray-800">Quick Actions</h2>
-            <div className="grid grid-cols-2 gap-3">
-              <QuickAction title="Add Player" icon={<FiUser className="text-lg" />} onClick={() => {
-                closeSidebar();
-                alert("Add Player clicked");
-              }} />
-              <QuickAction title="Schedule Match" icon={<FaCalendarAlt className="text-lg" />} onClick={() => {
-                closeSidebar();
-                alert("Schedule Match clicked");
-              }} />
-              <QuickAction title="Create Training" icon={<FaDumbbell className="text-lg" />} onClick={() => {
-                closeSidebar();
-                alert("Create Training clicked");
-              }} />
-              <QuickAction title="Send Message" icon={<FiMail className="text-lg" />} onClick={() => {
-                closeSidebar();
-                alert("Send Message clicked");
-              }} />
+          <>
+            {/* Stats cards */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <StatCard title="Players" value={coachProfile.stats.totalPlayers} icon={<FiUsers className="text-blue-500" />} />
+              <StatCard title="Matches" value={coachProfile.stats.upcomingMatches} icon={<FaCalendarAlt className="text-green-500" />} />
+              <StatCard title="Trainings" value={coachProfile.stats.trainingSessions} icon={<FaDumbbell className="text-orange-500" />} />
+              <StatCard title="Messages" value={coachProfile.stats.messages} icon={<FaEnvelope className="text-purple-500" />} />
             </div>
-          </div>
-        )}
 
-        {/* Feature overview cards on dashboard root */}
-        {isRoot && (
-          <div className="grid grid-cols-1 gap-4 mb-6">
-            {features.map(({ name, path, icon, description }) => (
-              <NavLink 
-                to={path} 
-                key={name} 
-                onClick={closeSidebar}
-                className="p-4 rounded-lg shadow-md hover:shadow-lg transition bg-white"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="text-xl text-blue-600">{icon}</div>
-                  <div>
-                    <h2 className="font-semibold text-base text-gray-800">{name}</h2>
-                    <p className="text-xs text-gray-600">{description}</p>
-                  </div>
-                </div>
-              </NavLink>
-            ))}
-          </div>
+            {/* Quick Actions */}
+            <div className="mb-6">
+              <h2 className="text-lg font-semibold mb-3 text-gray-800">Quick Actions</h2>
+              <div className="grid grid-cols-2 gap-3">
+                <QuickAction title="Add Player" icon={<FiUser className="text-lg" />} onClick={() => {
+                  closeSidebar();
+                  navigate("/dashboard/coach/players/new");
+                }} />
+                <QuickAction title="Schedule Match" icon={<FaCalendarAlt className="text-lg" />} onClick={() => {
+                  closeSidebar();
+                  navigate("/dashboard/coach/match-schedule/new");
+                }} />
+                <QuickAction title="Create Training" icon={<FaDumbbell className="text-lg" />} onClick={() => {
+                  closeSidebar();
+                  navigate("/dashboard/coach/training-plans/new");
+                }} />
+                <QuickAction title="Send Message" icon={<FiMail className="text-lg" />} onClick={() => {
+                  closeSidebar();
+                  navigate("/dashboard/coach/messages/new");
+                }} />
+              </div>
+            </div>
+
+            {/* Feature Highlights (condensed on mobile) */}
+            <div className="mb-6">
+              <h2 className="text-lg font-semibold mb-3 text-gray-800">Features</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {features.slice(0, isMobile ? 4 : features.length).map(({ name, path, icon, description }) => (
+                  <NavLink 
+                    to={path} 
+                    key={name} 
+                    onClick={closeSidebar}
+                    className="p-3 rounded-lg shadow-sm hover:shadow transition bg-white flex items-center gap-3"
+                  >
+                    <div className="text-xl text-blue-600 p-2 bg-blue-50 rounded-full">
+                      {icon}
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-gray-800">{name}</h3>
+                      {!isMobile && <p className="text-xs text-gray-600 line-clamp-1">{description}</p>}
+                    </div>
+                  </NavLink>
+                ))}
+                {isMobile && (
+                  <NavLink 
+                    to="players" 
+                    onClick={closeSidebar}
+                    className="p-3 rounded-lg shadow-sm hover:shadow transition bg-white flex items-center justify-center text-blue-600 font-medium"
+                  >
+                    View All Features →
+                  </NavLink>
+                )}
+              </div>
+            </div>
+          </>
         )}
 
         {/* Outlet renders nested routes here */}

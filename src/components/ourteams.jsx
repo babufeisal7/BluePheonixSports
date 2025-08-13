@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const teams = [
   {
@@ -7,34 +8,38 @@ const teams = [
     image: '/image1.jpg',
     description: 'We will always Rise!',
     buttonText: 'Join Us',
+    link: '/teams/rugby',
   },
   {
     sport: 'Football',
     image: '/football1.jpg',
     description: 'We will always Rise!',
     buttonText: 'Coming Soon',
+    link: '/teams/football',
   },
   {
     sport: 'Basketball',
     image: '/basketball4.jpg',
     description: 'We will always Rise!',
     buttonText: 'Coming Soon',
+    link: '/teams/basketball',
   },
   {
     sport: 'Swimming',
     image: '/swimmingteam.jpg',
     description: 'We will always Rise!',
     buttonText: 'Coming Soon',
+    link: '/teams/swimming',
   },
 ];
 
-const TeamSummaryCard = ({ sport, image, description, buttonText }) => {
+const TeamSummaryCard = ({ sport, image, description, buttonText, link }) => {
   const buttonClasses = [
     'text-white border-2 border-white px-4 py-2 text-sm rounded-full transition-colors duration-300',
     buttonText === 'Join Us'
       ? 'bg-orange-700 hover:bg-orange-600'
       : 'bg-blue-700 hover:bg-blue-800',
-  ].join('login ');
+  ].join(' ');
 
   return (
     <div className="bg- rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
@@ -47,13 +52,13 @@ const TeamSummaryCard = ({ sport, image, description, buttonText }) => {
       <div className="p-4">
         <h3 className="text-xl text-white">{sport} Team</h3>
         <p className="text-white mb-4">{description}</p>
-        <a
-          href={`/${sport.toLowerCase()}`}
+        <Link
+          to={link}
           className={buttonClasses}
           aria-label={`Learn more about our ${sport} team`}
         >
           {buttonText}
-        </a>
+        </Link>
       </div>
     </div>
   );
@@ -64,6 +69,7 @@ TeamSummaryCard.propTypes = {
   image: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
 };
 
 const OurTeamsSummary = () => {

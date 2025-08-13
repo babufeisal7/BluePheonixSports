@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrophy, faPeopleArrows, faUsers, faStar, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faTrophy, faPeopleArrows, faUsers, faStar, faChevronRight, faPlay, faPause, faVolumeHigh, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
@@ -23,12 +23,28 @@ const tabButtonClasses = (isActive) => clsx(
 
 const AboutusPage = () => {
   const [activeTab, setActiveTab] = useState('vision');
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
 
   const stats = [
     { value: "20+", label: "Professional Coaches" },
     { value: "10+", label: "Certified Youth Coaches" },
     { value: "10K+", label: "Training Hours Annually" }
   ];
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) videoRef.current.pause();
+    else videoRef.current.play();
+    setIsPlaying(!isPlaying);
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+  };
 
   return (
     <motion.div
@@ -51,12 +67,30 @@ const AboutusPage = () => {
       >
         <h2 className={sectionTitleClasses}>Introduction</h2>
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-8">
-          <div className="w-full lg:w-1/2 max-h-[320px] rounded-xl overflow-hidden shadow-2xl">
-            <video className="w-full h-full object-cover" autoPlay loop muted playsInline>
+          <div className="w-full lg:w-1/2 max-h-[320px] rounded-xl overflow-hidden shadow-2xl relative">
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              autoPlay
+              loop
+              muted={isMuted}
+              playsInline
+            >
               <source src="/BLUE PHEONIX.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+
+            {/* Compact Controls */}
+            <div className="absolute bottom-4 left-4 flex space-x-2 bg-black/30 p-1.5 rounded-lg">
+              <button onClick={togglePlay} className="text-white text-lg p-1">
+                <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+              </button>
+              <button onClick={toggleMute} className="text-white text-lg p-1">
+                <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeHigh} />
+              </button>
+            </div>
           </div>
+
           <div className="w-full lg:w-1/2 px-2 sm:px-6">
             <p className={sectionTextClasses}>
               Welcome to <span className="font-semibold bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent">Blue Phoenix Sports Limited</span>! We are dedicated to excellence in sports management and training, committed to empowering athletes of all levels. Founded in 2022, our mission is to foster athletic excellence and community engagement through a range of sports programs.
