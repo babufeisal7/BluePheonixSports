@@ -3,28 +3,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSchool, faUsers, faCalendarAlt, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 
 // Custom class for increased icon size
-const iconSize = 'h-[2.80rem] w-[2.80rem] '; // Increased size
+const iconSize = 'h-[2.80rem] w-[2.80rem] '; 
 
 const services = [
     {
         title: 'Schools Sports Management',
         description: 'Expert management and coordination of school sports programs, including scheduling, coaching, and event planning.',
-        icon: <FontAwesomeIcon icon={faSchool} className={`${iconSize} text-black`} /> // Changed to text-black
+        icon: <FontAwesomeIcon icon={faSchool} className={`${iconSize} text-black`} /> 
     },
     {
         title: 'Sports Team Management',
         description: 'Comprehensive management of sports teams, from recruitment and training to game strategies and performance analysis.',
-        icon: <FontAwesomeIcon icon={faUsers} className={`${iconSize} text-black`} /> // Changed to text-black
+        icon: <FontAwesomeIcon icon={faUsers} className={`${iconSize} text-black`} /> 
     },
     {
         title: 'Sports Events Management',
         description: 'Full-service event management for sports events, including logistics, promotion, and execution to ensure successful events.',
-        icon: <FontAwesomeIcon icon={faCalendarAlt} className={`${iconSize} text-black`} /> // Changed to text-black
+        icon: <FontAwesomeIcon icon={faCalendarAlt} className={`${iconSize} text-black`} /> 
     },
     {
         title: 'Merchandise Sales',
         description: 'A wide range of merchandise available for fans and players, including apparel, equipment, and accessories.',
-        icon: <FontAwesomeIcon icon={faShoppingBag} className={`${iconSize} text-black`} /> // Changed to text-black
+        icon: <FontAwesomeIcon icon={faShoppingBag} className={`${iconSize} text-black`} /> 
     },
 ];
 

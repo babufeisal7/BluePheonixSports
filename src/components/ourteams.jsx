@@ -34,7 +34,7 @@ const TeamSummaryCard = ({ sport, image, description, buttonText }) => {
     buttonText === 'Join Us'
       ? 'bg-orange-700 hover:bg-orange-600'
       : 'bg-blue-700 hover:bg-blue-800',
-  ].join(' ');
+  ].join('login ');
 
   return (
     <div className="bg- rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">

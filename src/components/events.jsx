@@ -34,7 +34,7 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("/db.json"); // Adjust path as needed
+        const response = await fetch("/db.json"); 
         if (!response.ok) throw new Error("Failed to fetch events.");
         const data = await response.json();
         setEvents(data.events || []);
@@ -57,7 +57,7 @@ const Events = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
-    pauseOnHover: false, // Keeps the carousel moving even when hovered
+    pauseOnHover: false,
     responsive: [
       {
         breakpoint: 1024,

@@ -15,7 +15,7 @@ const AboutUs = () => {
             Welcome to <span className="font-semibold text-primary">Blue Phoenix Sports Limited</span>! We are dedicated to excellence in sports management and training, committed to empowering athletes of all levels.
           </p>
           <Link 
-            to="/AboutusPage" 
+            to="/Aboutus" 
             className="bg-blue-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full hover:bg-blue-700 transition duration-300 animate-slide-in"
           >
             Read More..

@@ -108,7 +108,7 @@ const Experts = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3, // Show fewer cards to accommodate taller images
+    slidesToShow: 3, 
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
