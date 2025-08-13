@@ -23,12 +23,17 @@ export default {
         slide: {
           '0%': { opacity: '0', transform: 'scale(1.05)' },
           '100%': { opacity: '1', transform: 'scale(1)' }
+        },
+        glow: {
+          '0%, 100%': { boxShadow: '0 0 10px rgba(255,165,0,0.7)' },
+          '50%': { boxShadow: '0 0 20px rgba(255,165,0,1)' },
         }
       },
       animation: {
         'fade-in': 'fadeIn 2s ease-in forwards',
         'slide-down': 'slideDown 0.3s ease-out forwards',
-        'slide': 'slide 1s ease-in-out'
+        'slide': 'slide 1s ease-in-out',
+        'glow': 'glow 2s infinite ease-in-out',
       },
     },
   },
